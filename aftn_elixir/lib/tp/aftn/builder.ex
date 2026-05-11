@@ -70,8 +70,36 @@ defmodule Tp.Aftn.Builder do
 
   def validate("ALR", params) do
     params
-    |> require_fields(["phase", "alert_originator", "nature", "aircraft_id"])
+    |> require_fields([
+      "phase",
+      "alert_originator",
+      "nature",
+      "aircraft_id",
+      "flight_rules",
+      "flight_type",
+      "aircraft_type",
+      "wake",
+      "equipment",
+      "equipment_surveillance",
+      "departure",
+      "departure_time",
+      "speed",
+      "level",
+      "route",
+      "destination",
+      "eet",
+      "alternate",
+      "dof",
+      "sar_info"
+    ])
     |> validate_format(params, "aircraft_id", ~r/^[A-Z0-9]{2,7}$/, "Aircraft harus 2-7 huruf/angka")
+    |> validate_format(params, "aircraft_type", ~r/^[A-Z0-9]{2,4}$/, "Type aircraft harus 2-4 huruf/angka")
+    |> validate_format(params, "departure", ~r/^[A-Z]{4}$/, "Departure harus ICAO 4 huruf")
+    |> validate_format(params, "departure_time", ~r/^\d{4}$/, "Departure time harus HHMM 4 digit")
+    |> validate_format(params, "destination", ~r/^[A-Z]{4}$/, "Destination harus ICAO 4 huruf")
+    |> validate_format(params, "eet", ~r/^\d{4}$/, "EET harus HHMM 4 digit")
+    |> validate_format(params, "alternate", ~r/^[A-Z]{4}$/, "Alternate harus ICAO 4 huruf")
+    |> validate_format(params, "dof", ~r/^\d{6}$/, "DOF harus YYMMDD 6 digit")
     |> validate_aftn_header(params)
   end
 
@@ -239,16 +267,28 @@ defmodule Tp.Aftn.Builder do
   end
 
   defp alr_item9_10(params) do
+    number = up(params, "aircraft_number")
     aircraft_type = up(params, "aircraft_type")
     wake = up(params, "wake")
     equipment = up(params, "equipment")
+    surveillance = up(params, "equipment_surveillance")
 
     aircraft =
       cond do
+        number != "" and aircraft_type != "" and wake != "" -> "#{number}#{aircraft_type}/#{wake}"
+        number != "" and aircraft_type != "" -> "#{number}#{aircraft_type}"
+        number != "" and wake != "" -> "#{number}/#{wake}"
         aircraft_type != "" and wake != "" -> "#{aircraft_type}/#{wake}"
         aircraft_type != "" -> aircraft_type
         wake != "" -> "/#{wake}"
         true -> ""
+      end
+
+    equipment =
+      cond do
+        equipment != "" and surveillance != "" -> "#{equipment}/#{surveillance}"
+        equipment != "" -> equipment
+        true -> surveillance
       end
 
     cond do
@@ -347,8 +387,7 @@ defmodule Tp.Aftn.Builder do
         alr_flags("R", params, [{"U", "radio_uhf"}, {"V", "radio_vhf"}, {"E", "radio_elt"}]),
         alr_flags("S", params, [{"P", "survival_polar"}, {"D", "survival_desert"}, {"M", "survival_maritime"}, {"J", "survival_jungle"}]),
         alr_flags("J", params, [{"L", "jackets_light"}, {"F", "jackets_fluores"}, {"U", "jackets_uhf"}, {"V", "jackets_vhf"}]),
-        alr_slash("D", params, "dinghy_number"),
-        alr_slash("C", params, "dinghy_colour"),
+        alr_dinghy(params),
         alr_slash("A", params, "aircraft_colour"),
         alr_slash("N", params, "remarks"),
         alr_slash("C", params, "pilot")
@@ -369,6 +408,20 @@ defmodule Tp.Aftn.Builder do
     case up(params, key) do
       "" -> ""
       value -> "#{label}/#{value}"
+    end
+  end
+
+  defp alr_dinghy(params) do
+    number = up(params, "dinghy_number")
+    capacity = up(params, "dinghy_capacity")
+    cover = if checked?(params, "dinghy_cover"), do: "C", else: ""
+    colour = up(params, "dinghy_colour")
+
+    [number, capacity, cover, colour]
+    |> Enum.reject(&(&1 == ""))
+    |> case do
+      [] -> ""
+      values -> "D/#{Enum.join(values, " ")}"
     end
   end
 

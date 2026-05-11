@@ -72,7 +72,7 @@ defmodule TpWeb.Views do
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
         header a{color:white}#{header_time_css()} main{max-width:1100px;margin:16px auto;padding:0 16px}
-        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:hidden}
+        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         dl{display:grid;grid-template-columns:180px 1fr;margin:0} dt,dd{border-bottom:1px solid #edf0f3;padding:8px 12px;margin:0}
         dt{background:#f0f3f6;color:#435466;font-weight:600} pre{margin:0;padding:14px;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
@@ -178,7 +178,7 @@ defmodule TpWeb.Views do
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
         header a{color:white}#{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px}
-        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:hidden}
+        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         form{padding:12px} button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:8px 12px;font-weight:600}
         textarea,input,select{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:8px;background:white;width:100%}
@@ -187,12 +187,12 @@ defmodule TpWeb.Views do
         .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
         .field{margin-bottom:8px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.toolbar a{background:white;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px}.toolbar a.active{background:#14324a;color:white;border-color:#14324a}
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
-        .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}.actions{margin:8px 0 0}.subhead{background:#f0f3f6;border:1px solid #e4e8ee;border-radius:4px;padding:8px;margin:4px 0 10px;font-size:13px;color:#435466}
-        .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:hidden}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;min-width:0;font-size:13px;font-weight:700;cursor:pointer}.amo-tool i{font-size:16px}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
-        .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:hidden}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
-        .alr-scroll{max-height:520px;overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.alr-grid.three{grid-template-columns:repeat(3,1fr)}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input{width:auto}.alr-text{min-height:54px;resize:vertical}
+        .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}.actions{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;align-items:center;margin:-12px -12px 12px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10)}.subhead{background:#f0f3f6;border:1px solid #e4e8ee;border-radius:4px;padding:8px;margin:4px 0 10px;font-size:13px;color:#435466}
+        .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;min-width:0;font-size:13px;font-weight:700;cursor:pointer}.amo-tool i{font-size:16px}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
+        .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
+        .alr-scroll{max-height:520px;overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
         @media(max-width:900px){.grid2,.grid4,.send-row,.header-meta{grid-template-columns:1fr}}
-        @media(max-width:900px){.alr-grid,.alr-grid.three{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
+        @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
         @media(max-width:900px){.compose-head,.address-line{display:block}.address-grid,.aftn-address-grid{grid-template-columns:repeat(2,1fr)}.aftn-topline,.aftn-address-row,.aftn-meta{grid-template-columns:1fr}}
       </style>
     </head>
@@ -223,7 +223,7 @@ defmodule TpWeb.Views do
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
         header a{color:white}#{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px}
-        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:hidden}
+        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         table{width:100%;border-collapse:collapse;font-size:13px} th,td{border-bottom:1px solid #edf0f3;padding:7px 8px;text-align:left;vertical-align:top}
         th{background:#f0f3f6;color:#435466;font-weight:700;white-space:nowrap}.table-wrap{overflow:auto}.muted{color:#6d7b88}.empty-row{text-align:center;color:#6d7b88;padding:18px}.message-preview{white-space:pre-wrap;word-break:break-word}
@@ -317,7 +317,7 @@ defmodule TpWeb.Views do
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
         header a{color:white}#{header_time_css()} main{max-width:920px;margin:0 auto;padding:16px}
-        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:hidden}
+        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         form{padding:14px} label{display:block;font-size:12px;color:#435466;font-weight:700;margin-bottom:4px}
         input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:8px;background:white}
@@ -794,9 +794,9 @@ defmodule TpWeb.Views do
         <input type="hidden" name="compose_type" value="#{html(post_type)}">
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="#{html(type)}">
+        <p class="actions"><button type="submit" name="compose_action" value="send">Send #{html(type)}</button> <button type="button" class="js-clear-form">Clear</button></p>
         #{target_fields()}
         #{textarea("message", "Text", "")}
-        <p class="actions"><button type="submit" name="compose_action" value="send">Send #{html(type)}</button> <button type="button" class="js-clear-form">Clear</button></p>
       </form>
     </section>
     """
@@ -805,6 +805,7 @@ defmodule TpWeb.Views do
   defp alr_form(params \\ %{}) do
     priority = compose_prefill(params, "priority", "FF")
     originator = compose_prefill(params, "originator", default_originator())
+    lists = alr_reference_lists()
 
     """
     <section id="ALR" class="aftn-window">
@@ -833,11 +834,12 @@ defmodule TpWeb.Views do
           #{alr_header(priority, originator, params)}
         </div>
         <div class="alr-scroll">
-          #{alr_page_a(params)}
-          #{alr_page_b(params)}
-          #{alr_page_c(params)}
+          #{alr_page_a(params, lists)}
+          #{alr_page_b(params, lists)}
+          #{alr_page_c(params, lists)}
           #{alr_page_d(params)}
         </div>
+        #{alr_datalists(lists)}
       </form>
     </section>
     """
@@ -879,77 +881,106 @@ defmodule TpWeb.Views do
     """
   end
 
-  defp alr_page_a(_params) do
+  defp alr_page_a(_params, lists) do
     """
     <div class="alr-page">
       <div class="alr-page-title">A - ICAO Flight Plan Format</div>
       <div class="alr-grid">
-        #{alr_input("message_type", "3. Message Type", "ALR", readonly: true)}
-        #{alr_input("alr_number", "Number", "")}
-        #{alr_input("reference_data", "Reference Data", "")}
-        #{alr_input("phase", "5. Phase of Emergency", "", required: true)}
-        #{alr_input("alert_originator", "Originator of Message", "", required: true)}
-        #{alr_input("nature", "Nature of Emergency", "", required: true)}
-        #{alr_input("aircraft_id", "7. Aircraft ID", "", required: true)}
-        #{alr_input("ssr_mode", "SSR Mode", "")}
-        #{alr_input("ssr_code", "Code", "")}
-        #{alr_input("flight_rules", "8. Flight Rules", "I")}
-        #{alr_input("flight_type", "Type of Flight", "S")}
-        #{alr_input("aircraft_type", "9. Type of Aircraft", "")}
-        #{alr_input("wake", "Wake Turb. Category", "")}
-        #{alr_input("equipment", "10. Equipment and Capabilities", "", class: "alr-wide")}
-        #{alr_input("departure", "13. DEP AD", "")}
-        #{alr_input("departure_time", "Time", "")}
-        #{alr_input("speed", "15. Cruising Speed", "")}
-        #{alr_input("level", "Cruising Level", "")}
-        #{alr_textarea("route", "Route", "", "alr-wide")}
+        <div class="alr-row alr-row-head">
+          #{alr_message_number()}
+          #{alr_input("reference_data", "Reference Data", "")}
+          #{alr_select("phase", "5. Phase of Emergency", "", ["INCERFA", "ALERFA", "DETRESFA"], required: true, prefix: "-")}
+          #{alr_input("alert_originator", "Originator of Message", "", required: true, prefix: "/")}
+          #{alr_input("nature", "Nature of Emergency", "", required: true, prefix: "/")}
+        </div>
+        <div class="alr-row alr-row-5">
+          #{alr_input("aircraft_id", "7. Aircraft ID", "", required: true, prefix: "-")}
+          #{alr_check_field("ssr_mode", "SSR Mode", "A", prefix: "/")}
+          #{alr_input("ssr_code", "Code", "")}
+          #{alr_select("flight_rules", "8. Flight Rules", "I", ["I", "V", "Y", "Z"], required: true, prefix: "-")}
+          #{alr_select("flight_type", "Type of Flight", "S", ["S", "N", "G", "M", "X"], required: true)}
+        </div>
+        <div class="alr-row alr-row-5b">
+          #{alr_input("aircraft_number", "9. Number", "", prefix: "-")}
+          #{alr_input("aircraft_type", "Type of Aircraft", "", required: true, list: "alr-aircraft-types")}
+          #{alr_select("wake", "Wake Turb. Category", "", wake_options(lists), required: true, prefix: "/")}
+          #{alr_input("equipment", "10a. Equipment and Capabilities", "", required: true, list: "alr-equipment", prefix: "-")}
+          #{alr_input("equipment_surveillance", "10b. Surveillance Equipment", "", required: true, list: "alr-surveillance", prefix: "/")}
+        </div>
+        <div class="alr-row alr-row-2">
+          #{alr_input("departure", "13. DEP AD", "", required: true, list: "alr-departures", prefix: "-")}
+          #{alr_input("departure_time", "Time", "", required: true)}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_input("speed", "15. Cruising Speed", "", required: true, prefix: "-")}
+          #{alr_input("level", "Cruising Level", "", required: true)}
+          #{alr_textarea_picker("route", "Route", "", "required", Map.get(lists, :routes, []), required: true)}
+        </div>
       </div>
     </div>
     """
   end
 
-  defp alr_page_b(_params) do
+  defp alr_page_b(_params, lists) do
     """
     <div class="alr-page">
       <div class="alr-page-title">B - Destination & Other Information</div>
-      <div class="alr-grid three">
-        #{alr_input("destination", "16. DEST AD", "")}
-        #{alr_input("eet", "Total EET", "")}
-        #{alr_input("alternate", "DEST ALTN AD", "")}
-        #{alr_input("second_alternate", "2ND DEST ALTN AD", "")}
-        #{alr_textarea("sts", "18. STS", "", "alr-wide")}
-        #{alr_input("pbn", "PBN", "")}
-        #{alr_textarea("nav", "NAV", "", "alr-wide")}
-        #{alr_textarea("com", "COM", "", "alr-wide")}
-        #{alr_input("dat", "DAT", "")}
-        #{alr_textarea("sur", "SUR", "", "alr-wide")}
-        #{alr_textarea("dep_info", "DEP", "", "alr-wide")}
-        #{alr_textarea("dest_info", "DEST", "", "alr-wide")}
-        #{alr_input("dof", "DOF", Calendar.strftime(Date.utc_today(), "%y%m%d"))}
+      <div class="alr-grid">
+        <div class="alr-row alr-row-4">
+          #{alr_input("destination", "16. DEST AD", "", required: true, list: "alr-destinations", prefix: "-")}
+          #{alr_input("eet", "Total EET", "", required: true)}
+          #{alr_input("alternate", "DEST ALTN AD", "", required: true, list: "alr-destinations")}
+          #{alr_input("second_alternate", "2ND DEST ALTN AD", "")}
+        </div>
+        <div class="alr-row alr-row-18">
+          #{alr_input("sts", "STS/", "", list: "alr-sts", prefix: "-")}
+          #{alr_input("pbn", "PBN/", "", list: "alr-pbn", prefix: "PBN/")}
+          #{alr_textarea("nav", "NAV/", "", "", prefix: "NAV/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("com", "COM/", "", "", prefix: "COM/")}
+          #{alr_input("dat", "DAT/", "", prefix: "DAT/")}
+          #{alr_textarea("sur", "SUR/", "", "", prefix: "SUR/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("dep_info", "DEP/", "", "", prefix: "DEP/")}
+          #{alr_textarea("dest_info", "DEST/", "", "", prefix: "DEST/")}
+          #{alr_input("dof", "DOF", Calendar.strftime(Date.utc_today(), "%y%m%d"), required: true, prefix: "DOF/")}
+        </div>
       </div>
     </div>
     """
   end
 
-  defp alr_page_c(_params) do
+  defp alr_page_c(_params, _lists) do
     """
     <div class="alr-page">
       <div class="alr-page-title">C - Other Information Detail</div>
-      <div class="alr-grid three">
-        #{alr_input("reg", "REG", "")}
-        #{alr_textarea("eet_detail", "EET", "", "alr-wide")}
-        #{alr_input("sel", "SEL", "")}
-        #{alr_textarea("typ", "TYP", "", "alr-wide")}
-        #{alr_input("code", "CODE", "")}
-        #{alr_textarea("dle", "DLE", "", "alr-wide")}
-        #{alr_textarea("opr", "OPR", "", "alr-wide")}
-        #{alr_textarea("orgn", "ORGN", "", "alr-wide")}
-        #{alr_input("per", "PER", "")}
-        #{alr_textarea("altn_detail", "ALTN", "", "alr-wide")}
-        #{alr_textarea("ralt", "RALT", "", "alr-wide")}
-        #{alr_textarea("talt", "TALT", "", "alr-wide")}
-        #{alr_textarea("rif", "RIF", "", "alr-wide")}
-        #{alr_textarea("rmk", "RMK", "", "alr-wide")}
+      <div class="alr-grid">
+        <div class="alr-row alr-row-3">
+          #{alr_input("reg", "REG/", "", list: "alr-registrations", prefix: "REG/")}
+          #{alr_textarea("eet_detail", "EET/", "", "", prefix: "EET/")}
+          #{alr_input("sel", "SEL/", "", prefix: "SEL/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("typ", "TYP/", "", "", prefix: "TYP/")}
+          #{alr_input("code", "CODE/", "", prefix: "CODE/")}
+          #{alr_textarea("dle", "DLE/", "", "", prefix: "DLE/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("opr", "OPR/", "", "", list: "alr-operators", prefix: "OPR/")}
+          #{alr_textarea("orgn", "ORGN/", "", "", prefix: "ORGN/")}
+          #{alr_input("per", "PER/", "", prefix: "PER/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("altn_detail", "ALTN/", "", "", prefix: "ALTN/")}
+          #{alr_textarea("ralt", "RALT/", "", "", prefix: "RALT/")}
+          #{alr_textarea("talt", "TALT/", "", "", prefix: "TALT/")}
+        </div>
+        <div class="alr-row alr-row-2">
+          #{alr_textarea("rif", "RIF/", "", "", prefix: "RIF/")}
+          #{alr_textarea("rmk", "RMK/", "", "", prefix: "RMK/")}
+        </div>
       </div>
     </div>
     """
@@ -960,17 +991,29 @@ defmodule TpWeb.Views do
     <div class="alr-page">
       <div class="alr-page-title">D - Supplementary & Search Rescue</div>
       <div class="alr-grid">
-        #{alr_input("endurance", "19. Endurance HR/MIN", "")}
-        #{alr_input("pob", "Person on Board", "")}
-        <div class="field alr-wide"><label>Emergency Radio</label><div class="alr-checks">#{alr_check("radio_uhf", "UHF")}#{alr_check("radio_vhf", "VHF")}#{alr_check("radio_elt", "ELT")}</div></div>
-        <div class="field alr-wide"><label>Survival Equipment</label><div class="alr-checks">#{alr_check("survival_polar", "Polar")}#{alr_check("survival_desert", "Desert")}#{alr_check("survival_maritime", "Maritime")}#{alr_check("survival_jungle", "Jungle")}</div></div>
-        <div class="field alr-wide"><label>Jackets</label><div class="alr-checks">#{alr_check("jackets_light", "Light")}#{alr_check("jackets_fluores", "Fluores")}#{alr_check("jackets_uhf", "UHF")}#{alr_check("jackets_vhf", "VHF")}</div></div>
-        #{alr_input("dinghy_number", "Dinghy Number", "")}
-        #{alr_input("dinghy_colour", "Dinghy Colour", "")}
-        #{alr_input("aircraft_colour", "Aircraft Colour and Markings", "", class: "alr-full")}
-        #{alr_input("remarks", "Remarks", "", class: "alr-full")}
-        #{alr_input("pilot", "Pilot in Command", "", class: "alr-full")}
-        #{alr_textarea("sar_info", "20. Alerting Search and Rescue Information", "", "alr-full")}
+        <div class="alr-row alr-row-sup">
+          #{alr_input("endurance", "19. Endurance HR/MIN", "", prefix: "-E/")}
+          #{alr_input("pob", "Person on Board", "", prefix: "P/")}
+          <div class="field"><label>Emergency Radio</label><div class="alr-checks">#{alr_check("radio_uhf", "UHF")}#{alr_check("radio_vhf", "VHF")}#{alr_check("radio_elt", "ELT")}</div></div>
+        </div>
+        <div class="alr-row alr-row-2">
+          <div class="field"><label>Survival Equipment</label><div class="alr-checks">#{alr_check("survival_polar", "Polar")}#{alr_check("survival_desert", "Desert")}#{alr_check("survival_maritime", "Maritime")}#{alr_check("survival_jungle", "Jungle")}</div></div>
+          <div class="field"><label>Jackets</label><div class="alr-checks">#{alr_check("jackets_light", "Light")}#{alr_check("jackets_fluores", "Fluores")}#{alr_check("jackets_uhf", "UHF")}#{alr_check("jackets_vhf", "VHF")}</div></div>
+        </div>
+        <div class="alr-row alr-row-4">
+          #{alr_input("dinghy_number", "Dinghy Number", "", prefix: "D/")}
+          #{alr_input("dinghy_capacity", "Dinghy Capacity", "")}
+          <div class="field"><label>Dinghy Cover</label><div class="alr-checks">#{alr_check("dinghy_cover", "Cover")}</div></div>
+          #{alr_input("dinghy_colour", "Dinghy Colour", "")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_input("aircraft_colour", "Aircraft Colour and Markings", "", prefix: "A/")}
+          #{alr_input("remarks", "Remarks", "", prefix: "N/")}
+          #{alr_input("pilot", "Pilot in Command", "", prefix: "C/")}
+        </div>
+        <div class="alr-row alr-row-1">
+          #{alr_textarea("sar_info", "20. Alerting Search and Rescue Information", "", "required", required: true, prefix: "-", suffix: ")")}
+        </div>
         <div class="aftn-footer alr-full">
           <div class="aftn-filled">
             <label for="alr-filed-by">Filled By</label>
@@ -986,26 +1029,124 @@ defmodule TpWeb.Views do
     required = if Keyword.get(opts, :required, false), do: " required", else: ""
     readonly = if Keyword.get(opts, :readonly, false), do: " readonly", else: ""
     class = Keyword.get(opts, :class, "")
+    list = if list_id = Keyword.get(opts, :list), do: ~s( list="#{html(list_id)}"), else: ""
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
 
     """
     <div class="field #{html(class)}#{required}">
       <label>#{html(label)}</label>
-      <input name="#{html(name)}" value="#{html(value)}"#{readonly}>
+      <div class="alr-control">#{prefix}<input name="#{html(name)}" value="#{html(value)}"#{readonly}#{required}#{list}>#{suffix}</div>
     </div>
     """
   end
 
-  defp alr_textarea(name, label, value, class \\ "") do
+  defp alr_message_number do
+    """
+    <div class="field">
+      <label>3. Message Type / Number</label>
+      <div class="alr-control compact">
+        #{alr_mark("(")}
+        <input name="message_type" value="ALR" readonly>
+        <input name="alr_number" value="">
+      </div>
+    </div>
+    """
+  end
+
+  defp alr_textarea(name, label, value, class \\ "", opts \\ []) do
+    required = if Keyword.get(opts, :required, false), do: " required", else: ""
+    list = if list_id = Keyword.get(opts, :list), do: ~s( list="#{html(list_id)}"), else: ""
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
+
     """
     <div class="field #{html(class)}">
       <label>#{html(label)}</label>
-      <textarea class="alr-text" name="#{html(name)}" spellcheck="false">#{html(value)}</textarea>
+      <div class="alr-control">#{prefix}<textarea class="alr-text" name="#{html(name)}" spellcheck="false"#{required}#{list}>#{html(value)}</textarea>#{suffix}</div>
+    </div>
+    """
+  end
+
+  defp alr_textarea_picker(name, label, value, class, values, opts \\ []) do
+    picker =
+      case uniq_present(values) do
+        [] ->
+          ""
+
+        present ->
+          """
+          <select class="alr-picker" onchange="this.parentElement.querySelector('textarea').value=this.value">
+            #{option("", "Pilih dari database", "")}
+            #{Enum.map_join(present, "", &option(&1, &1, ""))}
+          </select>
+          """
+      end
+
+    required = if Keyword.get(opts, :required, false), do: " required", else: ""
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
+
+    """
+    <div class="field #{html(class)}">
+      <label>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<textarea class="alr-text" name="#{html(name)}" spellcheck="false"#{required}>#{html(value)}</textarea>#{suffix}</div>
+      #{picker}
     </div>
     """
   end
 
   defp alr_check(name, label) do
     ~s(<label><input type="checkbox" name="#{html(name)}" value="1">#{html(label)}</label>)
+  end
+
+  defp alr_check_field(name, label, value, opts \\ []) do
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
+
+    """
+    <div class="field">
+      <label>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<label class="alr-inline-check"><input type="checkbox" name="#{html(name)}" value="#{html(value)}">#{html(value)}</label>#{suffix}</div>
+    </div>
+    """
+  end
+
+  defp alr_select(name, label, selected, values, opts \\ []) do
+    required = if Keyword.get(opts, :required, false), do: " required", else: ""
+    class = Keyword.get(opts, :class, "")
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
+
+    """
+    <div class="field #{html(class)}#{required}">
+      <label>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<select name="#{html(name)}"#{required}>
+          #{option("", "", selected)}
+          #{Enum.map_join(values, "", &option(&1, &1, selected))}
+        </select>#{suffix}</div>
+    </div>
+    """
+  end
+
+  defp alr_mark(nil), do: ""
+  defp alr_mark(""), do: ""
+  defp alr_mark(value), do: ~s(<span class="alr-mark">#{html(value)}</span>)
+
+  defp alr_datalists(lists) do
+    [
+      datalist("alr-aircraft-types", Map.get(lists, :aircraft_types, [])),
+      datalist("alr-equipment", Map.get(lists, :equipment, [])),
+      datalist("alr-surveillance", Map.get(lists, :surveillance, [])),
+      datalist("alr-departures", Map.get(lists, :departures, [])),
+      datalist("alr-destinations", Map.get(lists, :destinations, [])),
+      datalist("alr-routes", Map.get(lists, :routes, [])),
+      datalist("alr-registrations", Map.get(lists, :registrations, [])),
+      datalist("alr-operators", Map.get(lists, :operators, [])),
+      datalist("alr-sts", sts_options()),
+      datalist("alr-pbn", Map.get(lists, :pbn, []) ++ pbn_options())
+    ]
+    |> Enum.join("")
   end
 
   defp free_message_form do
@@ -1565,6 +1706,114 @@ defmodule TpWeb.Views do
     end)
   end
 
+  defp alr_reference_lists do
+    aircraft_rows =
+      db_rows("""
+      SELECT DISTINCT type9b, type9c
+      FROM aircraft_wtc
+      WHERE type9b IS NOT NULL AND type9b <> ''
+      ORDER BY type9b
+      LIMIT 500
+      """)
+      |> fallback_rows("""
+      SELECT DISTINCT aircraft_type, wake_turbulence_category
+      FROM aircraft_wtc
+      WHERE aircraft_type IS NOT NULL AND aircraft_type <> ''
+      ORDER BY aircraft_type
+      LIMIT 500
+      """)
+
+    route_rows =
+      db_rows("""
+      SELECT type13a, type16a, type15c
+      FROM route
+      WHERE type15c IS NOT NULL AND type15c <> ''
+      ORDER BY id_number DESC
+      LIMIT 300
+      """)
+      |> fallback_rows("""
+      SELECT JSON_UNQUOTE(JSON_EXTRACT(raw_data, '$.type13a')),
+             JSON_UNQUOTE(JSON_EXTRACT(raw_data, '$.type16a')),
+             description
+      FROM route
+      WHERE description IS NOT NULL AND description <> ''
+      ORDER BY id DESC
+      LIMIT 300
+      """)
+
+    reg_rows =
+      db_rows("""
+      SELECT type18, type10a, type10b, type18Opr, type18Pbn
+      FROM aircraft_reg
+      ORDER BY id DESC
+      LIMIT 300
+      """)
+      |> fallback_rows("""
+      SELECT registration, JSON_UNQUOTE(JSON_EXTRACT(raw_data, '$.type10a')),
+             JSON_UNQUOTE(JSON_EXTRACT(raw_data, '$.type10b')), operator,
+             JSON_UNQUOTE(JSON_EXTRACT(raw_data, '$.type18Pbn'))
+      FROM aircraft_reg
+      ORDER BY id DESC
+      LIMIT 300
+      """)
+
+    %{
+      aircraft_types: aircraft_rows |> Enum.map(&row_at(&1, 0)) |> uniq_present(),
+      wakes: aircraft_rows |> Enum.map(&row_at(&1, 1)) |> uniq_present(),
+      departures: route_rows |> Enum.map(&row_at(&1, 0)) |> uniq_present(),
+      destinations: route_rows |> Enum.map(&row_at(&1, 1)) |> uniq_present(),
+      routes: route_rows |> Enum.map(&row_at(&1, 2)) |> uniq_present(),
+      registrations: reg_rows |> Enum.map(&row_at(&1, 0)) |> uniq_present(),
+      equipment: reg_rows |> Enum.map(&row_at(&1, 1)) |> uniq_present(),
+      surveillance: reg_rows |> Enum.map(&row_at(&1, 2)) |> uniq_present(),
+      operators: reg_rows |> Enum.map(&row_at(&1, 3)) |> uniq_present(),
+      pbn: reg_rows |> Enum.map(&row_at(&1, 4)) |> uniq_present()
+    }
+  end
+
+  defp fallback_rows([], sql), do: db_rows(sql)
+  defp fallback_rows(rows, _sql), do: rows
+
+  defp db_rows(sql) do
+    case Tp.Repo.query(sql, []) do
+      {:ok, %{rows: rows}} -> rows
+      _ -> []
+    end
+  rescue
+    _error -> []
+  end
+
+  defp row_at(row, index) when is_list(row), do: Enum.at(row, index)
+  defp row_at(_row, _index), do: nil
+
+  defp uniq_present(values) do
+    values
+    |> Enum.map(&to_string/1)
+    |> Enum.map(&String.trim/1)
+    |> Enum.reject(&(&1 in ["", "NULL"]))
+    |> Enum.uniq()
+  end
+
+  defp wake_options(lists) do
+    (Map.get(lists, :wakes, []) ++ ["H", "M", "L", "J", "Y"])
+    |> uniq_present()
+  end
+
+  defp sts_options do
+    ~w(ALTRV ATFMX FFR FLTCK HAZMAT HEAD HOSP HUM MARSA MEDEVAC NONRVSM SAR STATE)
+  end
+
+  defp pbn_options do
+    ~w(A1 B1 B2 B3 B4 B5 B6 C1 C2 C3 C4 D1 D2 D3 D4 L1 O1 O2 O3 O4 S1 S2 T1 T2)
+  end
+
+  defp datalist(_id, []), do: ""
+
+  defp datalist(id, values) do
+    options = values |> Enum.map_join("", fn value -> ~s(<option value="#{html(value)}"></option>) end)
+    ~s(<datalist id="#{html(id)}">#{options}</datalist>)
+  end
+
   defp option(value, label, selected) do
     attr = if value == selected, do: " selected", else: ""
     ~s(<option value="#{html(value)}"#{attr}>#{html(label)}</option>)
@@ -1604,10 +1853,10 @@ defmodule TpWeb.Views do
         <input type="hidden" name="compose_type" value="#{html(type)}">
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="#{html(type)}">
+        <p class="actions"><button type="submit" name="compose_action" value="send">Send #{html(type)}</button> <button type="button" class="js-clear-form">Clear</button></p>
         #{target_fields()}
         #{aftn_header_fields()}
         #{body_html}
-        <p class="actions"><button type="submit" name="compose_action" value="send">Send #{html(type)}</button> <button type="button" class="js-clear-form">Clear</button></p>
       </form>
     </section>
     """
