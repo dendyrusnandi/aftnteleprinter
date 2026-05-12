@@ -92,6 +92,7 @@ defmodule Tp.Aftn.Builder do
       "dof",
       "sar_info"
     ])
+    |> validate_alr_conditionals(params)
     |> validate_format(params, "aircraft_id", ~r/^[A-Z0-9]{2,7}$/, "Aircraft harus 2-7 huruf/angka")
     |> validate_format(params, "aircraft_type", ~r/^[A-Z0-9]{2,4}$/, "Type aircraft harus 2-4 huruf/angka")
     |> validate_format(params, "departure", ~r/^[A-Z]{4}$/, "Departure harus ICAO 4 huruf")
@@ -541,6 +542,39 @@ defmodule Tp.Aftn.Builder do
     |> validate_format(params, "departure", ~r/^[A-Z]{4}$/, "Departure harus ICAO 4 huruf")
     |> validate_format(params, "destination", ~r/^[A-Z]{4}$/, "Destination harus ICAO 4 huruf")
     |> validate_format(params, "departure_time", ~r/^\d{4}$/, "Time harus HHMM 4 digit")
+  end
+
+  defp validate_alr_conditionals(errors, _params) when errors != [], do: errors
+
+  defp validate_alr_conditionals(errors, params) do
+    errors
+    |> require_when(params, text(params, "ssr_mode") != "" and text(params, "ssr_code") == "", "SSR Code wajib diisi jika SSR Mode dipilih")
+    |> require_when(params, text(params, "ssr_mode") == "" and text(params, "ssr_code") != "", "SSR Mode wajib dipilih jika SSR Code diisi")
+    |> require_when(params, params |> text("equipment") |> upcase() |> String.contains?("R"), "pbn", "PBN wajib diisi jika Equipment berisi R")
+    |> require_when(params, (params |> text("aircraft_type") |> upcase()) == "ZZZZ", "typ", "TYP wajib diisi jika Type of Aircraft ZZZZ")
+    |> require_when(params, (params |> text("departure") |> upcase()) in ["ZZZZ", "AFIL"], "dep_info", "DEP wajib diisi jika DEP AD ZZZZ/AFIL")
+    |> require_when(params, (params |> text("destination") |> upcase()) == "ZZZZ", "dest_info", "DEST wajib diisi jika DEST AD ZZZZ")
+    |> require_when(params, (params |> text("alternate") |> upcase()) == "ZZZZ", "altn_detail", "ALTN wajib diisi jika DEST ALTN AD ZZZZ")
+    |> validate_alr_dinghy(params)
+  end
+
+  defp require_when(errors, _params, false, _message), do: errors
+  defp require_when(errors, _params, true, message), do: [message | errors]
+
+  defp require_when(errors, _params, false, _field, _message), do: errors
+
+  defp require_when(errors, params, true, field, message) do
+    if text(params, field) == "", do: [message | errors], else: errors
+  end
+
+  defp validate_alr_dinghy(errors, params) do
+    has_dinghy_detail? =
+      (["dinghy_number", "dinghy_capacity", "dinghy_colour"]
+       |> Enum.any?(&(text(params, &1) != ""))) or checked?(params, "dinghy_cover")
+
+    errors
+    |> require_when(params, has_dinghy_detail? and text(params, "dinghy_number") == "", "Dinghy Number wajib diisi jika detail dinghy diisi")
+    |> require_when(params, has_dinghy_detail? and text(params, "dinghy_capacity") == "", "Dinghy Capacity wajib diisi jika detail dinghy diisi")
   end
 
   defp validate_aftn_header(errors, _params) when errors != [], do: errors

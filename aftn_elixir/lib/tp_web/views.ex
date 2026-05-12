@@ -190,7 +190,8 @@ defmodule TpWeb.Views do
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}.actions{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;align-items:center;margin:-12px -12px 12px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10)}.subhead{background:#f0f3f6;border:1px solid #e4e8ee;border-radius:4px;padding:8px;margin:4px 0 10px;font-size:13px;color:#435466}
         .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;min-width:0;font-size:13px;font-weight:700;cursor:pointer}.amo-tool i{font-size:16px}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
         .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
-        .alr-scroll{max-height:520px;overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
+        .alr-scroll{max-height:520px;overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.equipment-control .equipment-open{width:40px;flex:0 0 40px;background:white;color:#14324a;border:1px solid #cbd3dc;border-left:0;border-radius:0 4px 4px 0;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-control .equipment-open:hover{background:#edf4fa}.equipment-control input{border-top-right-radius:0;border-bottom-right-radius:0}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
+        .equipment-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(10,18,28,.52);align-items:center;justify-content:center;padding:16px}.equipment-modal.open{display:flex}.equipment-card{width:min(760px,96vw);max-height:90vh;background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden}.equipment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.equipment-head strong{font-size:14px}.equipment-x{background:transparent;color:white;border:0;border-radius:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-body{padding:12px;overflow:auto}.equipment-group{border:1px solid #e4e8ee;border-radius:6px;margin-bottom:10px;overflow:hidden}.equipment-group-title{background:#f0f3f6;color:#14324a;font-size:12px;font-weight:900;text-transform:uppercase;padding:7px 9px}.equipment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.equipment-row{display:grid;grid-template-columns:22px 48px 1fr;gap:7px;align-items:center;margin:0;padding:7px 9px;border-top:1px solid #edf0f3;cursor:pointer;color:#17202a;font-size:12px;font-weight:600}.equipment-row:nth-child(odd){border-right:1px solid #edf0f3}.equipment-row:hover{background:#edf4fa}.equipment-row input{width:auto}.equipment-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:900;color:#14324a}.equipment-desc{font-weight:600;color:#435466}.equipment-notes{background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:8px 10px;color:#5f4400;font-size:12px}.equipment-notes p{margin:0 0 5px}.equipment-notes p:last-child{margin-bottom:0}.equipment-actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-top:1px solid #e4e8ee;flex-wrap:wrap}
         @media(max-width:900px){.grid2,.grid4,.send-row,.header-meta{grid-template-columns:1fr}}
         @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
         @media(max-width:900px){.compose-head,.address-line{display:block}.address-grid,.aftn-address-grid{grid-template-columns:repeat(2,1fr)}.aftn-topline,.aftn-address-row,.aftn-meta{grid-template-columns:1fr}}
@@ -679,6 +680,7 @@ defmodule TpWeb.Views do
             if (field.type === 'checkbox' || field.type === 'radio') field.checked = false;
             else field.value = '';
           });
+          updateAlrRequired(form);
           if (window.sessionStorage) window.sessionStorage.removeItem(formKey(form));
         }
 
@@ -705,6 +707,11 @@ defmodule TpWeb.Views do
           form.addEventListener('input', function (event) {
             var field = event.target;
             if (field && (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA')) uppercaseField(field);
+            updateAlrRequired(form);
+          });
+
+          form.addEventListener('change', function () {
+            updateAlrRequired(form);
           });
 
           form.addEventListener('click', function (event) {
@@ -724,6 +731,166 @@ defmodule TpWeb.Views do
               if (input) input.value = currentDdHhMm();
             }
           });
+
+          updateAlrRequired(form);
+        });
+
+        function value(form, name) {
+          var field = form.elements[name];
+          return field && field.value ? field.value.toUpperCase() : '';
+        }
+
+        function setRequired(form, name, required) {
+          var field = form.elements[name];
+          if (!field) return;
+          field.required = !!required;
+          var box = field.closest ? field.closest('.field') : null;
+          if (box) box.classList.toggle('required', !!required);
+        }
+
+        function updateAlrRequired(form) {
+          if (!form || form.id !== 'alr-form') return;
+          setRequired(form, 'ssr_code', !!form.elements.ssr_mode && form.elements.ssr_mode.checked);
+          setRequired(form, 'pbn', value(form, 'equipment').indexOf('R') !== -1);
+          setRequired(form, 'typ', value(form, 'aircraft_type') === 'ZZZZ');
+          setRequired(form, 'dep_info', ['ZZZZ', 'AFIL'].indexOf(value(form, 'departure')) !== -1);
+          setRequired(form, 'dest_info', value(form, 'destination') === 'ZZZZ');
+          setRequired(form, 'altn_detail', value(form, 'alternate') === 'ZZZZ');
+          var dinghyDetail = ['dinghy_number', 'dinghy_capacity', 'dinghy_colour'].some(function (name) { return value(form, name) !== ''; }) || (!!form.elements.dinghy_cover && form.elements.dinghy_cover.checked);
+          setRequired(form, 'dinghy_number', dinghyDetail);
+          setRequired(form, 'dinghy_capacity', dinghyDetail);
+        }
+
+        var equipmentOrder = {
+          '10a': ['N', 'S', 'A', 'B', 'C', 'D', 'E1', 'E2', 'E3', 'F', 'G', 'H', 'I', 'J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'K', 'L', 'M1', 'M2', 'M3', 'O', 'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'R', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+          '10b': ['N', 'A', 'C', 'E', 'H', 'I', 'L', 'P', 'S', 'X', 'B1', 'B2', 'U1', 'U2', 'V1', 'V2', 'D1', 'G1'],
+          'pbn': ['A1', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4', 'L1', 'O1', 'O2', 'O3', 'O4', 'S1', 'S2', 'T1', 'T2'],
+          'sts': ['ALTRV', 'ATFMX', 'FFR', 'FLTCK', 'HAZMAT', 'HEAD', 'HOSP', 'HUM', 'MARSA', 'MEDEVAC', 'NONRVSM', 'SAR', 'STATE']
+        };
+
+        function valuesFromField(value, order) {
+          value = (value || '').toUpperCase();
+          return order.filter(function (code) { return value.indexOf(code) !== -1; });
+        }
+
+        function selectedValues(modal) {
+          return Array.prototype.map.call(modal.querySelectorAll('.equipment-choice:checked'), function (box) { return box.value; });
+        }
+
+        function applyEquipmentRules(modal) {
+          var type = modal.getAttribute('data-equipment-modal');
+          var selected = selectedValues(modal);
+          modal.querySelectorAll('.equipment-choice').forEach(function (box) { box.disabled = false; });
+
+          if (type === '10a') {
+            if (selected.indexOf('N') !== -1) modal.querySelector('[value="S"]').disabled = true;
+            if (selected.indexOf('S') !== -1) modal.querySelector('[value="N"]').disabled = true;
+            return;
+          }
+
+          if (type === '10b') {
+            var primary = ['N', 'A', 'C', 'E', 'H', 'I', 'L', 'P', 'S', 'X'];
+            var selectedPrimary = primary.filter(function (code) { return selected.indexOf(code) !== -1; });
+            if (selectedPrimary.length) {
+              primary.forEach(function (code) {
+                var box = modal.querySelector('[value="' + code + '"]');
+                if (box && selectedPrimary.indexOf(code) === -1) box.disabled = true;
+              });
+              if (selectedPrimary.indexOf('N') !== -1) {
+                modal.querySelectorAll('.equipment-choice').forEach(function (box) {
+                  if (box.value !== 'N') box.disabled = true;
+                });
+              }
+            }
+
+            var outOnly = ['B1', 'U1', 'V1'];
+            var inOut = ['B2', 'U2', 'V2'];
+            var hasOutOnly = outOnly.some(function (code) { return selected.indexOf(code) !== -1; });
+            var hasInOut = inOut.some(function (code) { return selected.indexOf(code) !== -1; });
+            if (hasOutOnly) inOut.forEach(function (code) { modal.querySelector('[value="' + code + '"]').disabled = true; });
+            if (hasInOut) outOnly.forEach(function (code) { modal.querySelector('[value="' + code + '"]').disabled = true; });
+          }
+        }
+
+        document.addEventListener('click', function (event) {
+          var openButton = event.target.closest ? event.target.closest('.js-equipment-open') : null;
+          if (openButton) {
+            event.preventDefault();
+            var target = openButton.getAttribute('data-target');
+            var type = openButton.getAttribute('data-equipment');
+            var modal = document.querySelector('[data-equipment-modal="' + type + '"]');
+            var input = document.querySelector('[name="' + target + '"]');
+            if (!modal || !input) return;
+            modal.setAttribute('data-target', target);
+            var selected = valuesFromField(input.value, equipmentOrder[type] || []);
+            modal.querySelectorAll('.equipment-choice').forEach(function (box) {
+              box.checked = selected.indexOf(box.value) !== -1;
+            });
+            applyEquipmentRules(modal);
+            modal.classList.add('open');
+            return;
+          }
+
+          var closeButton = event.target.closest ? event.target.closest('.js-equipment-close') : null;
+          if (closeButton) {
+            event.preventDefault();
+            closeButton.closest('.equipment-modal').classList.remove('open');
+            return;
+          }
+
+          var clearButton = event.target.closest ? event.target.closest('.js-equipment-clear') : null;
+          if (clearButton) {
+            event.preventDefault();
+            var clearModal = clearButton.closest('.equipment-modal');
+            clearModal.querySelectorAll('.equipment-choice').forEach(function (box) {
+              box.checked = false;
+              box.disabled = false;
+            });
+            var clearInput = document.querySelector('[name="' + clearModal.getAttribute('data-target') + '"]');
+            if (clearInput) {
+              clearInput.value = '';
+              updateAlrRequired(clearInput.form);
+            }
+            return;
+          }
+
+          var addButton = event.target.closest ? event.target.closest('.js-equipment-add') : null;
+          if (addButton) {
+            event.preventDefault();
+            var addModal = addButton.closest('.equipment-modal');
+            var addType = addModal.getAttribute('data-equipment-modal');
+            var inputTarget = document.querySelector('[name="' + addModal.getAttribute('data-target') + '"]');
+            var picked = selectedValues(addModal);
+            var separator = addType === 'sts' ? ' ' : '';
+            var value = (equipmentOrder[addType] || []).filter(function (code) { return picked.indexOf(code) !== -1; }).join(separator);
+            if (addType === 'pbn' && value.length > 16) {
+              if (inputTarget) inputTarget.value = value;
+              window.alert('Please insert maximum 8 entries, i.e. a total of not more than 16 characters !!');
+              return;
+            }
+            if (inputTarget) {
+              inputTarget.value = value;
+              updateAlrRequired(inputTarget.form);
+            }
+            addModal.classList.remove('open');
+            return;
+          }
+
+          var row = event.target.closest ? event.target.closest('.equipment-row') : null;
+          if (row && !event.target.classList.contains('equipment-choice')) {
+            event.preventDefault();
+            var choice = row.querySelector('.equipment-choice');
+            if (choice && !choice.disabled) {
+              choice.checked = !choice.checked;
+              applyEquipmentRules(row.closest('.equipment-modal'));
+            }
+          }
+        });
+
+        document.addEventListener('change', function (event) {
+          if (event.target.classList && event.target.classList.contains('equipment-choice')) {
+            applyEquipmentRules(event.target.closest('.equipment-modal'));
+          }
         });
       })();
     </script>
@@ -840,6 +1007,7 @@ defmodule TpWeb.Views do
           #{alr_page_d(params)}
         </div>
         #{alr_datalists(lists)}
+        #{alr_equipment_modals()}
       </form>
     </section>
     """
@@ -852,7 +1020,7 @@ defmodule TpWeb.Views do
       <div class="aftn-address-row">
         <div class="field required">
           <label>Priority</label>
-          <select name="priority">
+          <select name="priority" required>
             #{option("FF", "FF", priority)}
             #{option("GG", "GG", priority)}
             #{option("DD", "DD", priority)}
@@ -873,7 +1041,7 @@ defmodule TpWeb.Views do
             <button class="time-button js-current-time" type="button" data-target="alr-filing-time" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
           </div>
         </div>
-        <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}"></div>
+        <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}" required></div>
         <div class="field"><label>Originator's Reference</label><input name="originator_reference" value=""></div>
         <label class="aftn-bell"><input type="checkbox" name="bell" value="1"> Bell</label>
       </div>
@@ -904,8 +1072,8 @@ defmodule TpWeb.Views do
           #{alr_input("aircraft_number", "9. Number", "", prefix: "-")}
           #{alr_input("aircraft_type", "Type of Aircraft", "", required: true, list: "alr-aircraft-types")}
           #{alr_select("wake", "Wake Turb. Category", "", wake_options(lists), required: true, prefix: "/")}
-          #{alr_input("equipment", "10a. Equipment and Capabilities", "", required: true, list: "alr-equipment", prefix: "-")}
-          #{alr_input("equipment_surveillance", "10b. Surveillance Equipment", "", required: true, list: "alr-surveillance", prefix: "/")}
+          #{alr_equipment_input("equipment", "10a. Equipment and Capabilities", "", "10a", required: true, list: "alr-equipment", prefix: "-")}
+          #{alr_equipment_input("equipment_surveillance", "10b. Surveillance Equipment", "", "10b", required: true, list: "alr-surveillance", prefix: "/")}
         </div>
         <div class="alr-row alr-row-2">
           #{alr_input("departure", "13. DEP AD", "", required: true, list: "alr-departures", prefix: "-")}
@@ -933,8 +1101,8 @@ defmodule TpWeb.Views do
           #{alr_input("second_alternate", "2ND DEST ALTN AD", "")}
         </div>
         <div class="alr-row alr-row-18">
-          #{alr_input("sts", "STS/", "", list: "alr-sts", prefix: "-")}
-          #{alr_input("pbn", "PBN/", "", list: "alr-pbn", prefix: "PBN/")}
+          #{alr_equipment_input("sts", "STS/", "", "sts", list: "alr-sts", prefix: "-")}
+          #{alr_equipment_input("pbn", "PBN/", "", "pbn", list: "alr-pbn", prefix: "PBN/")}
           #{alr_textarea("nav", "NAV/", "", "", prefix: "NAV/")}
         </div>
         <div class="alr-row alr-row-3">
@@ -994,16 +1162,16 @@ defmodule TpWeb.Views do
         <div class="alr-row alr-row-sup">
           #{alr_input("endurance", "19. Endurance HR/MIN", "", prefix: "-E/")}
           #{alr_input("pob", "Person on Board", "", prefix: "P/")}
-          <div class="field"><label>Emergency Radio</label><div class="alr-checks">#{alr_check("radio_uhf", "UHF")}#{alr_check("radio_vhf", "VHF")}#{alr_check("radio_elt", "ELT")}</div></div>
+          <div class="field"#{alr_title_attr(alr_tooltip("emergency_radio"))}><label#{alr_title_attr(alr_tooltip("emergency_radio"))}>Emergency Radio</label><div class="alr-checks">#{alr_check("radio_uhf", "UHF")}#{alr_check("radio_vhf", "VHF")}#{alr_check("radio_elt", "ELT")}</div></div>
         </div>
         <div class="alr-row alr-row-2">
-          <div class="field"><label>Survival Equipment</label><div class="alr-checks">#{alr_check("survival_polar", "Polar")}#{alr_check("survival_desert", "Desert")}#{alr_check("survival_maritime", "Maritime")}#{alr_check("survival_jungle", "Jungle")}</div></div>
-          <div class="field"><label>Jackets</label><div class="alr-checks">#{alr_check("jackets_light", "Light")}#{alr_check("jackets_fluores", "Fluores")}#{alr_check("jackets_uhf", "UHF")}#{alr_check("jackets_vhf", "VHF")}</div></div>
+          <div class="field"#{alr_title_attr(alr_tooltip("survival_equipment"))}><label#{alr_title_attr(alr_tooltip("survival_equipment"))}>Survival Equipment</label><div class="alr-checks">#{alr_check("survival_polar", "Polar")}#{alr_check("survival_desert", "Desert")}#{alr_check("survival_maritime", "Maritime")}#{alr_check("survival_jungle", "Jungle")}</div></div>
+          <div class="field"#{alr_title_attr(alr_tooltip("jackets"))}><label#{alr_title_attr(alr_tooltip("jackets"))}>Jackets</label><div class="alr-checks">#{alr_check("jackets_light", "Light")}#{alr_check("jackets_fluores", "Fluores")}#{alr_check("jackets_uhf", "UHF")}#{alr_check("jackets_vhf", "VHF")}</div></div>
         </div>
         <div class="alr-row alr-row-4">
           #{alr_input("dinghy_number", "Dinghy Number", "", prefix: "D/")}
           #{alr_input("dinghy_capacity", "Dinghy Capacity", "")}
-          <div class="field"><label>Dinghy Cover</label><div class="alr-checks">#{alr_check("dinghy_cover", "Cover")}</div></div>
+          <div class="field"#{alr_title_attr(alr_tooltip("dinghy_cover"))}><label#{alr_title_attr(alr_tooltip("dinghy_cover"))}>Dinghy Cover</label><div class="alr-checks">#{alr_check("dinghy_cover", "Cover")}</div></div>
           #{alr_input("dinghy_colour", "Dinghy Colour", "")}
         </div>
         <div class="alr-row alr-row-3">
@@ -1015,9 +1183,9 @@ defmodule TpWeb.Views do
           #{alr_textarea("sar_info", "20. Alerting Search and Rescue Information", "", "required", required: true, prefix: "-", suffix: ")")}
         </div>
         <div class="aftn-footer alr-full">
-          <div class="aftn-filled">
-            <label for="alr-filed-by">Filled By</label>
-            <input id="alr-filed-by" name="filed_by" value="SYSTEM" placeholder="Operator">
+          <div class="aftn-filled"#{alr_title_attr(alr_tooltip("filed_by"))}>
+            <label for="alr-filed-by"#{alr_title_attr(alr_tooltip("filed_by"))}>Filled By</label>
+            <input id="alr-filed-by" name="filed_by" value="SYSTEM" placeholder="Operator"#{alr_title_attr(alr_tooltip("filed_by"))}>
           </div>
         </div>
       </div>
@@ -1032,23 +1200,42 @@ defmodule TpWeb.Views do
     list = if list_id = Keyword.get(opts, :list), do: ~s( list="#{html(list_id)}"), else: ""
     prefix = alr_mark(Keyword.get(opts, :prefix))
     suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
 
     """
-    <div class="field #{html(class)}#{required}">
-      <label>#{html(label)}</label>
-      <div class="alr-control">#{prefix}<input name="#{html(name)}" value="#{html(value)}"#{readonly}#{required}#{list}>#{suffix}</div>
+    <div class="field #{html(class)}#{required}"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<input name="#{html(name)}" value="#{html(value)}"#{readonly}#{required}#{list}#{title}>#{suffix}</div>
+    </div>
+    """
+  end
+
+  defp alr_equipment_input(name, label, value, picker, opts \\ []) do
+    required = if Keyword.get(opts, :required, false), do: " required", else: ""
+    list = if list_id = Keyword.get(opts, :list), do: ~s( list="#{html(list_id)}"), else: ""
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
+
+    """
+    <div class="field#{required}"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control equipment-control">#{prefix}<input name="#{html(name)}" value="#{html(value)}" readonly#{required}#{list}#{title}><button class="equipment-open js-equipment-open" type="button" data-equipment="#{html(picker)}" data-target="#{html(name)}" title="Choose #{html(label)}"><i class="bi bi-list-check"></i></button>#{suffix}</div>
     </div>
     """
   end
 
   defp alr_message_number do
+    message_type_tip = alr_title_attr(alr_tooltip("message_type"))
+    number_tip = alr_title_attr(alr_tooltip("alr_number"))
+
     """
-    <div class="field">
-      <label>3. Message Type / Number</label>
+    <div class="field"#{message_type_tip}>
+      <label#{message_type_tip}>3. Message Type / Number</label>
       <div class="alr-control compact">
         #{alr_mark("(")}
-        <input name="message_type" value="ALR" readonly>
-        <input name="alr_number" value="">
+        <input name="message_type" value="ALR" readonly#{message_type_tip}>
+        <input name="alr_number" value=""#{number_tip}>
       </div>
     </div>
     """
@@ -1059,11 +1246,12 @@ defmodule TpWeb.Views do
     list = if list_id = Keyword.get(opts, :list), do: ~s( list="#{html(list_id)}"), else: ""
     prefix = alr_mark(Keyword.get(opts, :prefix))
     suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
 
     """
-    <div class="field #{html(class)}">
-      <label>#{html(label)}</label>
-      <div class="alr-control">#{prefix}<textarea class="alr-text" name="#{html(name)}" spellcheck="false"#{required}#{list}>#{html(value)}</textarea>#{suffix}</div>
+    <div class="field #{html(class)}"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<textarea class="alr-text" name="#{html(name)}" spellcheck="false"#{required}#{list}#{title}>#{html(value)}</textarea>#{suffix}</div>
     </div>
     """
   end
@@ -1086,28 +1274,31 @@ defmodule TpWeb.Views do
     required = if Keyword.get(opts, :required, false), do: " required", else: ""
     prefix = alr_mark(Keyword.get(opts, :prefix))
     suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
 
     """
-    <div class="field #{html(class)}">
-      <label>#{html(label)}</label>
-      <div class="alr-control">#{prefix}<textarea class="alr-text" name="#{html(name)}" spellcheck="false"#{required}>#{html(value)}</textarea>#{suffix}</div>
+    <div class="field #{html(class)}"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<textarea class="alr-text" name="#{html(name)}" spellcheck="false"#{required}#{title}>#{html(value)}</textarea>#{suffix}</div>
       #{picker}
     </div>
     """
   end
 
-  defp alr_check(name, label) do
-    ~s(<label><input type="checkbox" name="#{html(name)}" value="1">#{html(label)}</label>)
+  defp alr_check(name, label, opts \\ []) do
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
+    ~s(<label#{title}><input type="checkbox" name="#{html(name)}" value="1"#{title}>#{html(label)}</label>)
   end
 
   defp alr_check_field(name, label, value, opts \\ []) do
     prefix = alr_mark(Keyword.get(opts, :prefix))
     suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
 
     """
-    <div class="field">
-      <label>#{html(label)}</label>
-      <div class="alr-control">#{prefix}<label class="alr-inline-check"><input type="checkbox" name="#{html(name)}" value="#{html(value)}">#{html(value)}</label>#{suffix}</div>
+    <div class="field"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<label class="alr-inline-check"#{title}><input type="checkbox" name="#{html(name)}" value="#{html(value)}"#{title}>#{html(value)}</label>#{suffix}</div>
     </div>
     """
   end
@@ -1117,11 +1308,12 @@ defmodule TpWeb.Views do
     class = Keyword.get(opts, :class, "")
     prefix = alr_mark(Keyword.get(opts, :prefix))
     suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
 
     """
-    <div class="field #{html(class)}#{required}">
-      <label>#{html(label)}</label>
-      <div class="alr-control">#{prefix}<select name="#{html(name)}"#{required}>
+    <div class="field #{html(class)}#{required}"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<select name="#{html(name)}"#{required}#{title}>
           #{option("", "", selected)}
           #{Enum.map_join(values, "", &option(&1, &1, selected))}
         </select>#{suffix}</div>
@@ -1132,6 +1324,308 @@ defmodule TpWeb.Views do
   defp alr_mark(nil), do: ""
   defp alr_mark(""), do: ""
   defp alr_mark(value), do: ~s(<span class="alr-mark">#{html(value)}</span>)
+
+  defp alr_title_attr(nil), do: ""
+  defp alr_title_attr(""), do: ""
+  defp alr_title_attr(value), do: ~s( title="#{html(value)}")
+
+  defp alr_tooltip("message_type") do
+    """
+    Message Type
+
+    3 LETTERS as follows:
+
+    ALR - Alerting
+    RCF - Radio Communication Failure
+    FPL - Filed Flight Plan
+    DLA - Delay
+    CHG - Modification
+    CNL - Cancellation
+    DEP - Departure
+    ARR - Arrival
+    CDN - Co-ordination
+    CPL - Current Flight Plan
+    EST - Estimate
+    ACP - Acceptance
+    LAM - Logical Acknowledgement
+    RQP - Request Flight Plan
+    RQS - Request Supplementary Flight Plan
+    SPL - Supplementary Flight Plan
+    """
+  end
+
+  defp alr_tooltip("alr_number") do
+    """
+    Message Number
+
+    1 to 4 LETTER(S) identifying the sending
+    ATS unit, followed by
+
+    OBLIQUE STROKE (/) followed by
+
+    1 to 4 LETTER(S) identifying the receiving
+    ATS unit, followed by
+
+    3 DECIMAL NUMERICS giving the serial number
+    of this message in the sequence of messages
+    transmitted by this unit to the indicated
+    receiving ATS unit.
+    """
+  end
+
+  defp alr_tooltip("reference_data") do
+    """
+    Reference Data
+
+    1 to 4 LETTER(S) followed by OBLIQUE STROKE (/)
+    followed by 1 to 4 LETTER(S) followed by
+
+    3 DECIMAL NUMERICS, giving the 'message number'
+    contained in element (b) of the operational
+    message which began the sequence of messages of
+    which this message is a part.
+    """
+  end
+
+  defp alr_tooltip("phase") do
+    """
+    Phase of Emergency
+    ---------------------------
+    INCERFA if an uncertainly phase, or
+    ALERFA if an alert phase, or
+    DETRESFA if a distress phase
+
+    has been declared in respect of the aircraft concerned.
+    """
+  end
+
+  defp alr_tooltip("alert_originator"), do: "Originator of Message\n------------------------------\n8 LETTERS, being the 4-letter ICAO location indicator plus the 3-letter designator of the ATS unit originating the message followed by the letter X or, if applicable, the one-letter designator identifying the division of the ATS unit originating the message."
+  defp alr_tooltip("nature"), do: "Nature of Emergency\n-----------------------------\nSHORT PLAIN LANGUAGE TEXT, as necessary to explain the nature of the emergency, with natural spaces between the words."
+  defp alr_tooltip("aircraft_id"), do: "Aircraft Identification\n\nINSERT one of the following aircraft identification, not exceeding 7 alphanumeric characters and without hypens or symbols:\n\na) the ICAO designator for the aircraft operating agency followed by the flight identification (e.g. KLM511, NGA213, JTR25) when in radiotelephony the call sign to be used by the aircraft will consist of the ICAO telephony designator for the operating agency followed by the flight identification (e.g. KLM511, NIGERIA 213, JESTER 25);\n\nb) in the radiotelephony the call sign to be used by the aircraft will consist of this identification alone (e.g. CGAJS), or preceded by the ICAO telephony designator for the aircraft operating agency (e.g. BLIZZARD CGAJS);"
+  defp alr_tooltip("ssr_mode"), do: "SSR Mode\n\n1 LETTER giving the SSR Mode related to (c)."
+  defp alr_tooltip("ssr_code"), do: "SSR Code\n\n4 NUMERICS giving the SSR Code assigned to the aircraft by ATS and transmitted in the Mode given in (b)."
+
+  defp alr_tooltip("flight_rules") do
+    """
+    Flight Rules
+
+    INSERT one of the following letters to denote the category of flight rules with which the pilot intends to comply:
+
+    - I if it is intended that the entire flight will be operated under the IFR
+    - V if it is intended that the entire flight will be operated under the VFR
+    - Y if the flight initially will be operated under the IFR, followed by one or more subsequent changes of flight rules
+    - Z if the flight initially will be operated under the VFR, followed by one or more subsequent changes of flight rules
+
+    Specify in Item 15 the point or points at which a change of flight rules is planned.
+    """
+  end
+
+  defp alr_tooltip("flight_type") do
+    """
+    Type of Flight
+
+    INSERT one of the following letters to denote the type of flight when so required by the appropriate ATS authority:
+
+    - S if scheduled air service
+    - N if non-scheduled air transport operation
+    - G if general aviation
+    - M if military
+    - X if other than any of the defined categories above.
+
+    Specify status of a flight following the indicator STS in Item 18, or when necessary to denote other reasons for specific handling by ATS, indicate the reason following the indicator RMK/ in Item 18.
+    """
+  end
+
+  defp alr_tooltip("aircraft_number"), do: "Number of Aircraft (if more than one)\n\n1 to 2 NUMERICS giving the number of aircraft in the flight."
+  defp alr_tooltip("aircraft_type"), do: "Type of Aircraft\n\n2 to 4 CHARACTERS, being the appropriate designator chosen from ICAO Doc 8643, Aircraft Type Designators, or\n\nZZZZ if no designator has been assigned or if there is more than one type of aircraft in the flight."
+  defp alr_tooltip("wake"), do: "Wake Turbulence Category\n\n1 LETTER to indicate maximum certificated take-off mass of the aircraft:\n\nH - Heavy\nM - Medium\nL - Light\nJ - Jumbo"
+
+  defp alr_tooltip("equipment") do
+    """
+    Radio Communication, Navigation and Approach Aid Equipment and Capabilities
+
+    1 LETTER as follows:
+    N: no COM/NAV/approach aid equipment for the route to be
+        flown is carried, or the equipment is unserviceable, OR
+
+    S: Standard COM/NAV/approach aid equipment for the route
+        to be flown is carried and serviceable, AND/OR INSERT
+
+    ONE OR MORE OF THE FOLLOWING LETTERS to indicate the serviceable COM/NAV/approach aid equipment and capabilities:
+    A : GBAS landing system
+    B : LPV (APV with SBAS)
+    C : LORAN C
+    D : DME
+    E1: FMC WPR ACARS
+    E2: D-FIS ACARS
+    E3: PDC ACARS
+    F : ADF
+    G : GNSS
+    H : HF RTF
+    I : Inertial Navigation
+    J1: CPDLC ATN VDL Mode 2
+    J2: CPDLC FANS 1/A HFDL
+    J3: CPDLC FANS 1/A VDL Mode A
+    J4: CPDLC FANS 1/A VDL Mode 2
+    J5: CPDLC FANS 1/A SATCOM (INMARSAT)
+    J6: CPDLC FANS 1/A SATCOM (MTSAT)
+    J7: CPDLC FANS 1/A SATCOM (Iridium)
+    K : MLS
+    L : ILS
+    M1: ATC RTF SATCOM (INMARSAT)
+    M2: ATC RTF (MTSAT)
+    M3: ATC RTF (Iridium)
+    O : VOR
+    P1-P9: Reserved for RCP
+    R : PBN approved
+    T : TACAN
+    U : UHF RTF
+    V : VHF RTF
+    W : RVSM approved
+    X : MNPS approved
+    Y : VHF with 8.33 kHz channel spacing capability
+    Z : Other equipment carried or other capabilities
+    """
+  end
+
+  defp alr_tooltip("equipment_surveillance") do
+    """
+    Surveillance equipment and capabilities
+
+    N   if no surveillance equipment for the route to be flown is
+         carried, or the equipment is unserviceable
+    A   Transponder - Mode A (4 digits - 4 096 codes)
+    C   Transponder - Mode A (4 digits - 4 096 codes) and Mode C
+    E   Transponder - Mode S, including aircraft identification,
+         pressure-altitude and extend squitter (ADS-B) capability
+    H   Transponder - Mode S, including aircraft identification,
+         pressure-altitude and enhanced survilliance capability
+    I   Transponder - Mode S, including aircraft identification,
+         but no pressure-altitude capability
+    L   Transponder - Mode S, including aircraft identification,
+         pressure-altitude, extend squitter (ADS-B) and enhanced
+         survilliance capability
+    P   Transponder - Mode S, including pressure-altitude, but no
+         aircraft identification capability
+    S   Transponder - Mode S, including both pressure altitude and
+         aircraft identification capability
+    X   Transponder - Mode S with neither aircraft identification
+         nor pressure-altitude capability
+
+    ADS B
+    B1  ADS-B with dedicated 1090 MHz ADS-B 'out' capability
+    B2  ADS-B with dedicated 1090 MHz ADS-B 'out' and 'in' capability
+    U1  ADS-B 'out' capability using UAT
+    U2  ADS-B 'out' and 'in' capability using UAT
+    V1  ADS-B 'out' capability using VDL Mode 4
+    V2  ADS-B 'out' and 'in' capability using VDL Mode 4
+
+    ADS C
+    D1  ADS-C with FANS 1/A capabilities
+    G1  ADS-C with ATN capabilities
+
+    Alphanumeric characters not indicated above are reserved.
+    """
+  end
+
+  defp alr_tooltip("departure"), do: "Departure Aerodrome\n\nINSERT the ICAO four-letter location indicator of the departure aerodrome as specified in Doc 7910, Location Indicators,\n\nOR if no location indicator has been assigned,\n\nINSERT ZZZZ and SPECIFY, in Item 18, the name and location of the aerodrome preceded by DEP/\n\nOR the first point of the route or the marker radio beacon preceded by DEP/..., if the aircraft has not taken off from the aerodrome,\n\nOR if the flight plan is received from an aircraft in flight,\n\nINSERT AFIL and SPECIFY, in Item 18, the ICAO four-letter location indicator of the location ATS unit from which supplementary flight plan data can be obtained, preceded by DEP/"
+  defp alr_tooltip("departure_time"), do: "Time\n\n4 NUMERICS giving\n\nthe estimated off-block time at the aerodrome in (a) in FPL and DLA messages transmitted before departure and in RQP message, if known, or\n\nthe actual time of departure from the aerodrome in (a) in ALR, DEP and SPL messages, or\n\nthe actual or estimated time of departure from the first point shown in the Route Field (see Field Type 15) in FPL messages derived from flight plans filed in the air, as shown by the letters AFIL in (a)."
+  defp alr_tooltip("speed"), do: "Cruising speed (maximum 5 characters)\n\nINSERT the True Air Speed for the first or the whole cruising portion of the flight, in terms of:\n- Kilometres per hour, expressed as K followed by 4 figures\n  (e.g. K0830), or\n- Knots, expressed as N followed by 4 figures (e.g. N0485), or\n- True Mach number, when so prescribed by the appropriate\n  ATS authority, to the nearest hundredth of unit Mach,\n  expressed as M followed by 3 figures (e.g M082)."
+  defp alr_tooltip("level"), do: "Cruising level (maximum 5 characters)\n\nINSERT the planned cruising level for the first or the whole portion of the route to be flown, in terms if:\n- Flight level, expressed as F followed by 3 figures (e.g.\n  F085; F330), or\n- *Standard Metric Level in tens of metres, expressed as\n  S followed by 4 figures (e.g. S1130), or\n- Altitude in hundreds of feet, expressed as A followed by\n  3 figures (e.g. A045; A100), or\n- Altitude in tens of metres, expressed as M followed by 4\n  figures (e.g. M0840), or\n- for uncontrolled VFR flights, the letters VFR.\n\n*When so prescribed by the appropriate ATS authorities."
+  defp alr_tooltip("route") do
+    """
+    Route (including changes of speed, level and/or flight rules)
+
+    Flights along designated ATS routes
+    1. ATS route (2 to 7 characters)
+      The coded designator assigned to the route or route segment
+      including, where appropriate, the coded designator
+      assigned to the standard departure or arrival route
+      (e.g. BCN1, B1, R14, UB10, KODAP2A)
+
+    2. Significant point (2 to 11 characters)
+       The coded designator (2 to 5 chars) assigned to the point
+       (e.g. LN, MAY, HADDY), or if no coded designator has been
+       assigned, one of the following ways:
+       - Degress only (7 chars), e.g. 46N078W
+       - Degress and minutes (11 chars), e.g. 4620N07805W
+       - Bearing distance from significant point, e.g. DUB180040
+
+    3. Change of speed or level (maximum 21 characters)
+       The point at which a change of speed (5% TAS or 0.01 Mach
+       or more) or a change of level is planned to commence,
+       expressed exactly as in (2) above.
+       e.g. LN/N0284A045; MAY/N0305F330; HADDY/
+       N0420F330; 4602N07805W/N0500F350; 46N078W/
+       M082F330; DUB180040/N0350M0840
+
+    4. Change of flight rules (maximum 3 characters)
+       The point at which the change of flight rules is planned,
+       expressed exactly as in (2) or (3) above as appropriate,
+       followed by a space and one of the following:
+       - VFR if from IFR to VFR    - IFR if from VFR to IFR
+       e.g. LN VFR; LN/N0284A050 IFR
+
+    5. Cruise climb (maximum 28 characters)
+       e.g. C/48N050W/M082F290F350; C/48N050W/
+       M082F290PLUS; C/52N050W/M220F580F620;
+    """
+  end
+  defp alr_tooltip("destination"), do: "Destination aerodrome\n\nINSERT the ICAO four-letter location indicator of the destination aerodrome as specfied in Doc 7910, Location Indicators,\n\nOR, if no location indicator has been assigned,\n\nINSERT ZZZZ and SPECIFY in Item 18 the name and location of the aerodrome, preceded by DEST/"
+  defp alr_tooltip("eet"), do: "Total Estimated Elapsed Time\n\n4 NUMERICS, giving the total estimated elapsed time."
+  defp alr_tooltip("alternate"), do: "Destination alternate aerodrome(s)\n\nINSERT the ICAO four-letter location indicator(s) of not more than two destination alternate aerodromes, as specfied in Doc 7910, Location Indicators, separated by a space,\n\nOR, if no location indicator has been assigned to the destination alternate aerodrome(s),\n\nINSERT ZZZZ and SPECIFY in Item 18 the name and location of the destination alternate aerodrome(s), preceded by ALTN/"
+  defp alr_tooltip("second_alternate"), do: alr_tooltip("alternate")
+
+  defp alr_tooltip("sts"), do: "Reason for special handling by ATS, e.g. a search and rescue mission, as follows:\n\nALTRV:\tfor a flight operated in accordance with an altitude reservation;\nATFMX:\tfor a flight approved for exemption from ATFM measures by the appropriate ATS authority;\nFFR:\tfire-fighting;\nFLTCK:\tflight check for calibration of navaids;\nHAZMAT:for a flight carrying hazardous material;\nHEAD:\ta flight with Head of State status;\nHOSP:\tfor medical flight declared by medical authorities;\nHUM:\tfor a flight operating on a humanitarian mission;\nMARSA:for a flight for which a military entity assumes responsibility for separation of military aircraft;\nMEDEVAC: for a life critical medical emergency evacuation;\nNONRVSM: for non-RVSM capable flight intending to operate in RVSM airspace;\nSAR:\tfor a flight engaged in a search and rescue mission;\nSTATE:\tfor a flight engaged in military, customs or police services."
+  defp alr_tooltip("pbn"), do: "Indication of RNAV and/or RNP capabilities. Include as many of the descriptors below, as apply to the flight, up to maximum 8 entries, i.e. a total of not more than 16 characters.\n\nRNAV SPECIFICATION\nA1: RNAV 10 (RNP 10)\tC1: RNAV 2 all permitted sensors\nB1: RNAV 5 all permitted sensors\tC2: RNAV 2 GNSS\nC3: RNAV 2 DME/DME\nB2: RNAV 5 GNSS\tC4: RNAV 2 DME/DME/IRU\nB3: RNAV 5 DME/DME\tD1: RNAV 1 all permitted sensors\nB4: RNAV 5 VOR/DME\tD2: RNAV 1 GNSS\nB5: RNAV 5 INS or IRS\tD3: RNAV 1 DME/DME\nB6: RNAV 5 LORANC\tD4: RNAV 1 DME/DME/IRU\n\nRNP SPECIFICATION\nL1: RNP 4\tS1: RNP APCH\nO1: Basic RNP 1 all permitted sensors\tS2: RNP APCH with BAR-VNAV\nO2: Basic RNP 1 GNSS\tT1: RNP AR APCH with RF (special auth. req.)\nO3: Basic RNP 1 DME/DME\tT2: RNP AR APCH without RF (special auth. req.)\nO4: Basic RNP 1 DME/DME/IRU\n\nCombinations of alphanumeric characters not indicated above are reserved.\n\n- If B1, B2, C1, C2, D1, D2, O1 or O2 are filed, then a 'G' must be included in Field 10a\n- If B1, B3, C1, C3, D1, D3, O1 or O3 are filed, then a 'D' must be included in Field 10a\n- If B1 or B4 is filed, then an 'O' or 'S' and a 'D' must be included in Field 10a (i.e., 'OD' or 'SD' must appear in 10a)\n- If B1, B5 or C1 are filed, then an 'I' must be included in Field 10a; and\n- If C1, C4, D1, D4, O1 or O4 are filed, then a 'D' and an 'I' must be included in Field 10a (i.e., 'DI' must appear in 10a)"
+  defp alr_tooltip("nav"), do: "Significant data related to navigation equipment, other than specified in PBN/, as required by the appropriate ATS authority. Indicate GNSS augmentation under this indicator, with a space between two or more methods of augmentation, e.g. NAV/GBAS SBAS."
+  defp alr_tooltip("com"), do: "Indicate communications applications or capabilities not specified in Item 10a."
+  defp alr_tooltip("dat"), do: "Indicate data applications or capabilities not specified in Item 10a."
+  defp alr_tooltip("sur"), do: "Include surveillance applications or capabilities not specified in Item 10b."
+  defp alr_tooltip("dep_info"), do: "Name and location of departure aerodrome, if ZZZZ is inserted in Item 13, or the ATS unit from which supplementary flight plan data can be obtained, if AFIL is inserted in Item 13. For aerodromes not listed in the relevant AIP, indicate location as follows:\n\nWith 4 figures describing latitude in degrees and tens and units of minutes followed by 'N' (North) or 'S' (South), followed by 5 figures describing longitude in degrees and tens and units of minutes, followed by 'E' (East) or 'W' (West). Make up the correct number of figures, where necessary, by insertion of zeros, e.g. 4620N07805W (11 characters).\n\nOR, Bearing and distance from the nearest significant point, as follows:\n\nThe identification of the significant point followed by the bearing from the point in the form of 3 figures giving degrees magnetic, followed by the distance from the point in the form of 3 figures expressing nautical miles. In areas of high latitude where it is determined by the appropriate authority that reference to degrees magnetic is impractical, degrees true may be used. Make up the correct number of figures, where necessary, by insertion of zeros, e.g. a point of 180 degrees magnetic at a distance of 40 nautical miles from VOR 'DUB' should be expressed as DUB180040.\n\nOR, The first point of the route (name or LAT/LONG) or the marker radio beacon, if the aircraft has not taken off from an aerodrome."
+  defp alr_tooltip("dest_info"), do: "Name and location of destination aerodrome, if ZZZZ is inserted in Item 16. For aerodromes not listed in the relevant AIP, indicate location in LAT/LONG or bearing and distance from the nearest significant point, as described under DEP/."
+  defp alr_tooltip("dof"), do: "The date of flight departure in six figure format (YYMMDD, where YY equals the year, MM equals the month and DD equals the day)."
+  defp alr_tooltip("reg"), do: "The nationality or common mark and registration mark of the aircraft, if different from the aircraft identification in field AIRCRAFT ID."
+  defp alr_tooltip("eet_detail"), do: "Significant point of FIR boundary designators and accumulated estimated elapsed times from take-off to such points or FIR boundaries, when so prescribed on the basis of regional air navigation agreements, or by the appropriate ATS authority.\n\ne.g., EET/CAP0745 XYZ080 or EET/EINN0204"
+  defp alr_tooltip("sel"), do: "SELCAL Code, for aircraft so equipped. A single string of four letters."
+  defp alr_tooltip("typ"), do: "Type(s) of aircraft, preceded if necessary without a space by number(s) of aircraft and separated by one space, if ZZZZ is inserted in Item 9.\n\ne.g., TYP/2F15 5F5 3B2"
+  defp alr_tooltip("code"), do: "Aircraft address (expressed in the form of an alphanumerical code of six hexadecimal characters) when required by the appropriate ATS authority. Example: 'F00001' is the lowest aircraft address contained in the specific block administered by ICAO."
+  defp alr_tooltip("dle"), do: "Enroute delay or holding, insert the significant point(s) on the route where a delay is planned to occur, followed by the length of delay using four figure time in hours and minutes (hhmm).\n\ne.g., DLE/MDG0030"
+  defp alr_tooltip("opr"), do: "ICAO designator or name of the aircraft operating agency, if different from the aircraft identification in item 7."
+  defp alr_tooltip("orgn"), do: "The originator's 8 letter AFTN address or other appropriate contact details, in cases where the originator of the flight plan may not be readily identified, as required by the appropriate ATS authority."
+  defp alr_tooltip("per"), do: "Aircraft performance data, indicated by a single letter, as shown below:\n* Cat. A : < 169 km/h (91 kt) indicated airspeed (IAS)\n* Cat. B : 169 km/h (91 kt) or more but < 224 km/h (121 kt)\n* Cat. C : 224 km/h (121 kt) or more but < 261 km/h (141 kt)\n* Cat. D : 261 km/h (141 kt) or more but < 307 km/h (166 kt)\n* Cat. E : 307 km/h (166 kt) or more but < 391 km/h (211 kt)\n* Cat. H : Specific procedures for Helicopters"
+  defp alr_tooltip("altn_detail"), do: "Name of destination alternate aerodrome(s), if ZZZZ is inserted in Item 16. For aerodromes not listed in the relevant AIP, indicate location in LAT/LONG or bearing and distance from the nearest significant point, as described in DEP/."
+  defp alr_tooltip("ralt"), do: "ICAO four letter indicator(s) for en-route alternate(s), as specified in Doc 7910, Location Indicators, or name(s) of en-route alternate aerodrome(s), if no indicator is allocated. For aerodromes not listed in the relevant AIP, indicate located in LAT/LONG or bearing and distance from the nearest significant point, as described in DEP/."
+  defp alr_tooltip("talt"), do: "ICAO four letter indicator(s) for take-off alternate, as specified in Doc 7910, Location Indicators, or name of take-off alternate aerodrome, if no indicator is allocated. For aerodromes not listed in the relevant AIP, indicate located in LAT/LONG or bearing and distance from the nearest significant point, as described in DEP/."
+  defp alr_tooltip("rif"), do: "The route details to the revised destination aerodrome, following by the ICAO four-letter location indicator of the aerodrome. The revised route is subject to reclearance in flight.\n\ne.g., RIF/DTA HEC KLAX or RIF/ESP G94 CLA YPPH"
+  defp alr_tooltip("rmk"), do: "Other reasons for special handling by ATS. Any other plain language remarks when required by the appropriate ATS authority or deemed necessary."
+
+  defp alr_tooltip("endurance"), do: "4 NUMERICS giving the fuel endurance in hours and minutes."
+  defp alr_tooltip("pob"), do: "1, 2 or 3 NUMERICS giving the total number of persons on board, when so prescribed by the appropriate ATS authority."
+  defp alr_tooltip("emergency_radio"), do: "Emergency Radio\n\nIndicate available emergency radio equipment: UHF 243.0 MHz, VHF 121.5 MHz, and/or ELT."
+  defp alr_tooltip("radio_uhf"), do: "Emergency Radio UHF\n\nIf frequency 243.0 MHz (UHF) is available."
+  defp alr_tooltip("radio_vhf"), do: "Emergency Radio VHF\n\nIf frequency 121.5 MHz (VHF) is available."
+  defp alr_tooltip("radio_elt"), do: "If emergency location beacon-aircraft (ELBA) is available."
+  defp alr_tooltip("survival_equipment"), do: "Survival Equipment\n\nIndicate survival equipment carried: Polar, Desert, Maritime, and/or Jungle."
+  defp alr_tooltip("survival_polar"), do: "If polar survival equipment is carried."
+  defp alr_tooltip("survival_desert"), do: "If desert survival equipment is carried."
+  defp alr_tooltip("survival_maritime"), do: "If maritime survival equipment is carried."
+  defp alr_tooltip("survival_jungle"), do: "If jungle survival equipment is carried."
+  defp alr_tooltip("jackets"), do: "Jackets\n\nIndicate life jacket equipment: lights, fluorescein, UHF, and/or VHF."
+  defp alr_tooltip("jackets_light"), do: "If the life jackets are equipped with lights."
+  defp alr_tooltip("jackets_fluores"), do: "If they are equipped with fluorscein."
+  defp alr_tooltip("jackets_uhf"), do: "If any life jacket radio is equipped with UHF on frequency 243.0 MHz."
+  defp alr_tooltip("jackets_vhf"), do: "If any life jacket radio is equipped with VHF on frequency 121.5 MHz."
+  defp alr_tooltip("dinghy_number"), do: "2 NUMERICS giving the number of dinghies carried."
+  defp alr_tooltip("dinghy_capacity"), do: "3 NUMERICS giving the total capacity, in persons carried, all of dinghies."
+  defp alr_tooltip("dinghy_cover"), do: "Dinghy Cover\n\nIndicate if dinghies are covered."
+  defp alr_tooltip("dinghy_colour"), do: "Dinghy Colour\n\nThe colour of the dinghies."
+  defp alr_tooltip("aircraft_colour"), do: "The colour of the aircraft.\nSignificant markings (this may include the aircraft registration)."
+  defp alr_tooltip("remarks"), do: "Plain language indicating any other survival equipment carried and any other useful remarks."
+  defp alr_tooltip("pilot"), do: "The name of the pilot-in-command."
+  defp alr_tooltip("sar_info"), do: "Alerting Search and Rescue Information\n\nThis field consists of the following specified sequence of elements separated by spaces. Any information not available should be shown as 'NIL' or 'NOT KNOWN' and not simply omitted."
+  defp alr_tooltip("filed_by"), do: "Filled by"
+  defp alr_tooltip(_name), do: ""
 
   defp alr_datalists(lists) do
     [
@@ -1147,6 +1641,203 @@ defmodule TpWeb.Views do
       datalist("alr-pbn", Map.get(lists, :pbn, []) ++ pbn_options())
     ]
     |> Enum.join("")
+  end
+
+  defp alr_equipment_modals do
+    """
+    #{alr_equipment_modal("10a", "Equipment and Capabilities (Item 10a)", alr_10a_groups(), [
+      "Any alphanumeric characters not indicated above are reserved."
+    ])}
+    #{alr_equipment_modal("10b", "Surveillance Equipment and Capabilities (Item 10b)", alr_10b_groups(), [
+      "Enhanced surveillance capability is the ability of the aircraft to down-link aircraft derived data via a Mode S transponder.",
+      "Alphanumeric characters not indicated above are reserved.",
+      "Example: ADE3RV/HB2U2V2G1",
+      "Additional surveillance application should be listed in Item 18 following the indicator SUR/."
+    ])}
+    #{alr_equipment_modal("sts", "STS/ Indicator Value", alr_sts_groups(), [])}
+    #{alr_equipment_modal("pbn", "PBN/ Indicator Value", alr_pbn_groups(), [
+      "Please insert maximum 8 entries, i.e. a total of not more than 16 characters."
+    ])}
+    """
+  end
+
+  defp alr_equipment_modal(kind, title, groups, notes) do
+    """
+    <div class="equipment-modal" data-equipment-modal="#{html(kind)}" role="dialog" aria-modal="true">
+      <div class="equipment-card">
+        <div class="equipment-head">
+          <strong>#{html(title)}</strong>
+          <button type="button" class="equipment-x js-equipment-close" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="equipment-body">
+          #{Enum.map_join(groups, "", &alr_equipment_group/1)}
+          <div class="equipment-notes">#{Enum.map_join(notes, "", fn note -> "<p>#{html(note)}</p>" end)}</div>
+        </div>
+        <div class="equipment-actions">
+          <button type="button" class="aftn-tool primary js-equipment-add"><i class="bi bi-plus-lg"></i><span>Add</span></button>
+          <button type="button" class="aftn-tool discard js-equipment-clear"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <button type="button" class="aftn-tool close js-equipment-close"><i class="bi bi-x-lg"></i><span>Close</span></button>
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  defp alr_equipment_group({heading, rows}) do
+    """
+    <div class="equipment-group">
+      <div class="equipment-group-title">#{html(heading)}</div>
+      <div class="equipment-list">#{Enum.map_join(rows, "", &alr_equipment_row/1)}</div>
+    </div>
+    """
+  end
+
+  defp alr_equipment_row({code, description}) do
+    """
+    <label class="equipment-row" title="#{html("#{code}: #{description}")}">
+      <input class="equipment-choice" type="checkbox" value="#{html(code)}">
+      <span class="equipment-code">#{html(code)}</span>
+      <span class="equipment-desc">#{html(description)}</span>
+    </label>
+    """
+  end
+
+  defp alr_10a_groups do
+    [
+      {"INSERT one letter as follows", [
+        {"N", "No COM/NAV/approach aid equipment for the route to be flown is carried, or the equipment is unserviceable"},
+        {"S", "Standard COM/NAV/approach aid equipment for the route to be flown is carried and serviceable"}
+      ]},
+      {"AND/OR INSERT one or more serviceable COM/NAV/approach aid equipment and capabilities", [
+        {"A", "GBAS landing system"},
+        {"B", "LPV (APV with SBAS)"},
+        {"C", "LORAN C"},
+        {"D", "DME"},
+        {"E1", "FMC WPR ACARS"},
+        {"E2", "D-FIS ACARS"},
+        {"E3", "PDC ACARS"},
+        {"F", "ADF"},
+        {"G", "GNSS"},
+        {"H", "HF RTF"},
+        {"I", "Inertial Navigation"},
+        {"J1", "CPDLC ATN VDL Mode 2"},
+        {"J2", "CPDLC FANS 1/A HFDL"},
+        {"J3", "CPDLC FANS 1/A VDL Mode A"},
+        {"J4", "CPDLC FANS 1/A VDL Mode 2"},
+        {"J5", "CPDLC FANS 1/A SATCOM (INMARSAT)"},
+        {"J6", "CPDLC FANS 1/A SATCOM (MTSAT)"},
+        {"J7", "CPDLC FANS 1/A SATCOM (Iridium)"},
+        {"K", "MLS"},
+        {"L", "ILS"},
+        {"M1", "ATC RTF SATCOM (INMARSAT)"},
+        {"M2", "ATC RTF (MTSAT)"},
+        {"M3", "ATC RTF (Iridium)"},
+        {"O", "VOR"},
+        {"P1", "Reserved for RCP"},
+        {"P2", "Reserved for RCP"},
+        {"P3", "Reserved for RCP"},
+        {"P4", "Reserved for RCP"},
+        {"P5", "Reserved for RCP"},
+        {"P6", "Reserved for RCP"},
+        {"P7", "Reserved for RCP"},
+        {"P8", "Reserved for RCP"},
+        {"P9", "Reserved for RCP"},
+        {"R", "PBN approved"},
+        {"T", "TACAN"},
+        {"U", "UHF RTF"},
+        {"V", "VHF RTF"},
+        {"W", "RVSM approved"},
+        {"X", "MNPS approved"},
+        {"Y", "VHF with 8.33 kHz channel spacing capability"},
+        {"Z", "Other equipment carried or other capabilities"}
+      ]}
+    ]
+  end
+
+  defp alr_10b_groups do
+    [
+      {"INSERT", [
+        {"N", "No surveillance equipment for the route to be flown is carried, or the equipment is unserviceable"}
+      ]},
+      {"SSR Modes A and C", [
+        {"A", "Transponder - Mode A (4 digits - 4096 codes)"},
+        {"C", "Transponder - Mode A (4 digits - 4096 codes) and Mode C"}
+      ]},
+      {"SSR Mode S", [
+        {"E", "Transponder - Mode S, including aircraft identification, pressure-altitude and extended squitter (ADS-B) capability"},
+        {"H", "Transponder - Mode S, including aircraft identification, pressure-altitude and enhanced surveillance capability"},
+        {"I", "Transponder - Mode S, including aircraft identification, but no pressure-altitude capability"},
+        {"L", "Transponder - Mode S, including aircraft identification, pressure-altitude, extended squitter (ADS-B) and enhanced surveillance capability"},
+        {"P", "Transponder - Mode S, including pressure-altitude, but no aircraft identification capability"},
+        {"S", "Transponder - Mode S, including both pressure-altitude and aircraft identification capability"},
+        {"X", "Transponder - Mode S, with neither aircraft identification nor pressure-altitude capability"}
+      ]},
+      {"ADS-B", [
+        {"B1", "ADS-B with dedicated 1090 MHz ADS-B 'out' capability"},
+        {"B2", "ADS-B with dedicated 1090 MHz ADS-B 'out' and 'in' capability"},
+        {"U1", "ADS-B 'out' capability using UAT"},
+        {"U2", "ADS-B 'out' and 'in' capability using UAT"},
+        {"V1", "ADS-B 'out' capability using VDL Mode 4"},
+        {"V2", "ADS-B 'out' and 'in' capability using VDL Mode 4"}
+      ]},
+      {"ADS-C", [
+        {"D1", "ADS-C with FANS 1/A capabilities"},
+        {"G1", "ADS-C with ATN capabilities"}
+      ]}
+    ]
+  end
+
+  defp alr_sts_groups do
+    [
+      {"INSERT one or more special handling indicators", [
+        {"ALTRV", "For a flight operated in accordance with an altitude reservation"},
+        {"ATFMX", "For a flight approved for exemption from ATFM measures by the appropriate ATS authority"},
+        {"FFR", "Fire-fighting"},
+        {"FLTCK", "Flight check for calibration of navaids"},
+        {"HAZMAT", "For a flight carrying hazardous material"},
+        {"HEAD", "A flight with Head of State status"},
+        {"HOSP", "For medical flight declared by medical authorities"},
+        {"HUM", "For a flight operating on a humanitarian mission"},
+        {"MARSA", "For a flight for which a military entity assumes responsibility for separation of military aircraft"},
+        {"MEDEVAC", "For a life critical medical emergency evacuation"},
+        {"NONRVSM", "For non-RVSM capable flight intending to operate in RVSM airspace"},
+        {"SAR", "For a flight engaged in a search and rescue mission"},
+        {"STATE", "For a flight engaged in military, customs or police services."}
+      ]}
+    ]
+  end
+
+  defp alr_pbn_groups do
+    [
+      {"RNAV SPECIFICATIONS", [
+        {"A1", "RNAV 10 (RNP 10)"},
+        {"B1", "RNAV 5 all permitted sensors"},
+        {"B2", "RNAV 5 GNSS"},
+        {"B3", "RNAV 5 DME/DME"},
+        {"B4", "RNAV 5 VOR/DME"},
+        {"B5", "RNAV 5 INS or IRS"},
+        {"B6", "RNAV 5 LORANC"},
+        {"C1", "RNAV 2 all permitted sensors"},
+        {"C2", "RNAV 2 GNSS"},
+        {"C3", "RNAV 2 DME/DME"},
+        {"C4", "RNAV 2 DME/DME/IRU"},
+        {"D1", "RNAV 1 all permitted sensors"},
+        {"D2", "RNAV 1 GNSS"},
+        {"D3", "RNAV 1 DME/DME"},
+        {"D4", "RNAV 1 DME/DME/IRU"}
+      ]},
+      {"RNP SPECIFICATIONS", [
+        {"L1", "RNP 4"},
+        {"O1", "Basic RNP 1 all permitted sensors"},
+        {"O2", "Basic RNP 1 GNSS"},
+        {"O3", "Basic RNP 1 DME/DME"},
+        {"O4", "Basic RNP 1 DME/DME/IRU"},
+        {"S1", "RNP APCH"},
+        {"S2", "RNP APCH with BARO-VNAV"},
+        {"T1", "RNP AR APCH with RF (special authorization required)"},
+        {"T2", "RNP AR APCH without RF (special authorization required)"}
+      ]}
+    ]
   end
 
   defp free_message_form do
@@ -1968,7 +2659,8 @@ defmodule TpWeb.Views do
     1..21
     |> Enum.map_join("", fn index ->
       value = compose_prefill(params, "address_#{index}", "")
-      ~s(<input name="address_#{index}" value="#{html(value)}" maxlength="8">)
+      required = if index == 1, do: " required", else: ""
+      ~s(<input name="address_#{index}" value="#{html(value)}" maxlength="8"#{required}>)
     end)
   end
 
