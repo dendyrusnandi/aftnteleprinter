@@ -54,6 +54,32 @@ defmodule Tp.Settings do
     |> Repo.insert_or_update()
   end
 
+  def increment_tseq do
+    setting = Repo.one(setting_query()) || default_setting()
+    update_tseq(next_sequence(setting.tseq, setting.digit_seq || 4))
+  end
+
+  defp next_sequence(value, digits) do
+    digits = if is_integer(digits) and digits > 0, do: digits, else: 4
+    max_value = round(:math.pow(10, digits)) - 1
+
+    value
+    |> to_int()
+    |> Kernel.+(1)
+    |> then(fn number -> if number > max_value, do: 1, else: number end)
+    |> Integer.to_string()
+    |> String.pad_leading(digits, "0")
+  end
+
+  defp to_int(value) when is_integer(value), do: value
+
+  defp to_int(value) do
+    case Integer.parse(to_string(value || "0")) do
+      {number, _} -> number
+      :error -> 0
+    end
+  end
+
   def default_setting do
     udp = Application.get_env(:tp, :udp, [])
 

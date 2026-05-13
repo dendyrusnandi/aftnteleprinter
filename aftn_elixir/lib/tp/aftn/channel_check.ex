@@ -50,15 +50,15 @@ defmodule Tp.Aftn.ChannelCheck do
 
     if setting.channel_check do
       filing_time = Calendar.strftime(now, "%d%H%M")
-      next_seq = next_sequence(setting.tseq, setting.digit_seq || 4)
-      tx_id = "#{setting.cid}#{next_seq}"
+      current_seq = current_sequence(setting.tseq, setting.digit_seq || 4)
+      tx_id = "#{setting.cid}#{current_seq}"
       raw = <<1>> <> tx_id <> " " <> filing_time <> "\r\n" <> <<2>> <> "CH\r\n" <> <<3>>
 
       attrs = %{
         filed_by: "SYSTEM",
         message_type: "CH",
         cid: setting.cid,
-        sequence_no: next_seq,
+        sequence_no: current_seq,
         filing_time: filing_time,
         raw_text: raw,
         udp_target_host: setting.destination_ip_address,
@@ -67,7 +67,6 @@ defmodule Tp.Aftn.ChannelCheck do
 
       case Aftn.transmit(raw, attrs) do
         {:ok, _result} ->
-          Settings.update_tseq(next_seq)
           Logger.info("Channel check CH sent to #{setting.destination_ip_address}:#{setting.port} seq=#{tx_id}")
 
         {:error, reason} ->
@@ -79,13 +78,11 @@ defmodule Tp.Aftn.ChannelCheck do
       Logger.error("Channel check failed: #{Exception.message(error)}")
   end
 
-  defp next_sequence(value, digits) do
-    max_value = round(:math.pow(10, digits)) - 1
+  defp current_sequence(value, digits) do
+    digits = if is_integer(digits) and digits > 0, do: digits, else: 4
 
     value
     |> to_int()
-    |> Kernel.+(1)
-    |> then(fn number -> if number > max_value, do: 1, else: number end)
     |> Integer.to_string()
     |> String.pad_leading(digits, "0")
   end

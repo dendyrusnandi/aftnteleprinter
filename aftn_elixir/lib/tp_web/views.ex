@@ -27,7 +27,7 @@ defmodule TpWeb.Views do
         .notice{margin:12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}
         .message-cell{max-width:560px}.message-preview{display:inline;white-space:pre-wrap;word-break:break-word}.read-more{display:inline;border:0;background:transparent;color:#195b86;padding:0 0 0 6px;font-size:12px;font-weight:700;cursor:pointer}.read-more:hover{text-decoration:underline}.muted{color:#6d7b88}.events{padding:12px}.event{border-bottom:1px solid #edf0f3;padding:8px 0}
-        .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:8px 10px}.status-summary{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:10px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto}.status-actions a{display:block;background:#14324a;color:white;border-radius:4px;padding:6px 10px;font-size:12px;font-weight:700}.status-actions a:hover{text-decoration:none;background:#195b86}
+        .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:7px 9px}.status-summary{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:10px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto;display:flex;align-items:center}.status-actions a{height:34px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:0 12px;font-size:13px;font-weight:700;line-height:1;white-space:nowrap;min-width:76px}.status-actions a:hover{text-decoration:none;background:#195b86}
         .udp-monitor{margin-top:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:#fbfcfd;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.udp-monitor-body{padding:9px}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:110px;overflow:auto;white-space:pre-wrap;font-size:12px;line-height:1.15}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px}
         @media(max-width:900px){main{grid-template-columns:1fr}.filters,.grid2,.grid4{grid-template-columns:1fr}}
       </style>
@@ -36,7 +36,7 @@ defmodule TpWeb.Views do
       <header><h1>AFTN Teleprinter</h1><nav class="top-nav">#{compose_dropdown()}#{maintenance_dropdown()}#{views_dropdown()}#{status_dropdown()}</nav>#{header_time()}</header>
       <main>
         <section>
-          <h2>Pesan Terakhir</h2>
+          <h2>AFTN Message</h2>
           #{notice_banner(notice)}
           #{filter_form(filters)}
           <div class="table-wrap">
@@ -77,6 +77,7 @@ defmodule TpWeb.Views do
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         dl{display:grid;grid-template-columns:180px 1fr;margin:0} dt,dd{border-bottom:1px solid #edf0f3;padding:8px 12px;margin:0}
         dt{background:#f0f3f6;color:#435466;font-weight:600} pre{margin:0;padding:14px;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+        #{status_footer_css()}
       </style>
     </head>
     <body>
@@ -109,6 +110,7 @@ defmodule TpWeb.Views do
           <pre>#{html(message.raw_text)}</pre>
         </section>
       </main>
+      #{status_panel([], nil)}
       #{header_clock_script()}
       #{auto_uppercase_script()}
     </body>
@@ -202,6 +204,7 @@ defmodule TpWeb.Views do
         @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup,.rcf-row-main{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
         @media(max-width:1100px){.compose-layout{grid-template-columns:1fr}.compose-side{position:static}.udp-monitor-body{max-height:360px}}
         @media(max-width:900px){.compose-head,.address-line{display:block}.address-grid,.aftn-address-grid{grid-template-columns:repeat(2,1fr)}.aftn-topline,.aftn-address-row,.aftn-meta{grid-template-columns:1fr}}
+        #{status_footer_css()}
       </style>
     </head>
     <body>
@@ -214,6 +217,7 @@ defmodule TpWeb.Views do
           <aside class="compose-side">#{udp_receive_monitor(received_messages, [])}</aside>
         </div>
       </main>
+      #{status_panel([], nil)}
       #{header_clock_script()}
       #{compose_page_script()}
       #{compose_udp_monitor_script()}
@@ -248,6 +252,7 @@ defmodule TpWeb.Views do
         .action-menu{position:relative;display:inline-flex}.action-menu .js-action-toggle{background:transparent;color:#435466;border:0;border-radius:0;box-shadow:none}.action-menu .js-action-toggle:hover{background:transparent;color:#14324a}.action-popup{display:none;position:absolute;right:0;top:28px;z-index:60;min-width:132px;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.18);padding:5px}.action-menu.open .action-popup{display:block}.action-item{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;background:white;color:#17202a;border:0;border-radius:4px;padding:7px 9px;font-size:12px;font-weight:700;text-align:left;cursor:pointer}.action-item:hover{background:#edf4fa;text-decoration:none}.action-item.danger{color:#b42318}.action-item svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.action-item .pdf-text{font-size:7px;font-weight:800;fill:currentColor;stroke:none}
         .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(10,18,28,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal-card{background:white;border-radius:8px;box-shadow:0 22px 60px rgba(0,0,0,.28);width:min(920px,96vw);max-height:90vh;overflow:hidden;border:1px solid #d8dee6}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.modal-head h3{margin:0;font-size:15px}.modal-close{background:transparent;color:white;border:0;font-size:22px;line-height:1;cursor:pointer;padding:0 4px}.modal-body{padding:14px;overflow:auto;max-height:calc(90vh - 48px)}.modal-grid{display:grid;grid-template-columns:140px minmax(0,1fr) 140px minmax(0,1fr);gap:0;border:1px solid #edf0f3;border-bottom:0;margin-bottom:12px}.modal-grid dt,.modal-grid dd{border-bottom:1px solid #edf0f3;margin:0;padding:7px 9px}.modal-grid dt{background:#f0f3f6;color:#435466;font-weight:700}.modal-raw{margin:0;border:1px solid #d8dee6;border-radius:6px;background:#fbfcfd;padding:12px;white-space:pre-wrap;max-height:430px;overflow:auto}.modal-error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11;border-radius:4px;padding:10px 12px}@media(max-width:720px){.modal-grid{grid-template-columns:130px minmax(0,1fr)}}
         .status-waiting{color:#b26a00;font-weight:700}.status-retrying{color:#8a1f11;font-weight:700}
+        #{status_footer_css()}
       </style>
     </head>
     <body>
@@ -280,6 +285,7 @@ defmodule TpWeb.Views do
           </div>
         </section>
       </main>
+      #{status_panel([], nil)}
       #{message_modal_script()}
       #{auto_uppercase_script()}
     </body>
@@ -301,6 +307,7 @@ defmodule TpWeb.Views do
         #{header_time_css()} main{max-width:760px;margin:16px auto;background:white;border:1px solid #d8dee6;border-radius:6px;padding:24px}
         header h1{font-size:18px;margin:0} main h1{font-size:22px;margin:0 0 12px} p{line-height:1.55} code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
         pre{background:#eef2f6;border:1px solid #d8dee6;border-radius:4px;padding:12px;overflow:auto}
+              #{status_footer_css()}
       </style>
     </head>
     <body>
@@ -312,6 +319,7 @@ defmodule TpWeb.Views do
     mix ecto.migrate</pre>
         <p>Setelah migration selesai, refresh halaman dashboard.</p>
       </main>
+      #{status_panel([], nil)}
       #{header_clock_script()}
       #{auto_uppercase_script()}
     </body>
@@ -342,6 +350,7 @@ defmodule TpWeb.Views do
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .errors{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11;border-radius:4px;padding:10px 12px;margin:0 0 12px}
         @media(max-width:760px){.grid2,.grid4{grid-template-columns:1fr}}
+              #{status_footer_css()}
       </style>
     </head>
     <body>
@@ -416,6 +425,7 @@ defmodule TpWeb.Views do
           </div>
         </form>
       </main>
+      #{status_panel([], nil)}
       #{header_clock_script()}
       #{auto_uppercase_script()}
     </body>
@@ -603,6 +613,12 @@ defmodule TpWeb.Views do
 
   defp setting_value(%Ecto.Changeset{} = changeset, field), do: Ecto.Changeset.get_field(changeset, field)
   defp setting_value(setting, field), do: Map.get(setting, field)
+
+  defp status_footer_css do
+    """
+    .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:7px 9px}.status-summary{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:10px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto;display:flex;align-items:center}.status-actions a{height:34px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:0 12px;font-size:13px;font-weight:700;line-height:1;white-space:nowrap;min-width:76px}.status-actions a:hover{text-decoration:none;background:#195b86}
+    """
+  end
 
   defp header_time do
     """
@@ -2151,11 +2167,12 @@ defmodule TpWeb.Views do
   end
 
   defp status_panel(_events, settings) do
-    settings = settings || Tp.Settings.default_setting()
+    settings = settings || Tp.Settings.get_or_default()
     link = Tp.LinkMonitor.status()
     link_up? = link.state == :up
     link_card = if link_up?, do: "ok", else: "warn"
     link_state = if link_up?, do: "Established", else: "Down"
+    check_text = if link_up?, do: "established", else: (link.reason || "down")
     link_pill = if link_up?, do: "up", else: "down"
     queue_count = safe_queue_count()
     queue_card = if is_integer(queue_count) and queue_count > 0, do: "warn", else: "ok"
@@ -2202,7 +2219,7 @@ defmodule TpWeb.Views do
           </div>
           <div class="status-card #{link_card}">
             <div class="status-label">Check</div>
-            <div class="status-value">#{html(link.reason)}</div>
+            <div class="status-value">#{html(check_text)}</div>
           </div>
           <div class="status-actions"><a href="/settings">Setting</a></div>
         </div>

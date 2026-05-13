@@ -1,8 +1,9 @@
 defmodule Tp.Aftn do
   import Ecto.Query
+  require Logger
 
   alias Tp.Aftn.{Builder, Event, Legacy, Message, Parser}
-  alias Tp.Repo
+  alias Tp.{Repo, Settings}
   alias Tp.Udp.Sender
 
   def list_messages(opts \\ []) do
@@ -241,14 +242,17 @@ defmodule Tp.Aftn do
   end
 
   def transmit(raw, attrs \\ %{}) do
-    with {:ok, sent} <- Sender.send(raw, attrs_to_target_opts(attrs)),
-         {:ok, message} <-
-           raw
-           |> Parser.parse_message()
-           |> Map.merge(attrs)
-           |> Map.merge(%{direction: :outbound, raw_text: raw, status: "sent", sent_at: DateTime.utc_now()})
-           |> create_message() do
-      {:ok, %{udp: sent, message: message}}
+    with {:ok, sent} <- Sender.send(raw, attrs_to_target_opts(attrs)) do
+      increment_tseq_after_success()
+
+      with {:ok, message} <-
+             raw
+             |> Parser.parse_message()
+             |> Map.merge(attrs)
+             |> Map.merge(%{direction: :outbound, raw_text: raw, status: "sent", sent_at: DateTime.utc_now()})
+             |> create_message() do
+        {:ok, %{udp: sent, message: message}}
+      end
     end
   end
 
@@ -341,6 +345,8 @@ defmodule Tp.Aftn do
 
     case Sender.send(message.raw_text, target_opts(message)) do
       {:ok, _sent} ->
+        increment_tseq_after_success()
+
         update_message(message, %{
           status: "sent",
           sent_at: DateTime.utc_now(),
@@ -357,6 +363,22 @@ defmodule Tp.Aftn do
           next_attempt_at: next_retry_at(attempts)
         })
     end
+  end
+
+  defp increment_tseq_after_success do
+    case Settings.increment_tseq() do
+      {:ok, setting} ->
+        Logger.info("Transmit sequence incremented to #{setting.tseq}")
+        :ok
+
+      {:error, changeset} ->
+        Logger.error("Transmit sequence increment failed: #{inspect(changeset)}")
+        :ok
+    end
+  rescue
+    error ->
+      Logger.error("Transmit sequence increment failed: #{Exception.message(error)}")
+      :ok
   end
 
   def create_message(attrs), do: %Message{} |> Message.changeset(attrs) |> Repo.insert()
