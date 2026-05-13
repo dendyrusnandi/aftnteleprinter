@@ -1,6 +1,6 @@
 defmodule Tp.Aftn.Builder do
   @basic_flight_types ~w(DLA CHG CNL DEP RQP RQS)
-  @fpl_like_types ~w(FPL CPL SPL)
+  @fpl_like_types ~w(CPL SPL)
   @supported_types ~w(FREE AFTN_FREE FPL DLA CHG CNL DEP ARR CDN CPL EST ACP LAM RQP RQS SPL RCF ALR)
 
   def validate("FREE", params), do: require_fields(params, ["message"])
@@ -13,6 +13,40 @@ defmodule Tp.Aftn.Builder do
     |> validate_format(params, "priority", ~r/^(SS|DD|FF|GG|KK)$/, "Priority harus SS/DD/FF/GG/KK")
     |> validate_destinations(params)
     |> validate_format(params, "originator", ~r/^[A-Z]{4}[A-Z]{4}$/, "Originator harus 8 huruf AFTN")
+  end
+
+  def validate("FPL", params) do
+    params
+    |> require_fields([
+      "aircraft_id",
+      "flight_rules",
+      "flight_type",
+      "aircraft_type",
+      "wake",
+      "equipment",
+      "equipment_surveillance",
+      "departure",
+      "departure_time",
+      "speed",
+      "level",
+      "route",
+      "destination",
+      "eet",
+      "dof"
+    ])
+    |> validate_alr_conditionals(params)
+    |> validate_format(params, "aircraft_id", ~r/^[A-Z0-9]{2,7}$/, "Aircraft harus 2-7 huruf/angka")
+    |> validate_optional_format(params, "message_number", ~r/^[A-Z0-9\/]{0,12}$/, "Message number maksimal 12 huruf/angka atau /")
+    |> validate_format(params, "aircraft_type", ~r/^[A-Z0-9]{2,4}$/, "Type aircraft harus 2-4 huruf/angka")
+    |> validate_format(params, "departure", ~r/^[A-Z]{4}$/, "Departure harus ICAO 4 huruf")
+    |> validate_format(params, "departure_time", ~r/^\d{4}$/, "Departure time harus HHMM 4 digit")
+    |> validate_format(params, "destination", ~r/^[A-Z]{4}$/, "Destination harus ICAO 4 huruf")
+    |> validate_format(params, "eet", ~r/^\d{4}$/, "EET harus HHMM 4 digit")
+    |> validate_optional_format(params, "alternate", ~r/^[A-Z]{4}$/, "Alternate harus ICAO 4 huruf")
+    |> validate_optional_format(params, "second_alternate", ~r/^[A-Z]{4}$/, "Second alternate harus ICAO 4 huruf")
+    |> validate_optional_format(params, "ssr_code", ~r/^\d{4}$/, "SSR Code harus 4 angka")
+    |> validate_format(params, "dof", ~r/^\d{6}$/, "DOF harus YYMMDD 6 digit")
+    |> validate_aftn_header(params)
   end
 
   def validate(type, params) when type in @fpl_like_types do
@@ -200,6 +234,12 @@ defmodule Tp.Aftn.Builder do
     |> maybe_wrap_aftn(params)
   end
 
+  def build("FPL", params) do
+    params
+    |> fpl_body()
+    |> maybe_wrap_aftn(params)
+  end
+
   def build(type, params) when is_binary(type) do
     type = String.upcase(type)
 
@@ -264,6 +304,23 @@ defmodule Tp.Aftn.Builder do
       alr_item18(params),
       alr_item19(params),
       alr_item20(params),
+      ")"
+    ]
+    |> Enum.reject(&(&1 in ["", nil]))
+    |> Enum.join("\r\n")
+  end
+
+  defp fpl_body(params) do
+    [
+      "(FPL#{up(params, "message_number")}",
+      alr_item7(params),
+      alr_item8(params),
+      alr_item9_10(params),
+      alr_item13(params),
+      alr_item15(params),
+      alr_item16(params),
+      alr_item18(params),
+      alr_item19(params),
       ")"
     ]
     |> Enum.reject(&(&1 in ["", nil]))

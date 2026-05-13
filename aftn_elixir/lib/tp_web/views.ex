@@ -242,11 +242,12 @@ defmodule TpWeb.Views do
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Queue / Not Delivered Messages</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <style>
         body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
-        header a{color:white}#{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px}
+        header a{color:white}.queue-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.queue-back:hover{text-decoration:none;color:#d8e8f3}.queue-back i{font-size:18px;line-height:1}.queue-title{display:inline-flex;align-items:center;gap:8px}.queue-title i{color:#9bd0ff;font-size:18px;line-height:1}#{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         table{width:100%;border-collapse:collapse;font-size:13px} th,td{border-bottom:1px solid #edf0f3;padding:7px 8px;text-align:left;vertical-align:top}
@@ -263,7 +264,7 @@ defmodule TpWeb.Views do
       </style>
     </head>
     <body>
-      <header><a href="/">Back</a><h1>Queue / Not Delivered Messages</h1>#{header_time()}</header>
+      <header><a class="queue-back" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a><h1 class="queue-title"><i class="bi bi-envelope-exclamation"></i><span>Queue / Not Delivered Messages</span></h1>#{header_time()}</header>
       <main>
         <section>
           <h2>Search Queue/Not Delivered Messages</h2>
@@ -1103,7 +1104,7 @@ defmodule TpWeb.Views do
             setRequired(form, 'ssr_code', !!form.elements.ssr_mode && form.elements.ssr_mode.checked);
             return;
           }
-          if (form.id !== 'alr-form') return;
+          if (form.id !== 'alr-form' && form.id !== 'fpl-form') return;
           setRequired(form, 'ssr_code', !!form.elements.ssr_mode && form.elements.ssr_mode.checked);
           setRequired(form, 'pbn', value(form, 'equipment').indexOf('R') !== -1);
           setRequired(form, 'typ', value(form, 'aircraft_type') === 'ZZZZ');
@@ -1289,7 +1290,7 @@ defmodule TpWeb.Views do
   defp compose_form("AFTN_FREE", params), do: aftn_free_form(params)
   defp compose_form("ALR", params), do: alr_form(params)
   defp compose_form("RCF", params), do: rcf_form(params)
-  defp compose_form("FPL", _params), do: fpl_like_form("FPL", "Filed Flight Plan")
+  defp compose_form("FPL", params), do: fpl_form(params)
   defp compose_form("CHG", _params), do: change_form()
   defp compose_form("DLA", _params), do: basic_flight_form("DLA", "Delay Message")
   defp compose_form("CNL", _params), do: basic_flight_form("CNL", "Cancel Flight Plan")
@@ -1360,7 +1361,46 @@ defmodule TpWeb.Views do
     """
   end
 
-  defp alr_header(priority, originator, params) do
+  defp fpl_form(params \\ %{}) do
+    priority = compose_prefill(params, "priority", "FF")
+    originator = compose_prefill(params, "originator", default_originator())
+    lists = alr_reference_lists()
+
+    """
+    <section id="FPL" class="aftn-window">
+      <div class="aftn-title"><i class="bi bi-airplane"></i><span>FPL (Filed Flight Plan) Message</span></div>
+      <form id="fpl-form" class="aftn-form" method="post" action="/messages/compose">
+        <input type="hidden" name="compose_type" value="FPL">
+        <input type="hidden" name="return_to" value="compose">
+        <input type="hidden" name="return_form" value="FPL">
+        <div class="aftn-toolbar">
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
+          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
+          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <a class="aftn-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
+        </div>
+        <input type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
+        <div class="aftn-body">
+          <div class="aftn-required-note">Blue field indicates required field.</div>
+          #{aftn_header("fpl", priority, originator, params)}
+        </div>
+        <div class="alr-scroll">
+          #{fpl_page_a(lists)}
+          #{fpl_page_b(lists)}
+          #{fpl_page_c()}
+          #{fpl_page_d()}
+        </div>
+        #{alr_datalists(lists)}
+        #{alr_equipment_modals()}
+      </form>
+    </section>
+    """
+  end
+
+  defp alr_header(priority, originator, params), do: aftn_header("alr", priority, originator, params)
+
+  defp aftn_header(prefix, priority, originator, params) do
     """
     <div class="aftn-card">
       <div class="aftn-card-title">AFTN Header</div>
@@ -1384,13 +1424,150 @@ defmodule TpWeb.Views do
         <div class="field">
           <label>Filing Time</label>
           <div class="time-control">
-            <input id="alr-filing-time" name="filing_time" value="#{current_filing_time()}">
-            <button class="time-button js-current-time" type="button" data-target="alr-filing-time" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
+            <input id="#{html(prefix)}-filing-time" name="filing_time" value="#{current_filing_time()}">
+            <button class="time-button js-current-time" type="button" data-target="#{html(prefix)}-filing-time" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
           </div>
         </div>
         <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}" required></div>
         <div class="field"><label>Originator's Reference</label><input name="originator_reference" value=""></div>
         <label class="aftn-bell"><input type="checkbox" name="bell" value="1"><i class="bi bi-bell-fill" aria-hidden="true"></i><span>Bell</span></label>
+      </div>
+    </div>
+    """
+  end
+
+  defp fpl_page_a(lists) do
+    """
+    <div class="alr-page">
+      <div class="alr-page-title">A - ICAO Flight Plan Format</div>
+      <div class="alr-grid">
+        <div class="alr-row alr-row-head">
+          #{fpl_message_number()}
+        </div>
+        <div class="alr-row alr-row-5">
+          #{alr_input("aircraft_id", "7. Aircraft ID", "", required: true, prefix: "-")}
+          #{alr_check_field("ssr_mode", "SSR Mode", "A", prefix: "/")}
+          #{alr_input("ssr_code", "Code", "")}
+          #{alr_select("flight_rules", "8. Flight Rules", "I", ["I", "V", "Y", "Z"], required: true, prefix: "-")}
+          #{alr_select("flight_type", "Type of Flight", "S", ["S", "N", "G", "M", "X"], required: true)}
+        </div>
+        <div class="alr-row alr-row-5b">
+          #{alr_input("aircraft_number", "9. Number", "", prefix: "-")}
+          #{alr_input("aircraft_type", "Type of Aircraft", "", required: true, list: "alr-aircraft-types")}
+          #{alr_select("wake", "Wake Turb. Category", "", wake_options(lists), required: true, prefix: "/")}
+          #{alr_equipment_input("equipment", "10a. Equipment and Capabilities", "", "10a", required: true, list: "alr-equipment", prefix: "-")}
+          #{alr_equipment_input("equipment_surveillance", "10b. Surveillance Equipment", "", "10b", required: true, list: "alr-surveillance", prefix: "/")}
+        </div>
+        <div class="alr-row alr-row-2">
+          #{alr_input("departure", "13. DEP AD", "", required: true, list: "alr-departures", prefix: "-")}
+          #{alr_input("departure_time", "Time", "", required: true)}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_input("speed", "15. Cruising Speed", "", required: true, prefix: "-")}
+          #{alr_input("level", "Cruising Level", "", required: true)}
+          #{alr_textarea_picker("route", "Route", "", "required", Map.get(lists, :routes, []), required: true)}
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  defp fpl_page_b(lists) do
+    """
+    <div class="alr-page">
+      <div class="alr-page-title">B - Destination & Other Information</div>
+      <div class="alr-grid">
+        <div class="alr-row alr-row-4">
+          #{alr_input("destination", "16. DEST AD", "", required: true, list: "alr-destinations", prefix: "-")}
+          #{alr_input("eet", "Total EET", "", required: true)}
+          #{alr_input("alternate", "DEST ALTN AD", "", list: "alr-destinations")}
+          #{alr_input("second_alternate", "2ND DEST ALTN AD", "")}
+        </div>
+        <div class="alr-row alr-row-18">
+          #{alr_equipment_input("sts", "STS/", "", "sts", list: "alr-sts", prefix: "-")}
+          #{alr_equipment_input("pbn", "PBN/", "", "pbn", list: "alr-pbn", prefix: "PBN/")}
+          #{alr_textarea("nav", "NAV/", "", "", prefix: "NAV/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("com", "COM/", "", "", prefix: "COM/")}
+          #{alr_input("dat", "DAT/", "", prefix: "DAT/")}
+          #{alr_textarea("sur", "SUR/", "", "", prefix: "SUR/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("dep_info", "DEP/", "", "", prefix: "DEP/")}
+          #{alr_textarea("dest_info", "DEST/", "", "", prefix: "DEST/")}
+          #{alr_input("dof", "DOF", Calendar.strftime(Date.utc_today(), "%y%m%d"), required: true, prefix: "DOF/")}
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  defp fpl_page_c do
+    """
+    <div class="alr-page">
+      <div class="alr-page-title">C - Other Information Detail</div>
+      <div class="alr-grid">
+        <div class="alr-row alr-row-3">
+          #{alr_input("reg", "REG/", "", list: "alr-registrations", prefix: "REG/")}
+          #{alr_textarea("eet_detail", "EET/", "", "", prefix: "EET/")}
+          #{alr_input("sel", "SEL/", "", prefix: "SEL/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("typ", "TYP/", "", "", prefix: "TYP/")}
+          #{alr_input("code", "CODE/", "", prefix: "CODE/")}
+          #{alr_textarea("dle", "DLE/", "", "", prefix: "DLE/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("opr", "OPR/", "", "", list: "alr-operators", prefix: "OPR/")}
+          #{alr_textarea("orgn", "ORGN/", "", "", prefix: "ORGN/")}
+          #{alr_input("per", "PER/", "", prefix: "PER/")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_textarea("altn_detail", "ALTN/", "", "", prefix: "ALTN/")}
+          #{alr_textarea("ralt", "RALT/", "", "", prefix: "RALT/")}
+          #{alr_textarea("talt", "TALT/", "", "", prefix: "TALT/")}
+        </div>
+        <div class="alr-row alr-row-2">
+          #{alr_textarea("rif", "RIF/", "", "", prefix: "RIF/")}
+          #{alr_textarea("rmk", "RMK/", "", "", prefix: "RMK/")}
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  defp fpl_page_d do
+    """
+    <div class="alr-page">
+      <div class="alr-page-title">D - Supplementary Information</div>
+      <div class="alr-grid">
+        <div class="alr-row alr-row-sup">
+          #{alr_input("endurance", "19. Endurance HR/MIN", "", prefix: "-E/")}
+          #{alr_input("pob", "Person on Board", "", prefix: "P/")}
+          <div class="field"#{alr_title_attr(alr_tooltip("emergency_radio"))}><label#{alr_title_attr(alr_tooltip("emergency_radio"))}>Emergency Radio</label><div class="alr-checks">#{alr_check("radio_uhf", "UHF")}#{alr_check("radio_vhf", "VHF")}#{alr_check("radio_elt", "ELT")}</div></div>
+        </div>
+        <div class="alr-row alr-row-2">
+          <div class="field"#{alr_title_attr(alr_tooltip("survival_equipment"))}><label#{alr_title_attr(alr_tooltip("survival_equipment"))}>Survival Equipment</label><div class="alr-checks">#{alr_check("survival_polar", "Polar")}#{alr_check("survival_desert", "Desert")}#{alr_check("survival_maritime", "Maritime")}#{alr_check("survival_jungle", "Jungle")}</div></div>
+          <div class="field"#{alr_title_attr(alr_tooltip("jackets"))}><label#{alr_title_attr(alr_tooltip("jackets"))}>Jackets</label><div class="alr-checks">#{alr_check("jackets_light", "Light")}#{alr_check("jackets_fluores", "Fluores")}#{alr_check("jackets_uhf", "UHF")}#{alr_check("jackets_vhf", "VHF")}</div></div>
+        </div>
+        <div class="alr-row alr-row-4">
+          #{alr_input("dinghy_number", "Dinghy Number", "", prefix: "D/")}
+          #{alr_input("dinghy_capacity", "Dinghy Capacity", "")}
+          <div class="field"#{alr_title_attr(alr_tooltip("dinghy_cover"))}><label#{alr_title_attr(alr_tooltip("dinghy_cover"))}>Dinghy Cover</label><div class="alr-checks">#{alr_check("dinghy_cover", "Cover")}</div></div>
+          #{alr_input("dinghy_colour", "Dinghy Colour", "")}
+        </div>
+        <div class="alr-row alr-row-3">
+          #{alr_input("aircraft_colour", "Aircraft Colour and Markings", "", prefix: "A/")}
+          #{alr_input("remarks", "Remarks", "", prefix: "N/")}
+          #{alr_input("pilot", "Pilot in Command", "", prefix: "C/")}
+        </div>
+        <div class="aftn-footer alr-full">
+          <div class="aftn-filled"#{alr_title_attr(alr_tooltip("filed_by"))}>
+            <label for="fpl-filed-by"#{alr_title_attr(alr_tooltip("filed_by"))}>Filled By</label>
+            <input id="fpl-filed-by" name="filed_by" value="SYSTEM" placeholder="Operator"#{alr_title_attr(alr_tooltip("filed_by"))}>
+          </div>
+        </div>
       </div>
     </div>
     """
@@ -1583,6 +1760,22 @@ defmodule TpWeb.Views do
         #{alr_mark("(")}
         <input name="message_type" value="ALR" readonly#{message_type_tip}>
         <input name="alr_number" value=""#{number_tip}>
+      </div>
+    </div>
+    """
+  end
+
+  defp fpl_message_number do
+    message_type_tip = alr_title_attr(alr_tooltip("message_type"))
+    number_tip = alr_title_attr(alr_tooltip("alr_number"))
+
+    """
+    <div class="field"#{message_type_tip}>
+      <label#{message_type_tip}>3. Message Type / Number</label>
+      <div class="alr-control compact">
+        #{alr_mark("(")}
+        <input name="message_type" value="FPL" readonly#{message_type_tip}>
+        <input name="message_number" value=""#{number_tip}>
       </div>
     </div>
     """
