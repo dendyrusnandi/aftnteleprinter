@@ -30,6 +30,30 @@ defmodule Tp.Settings do
     end
   end
 
+
+  def update_tseq(next_tseq) do
+    setting = Repo.one(setting_query()) || default_setting()
+
+    attrs = %{
+      local_udp_port: setting.local_udp_port,
+      destination_ip_address: setting.destination_ip_address,
+      port: setting.port,
+      code: setting.code,
+      digit_seq: setting.digit_seq,
+      cid: setting.cid,
+      tseq: next_tseq,
+      svc_msg_generation: setting.svc_msg_generation,
+      prev_st: setting.prev_st,
+      channel_check: setting.channel_check,
+      automatic_repeat: setting.automatic_repeat,
+      originator: setting.originator
+    }
+
+    (Repo.one(setting_query()) || %TeleprinterSetting{})
+    |> TeleprinterSetting.changeset(attrs)
+    |> Repo.insert_or_update()
+  end
+
   def default_setting do
     udp = Application.get_env(:tp, :udp, [])
 

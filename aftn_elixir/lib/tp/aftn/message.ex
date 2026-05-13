@@ -2,7 +2,7 @@ defmodule Tp.Aftn.Message do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @message_types ~w(ALR RCF FPL CHG CNL DLA DEP ARR CPL EST CDN ACP LAM RQP RQS SPL ABI PAC MAC REJ TOC AOC EMG MIS TDM LRM ASM FAN FCN TRU ADS FREE)
+  @message_types ~w(CH ALR RCF FPL CHG CNL DLA DEP ARR CPL EST CDN ACP LAM RQP RQS SPL ABI PAC MAC REJ TOC AOC EMG MIS TDM LRM ASM FAN FCN TRU ADS FREE)
 
   schema "air_messages" do
     field :direction, Ecto.Enum, values: [:inbound, :outbound], default: :inbound

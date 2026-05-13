@@ -1,6 +1,6 @@
 defmodule Tp.Aftn.Parser do
   @status_prefixes ~w(Tseq Rseq Queu Line Link Conn warning QPrint Free)
-  @message_types ~w(ALR RCF FPL CHG CNL DLA DEP ARR CPL EST CDN ACP LAM RQP RQS SPL ABI PAC MAC REJ TOC AOC EMG MIS TDM LRM ASM FAN FCN TRU ADS)
+  @message_types ~w(CH ALR RCF FPL CHG CNL DLA DEP ARR CPL EST CDN ACP LAM RQP RQS SPL ABI PAC MAC REJ TOC AOC EMG MIS TDM LRM ASM FAN FCN TRU ADS)
 
   def aftn?(raw) when is_binary(raw) do
     text = raw |> String.replace("\r\n", "\n") |> String.trim()

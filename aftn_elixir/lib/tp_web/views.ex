@@ -17,13 +17,13 @@ defmodule TpWeb.Views do
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         table{width:100%;border-collapse:collapse;font-size:13px} th,td{border-bottom:1px solid #edf0f3;padding:8px;text-align:left;vertical-align:top}
         th{background:#f0f3f6;color:#435466;font-weight:600;white-space:nowrap} code,textarea{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
-        .table-wrap{overflow:auto}tbody tr[data-message-id]{cursor:pointer}tbody tr.row-selected td{background:#eaf4ff}.table-actions{white-space:nowrap;text-align:center;vertical-align:middle}.btn-small{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#14324a;color:white;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}.btn-small:hover{background:#195b86;text-decoration:none}.btn-small.pdf{background:#195b86}.btn-small.danger{background:#b42318}.btn-small.danger:hover{background:#8a1f11}.icon-action{width:30px;height:30px;padding:0}.icon-action svg,.btn-small svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.icon-action .pdf-text{font-size:7px;font-weight:800;fill:currentColor;stroke:none}.inline-form{display:inline;margin:0;padding:0}.empty-row{text-align:center;color:#6d7b88;padding:18px}.table-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px;flex-wrap:wrap}.footer-actions{display:flex;align-items:center;gap:8px}.pagination{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.pagination a,.pagination span{border:1px solid #cbd3dc;background:white;border-radius:4px;padding:6px 9px;color:#17202a}.pagination a:hover{background:#edf4fa;text-decoration:none}.pagination .active{background:#14324a;color:white;border-color:#14324a;font-weight:700}.pagination .disabled{color:#9aa6b2;background:#f0f3f6}.page-size{display:flex;align-items:center;gap:6px;padding:0}.page-size select{padding:5px 7px}.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(10,18,28,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal-card{background:white;border-radius:8px;box-shadow:0 22px 60px rgba(0,0,0,.28);width:min(920px,96vw);max-height:90vh;overflow:hidden;border:1px solid #d8dee6}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.modal-head h3{margin:0;font-size:15px}.modal-close{background:transparent;color:white;border:0;font-size:22px;line-height:1;cursor:pointer;padding:0 4px}.modal-body{padding:14px;overflow:auto;max-height:calc(90vh - 48px)}.modal-grid{display:grid;grid-template-columns:160px 1fr;gap:0;border:1px solid #edf0f3;border-bottom:0;margin-bottom:12px}.modal-grid dt,.modal-grid dd{border-bottom:1px solid #edf0f3;margin:0;padding:7px 9px}.modal-grid dt{background:#f0f3f6;color:#435466;font-weight:700}.modal-raw{margin:0;border:1px solid #d8dee6;border-radius:6px;background:#fbfcfd;padding:12px;white-space:pre-wrap;max-height:430px;overflow:auto}.modal-error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11;border-radius:4px;padding:10px 12px}
+        .table-wrap{overflow:auto}tbody tr[data-message-id]{cursor:pointer}tbody tr.row-selected td{background:#eaf4ff}.table-actions{white-space:nowrap;text-align:center;vertical-align:middle}.btn-small{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#14324a;color:white;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}.btn-small:hover{background:#195b86;text-decoration:none}.btn-small.pdf{background:#195b86}.btn-small.danger{background:#b42318}.btn-small.danger:hover{background:#8a1f11}.icon-action{width:30px;height:30px;padding:0}.icon-action svg,.btn-small svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.icon-action .pdf-text{font-size:7px;font-weight:800;fill:currentColor;stroke:none}.inline-form{display:inline;margin:0;padding:0}.empty-row{text-align:center;color:#6d7b88;padding:18px}.table-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px;flex-wrap:wrap}.footer-actions{display:flex;align-items:center;gap:8px}.pagination{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.pagination a,.pagination span{border:1px solid #cbd3dc;background:white;border-radius:4px;padding:6px 9px;color:#17202a}.pagination a:hover{background:#edf4fa;text-decoration:none}.pagination .active{background:#14324a;color:white;border-color:#14324a;font-weight:700}.pagination .disabled{color:#9aa6b2;background:#f0f3f6}.page-size{display:flex;align-items:center;gap:6px;padding:0}.page-size select{padding:5px 7px}.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(10,18,28,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal-card{background:white;border-radius:8px;box-shadow:0 22px 60px rgba(0,0,0,.28);width:min(920px,96vw);max-height:90vh;overflow:hidden;border:1px solid #d8dee6}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.modal-head h3{margin:0;font-size:15px}.modal-close{background:transparent;color:white;border:0;font-size:22px;line-height:1;cursor:pointer;padding:0 4px}.modal-body{padding:14px;overflow:auto;max-height:calc(90vh - 48px)}.modal-grid{display:grid;grid-template-columns:140px minmax(0,1fr) 140px minmax(0,1fr);gap:0;border:1px solid #edf0f3;border-bottom:0;margin-bottom:12px}.modal-grid dt,.modal-grid dd{border-bottom:1px solid #edf0f3;margin:0;padding:7px 9px}.modal-grid dt{background:#f0f3f6;color:#435466;font-weight:700}.modal-raw{margin:0;border:1px solid #d8dee6;border-radius:6px;background:#fbfcfd;padding:12px;white-space:pre-wrap;max-height:430px;overflow:auto}.modal-error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11;border-radius:4px;padding:10px 12px}@media(max-width:720px){.modal-grid{grid-template-columns:130px minmax(0,1fr)}}
         .action-menu{position:relative;display:inline-flex}.action-menu .js-action-toggle{background:transparent;color:#435466;border:0;border-radius:0;box-shadow:none}.action-menu .js-action-toggle:hover{background:transparent;color:#14324a}.btn-outline{background:white;color:#435466;border:1px solid #cbd3dc}.btn-outline:hover{background:#edf4fa;color:#14324a}.action-popup{display:none;position:absolute;right:0;top:28px;z-index:60;min-width:132px;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.18);padding:5px}.action-menu.open .action-popup{display:block}.action-item{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;background:white;color:#17202a;border:0;border-radius:4px;padding:7px 9px;font-size:12px;font-weight:700;text-align:left;cursor:pointer}.action-item:hover{background:#edf4fa;text-decoration:none}.action-item.danger{color:#b42318}.action-item svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.action-item .pdf-text{font-size:7px;font-weight:800;fill:currentColor;stroke:none}
         textarea,input,select{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:8px;background:white}
         textarea{width:100%;min-height:130px}
         form{padding:12px} button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:8px 12px;font-weight:600}
         label{display:block;font-size:12px;color:#435466;font-weight:600;margin-bottom:4px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.field{margin-bottom:8px}.field input,.field select{width:100%}
-        .filters{display:grid;grid-template-columns:1fr 140px 120px 145px 145px auto;gap:8px;padding:12px;border-bottom:1px solid #e4e8ee}
+        .filters{display:grid;grid-template-columns:120px 115px 115px minmax(180px,1fr) 145px 145px 150px 120px 120px auto auto;gap:8px;padding:12px;border-bottom:1px solid #e4e8ee;align-items:end;background:#fbfcfd}.filters .field{margin-bottom:0}.filters input,.filters select{width:100%;height:34px}.filters button,.filters .clear-filter{height:34px;align-self:end;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}.filters .clear-filter{background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:4px;padding:0 12px;font-size:12px;font-weight:700}.filters .clear-filter:hover{background:#edf4fa;text-decoration:none}.filters .search-label{font-size:11px;color:#435466;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
         .notice{margin:12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}
         .message-cell{max-width:560px}.message-preview{display:inline;white-space:pre-wrap;word-break:break-word}.read-more{display:inline;border:0;background:transparent;color:#195b86;padding:0 0 0 6px;font-size:12px;font-weight:700;cursor:pointer}.read-more:hover{text-decoration:underline}.muted{color:#6d7b88}.events{padding:12px}.event{border-bottom:1px solid #edf0f3;padding:8px 0}
@@ -54,6 +54,7 @@ defmodule TpWeb.Views do
       </main>
       #{status_panel(events, settings)}
       #{message_modal_script()}
+      #{auto_uppercase_script()}
     </body>
     </html>
     """
@@ -109,6 +110,7 @@ defmodule TpWeb.Views do
         </section>
       </main>
       #{header_clock_script()}
+      #{auto_uppercase_script()}
     </body>
     </html>
     """
@@ -162,7 +164,7 @@ defmodule TpWeb.Views do
     """
   end
 
-  def compose_page(notice \\ nil, selected \\ "AFTN_FREE", params \\ %{}) do
+  def compose_page(notice \\ nil, selected \\ "AFTN_FREE", params \\ %{}, received_messages \\ []) do
     selected = selected |> to_string() |> String.upcase()
 
     """
@@ -177,7 +179,8 @@ defmodule TpWeb.Views do
         body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
-        header a{color:white}#{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px}
+        header a{color:white}.compose-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.compose-back:hover{text-decoration:none;color:#d8e8f3}.compose-back i{font-size:18px;line-height:1}.compose-title{display:inline-flex;align-items:center;gap:8px}.compose-title .menu-icon{width:18px;height:18px;stroke:#9bd0ff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+        #{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         form{padding:12px} button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:8px 12px;font-weight:600}
@@ -188,26 +191,33 @@ defmodule TpWeb.Views do
         .field{margin-bottom:8px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.toolbar a{background:white;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px}.toolbar a.active{background:#14324a;color:white;border-color:#14324a}
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}.actions{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;align-items:center;margin:-12px -12px 12px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10)}.subhead{background:#f0f3f6;border:1px solid #e4e8ee;border-radius:4px;padding:8px;margin:4px 0 10px;font-size:13px;color:#435466}
+        .compose-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start}.compose-main{min-width:0}.compose-side{position:sticky;top:12px;min-width:0}.compose-side .udp-monitor{margin:0;background:white;border:1px solid #d8dee6;border-radius:8px;overflow:hidden;box-shadow:0 12px 28px rgba(20,50,74,.08)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee;background:#fbfcfd}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.icon-button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.udp-monitor-body{padding:9px;max-height:calc(100vh - 178px);overflow:auto}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:150px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.2}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px;background:#fbfcfd}
         .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;min-width:0;font-size:13px;font-weight:700;cursor:pointer}.amo-tool i{font-size:16px}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
         .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
         .alr-scroll{max-height:520px;overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.equipment-control .equipment-open{width:40px;flex:0 0 40px;background:white;color:#14324a;border:1px solid #cbd3dc;border-left:0;border-radius:0 4px 4px 0;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-control .equipment-open:hover{background:#edf4fa}.equipment-control input{border-top-right-radius:0;border-bottom-right-radius:0}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
         .equipment-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(10,18,28,.52);align-items:center;justify-content:center;padding:16px}.equipment-modal.open{display:flex}.equipment-card{width:min(760px,96vw);max-height:90vh;background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden}.equipment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.equipment-head strong{font-size:14px}.equipment-x{background:transparent;color:white;border:0;border-radius:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-body{padding:12px;overflow:auto}.equipment-group{border:1px solid #e4e8ee;border-radius:6px;margin-bottom:10px;overflow:hidden}.equipment-group-title{background:#f0f3f6;color:#14324a;font-size:12px;font-weight:900;text-transform:uppercase;padding:7px 9px}.equipment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.equipment-row{display:grid;grid-template-columns:22px 48px 1fr;gap:7px;align-items:center;margin:0;padding:7px 9px;border-top:1px solid #edf0f3;cursor:pointer;color:#17202a;font-size:12px;font-weight:600}.equipment-row:nth-child(odd){border-right:1px solid #edf0f3}.equipment-row:hover{background:#edf4fa}.equipment-row input{width:auto}.equipment-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:900;color:#14324a}.equipment-desc{font-weight:600;color:#435466}.equipment-notes{background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:8px 10px;color:#5f4400;font-size:12px}.equipment-notes p{margin:0 0 5px}.equipment-notes p:last-child{margin-bottom:0}.equipment-actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-top:1px solid #e4e8ee;flex-wrap:wrap}
         .rcf-body{border:1px solid #d8dee6;background:#fbfcfd;border-radius:6px;padding:12px;margin-top:10px}.rcf-row-main{grid-template-columns:1.25fr 1.2fr 1.1fr .8fr .8fr}.rcf-message-type input:first-of-type{max-width:64px}.rcf-message-type input:not(:first-of-type){min-width:0}.rcf-radio textarea{min-height:74px}.rcf-filled{max-width:260px;margin-top:10px}
-        main{max-width:1440px;padding:10px}form{padding:8px}h2{font-size:14px;padding:9px 12px}button{padding:6px 9px;font-size:12px}textarea,input,select{padding:5px 6px;font-size:12px;min-height:30px}textarea{min-height:64px}label{font-size:11px;margin-bottom:2px}.field{margin-bottom:5px}.grid2,.grid4{gap:6px}.toolbar{gap:6px;margin-bottom:8px}.toolbar a{font-size:12px;padding:5px 7px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:6px;padding:6px 8px}.aftn-tool,.amo-tool{gap:5px;padding:6px 8px;font-size:12px}.aftn-tool i,.amo-tool i{font-size:14px}.aftn-title,.amo-title{font-size:14px;padding:9px 12px}.aftn-title i,.amo-title i{font-size:16px}.aftn-body,.amo-body{padding:8px}.aftn-required-note{font-size:11px;margin-bottom:6px}.aftn-topline{grid-template-columns:150px;gap:6px;margin-bottom:6px}.aftn-card,.rcf-body,.form-band{padding:7px;margin-bottom:7px}.aftn-card-title{font-size:11px;margin-bottom:5px}.aftn-address-row{grid-template-columns:80px 1fr;gap:8px}.aftn-address-grid,.address-grid{gap:4px}.aftn-address-grid input,.address-grid input{padding:4px 5px;min-height:28px}.aftn-meta{grid-template-columns:130px 140px 1fr 74px;gap:6px;margin-top:6px}.aftn-bell{height:30px}.time-control{gap:4px}.time-button{width:32px}.alr-scroll{max-height:calc(100vh - 178px)}.alr-page{padding:8px}.alr-page-title{font-size:12px;margin-bottom:6px}.alr-grid{gap:6px}.alr-row{gap:6px}.alr-checks{gap:7px;min-height:30px}.alr-checks label,.alr-inline-check{font-size:12px}.alr-text{min-height:42px}.alr-picker{margin-top:4px;padding:4px;font-size:11px}.alr-mark{min-width:22px;padding:0 6px}.rcf-radio textarea{min-height:54px}.rcf-filled{margin-top:4px}.aftn-textarea{min-height:240px;font-size:13px}.amo-footer,.aftn-footer{margin-top:8px;padding-top:8px}.amo-filled input,.aftn-filled input{height:30px}
+        main{max-width:1560px;padding:14px}form{padding:10px}h2{font-size:15px;padding:11px 14px}button{padding:8px 12px;font-size:13px}textarea,input,select{padding:7px 9px;font-size:13px;min-height:34px}textarea{min-height:78px}label{font-size:12px;margin-bottom:4px}.field{margin-bottom:8px}.grid2,.grid4{gap:8px}.toolbar{gap:8px;margin-bottom:10px}.toolbar a{font-size:13px;padding:7px 10px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:8px;padding:8px 10px}.aftn-tool,.amo-tool{gap:7px;padding:8px 11px;font-size:13px}.aftn-tool i,.amo-tool i{font-size:16px}.aftn-title,.amo-title{font-size:15px;padding:11px 14px}.aftn-title i,.amo-title i{font-size:18px}.aftn-body,.amo-body{padding:12px}.aftn-required-note{font-size:12px;margin-bottom:9px}.aftn-topline{grid-template-columns:170px;gap:9px;margin-bottom:9px}.aftn-card,.rcf-body,.form-band{padding:10px;margin-bottom:10px}.aftn-card-title{font-size:12px;margin-bottom:8px}.aftn-address-row{grid-template-columns:90px 1fr;gap:12px}.aftn-address-grid,.address-grid{gap:6px}.aftn-address-grid input,.address-grid input{padding:6px 7px;min-height:33px}.aftn-meta{grid-template-columns:145px 155px 1fr 102px;gap:8px;margin-top:9px}.aftn-bell{height:34px;display:flex;align-items:center;gap:7px;font-weight:800;color:#14324a}.aftn-bell i{font-size:16px;color:#b26a00}.time-control{gap:6px}.time-button{width:36px}.alr-scroll{max-height:calc(100vh - 190px)}.alr-page{padding:10px}.alr-page-title{font-size:13px;margin-bottom:8px}.alr-grid{gap:8px}.alr-row{gap:8px}.alr-checks{gap:9px;min-height:34px}.alr-checks label,.alr-inline-check{font-size:13px}.alr-text{min-height:58px}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-mark{min-width:26px;padding:0 7px}.rcf-radio textarea{min-height:70px}.rcf-filled{margin-top:7px}.aftn-textarea{min-height:285px;font-size:14px}.amo-footer,.aftn-footer{margin-top:10px;padding-top:10px}.amo-filled input,.aftn-filled input{height:34px}
         @media(max-width:900px){.grid2,.grid4,.send-row,.header-meta{grid-template-columns:1fr}}
         @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup,.rcf-row-main{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
+        @media(max-width:1100px){.compose-layout{grid-template-columns:1fr}.compose-side{position:static}.udp-monitor-body{max-height:360px}}
         @media(max-width:900px){.compose-head,.address-line{display:block}.address-grid,.aftn-address-grid{grid-template-columns:repeat(2,1fr)}.aftn-topline,.aftn-address-row,.aftn-meta{grid-template-columns:1fr}}
       </style>
     </head>
     <body>
-      <header><a href="/">Back</a><h1>Message</h1>#{header_time()}</header>
+      <header><a class="compose-back" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a><h1 class="compose-title">#{write_icon()}<span>Message</span></h1>#{header_time()}</header>
       <main>
         #{notice_banner(notice)}
         <nav class="toolbar">#{compose_type_links(selected)}</nav>
-        #{compose_form(selected, params)}
+        <div class="compose-layout">
+          <div class="compose-main">#{compose_form(selected, params)}</div>
+          <aside class="compose-side">#{udp_receive_monitor(received_messages, [])}</aside>
+        </div>
       </main>
       #{header_clock_script()}
       #{compose_page_script()}
+      #{compose_udp_monitor_script()}
+      #{auto_uppercase_script()}
     </body>
     </html>
     """
@@ -236,7 +246,7 @@ defmodule TpWeb.Views do
         .queue-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px;font-weight:700;color:#195b86}tbody tr[data-message-id]{cursor:pointer}tbody tr.row-selected td{background:#eaf4ff}
         .table-actions{white-space:nowrap;text-align:center;vertical-align:middle}.btn-small{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#14324a;color:white;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}.btn-small:hover{background:#195b86;text-decoration:none}.icon-action{width:30px;height:30px;padding:0}.icon-action svg,.btn-small svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.btn-small .pdf-text{font-size:7px;font-weight:800;fill:currentColor;stroke:none}.btn-outline{background:white;color:#435466;border:1px solid #cbd3dc}.btn-outline:hover{background:#edf4fa;color:#14324a}.inline-form{display:inline;margin:0;padding:0}
         .action-menu{position:relative;display:inline-flex}.action-menu .js-action-toggle{background:transparent;color:#435466;border:0;border-radius:0;box-shadow:none}.action-menu .js-action-toggle:hover{background:transparent;color:#14324a}.action-popup{display:none;position:absolute;right:0;top:28px;z-index:60;min-width:132px;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.18);padding:5px}.action-menu.open .action-popup{display:block}.action-item{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;background:white;color:#17202a;border:0;border-radius:4px;padding:7px 9px;font-size:12px;font-weight:700;text-align:left;cursor:pointer}.action-item:hover{background:#edf4fa;text-decoration:none}.action-item.danger{color:#b42318}.action-item svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.action-item .pdf-text{font-size:7px;font-weight:800;fill:currentColor;stroke:none}
-        .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(10,18,28,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal-card{background:white;border-radius:8px;box-shadow:0 22px 60px rgba(0,0,0,.28);width:min(920px,96vw);max-height:90vh;overflow:hidden;border:1px solid #d8dee6}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.modal-head h3{margin:0;font-size:15px}.modal-close{background:transparent;color:white;border:0;font-size:22px;line-height:1;cursor:pointer;padding:0 4px}.modal-body{padding:14px;overflow:auto;max-height:calc(90vh - 48px)}.modal-grid{display:grid;grid-template-columns:160px 1fr;gap:0;border:1px solid #edf0f3;border-bottom:0;margin-bottom:12px}.modal-grid dt,.modal-grid dd{border-bottom:1px solid #edf0f3;margin:0;padding:7px 9px}.modal-grid dt{background:#f0f3f6;color:#435466;font-weight:700}.modal-raw{margin:0;border:1px solid #d8dee6;border-radius:6px;background:#fbfcfd;padding:12px;white-space:pre-wrap;max-height:430px;overflow:auto}.modal-error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11;border-radius:4px;padding:10px 12px}
+        .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(10,18,28,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal-card{background:white;border-radius:8px;box-shadow:0 22px 60px rgba(0,0,0,.28);width:min(920px,96vw);max-height:90vh;overflow:hidden;border:1px solid #d8dee6}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.modal-head h3{margin:0;font-size:15px}.modal-close{background:transparent;color:white;border:0;font-size:22px;line-height:1;cursor:pointer;padding:0 4px}.modal-body{padding:14px;overflow:auto;max-height:calc(90vh - 48px)}.modal-grid{display:grid;grid-template-columns:140px minmax(0,1fr) 140px minmax(0,1fr);gap:0;border:1px solid #edf0f3;border-bottom:0;margin-bottom:12px}.modal-grid dt,.modal-grid dd{border-bottom:1px solid #edf0f3;margin:0;padding:7px 9px}.modal-grid dt{background:#f0f3f6;color:#435466;font-weight:700}.modal-raw{margin:0;border:1px solid #d8dee6;border-radius:6px;background:#fbfcfd;padding:12px;white-space:pre-wrap;max-height:430px;overflow:auto}.modal-error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11;border-radius:4px;padding:10px 12px}@media(max-width:720px){.modal-grid{grid-template-columns:130px minmax(0,1fr)}}
         .status-waiting{color:#b26a00;font-weight:700}.status-retrying{color:#8a1f11;font-weight:700}
       </style>
     </head>
@@ -271,6 +281,7 @@ defmodule TpWeb.Views do
         </section>
       </main>
       #{message_modal_script()}
+      #{auto_uppercase_script()}
     </body>
     </html>
     """
@@ -302,6 +313,7 @@ defmodule TpWeb.Views do
         <p>Setelah migration selesai, refresh halaman dashboard.</p>
       </main>
       #{header_clock_script()}
+      #{auto_uppercase_script()}
     </body>
     </html>
     """
@@ -405,6 +417,7 @@ defmodule TpWeb.Views do
         </form>
       </main>
       #{header_clock_script()}
+      #{auto_uppercase_script()}
     </body>
     </html>
     """
@@ -614,6 +627,202 @@ defmodule TpWeb.Views do
         }
         updateHeaderTime();
         window.setInterval(updateHeaderTime, 1000);
+      })();
+    </script>
+    """
+  end
+
+  defp compose_udp_monitor_script do
+    """
+    <script>
+      (function () {
+        function byId(id) { return document.getElementById(id); }
+
+        function escapeHtml(value) {
+          return String(value == null ? '' : value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        }
+
+        function visibleMonitorUdp(value) {
+          var text = String(value == null ? '' : value);
+          var out = '';
+          for (var i = 0; i < text.length; i++) {
+            var code = text.charCodeAt(i);
+            if (code === 1 || code === 2 || code === 3 || code === 11) continue;
+            if (code === 13) out += String.fromCharCode(10);
+            else if (code === 10 && i > 0 && text.charCodeAt(i - 1) === 13) continue;
+            else out += text.charAt(i);
+          }
+          return out;
+        }
+
+        function formatMonitorTime(value) {
+          return String(value || '').replace('T', ' ').replace('Z', '').slice(0, 19);
+        }
+
+        function monitorSource(item) {
+          var ip = item && item.source_ip ? item.source_ip : '';
+          var port = item && item.source_port ? item.source_port : '';
+          if (ip && port) return ip + ':' + port;
+          return ip || '';
+        }
+
+        function monitorRow(item) {
+          var bell = hasBellSignal(item) ? '<span title="Bell/Sound">🔔</span>' : '';
+          return '<div class="udp-item">' +
+            '<div class="udp-meta">' +
+              '<span>' + escapeHtml(formatMonitorTime(item.time)) + '</span>' +
+              '<span>' + escapeHtml(item.kind || 'UDP') + '</span>' +
+              '<span>' + bell + escapeHtml(monitorSource(item)) + '</span>' +
+            '</div>' +
+            '<pre class="udp-raw">' + escapeHtml(visibleMonitorUdp(item.raw || '')) + '</pre>' +
+          '</div>';
+        }
+
+        function udpEmptyHtml() {
+          return '<div class="udp-empty">No Data.</div>';
+        }
+
+        function hasBellSignal(item) {
+          var raw = String(item && item.raw != null ? item.raw : '');
+          for (var i = 0; i < raw.length; i++) {
+            var code = raw.charCodeAt(i);
+            if (code === 7 || code === 11) return true;
+          }
+          return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\u0007') !== -1 || raw.indexOf('\u000b') !== -1;
+        }
+
+        function playBellAlarm() {
+          try {
+            var AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) {
+              if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
+              return;
+            }
+            var context = window.__aftnBellAudioContext || new AudioContext();
+            window.__aftnBellAudioContext = context;
+            if (context.state === 'suspended' && context.resume) context.resume();
+            var start = context.currentTime;
+            [0, 0.28, 0.56].forEach(function (offset) {
+              var osc = context.createOscillator();
+              var gain = context.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(880, start + offset);
+              gain.gain.setValueAtTime(0.0001, start + offset);
+              gain.gain.exponentialRampToValueAtTime(0.22, start + offset + 0.015);
+              gain.gain.exponentialRampToValueAtTime(0.0001, start + offset + 0.18);
+              osc.connect(gain);
+              gain.connect(context.destination);
+              osc.start(start + offset);
+              osc.stop(start + offset + 0.2);
+            });
+            if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
+          } catch (_error) {}
+        }
+
+        function playBellAlarmForRows(rows) {
+          for (var i = 0; i < rows.length; i++) {
+            if (hasBellSignal(rows[i])) {
+              playBellAlarm();
+              return;
+            }
+          }
+        }
+
+        function pollUdpMonitor() {
+          var body = byId('udp-monitor-body');
+          if (!body) return;
+
+          fetch('/api/udp-monitor', {
+            method: 'GET',
+            headers: {'Accept': 'application/json'},
+            credentials: 'same-origin'
+          })
+            .then(function (response) {
+              if (!response.ok) throw new Error('monitor failed');
+              return response.json();
+            })
+            .then(function (payload) {
+              var rows = payload && payload.data ? payload.data : [];
+              if (!rows.length) return;
+
+              playBellAlarmForRows(rows);
+
+              var html = '';
+              for (var i = rows.length - 1; i >= 0; i--) html += monitorRow(rows[i]);
+
+              if (body.querySelector && body.querySelector('.udp-empty')) body.innerHTML = '';
+              body.insertAdjacentHTML('afterbegin', html);
+
+              var items = body.querySelectorAll ? body.querySelectorAll('.udp-item') : [];
+              for (var index = 10; index < items.length; index++) items[index].parentNode.removeChild(items[index]);
+            })
+            .catch(function () {});
+        }
+
+        document.addEventListener('click', function (event) {
+          var target = event.target;
+          if (target && (target.id === 'clear-udp-monitor' || (target.closest && target.closest('#clear-udp-monitor')))) {
+            event.preventDefault();
+            var monitor = byId('udp-monitor-body');
+            if (monitor) monitor.innerHTML = udpEmptyHtml();
+            return false;
+          }
+        });
+
+        window.setInterval(pollUdpMonitor, 2000);
+      })();
+    </script>
+    """
+  end
+
+  defp auto_uppercase_script do
+    """
+    <script>
+      (function () {
+        function shouldUppercase(field) {
+          if (!field || !field.name) return false;
+          var tag = (field.tagName || '').toUpperCase();
+          if (tag !== 'INPUT' && tag !== 'TEXTAREA') return false;
+          var type = (field.type || '').toLowerCase();
+          return ['hidden','submit','button','reset','checkbox','radio','file','date','time','datetime-local','month','week','number','password'].indexOf(type) === -1;
+        }
+
+        function uppercaseField(field) {
+          if (!shouldUppercase(field) || !field.value) return;
+          var start = field.selectionStart;
+          var end = field.selectionEnd;
+          var upper = field.value.toUpperCase();
+          if (field.value === upper) return;
+          field.value = upper;
+          if (typeof start === 'number' && typeof end === 'number') field.setSelectionRange(start, end);
+        }
+
+        function uppercaseAll(root) {
+          Array.prototype.forEach.call((root || document).querySelectorAll('input, textarea'), uppercaseField);
+        }
+
+        document.addEventListener('input', function (event) {
+          uppercaseField(event.target);
+        }, true);
+
+        document.addEventListener('change', function (event) {
+          uppercaseField(event.target);
+        }, true);
+
+        document.addEventListener('submit', function (event) {
+          if (event.target && event.target.querySelectorAll) uppercaseAll(event.target);
+        }, true);
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function () { uppercaseAll(document); });
+        } else {
+          uppercaseAll(document);
+        }
       })();
     </script>
     """
@@ -1015,11 +1224,8 @@ defmodule TpWeb.Views do
           <div class="aftn-required-note">Blue field indicates required field.</div>
           <div class="aftn-topline">
             <div class="field required">
-              <label>Send At</label>
-              <div class="time-control">
-                <input id="alr-send-at" name="transmission_id" value="#{current_filing_time()}">
-                <button class="time-button js-current-time" type="button" data-target="alr-send-at" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
-              </div>
+              <label>TX ID / CID Seq</label>
+              <input id="alr-send-at" name="transmission_id" value="#{html(current_cid_seq())}" maxlength="8">
             </div>
           </div>
           #{alr_header(priority, originator, params)}
@@ -1067,7 +1273,7 @@ defmodule TpWeb.Views do
         </div>
         <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}" required></div>
         <div class="field"><label>Originator's Reference</label><input name="originator_reference" value=""></div>
-        <label class="aftn-bell"><input type="checkbox" name="bell" value="1"> Bell</label>
+        <label class="aftn-bell"><input type="checkbox" name="bell" value="1"><i class="bi bi-bell-fill" aria-hidden="true"></i><span>Bell</span></label>
       </div>
     </div>
     """
@@ -2066,7 +2272,7 @@ defmodule TpWeb.Views do
         <input type="hidden" name="compose_type" value="AFTN_FREE">
         #{target_fields()}
         <div class="grid2">
-          #{input("transmission_id", "TX ID", "ACR0016")}
+          #{input("transmission_id", "TX ID", current_cid_seq())}
           #{input("filing_time", "Filing Time", current_filing_time())}
           #{input("priority", "Priority", "FF")}
           #{input("originator", "Originator", "WIIIYFYX")}
@@ -2311,22 +2517,32 @@ defmodule TpWeb.Views do
   defp filter_form(filters) do
     direction = Keyword.get(filters, :direction, "")
     type = Keyword.get(filters, :type, "")
-    q = Keyword.get(filters, :q, "")
+    cid = Keyword.get(filters, :cid, "")
+    seq_from = Keyword.get(filters, :seq_from, "")
+    seq_to = Keyword.get(filters, :seq_to, "")
+    text = Keyword.get(filters, :text, "")
     date_from = Keyword.get(filters, :date_from, "")
     date_to = Keyword.get(filters, :date_to, "")
+    filed_by = Keyword.get(filters, :filed_by, "")
     page_size = Keyword.get(filters, :page_size, "15")
 
     """
     <form class="filters" method="get" action="/">
       <input type="hidden" name="page" value="1">
       <input type="hidden" name="page_size" value="#{html(page_size)}">
-      <input name="q" value="#{html(q)}" placeholder="Search CID, seq, message">
-      <select name="direction">
+      <div class="field"><label class="search-label">CID</label><input name="cid" value="#{html(cid)}" placeholder="CID"></div>
+      <div class="field"><label class="search-label">Seq From</label><input name="seq_from" value="#{html(seq_from)}" placeholder="From"></div>
+      <div class="field"><label class="search-label">Seq To</label><input name="seq_to" value="#{html(seq_to)}" placeholder="To"></div>
+      <div class="field"><label class="search-label">Text</label><input name="text" value="#{html(text)}" placeholder="Search message text"></div>
+      <div class="field"><label class="search-label">Date From</label><input type="date" name="date_from" value="#{html(date_from)}"></div>
+      <div class="field"><label class="search-label">Date To</label><input type="date" name="date_to" value="#{html(date_to)}"></div>
+      <div class="field"><label class="search-label">Filled By</label><input name="filed_by" value="#{html(filed_by)}" placeholder="Operator"></div>
+      <div class="field"><label class="search-label">IO</label><select name="direction">
         #{option("", "All IO", direction)}
         #{option("inbound", "Inbound", direction)}
         #{option("outbound", "Outbound", direction)}
-      </select>
-      <select name="type">
+      </select></div>
+      <div class="field"><label class="search-label">Type</label><select name="type">
         #{option("", "All Type", type)}
         #{option("FREE", "FREE", type)}
         #{option("FPL", "FPL", type)}
@@ -2335,10 +2551,9 @@ defmodule TpWeb.Views do
         #{option("CNL", "CNL", type)}
         #{option("DEP", "DEP", type)}
         #{option("ARR", "ARR", type)}
-      </select>
-      <input type="date" name="date_from" value="#{html(date_from)}">
-      <input type="date" name="date_to" value="#{html(date_to)}">
+      </select></div>
       <button type="submit">Filter</button>
+      <a class="clear-filter" href="/?page_size=#{html(page_size)}">Clear</a>
     </form>
     """
   end
@@ -2584,7 +2799,7 @@ defmodule TpWeb.Views do
     """
     <div class="subhead">AFTN Header</div>
     <div class="grid4">
-      #{input("transmission_id", "TX ID", "ACR0016")}
+      #{input("transmission_id", "TX ID", current_cid_seq())}
       #{input("filing_time", "Filing Time", current_filing_time())}
       #{input("priority", "Priority", "FF")}
       #{input("originator", "Originator", "WIIIYFYX")}
@@ -2616,11 +2831,8 @@ defmodule TpWeb.Views do
           <div class="aftn-required-note">Blue field indicates required field.</div>
           <div class="aftn-topline">
             <div class="field required">
-              <label>Send At</label>
-              <div class="time-control">
-                <input id="aftn-send-at" name="transmission_id" value="#{current_filing_time()}">
-                <button class="time-button js-current-time" type="button" data-target="aftn-send-at" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
-              </div>
+              <label>TX ID / CID Seq</label>
+              <input id="aftn-send-at" name="transmission_id" value="#{html(current_cid_seq())}" maxlength="8">
             </div>
           </div>
           <div class="aftn-card">
@@ -2652,7 +2864,7 @@ defmodule TpWeb.Views do
               </div>
               <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}"></div>
               <div class="field"><label>Originator's Reference</label><input name="originator_reference" value=""></div>
-              <label class="aftn-bell"><input type="checkbox" name="bell" value="1"> Bell</label>
+              <label class="aftn-bell"><input type="checkbox" name="bell" value="1"><i class="bi bi-bell-fill" aria-hidden="true"></i><span>Bell</span></label>
             </div>
           </div>
           <div class="aftn-editor-head">
@@ -2837,11 +3049,8 @@ defmodule TpWeb.Views do
           <div class="aftn-required-note">Blue field indicates required field.</div>
           <div class="aftn-topline">
             <div class="field required">
-              <label>Send At</label>
-              <div class="time-control">
-                <input id="rcf-send-at" name="transmission_id" value="#{current_filing_time()}">
-                <button class="time-button js-current-time" type="button" data-target="rcf-send-at" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
-              </div>
+              <label>TX ID / CID Seq</label>
+              <input id="rcf-send-at" name="transmission_id" value="#{html(current_cid_seq())}" maxlength="8">
             </div>
           </div>
           #{alr_header(priority, originator, params)}
@@ -3058,6 +3267,52 @@ defmodule TpWeb.Views do
           return '<div class="udp-empty">No Data.</div>';
         }
 
+        function hasBellSignal(item) {
+          var raw = String(item && item.raw != null ? item.raw : '');
+          for (var i = 0; i < raw.length; i++) {
+            var code = raw.charCodeAt(i);
+            if (code === 7 || code === 11) return true;
+          }
+          return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\u0007') !== -1 || raw.indexOf('\u000b') !== -1;
+        }
+
+        function playBellAlarm() {
+          try {
+            var AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) {
+              if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
+              return;
+            }
+            var context = window.__aftnBellAudioContext || new AudioContext();
+            window.__aftnBellAudioContext = context;
+            if (context.state === 'suspended' && context.resume) context.resume();
+            var start = context.currentTime;
+            [0, 0.28, 0.56].forEach(function (offset) {
+              var osc = context.createOscillator();
+              var gain = context.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(880, start + offset);
+              gain.gain.setValueAtTime(0.0001, start + offset);
+              gain.gain.exponentialRampToValueAtTime(0.22, start + offset + 0.015);
+              gain.gain.exponentialRampToValueAtTime(0.0001, start + offset + 0.18);
+              osc.connect(gain);
+              gain.connect(context.destination);
+              osc.start(start + offset);
+              osc.stop(start + offset + 0.2);
+            });
+            if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
+          } catch (_error) {}
+        }
+
+        function playBellAlarmForRows(rows) {
+          for (var i = 0; i < rows.length; i++) {
+            if (hasBellSignal(rows[i])) {
+              playBellAlarm();
+              return;
+            }
+          }
+        }
+
         function updateHeaderTime() {
           var node = byId('header-time');
           if (!node) return;
@@ -3074,11 +3329,12 @@ defmodule TpWeb.Views do
         }
 
         function monitorRow(item) {
+          var bell = hasBellSignal(item) ? '<span title="Bell/Sound">🔔</span>' : '';
           return '<div class="udp-item">' +
             '<div class="udp-meta">' +
               '<span>' + escapeHtml(formatMonitorTime(item.time)) + '</span>' +
               '<span>' + escapeHtml(item.kind || 'UDP') + '</span>' +
-              '<span>' + escapeHtml(monitorSource(item)) + '</span>' +
+              '<span>' + bell + escapeHtml(monitorSource(item)) + '</span>' +
             '</div>' +
             '<pre class="udp-raw">' + escapeHtml(visibleMonitorUdp(item.raw || '')) + '</pre>' +
           '</div>';
@@ -3248,6 +3504,8 @@ defmodule TpWeb.Views do
               var rows = payload && payload.data ? payload.data : [];
               if (!rows.length) return;
 
+              playBellAlarmForRows(rows);
+
               var html = '';
               for (var i = rows.length - 1; i >= 0; i--) html += monitorRow(rows[i]);
 
@@ -3336,6 +3594,8 @@ defmodule TpWeb.Views do
                 detailItem('Route', message.route) +
                 detailItem('Sequence', message.sequence_no) +
                 detailItem('Status', message.status) +
+                detailItem('Note', message.note) +
+                detailItem('Filed By', message.filed_by) +
                 '</dl>' +
                 '<pre class="modal-raw">' + escapeHtml(visibleAftn(message.raw_text)) + '</pre>';
             })

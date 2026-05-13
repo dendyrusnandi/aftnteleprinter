@@ -394,14 +394,23 @@ defmodule Tp.Aftn do
     direction = Keyword.get(opts, :direction)
     type = Keyword.get(opts, :type)
     q = Keyword.get(opts, :q)
+    cid = Keyword.get(opts, :cid)
+    seq_from = Keyword.get(opts, :seq_from)
+    seq_to = Keyword.get(opts, :seq_to)
+    text = Keyword.get(opts, :text)
     date_from = Keyword.get(opts, :date_from)
     date_to = Keyword.get(opts, :date_to)
+    filed_by = Keyword.get(opts, :filed_by)
 
     Message
     |> maybe_direction(direction)
     |> maybe_type(type)
     |> maybe_search(q)
+    |> maybe_cid(cid)
+    |> maybe_sequence_range(seq_from, seq_to)
+    |> maybe_text(text)
     |> maybe_date(date_from, date_to)
+    |> maybe_filed_by(filed_by)
   end
 
   defp legacy_read?(opts) do
@@ -421,6 +430,45 @@ defmodule Tp.Aftn do
   defp maybe_type(query, nil), do: query
   defp maybe_type(query, ""), do: query
   defp maybe_type(query, type), do: where(query, [m], m.message_type == ^String.upcase(type))
+
+
+  defp maybe_cid(query, nil), do: query
+  defp maybe_cid(query, ""), do: query
+
+  defp maybe_cid(query, cid) do
+    term = "%#{String.downcase(to_string(cid))}%"
+    where(query, [m], like(fragment("LOWER(?)", m.cid), ^term))
+  end
+
+  defp maybe_sequence_range(query, seq_from, seq_to) when seq_from in [nil, ""] and seq_to in [nil, ""], do: query
+
+  defp maybe_sequence_range(query, seq_from, seq_to) do
+    from_seq = parse_int(seq_from, nil) || parse_int(seq_to, nil)
+    to_seq = parse_int(seq_to, nil) || parse_int(seq_from, nil)
+
+    if from_seq && to_seq do
+      {from_seq, to_seq} = if from_seq > to_seq, do: {to_seq, from_seq}, else: {from_seq, to_seq}
+      where(query, [m], fragment("CAST(? AS UNSIGNED)", m.sequence_no) >= ^from_seq and fragment("CAST(? AS UNSIGNED)", m.sequence_no) <= ^to_seq)
+    else
+      query
+    end
+  end
+
+  defp maybe_text(query, nil), do: query
+  defp maybe_text(query, ""), do: query
+
+  defp maybe_text(query, text) do
+    term = "%#{String.downcase(to_string(text))}%"
+    where(query, [m], like(fragment("LOWER(?)", m.raw_text), ^term))
+  end
+
+  defp maybe_filed_by(query, nil), do: query
+  defp maybe_filed_by(query, ""), do: query
+
+  defp maybe_filed_by(query, filed_by) do
+    term = "%#{String.downcase(to_string(filed_by))}%"
+    where(query, [m], like(fragment("LOWER(?)", m.filed_by), ^term))
+  end
 
   defp maybe_date(query, date_from, date_to) when date_from in [nil, ""] and date_to in [nil, ""], do: query
 

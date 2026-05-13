@@ -8,7 +8,7 @@ defmodule Tp.Aftn.Builder do
   def validate("AFTN_FREE", params) do
     params
     |> require_fields(["transmission_id", "priority", "originator", "message"])
-    |> validate_format(params, "transmission_id", ~r/^[A-Z0-9]{3,12}$/, "TX ID harus 3-12 huruf/angka tanpa spasi")
+    |> validate_format(params, "transmission_id", ~r/^[A-Z]{3,4}\d{3,4}$/, "TX ID harus format CID+SEQ, contoh RCJ0001 atau ACR0016")
     |> validate_optional_format(params, "filing_time", ~r/^\d{6}$/, "Filing Time harus DDHHMM 6 digit")
     |> validate_format(params, "priority", ~r/^(SS|DD|FF|GG|KK)$/, "Priority harus SS/DD/FF/GG/KK")
     |> validate_destinations(params)
@@ -469,7 +469,7 @@ defmodule Tp.Aftn.Builder do
 
     [
       <<1>>,
-      up(params, "transmission_id", "ACR0016"),
+      transmission_id(params),
       " ",
       filing_time,
       "\r\n",
@@ -486,6 +486,24 @@ defmodule Tp.Aftn.Builder do
       <<3>>
     ]
     |> IO.iodata_to_binary()
+  end
+
+
+  defp transmission_id(params) do
+    tx_id = up(params, "transmission_id")
+
+    if Regex.match?(~r/^[A-Z]{3,4}\d{3,4}$/, tx_id) do
+      tx_id
+    else
+      default_transmission_id()
+    end
+  end
+
+  defp default_transmission_id do
+    setting = Tp.Settings.get_or_default()
+    "#{setting.cid}#{setting.tseq}"
+  rescue
+    _error -> "RCJ0001"
   end
 
   defp filing_time(params) do

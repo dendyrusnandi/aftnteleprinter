@@ -1,6 +1,7 @@
 {application,tp,
              [{modules,['Elixir.Mix.Tasks.Tp.ValidateParser','Elixir.Tp.Aftn',
                         'Elixir.Tp.Aftn.Builder',
+                        'Elixir.Tp.Aftn.ChannelCheck',
                         'Elixir.Tp.Aftn.DestinationList',
                         'Elixir.Tp.Aftn.Event','Elixir.Tp.Aftn.Legacy',
                         'Elixir.Tp.Aftn.Message',

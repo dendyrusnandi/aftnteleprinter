@@ -324,6 +324,10 @@ defmodule Tp.Aftn.Legacy do
     {where, params} = {["id_ats != 0"], []}
     {where, params} = maybe_type_where(where, params, Keyword.get(opts, :type), columns)
     {where, params} = maybe_search_where(where, params, Keyword.get(opts, :q), columns)
+    {where, params} = maybe_cid_where(where, params, Keyword.get(opts, :cid), columns)
+    {where, params} = maybe_sequence_where(where, params, Keyword.get(opts, :seq_from), Keyword.get(opts, :seq_to), columns)
+    {where, params} = maybe_text_where(where, params, Keyword.get(opts, :text), columns)
+    {where, params} = maybe_filed_by_where(where, params, Keyword.get(opts, :filed_by), columns)
     maybe_date_where(where, params, Keyword.get(opts, :date_from), Keyword.get(opts, :date_to))
   end
 
@@ -342,6 +346,50 @@ defmodule Tp.Aftn.Legacy do
   defp maybe_search_where(where, params, search, columns) do
     term = "%#{String.downcase(search)}%"
     search_columns = ~w(msgall freetext priority originator type3a type7a type13a type15c type16a) ++ @destinations
+    search_sql = "LOWER(CONCAT_WS(' ', #{Enum.map_join(search_columns, ", ", &column_expr(columns, &1))})) LIKE ?"
+    {[search_sql | where], [term | params]}
+  end
+
+
+  defp maybe_cid_where(where, params, cid, _columns) when cid in [nil, ""], do: {where, params}
+
+  defp maybe_cid_where(where, params, cid, columns) do
+    term = "%#{String.downcase(to_string(cid))}%"
+    sql = "LOWER(#{column_expr(columns, "cid")}) LIKE ?"
+    {[sql | where], [term | params]}
+  end
+
+  defp maybe_sequence_where(where, params, seq_from, seq_to, _columns) when seq_from in [nil, ""] and seq_to in [nil, ""], do: {where, params}
+
+  defp maybe_sequence_where(where, params, seq_from, seq_to, columns) do
+    from_seq = parse_int(seq_from, nil) || parse_int(seq_to, nil)
+    to_seq = parse_int(seq_to, nil) || parse_int(seq_from, nil)
+
+    if from_seq && to_seq do
+      {from_seq, to_seq} = if from_seq > to_seq, do: {to_seq, from_seq}, else: {from_seq, to_seq}
+      seq_expr = column_expr(columns, "seq")
+      alt_seq_expr = column_expr(columns, "sequence_no")
+      sql = "CAST(COALESCE(NULLIF(#{seq_expr}, ''), NULLIF(#{alt_seq_expr}, ''), '0') AS UNSIGNED) BETWEEN ? AND ?"
+      {[sql | where], [from_seq, to_seq | params]}
+    else
+      {where, params}
+    end
+  end
+
+  defp maybe_text_where(where, params, text, _columns) when text in [nil, ""], do: {where, params}
+
+  defp maybe_text_where(where, params, text, columns) do
+    term = "%#{String.downcase(to_string(text))}%"
+    search_columns = ~w(msgall freetext)
+    search_sql = "LOWER(CONCAT_WS(' ', #{Enum.map_join(search_columns, ", ", &column_expr(columns, &1))})) LIKE ?"
+    {[search_sql | where], [term | params]}
+  end
+
+  defp maybe_filed_by_where(where, params, filed_by, _columns) when filed_by in [nil, ""], do: {where, params}
+
+  defp maybe_filed_by_where(where, params, filed_by, columns) do
+    term = "%#{String.downcase(to_string(filed_by))}%"
+    search_columns = ~w(filedby filled_by)
     search_sql = "LOWER(CONCAT_WS(' ', #{Enum.map_join(search_columns, ", ", &column_expr(columns, &1))})) LIKE ?"
     {[search_sql | where], [term | params]}
   end

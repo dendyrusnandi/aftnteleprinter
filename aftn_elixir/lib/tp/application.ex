@@ -11,6 +11,7 @@ defmodule Tp.Application do
       Tp.Udp.Listener,
       Tp.LinkMonitor,
       Tp.Aftn.OutgoingQueue,
+      Tp.Aftn.ChannelCheck,
       {Bandit, plug: TpWeb.Router, scheme: :http, port: http_port}
     ]
 
