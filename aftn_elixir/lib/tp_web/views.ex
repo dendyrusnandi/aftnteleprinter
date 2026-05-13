@@ -11,7 +11,7 @@ defmodule TpWeb.Views do
         body{margin:0;padding:56px 0 62px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{position:fixed;top:0;left:0;right:0;z-index:900;height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px;box-shadow:0 6px 18px rgba(20,50,74,.18)}
-        header a{color:white}.top-nav{display:flex;align-items:center;gap:16px}.header-spacer{flex:1}.header-time{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:700;color:#d8e8f3;white-space:nowrap}.top-menu{position:relative}.top-menu summary{cursor:pointer;color:white;font-weight:600;list-style:none;display:flex;align-items:center;gap:6px}.top-menu summary::-webkit-details-marker{display:none}.menu-icon{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.top-submenu{position:absolute;top:28px;left:0;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.16);z-index:20;min-width:260px;padding:6px}.top-submenu a{display:block;color:#17202a;padding:8px 10px;border-radius:4px;white-space:nowrap}.top-submenu a:hover{background:#edf4fa;text-decoration:none}
+        header a{color:white}#{header_time_css()}.top-nav{display:flex;align-items:center;gap:16px}.top-menu{position:relative}.top-menu summary{cursor:pointer;color:white;font-weight:600;list-style:none;display:flex;align-items:center;gap:6px}.top-menu summary::-webkit-details-marker{display:none}.menu-icon{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.top-submenu{position:absolute;top:28px;left:0;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.16);z-index:20;min-width:260px;padding:6px}.top-submenu a{display:block;color:#17202a;padding:8px 10px;border-radius:4px;white-space:nowrap}.top-submenu a:hover{background:#edf4fa;text-decoration:none}
         main{display:grid;grid-template-columns:1fr 360px;gap:16px;padding:16px}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;overflow:hidden}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
@@ -23,13 +23,13 @@ defmodule TpWeb.Views do
         textarea{width:100%;min-height:130px}
         form{padding:12px} button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:8px 12px;font-weight:600}
         label{display:block;font-size:12px;color:#435466;font-weight:600;margin-bottom:4px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.field{margin-bottom:8px}.field input,.field select{width:100%}
-        .filters{display:grid;grid-template-columns:120px 115px 115px minmax(180px,1fr) 145px 145px 150px 120px 120px auto auto;gap:8px;padding:12px;border-bottom:1px solid #e4e8ee;align-items:end;background:#fbfcfd}.filters .field{margin-bottom:0}.filters input,.filters select{width:100%;height:34px}.filters button,.filters .clear-filter{height:34px;align-self:end;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}.filters .clear-filter{background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:4px;padding:0 12px;font-size:12px;font-weight:700}.filters .clear-filter:hover{background:#edf4fa;text-decoration:none}.filters .search-label{font-size:11px;color:#435466;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+        .filters{display:flex;flex-wrap:wrap;gap:8px;padding:12px;border-bottom:1px solid #e4e8ee;align-items:end;background:#fbfcfd;max-width:100%;box-sizing:border-box}.filters .field{margin-bottom:0;min-width:0}.filters .filter-cid{flex:0 0 72px}.filters .filter-seq{flex:0 0 90px}.filters .filter-text{flex:1 1 220px}.filters .filter-date{flex:0 0 145px}.filters .filter-filed{flex:1 1 130px}.filters .filter-select{flex:0 0 112px}.filters input,.filters select{width:100%;height:34px}.filters button,.filters .clear-filter{height:34px;align-self:end;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;flex:0 0 auto}.filters .clear-filter{background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:4px;padding:0 12px;font-size:12px;font-weight:700}.filters .clear-filter:hover{background:#edf4fa;text-decoration:none}.filters .search-label{font-size:11px;color:#435466;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
         .notice{margin:12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}
         .message-cell{max-width:560px}.message-preview{display:inline;white-space:pre-wrap;word-break:break-word}.read-more{display:inline;border:0;background:transparent;color:#195b86;padding:0 0 0 6px;font-size:12px;font-weight:700;cursor:pointer}.read-more:hover{text-decoration:underline}.muted{color:#6d7b88}.events{padding:12px}.event{border-bottom:1px solid #edf0f3;padding:8px 0}
         .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:7px 9px}.status-summary{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:10px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto;display:flex;align-items:center}.status-actions a{height:34px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:0 12px;font-size:13px;font-weight:700;line-height:1;white-space:nowrap;min-width:76px}.status-actions a:hover{text-decoration:none;background:#195b86}
         .udp-monitor{margin-top:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:#fbfcfd;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.udp-monitor-body{padding:9px}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:110px;overflow:auto;white-space:pre-wrap;font-size:12px;line-height:1.15}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px}
-        @media(max-width:900px){main{grid-template-columns:1fr}.filters,.grid2,.grid4{grid-template-columns:1fr}}
+        @media(max-width:900px){main{grid-template-columns:1fr}.grid2,.grid4{grid-template-columns:1fr}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.filters .field,.filters .filter-cid,.filters .filter-seq,.filters .filter-text,.filters .filter-date,.filters .filter-filed,.filters .filter-select{flex:auto}.filters button,.filters .clear-filter{width:100%}}@media(max-width:560px){.filters{grid-template-columns:1fr}}
       </style>
     </head>
     <body>
@@ -53,6 +53,7 @@ defmodule TpWeb.Views do
         </aside>
       </main>
       #{status_panel(events, settings)}
+      #{header_clock_script()}
       #{status_footer_script()}
       #{message_modal_script()}
       #{auto_uppercase_script()}
@@ -180,11 +181,13 @@ defmodule TpWeb.Views do
       <title>Message</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <style>
-        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
+        body{margin:0;padding-bottom:104px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
         header a{color:white}.compose-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.compose-back:hover{text-decoration:none;color:#d8e8f3}.compose-back i{font-size:18px;line-height:1}.compose-title{display:inline-flex;align-items:center;gap:8px}.compose-title .menu-icon{width:18px;height:18px;stroke:#9bd0ff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
         #{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px}
+
+        .compose-main section>h2,.amo-title,.aftn-title{background:#f7f9fb!important;color:#17202a!important;border-bottom:1px solid #e4e8ee;border-radius:8px 8px 0 0}.amo-title i,.aftn-title i{color:#195b86!important}.amo-window,.aftn-window,.compose-main section{border-radius:8px;overflow:visible!important}.compose-main section{box-shadow:0 12px 28px rgba(20,50,74,.08)}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         form{padding:12px} button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:8px 12px;font-weight:600}
@@ -202,6 +205,7 @@ defmodule TpWeb.Views do
         .equipment-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(10,18,28,.52);align-items:center;justify-content:center;padding:16px}.equipment-modal.open{display:flex}.equipment-card{width:min(760px,96vw);max-height:90vh;background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden}.equipment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.equipment-head strong{font-size:14px}.equipment-x{background:transparent;color:white;border:0;border-radius:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-body{padding:12px;overflow:auto}.equipment-group{border:1px solid #e4e8ee;border-radius:6px;margin-bottom:10px;overflow:hidden}.equipment-group-title{background:#f0f3f6;color:#14324a;font-size:12px;font-weight:900;text-transform:uppercase;padding:7px 9px}.equipment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.equipment-row{display:grid;grid-template-columns:22px 48px 1fr;gap:7px;align-items:center;margin:0;padding:7px 9px;border-top:1px solid #edf0f3;cursor:pointer;color:#17202a;font-size:12px;font-weight:600}.equipment-row:nth-child(odd){border-right:1px solid #edf0f3}.equipment-row:hover{background:#edf4fa}.equipment-row input{width:auto}.equipment-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:900;color:#14324a}.equipment-desc{font-weight:600;color:#435466}.equipment-notes{background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:8px 10px;color:#5f4400;font-size:12px}.equipment-notes p{margin:0 0 5px}.equipment-notes p:last-child{margin-bottom:0}.equipment-actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-top:1px solid #e4e8ee;flex-wrap:wrap}
         .rcf-body{border:1px solid #d8dee6;background:#fbfcfd;border-radius:6px;padding:12px;margin-top:10px}.rcf-row-main{grid-template-columns:1.25fr 1.2fr 1.1fr .8fr .8fr}.rcf-message-type input:first-of-type{max-width:64px}.rcf-message-type input:not(:first-of-type){min-width:0}.rcf-radio textarea{min-height:74px}.rcf-filled{max-width:260px;margin-top:10px}
         main{max-width:1560px;padding:14px}form{padding:10px}h2{font-size:15px;padding:11px 14px}button{padding:8px 12px;font-size:13px}textarea,input,select{padding:7px 9px;font-size:13px;min-height:34px}textarea{min-height:78px}label{font-size:12px;margin-bottom:4px}.field{margin-bottom:8px}.grid2,.grid4{gap:8px}.toolbar{gap:8px;margin-bottom:10px}.toolbar a{font-size:13px;padding:7px 10px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:8px;padding:8px 10px}.aftn-tool,.amo-tool{gap:7px;padding:8px 11px;font-size:13px}.aftn-tool i,.amo-tool i{font-size:16px}.aftn-title,.amo-title{font-size:15px;padding:11px 14px}.aftn-title i,.amo-title i{font-size:18px}.aftn-body,.amo-body{padding:12px}.aftn-required-note{font-size:12px;margin-bottom:9px}.aftn-topline{grid-template-columns:170px;gap:9px;margin-bottom:9px}.tx-id-display{min-height:34px;padding:7px 9px}.aftn-card,.rcf-body,.form-band{padding:10px;margin-bottom:10px}.aftn-card-title{font-size:12px;margin-bottom:8px}.aftn-address-row{grid-template-columns:90px 1fr;gap:12px}.aftn-address-grid,.address-grid{gap:6px}.aftn-address-grid input,.address-grid input{padding:6px 7px;min-height:33px}.aftn-meta{grid-template-columns:145px 155px 1fr 102px;gap:8px;margin-top:9px}.aftn-bell{height:34px;display:flex;align-items:center;gap:7px;font-weight:800;color:#14324a}.aftn-bell i{font-size:16px;color:#b26a00}.time-control{gap:6px}.time-button{width:36px}.alr-scroll{max-height:calc(100vh - 190px)}.alr-page{padding:10px}.alr-page-title{font-size:13px;margin-bottom:8px}.alr-grid{gap:8px}.alr-row{gap:8px}.alr-checks{gap:9px;min-height:34px}.alr-checks label,.alr-inline-check{font-size:13px}.alr-text{min-height:58px}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-mark{min-width:26px;padding:0 7px}.rcf-radio textarea{min-height:70px}.rcf-filled{margin-top:7px}.aftn-textarea{min-height:285px;font-size:14px}.amo-footer,.aftn-footer{margin-top:10px;padding-top:10px}.amo-filled input,.aftn-filled input{height:34px}
+        .amo-toolbar,.aftn-toolbar{position:sticky!important;top:0!important;z-index:1200!important;background:rgba(247,249,251,.96)!important;backdrop-filter:blur(6px);border-bottom:1px solid #d8dee6!important;box-shadow:0 10px 22px rgba(20,50,74,.16)!important}.amo-window,.aftn-window{overflow:visible!important}.compose-layout,.compose-main{overflow:visible!important}.compose-main{padding-bottom:96px}.amo-body,.aftn-body{padding-bottom:20px}.amo-footer,.aftn-footer{margin-bottom:18px}.section-head{background:#f7f9fb!important;border-radius:8px 8px 0 0}
         @media(max-width:900px){.grid2,.grid4,.send-row,.header-meta{grid-template-columns:1fr}}
         @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup,.rcf-row-main{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
         @media(max-width:1100px){.compose-layout{grid-template-columns:1fr}.compose-side{position:static}.udp-monitor-body{max-height:360px}}
@@ -628,24 +632,51 @@ defmodule TpWeb.Views do
 
   defp header_time do
     """
-    <div class="header-spacer"></div><div id="header-time" class="header-time">#{html(format_time(DateTime.utc_now()))}</div>
+    <div class="header-spacer"></div>
+    <div id="header-time" class="header-time" title="Aviation UTC Time">
+      <span class="header-clock-icon" aria-hidden="true">#{clock_icon()}</span>
+      <span class="header-time-label">UTC</span>
+      <span id="header-time-value">#{html(format_time(DateTime.utc_now()))}</span>
+    </div>
     """
   end
 
   defp header_time_css do
-    ".header-spacer{flex:1}.header-time{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:700;color:#d8e8f3;white-space:nowrap}"
+    ".header-spacer{flex:1}.header-time{display:inline-flex;align-items:center;gap:6px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:700;color:#d8e8f3;white-space:nowrap}.header-clock-icon{display:inline-flex;align-items:center;color:#9bd0ff}.header-clock-icon svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.header-time-label{color:#9bd0ff;font-weight:900;letter-spacing:.03em}"
+  end
+
+  defp clock_icon do
+    """
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M12 7v5l3 2"></path>
+    </svg>
+    """
   end
 
   defp header_clock_script do
     """
     <script>
       (function () {
+        function ensureHeaderTimeMarkup() {
+          var root = document.getElementById('header-time');
+          if (!root) return null;
+          var value = document.getElementById('header-time-value');
+          if (value) return value;
+
+          root.setAttribute('title', 'Aviation UTC Time');
+          root.innerHTML = '<span class="header-clock-icon" aria-hidden="true">#{String.replace(clock_icon(), "\n", "")}</span>' +
+            '<span class="header-time-label">UTC</span>' +
+            '<span id="header-time-value"></span>';
+          return document.getElementById('header-time-value');
+        }
+
         function updateHeaderTime() {
-          var node = document.getElementById('header-time');
+          var node = ensureHeaderTimeMarkup();
           if (!node) return;
           var now = new Date();
           var pad = function (value) { value = String(value); return value.length < 2 ? '0' + value : value; };
-          node.textContent = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+          node.textContent = now.getUTCFullYear() + '-' + pad(now.getUTCMonth() + 1) + '-' + pad(now.getUTCDate()) + ' ' + pad(now.getUTCHours()) + ':' + pad(now.getUTCMinutes()) + ':' + pad(now.getUTCSeconds());
         }
         updateHeaderTime();
         window.setInterval(updateHeaderTime, 1000);
@@ -1311,14 +1342,9 @@ defmodule TpWeb.Views do
           <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
           <a class="aftn-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
+        <input type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
         <div class="aftn-body">
           <div class="aftn-required-note">Blue field indicates required field.</div>
-          <div class="aftn-topline">
-            <div class="field required">
-              <label>TX ID / CID Seq</label>
-              <input id="alr-send-at" name="transmission_id" value="#{html(current_cid_seq())}" maxlength="8">
-            </div>
-          </div>
           #{alr_header(priority, originator, params)}
         </div>
         <div class="alr-scroll">
@@ -2177,12 +2203,9 @@ defmodule TpWeb.Views do
           <button class="amo-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
           <a class="amo-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
+        <input type="hidden" name="cid_seq" value="#{html(current_cid_seq())}" data-current-cid-seq>
         <div class="amo-body">
           <div class="grid2">
-            <div class="field">
-              <label>CID Seq</label>
-              <input name="cid_seq" value="#{html(current_cid_seq())}">
-            </div>
             <div class="field">
               <label>Filing Time</label>
               <div class="time-control">
@@ -2260,6 +2283,10 @@ defmodule TpWeb.Views do
             <div class="status-label">Link</div>
             <div class="status-value"><span id="status-link-pill" class="status-pill #{link_pill}"><span class="status-dot"></span><span id="status-link-value">#{html(link_state)}</span></span></div>
           </div>
+           <div class="status-card #{link_card}">
+            <div class="status-label">Check</div>
+            <div id="status-check-value" class="status-value">#{html(check_text)}</div>
+          </div>
           <div class="status-card info">
             <div class="status-label">UDP</div>
             <div class="status-value">UDP</div>
@@ -2292,10 +2319,7 @@ defmodule TpWeb.Views do
             <div class="status-label">Destination</div>
             <div id="status-destination-value" class="status-value">#{html(settings.destination_ip_address)}:#{html(settings.port)}</div>
           </div>
-          <div class="status-card #{link_card}">
-            <div class="status-label">Check</div>
-            <div id="status-check-value" class="status-value">#{html(check_text)}</div>
-          </div>
+         
           <div class="status-actions"><a href="/settings">Setting</a></div>
         </div>
       </div>
@@ -2363,8 +2387,8 @@ defmodule TpWeb.Views do
       <form method="post" action="/messages/compose">
         <input type="hidden" name="compose_type" value="AFTN_FREE">
         #{target_fields()}
+        <input type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
         <div class="grid2">
-          #{input("transmission_id", "TX ID", current_cid_seq())}
           #{input("filing_time", "Filing Time", current_filing_time())}
           #{input("priority", "Priority", "FF")}
           #{input("originator", "Originator", "WIIIYFYX")}
@@ -2622,19 +2646,17 @@ defmodule TpWeb.Views do
     <form class="filters" method="get" action="/">
       <input type="hidden" name="page" value="1">
       <input type="hidden" name="page_size" value="#{html(page_size)}">
-      <div class="field"><label class="search-label">CID</label><input name="cid" value="#{html(cid)}" placeholder="CID"></div>
-      <div class="field"><label class="search-label">Seq From</label><input name="seq_from" value="#{html(seq_from)}" placeholder="From"></div>
-      <div class="field"><label class="search-label">Seq To</label><input name="seq_to" value="#{html(seq_to)}" placeholder="To"></div>
-      <div class="field"><label class="search-label">Text</label><input name="text" value="#{html(text)}" placeholder="Search message text"></div>
-      <div class="field"><label class="search-label">Date From</label><input type="date" name="date_from" value="#{html(date_from)}"></div>
-      <div class="field"><label class="search-label">Date To</label><input type="date" name="date_to" value="#{html(date_to)}"></div>
-      <div class="field"><label class="search-label">Filled By</label><input name="filed_by" value="#{html(filed_by)}" placeholder="Operator"></div>
-      <div class="field"><label class="search-label">IO</label><select name="direction">
+      <div class="field filter-cid"><label class="search-label">CID</label><input name="cid" value="#{html(cid)}" placeholder="CID" maxlength="3" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,3)"></div>
+      <div class="field filter-seq"><label class="search-label">Seq From</label><input name="seq_from" value="#{html(seq_from)}" placeholder="From" inputmode="numeric" maxlength="4" autocomplete="off" oninput="this.value=this.value.replace(/\D/g,'').slice(0,4)"></div>
+      <div class="field filter-seq"><label class="search-label">Seq To</label><input name="seq_to" value="#{html(seq_to)}" placeholder="To" inputmode="numeric" maxlength="4" autocomplete="off" oninput="this.value=this.value.replace(/\D/g,'').slice(0,4)"></div>
+      <div class="field filter-text"><label class="search-label">Text</label><input name="text" value="#{html(text)}" placeholder="Search message text"></div>
+       <div class="field filter-filed"><label class="search-label">Filled By</label><input name="filed_by" value="#{html(filed_by)}" placeholder="Operator"></div>
+      <div class="field filter-select"><label class="search-label">IO</label><select name="direction">
         #{option("", "All IO", direction)}
         #{option("inbound", "Inbound", direction)}
         #{option("outbound", "Outbound", direction)}
       </select></div>
-      <div class="field"><label class="search-label">Type</label><select name="type">
+      <div class="field filter-select"><label class="search-label">Type</label><select name="type">
         #{option("", "All Type", type)}
         #{option("FREE", "FREE", type)}
         #{option("FPL", "FPL", type)}
@@ -2644,6 +2666,9 @@ defmodule TpWeb.Views do
         #{option("DEP", "DEP", type)}
         #{option("ARR", "ARR", type)}
       </select></div>
+       <div class="field filter-date"><label class="search-label">Date From</label><input type="date" name="date_from" value="#{html(date_from)}"></div>
+      <div class="field filter-date"><label class="search-label">Date To</label><input type="date" name="date_to" value="#{html(date_to)}"></div>
+    
       <button type="submit">Filter</button>
       <a class="clear-filter" href="/?page_size=#{html(page_size)}">Clear</a>
     </form>
@@ -2890,8 +2915,8 @@ defmodule TpWeb.Views do
   defp aftn_header_fields do
     """
     <div class="subhead">AFTN Header</div>
+    <input type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
     <div class="grid4">
-      #{input("transmission_id", "TX ID", current_cid_seq())}
       #{input("filing_time", "Filing Time", current_filing_time())}
       #{input("priority", "Priority", "FF")}
       #{input("originator", "Originator", "WIIIYFYX")}
@@ -3132,14 +3157,9 @@ defmodule TpWeb.Views do
           <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
           <a class="aftn-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
+        <input type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
         <div class="aftn-body">
           <div class="aftn-required-note">Blue field indicates required field.</div>
-          <div class="aftn-topline">
-            <div class="field required">
-              <label>TX ID / CID Seq</label>
-              <input id="rcf-send-at" name="transmission_id" value="#{html(current_cid_seq())}" maxlength="8">
-            </div>
-          </div>
           #{alr_header(priority, originator, params)}
           <div class="rcf-body">
             <div class="alr-grid">
@@ -3400,12 +3420,25 @@ defmodule TpWeb.Views do
           }
         }
 
+        function ensureHeaderTimeValue() {
+          var root = byId('header-time');
+          if (!root) return null;
+          var value = byId('header-time-value');
+          if (value) return value;
+
+          root.setAttribute('title', 'Aviation UTC Time');
+          root.innerHTML = '<span class="header-clock-icon" aria-hidden="true">#{String.replace(clock_icon(), "\n", "")}</span>' +
+            '<span class="header-time-label">UTC</span>' +
+            '<span id="header-time-value"></span>';
+          return byId('header-time-value');
+        }
+
         function updateHeaderTime() {
-          var node = byId('header-time');
+          var node = ensureHeaderTimeValue();
           if (!node) return;
           var now = new Date();
           var pad = function (value) { value = String(value); return value.length < 2 ? '0' + value : value; };
-          node.textContent = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+          node.textContent = now.getUTCFullYear() + '-' + pad(now.getUTCMonth() + 1) + '-' + pad(now.getUTCDate()) + ' ' + pad(now.getUTCHours()) + ':' + pad(now.getUTCMinutes()) + ':' + pad(now.getUTCSeconds());
         }
 
         function monitorSource(item) {
