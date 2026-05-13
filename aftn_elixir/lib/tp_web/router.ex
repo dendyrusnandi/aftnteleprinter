@@ -614,7 +614,8 @@ defmodule TpWeb.Router do
   defp redirect_after_compose(%{"return_to" => "compose"} = params, type, action) do
     form = Map.get(params, "return_form", type)
     verb = if action == "save", do: "saved", else: "queued"
-    "/compose?form=#{URI.encode_www_form(form)}&info=#{URI.encode_www_form("#{redirect_type(type)} #{verb}")}"
+    clear = if action == "send_clear", do: "&clear=1", else: ""
+    "/compose?form=#{URI.encode_www_form(form)}&info=#{URI.encode_www_form("#{redirect_type(type)} #{verb}")}#{clear}"
   end
 
   defp redirect_after_compose(_params, type, _action) do

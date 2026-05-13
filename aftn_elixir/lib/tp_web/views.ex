@@ -192,8 +192,10 @@ defmodule TpWeb.Views do
         .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
         .alr-scroll{max-height:520px;overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.equipment-control .equipment-open{width:40px;flex:0 0 40px;background:white;color:#14324a;border:1px solid #cbd3dc;border-left:0;border-radius:0 4px 4px 0;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-control .equipment-open:hover{background:#edf4fa}.equipment-control input{border-top-right-radius:0;border-bottom-right-radius:0}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
         .equipment-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(10,18,28,.52);align-items:center;justify-content:center;padding:16px}.equipment-modal.open{display:flex}.equipment-card{width:min(760px,96vw);max-height:90vh;background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden}.equipment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.equipment-head strong{font-size:14px}.equipment-x{background:transparent;color:white;border:0;border-radius:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-body{padding:12px;overflow:auto}.equipment-group{border:1px solid #e4e8ee;border-radius:6px;margin-bottom:10px;overflow:hidden}.equipment-group-title{background:#f0f3f6;color:#14324a;font-size:12px;font-weight:900;text-transform:uppercase;padding:7px 9px}.equipment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.equipment-row{display:grid;grid-template-columns:22px 48px 1fr;gap:7px;align-items:center;margin:0;padding:7px 9px;border-top:1px solid #edf0f3;cursor:pointer;color:#17202a;font-size:12px;font-weight:600}.equipment-row:nth-child(odd){border-right:1px solid #edf0f3}.equipment-row:hover{background:#edf4fa}.equipment-row input{width:auto}.equipment-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:900;color:#14324a}.equipment-desc{font-weight:600;color:#435466}.equipment-notes{background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:8px 10px;color:#5f4400;font-size:12px}.equipment-notes p{margin:0 0 5px}.equipment-notes p:last-child{margin-bottom:0}.equipment-actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-top:1px solid #e4e8ee;flex-wrap:wrap}
+        .rcf-body{border:1px solid #d8dee6;background:#fbfcfd;border-radius:6px;padding:12px;margin-top:10px}.rcf-row-main{grid-template-columns:1.25fr 1.2fr 1.1fr .8fr .8fr}.rcf-message-type input:first-of-type{max-width:64px}.rcf-message-type input:not(:first-of-type){min-width:0}.rcf-radio textarea{min-height:74px}.rcf-filled{max-width:260px;margin-top:10px}
+        main{max-width:1440px;padding:10px}form{padding:8px}h2{font-size:14px;padding:9px 12px}button{padding:6px 9px;font-size:12px}textarea,input,select{padding:5px 6px;font-size:12px;min-height:30px}textarea{min-height:64px}label{font-size:11px;margin-bottom:2px}.field{margin-bottom:5px}.grid2,.grid4{gap:6px}.toolbar{gap:6px;margin-bottom:8px}.toolbar a{font-size:12px;padding:5px 7px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:6px;padding:6px 8px}.aftn-tool,.amo-tool{gap:5px;padding:6px 8px;font-size:12px}.aftn-tool i,.amo-tool i{font-size:14px}.aftn-title,.amo-title{font-size:14px;padding:9px 12px}.aftn-title i,.amo-title i{font-size:16px}.aftn-body,.amo-body{padding:8px}.aftn-required-note{font-size:11px;margin-bottom:6px}.aftn-topline{grid-template-columns:150px;gap:6px;margin-bottom:6px}.aftn-card,.rcf-body,.form-band{padding:7px;margin-bottom:7px}.aftn-card-title{font-size:11px;margin-bottom:5px}.aftn-address-row{grid-template-columns:80px 1fr;gap:8px}.aftn-address-grid,.address-grid{gap:4px}.aftn-address-grid input,.address-grid input{padding:4px 5px;min-height:28px}.aftn-meta{grid-template-columns:130px 140px 1fr 74px;gap:6px;margin-top:6px}.aftn-bell{height:30px}.time-control{gap:4px}.time-button{width:32px}.alr-scroll{max-height:calc(100vh - 178px)}.alr-page{padding:8px}.alr-page-title{font-size:12px;margin-bottom:6px}.alr-grid{gap:6px}.alr-row{gap:6px}.alr-checks{gap:7px;min-height:30px}.alr-checks label,.alr-inline-check{font-size:12px}.alr-text{min-height:42px}.alr-picker{margin-top:4px;padding:4px;font-size:11px}.alr-mark{min-width:22px;padding:0 6px}.rcf-radio textarea{min-height:54px}.rcf-filled{margin-top:4px}.aftn-textarea{min-height:240px;font-size:13px}.amo-footer,.aftn-footer{margin-top:8px;padding-top:8px}.amo-filled input,.aftn-filled input{height:30px}
         @media(max-width:900px){.grid2,.grid4,.send-row,.header-meta{grid-template-columns:1fr}}
-        @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
+        @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup,.rcf-row-main{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
         @media(max-width:900px){.compose-head,.address-line{display:block}.address-grid,.aftn-address-grid{grid-template-columns:repeat(2,1fr)}.aftn-topline,.aftn-address-row,.aftn-meta{grid-template-columns:1fr}}
       </style>
     </head>
@@ -656,6 +658,11 @@ defmodule TpWeb.Views do
         function restoreDraft(form) {
           if (!window.sessionStorage) return;
           var params = new URLSearchParams(window.location.search || '');
+          if (params.get('clear') === '1') {
+            window.sessionStorage.removeItem(formKey(form));
+            clearForm(form);
+            return;
+          }
           var hasPrefill = params.has('priority') || params.has('originator') || params.has('message');
           if (hasPrefill && form.id === 'aftn-free-form') {
             window.sessionStorage.removeItem(formKey(form));
@@ -677,6 +684,11 @@ defmodule TpWeb.Views do
 
         function clearForm(form) {
           fields(form).forEach(function (field) {
+            if (field.type === 'hidden') return;
+            if (field.name === 'message_type' && form.elements.compose_type) {
+              field.value = form.elements.compose_type.value;
+              return;
+            }
             if (field.type === 'checkbox' || field.type === 'radio') field.checked = false;
             else field.value = '';
           });
@@ -699,9 +711,14 @@ defmodule TpWeb.Views do
 
           fields(form).forEach(uppercaseField);
 
-          form.addEventListener('submit', function () {
+          form.addEventListener('submit', function (event) {
             fields(form).forEach(uppercaseField);
-            saveDraft(form);
+            var action = event.submitter ? event.submitter.value : '';
+            if (action === 'send_clear') {
+              if (window.sessionStorage) window.sessionStorage.removeItem(formKey(form));
+            } else {
+              saveDraft(form);
+            }
           });
 
           form.addEventListener('input', function (event) {
@@ -749,7 +766,13 @@ defmodule TpWeb.Views do
         }
 
         function updateAlrRequired(form) {
-          if (!form || form.id !== 'alr-form') return;
+          if (!form) return;
+          var composeType = form.elements.compose_type ? form.elements.compose_type.value : '';
+          if (composeType === 'RCF') {
+            setRequired(form, 'ssr_code', !!form.elements.ssr_mode && form.elements.ssr_mode.checked);
+            return;
+          }
+          if (form.id !== 'alr-form') return;
           setRequired(form, 'ssr_code', !!form.elements.ssr_mode && form.elements.ssr_mode.checked);
           setRequired(form, 'pbn', value(form, 'equipment').indexOf('R') !== -1);
           setRequired(form, 'typ', value(form, 'aircraft_type') === 'ZZZZ');
@@ -934,7 +957,7 @@ defmodule TpWeb.Views do
   defp compose_form("FREE", _params), do: free_message_form()
   defp compose_form("AFTN_FREE", params), do: aftn_free_form(params)
   defp compose_form("ALR", params), do: alr_form(params)
-  defp compose_form("RCF", _params), do: rcf_form()
+  defp compose_form("RCF", params), do: rcf_form(params)
   defp compose_form("FPL", _params), do: fpl_like_form("FPL", "Filed Flight Plan")
   defp compose_form("CHG", _params), do: change_form()
   defp compose_form("DLA", _params), do: basic_flight_form("DLA", "Delay Message")
@@ -961,7 +984,7 @@ defmodule TpWeb.Views do
         <input type="hidden" name="compose_type" value="#{html(post_type)}">
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="#{html(type)}">
-        <p class="actions"><button type="submit" name="compose_action" value="send">Send #{html(type)}</button> <button type="button" class="js-clear-form">Clear</button></p>
+        <p class="actions"><button type="submit" name="compose_action" value="send_clear">Send+Clear</button> <button type="submit" name="compose_action" value="send">Send #{html(type)}</button> <button type="button" class="js-clear-form">Clear</button></p>
         #{target_fields()}
         #{textarea("message", "Text", "")}
       </form>
@@ -982,6 +1005,7 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="ALR">
         <div class="aftn-toolbar">
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
           <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
           <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
           <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
@@ -1404,6 +1428,7 @@ defmodule TpWeb.Views do
   defp alr_tooltip("aircraft_id"), do: "Aircraft Identification\n\nINSERT one of the following aircraft identification, not exceeding 7 alphanumeric characters and without hypens or symbols:\n\na) the ICAO designator for the aircraft operating agency followed by the flight identification (e.g. KLM511, NGA213, JTR25) when in radiotelephony the call sign to be used by the aircraft will consist of the ICAO telephony designator for the operating agency followed by the flight identification (e.g. KLM511, NIGERIA 213, JESTER 25);\n\nb) in the radiotelephony the call sign to be used by the aircraft will consist of this identification alone (e.g. CGAJS), or preceded by the ICAO telephony designator for the aircraft operating agency (e.g. BLIZZARD CGAJS);"
   defp alr_tooltip("ssr_mode"), do: "SSR Mode\n\n1 LETTER giving the SSR Mode related to (c)."
   defp alr_tooltip("ssr_code"), do: "SSR Code\n\n4 NUMERICS giving the SSR Code assigned to the aircraft by ATS and transmitted in the Mode given in (b)."
+  defp alr_tooltip("radio_failure"), do: "Radio Failure Information\n\nThis field consist of the following specified sequence of elements preceded by a single hypen and separated by spaces. Any information not available is to be shown as 'NIL' or 'NOT KNOWN' and not simply omitted.\n\n(a) Time of Last Two-way Contact : 4 NUMERICS giving the time of the last two-way contact with the aircraft.\n(b) Frequency of Last Contact : NUMERICS as necessary giving the transmitting/receiving frequency of the last two-way contact with the aircraft.\n(c) Last Reported Position : The last reported position expressed in one of the data conventions of 1.6 of this Appendix.\n(d) Time at Last Reported Position : 4 NUMERICS giving the time at the last reported position.\n(e) Remaining COM Capability : LETTERS as necessary identifying the remaining COM capability of the aircraft, if known, using the convention of Filed Type 10, or in plain language.\n(f) Any Necessary Remarks : Plain language text as necessary."
 
   defp alr_tooltip("flight_rules") do
     """
@@ -1849,6 +1874,7 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="FREE">
         <div class="amo-toolbar">
+          <button class="amo-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
           <button class="amo-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
           <button class="amo-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
           <button class="amo-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
@@ -1894,6 +1920,7 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="AMO">
         <div class="amo-toolbar">
+          <button class="amo-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
           <button class="amo-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
           <button class="amo-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
           <button class="amo-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
@@ -2544,7 +2571,7 @@ defmodule TpWeb.Views do
         <input type="hidden" name="compose_type" value="#{html(type)}">
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="#{html(type)}">
-        <p class="actions"><button type="submit" name="compose_action" value="send">Send #{html(type)}</button> <button type="button" class="js-clear-form">Clear</button></p>
+        <p class="actions"><button type="submit" name="compose_action" value="send_clear">Send+Clear</button> <button type="submit" name="compose_action" value="send">Send #{html(type)}</button> <button type="button" class="js-clear-form">Clear</button></p>
         #{target_fields()}
         #{aftn_header_fields()}
         #{body_html}
@@ -2579,6 +2606,7 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="AFTN_FREE">
         <div class="aftn-toolbar">
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
           <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
           <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
           <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
@@ -2787,18 +2815,116 @@ defmodule TpWeb.Views do
     )
   end
 
-  defp rcf_form do
-    ats_form(
-      "RCF",
-      "Radio Communication Failure",
-      """
-      <div class="subhead">ATS Body</div>
-      <div class="grid2">
-        #{input("aircraft_id", "7a Aircraft ID", "GIA120")}
-        #{input("radio_failure", "21 Radio Failure", "WIII0330 WAAA")}
+  defp rcf_form(params \\ %{}) do
+    priority = compose_prefill(params, "priority", "FF")
+    originator = compose_prefill(params, "originator", default_originator())
+
+    """
+    <section id="RCF" class="aftn-window">
+      <div class="aftn-title"><i class="bi bi-broadcast-pin"></i><span>RCF (Radio Communication Failure) Message</span></div>
+      <form id="rcf-form" class="aftn-form" method="post" action="/messages/compose">
+        <input type="hidden" name="compose_type" value="RCF">
+        <input type="hidden" name="return_to" value="compose">
+        <input type="hidden" name="return_form" value="RCF">
+        <div class="aftn-toolbar">
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
+          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
+          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <a class="aftn-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
+        </div>
+        <div class="aftn-body">
+          <div class="aftn-required-note">Blue field indicates required field.</div>
+          <div class="aftn-topline">
+            <div class="field required">
+              <label>Send At</label>
+              <div class="time-control">
+                <input id="rcf-send-at" name="transmission_id" value="#{current_filing_time()}">
+                <button class="time-button js-current-time" type="button" data-target="rcf-send-at" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
+              </div>
+            </div>
+          </div>
+          #{alr_header(priority, originator, params)}
+          <div class="rcf-body">
+            <div class="alr-grid">
+              <div class="alr-row rcf-row-main">
+                #{rcf_message_number()}
+                #{rcf_input("reference_data", "Reference Data", "", maxlength: 12, tooltip: alr_tooltip("reference_data"))}
+                #{rcf_input("aircraft_id", "7. Aircraft ID", "", required: true, maxlength: 7, prefix: "-", tooltip: alr_tooltip("aircraft_id"))}
+                #{rcf_check_field("ssr_mode", "SSR Mode", "A", prefix: "/", tooltip: alr_tooltip("ssr_mode"))}
+                #{rcf_input("ssr_code", "Code", "", maxlength: 4, tooltip: alr_tooltip("ssr_code"))}
+              </div>
+              <div class="alr-row alr-row-1">
+                #{rcf_textarea("radio_failure", "21. Radio Failure Information", "", required: true, prefix: "-", suffix: ")", tooltip: alr_tooltip("radio_failure"))}
+              </div>
+              <div class="field rcf-filled"#{alr_title_attr(alr_tooltip("filed_by"))}>
+                <label#{alr_title_attr(alr_tooltip("filed_by"))}>Filled By</label>
+                <input name="filed_by" value="SYSTEM"#{alr_title_attr(alr_tooltip("filed_by"))}>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    """
+  end
+
+  defp rcf_message_number do
+    message_type_tip = alr_title_attr(alr_tooltip("message_type"))
+    number_tip = alr_title_attr(alr_tooltip("alr_number"))
+
+    """
+    <div class="field required rcf-message-type"#{message_type_tip}>
+      <label#{message_type_tip}>3. Message Type / Number</label>
+      <div class="alr-control compact">
+        #{alr_mark("(")}
+        <input name="message_type" value="RCF" readonly required maxlength="3"#{message_type_tip}>
+        <input name="message_number" value="" maxlength="12"#{number_tip}>
       </div>
-      """
-    )
+    </div>
+    """
+  end
+
+  defp rcf_input(name, label, value, opts \\ []) do
+    required = if Keyword.get(opts, :required, false), do: " required", else: ""
+    maxlength = if max = Keyword.get(opts, :maxlength), do: ~s( maxlength="#{max}"), else: ""
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
+
+    """
+    <div class="field#{required}"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<input name="#{html(name)}" value="#{html(value)}"#{maxlength}#{required}#{title}>#{suffix}</div>
+    </div>
+    """
+  end
+
+  defp rcf_textarea(name, label, value, opts \\ []) do
+    required = if Keyword.get(opts, :required, false), do: " required", else: ""
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
+
+    """
+    <div class="field rcf-radio#{required}"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<textarea class="alr-text" name="#{html(name)}" spellcheck="false"#{required}#{title}>#{html(value)}</textarea>#{suffix}</div>
+    </div>
+    """
+  end
+
+  defp rcf_check_field(name, label, value, opts \\ []) do
+    prefix = alr_mark(Keyword.get(opts, :prefix))
+    suffix = alr_mark(Keyword.get(opts, :suffix))
+    title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
+
+    """
+    <div class="field"#{title}>
+      <label#{title}>#{html(label)}</label>
+      <div class="alr-control">#{prefix}<label class="alr-inline-check"#{title}><input type="checkbox" name="#{html(name)}" value="#{html(value)}"#{title}>#{html(value)}</label>#{suffix}</div>
+    </div>
+    """
   end
 
   defp target_fields do
@@ -3085,7 +3211,7 @@ defmodule TpWeb.Views do
 
               for (var i = 0; i < rows.length; i++) {
                 var id = parseInt(rows[i].id, 10);
-                if (!isNaN(id) && id > latestMessageId && !body.querySelector('[data-message-id="' + id + '"]')) fresh.push(rows[i]);
+                if (!isNaN(id) && !body.querySelector('[data-message-id="' + id + '"]')) fresh.push(rows[i]);
               }
 
               if (!fresh.length) return;

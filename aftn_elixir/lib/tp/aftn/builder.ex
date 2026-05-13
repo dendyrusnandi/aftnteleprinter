@@ -64,7 +64,11 @@ defmodule Tp.Aftn.Builder do
   def validate("RCF", params) do
     params
     |> require_fields(["aircraft_id", "radio_failure"])
+    |> validate_rcf_conditionals(params)
     |> validate_format(params, "aircraft_id", ~r/^[A-Z0-9]{2,7}$/, "Aircraft harus 2-7 huruf/angka")
+    |> validate_optional_format(params, "message_number", ~r/^[A-Z0-9\/]{0,12}$/, "Message number maksimal 12 huruf/angka atau /")
+    |> validate_optional_format(params, "reference_data", ~r/^[A-Z0-9\/]{0,12}$/, "Reference data maksimal 12 huruf/angka atau /")
+    |> validate_optional_format(params, "ssr_code", ~r/^\d{4}$/, "SSR Code harus 4 angka")
     |> validate_aftn_header(params)
   end
 
@@ -185,7 +189,8 @@ defmodule Tp.Aftn.Builder do
   def build("LAM", params), do: "(LAM-#{up(params, "reference")})" |> maybe_wrap_aftn(params)
 
   def build("RCF", params) do
-    "(RCF-#{up(params, "aircraft_id")}-#{up(params, "radio_failure")})"
+    params
+    |> rcf_body()
     |> maybe_wrap_aftn(params)
   end
 
@@ -227,6 +232,22 @@ defmodule Tp.Aftn.Builder do
       end
 
     "(#{type}-#{up(params, "aircraft_id")}-#{up(params, "departure")}#{digits(params, "departure_time")}-#{up(params, "destination")}#{dof}#{extra})"
+  end
+
+  defp rcf_body(params) do
+    item3 = "RCF" <> up(params, "message_number") <> up(params, "reference_data")
+    aircraft = up(params, "aircraft_id")
+    mode = if text(params, "ssr_mode") == "", do: "", else: "/#{up(params, "ssr_mode")}"
+    code = digits(params, "ssr_code")
+    item7 = if aircraft == "" and mode == "" and code == "", do: "", else: "-#{aircraft}#{mode}#{code}"
+    item21 = if text(params, "radio_failure") == "", do: "", else: "-#{up(params, "radio_failure")}"
+
+    body =
+      [item3 <> item7, item21]
+      |> Enum.reject(&(&1 == ""))
+      |> Enum.join("\r\n")
+
+    "(#{body})"
   end
 
   defp alr_body(params) do
@@ -544,6 +565,14 @@ defmodule Tp.Aftn.Builder do
     |> validate_format(params, "departure_time", ~r/^\d{4}$/, "Time harus HHMM 4 digit")
   end
 
+  defp validate_rcf_conditionals(errors, _params) when errors != [], do: errors
+
+  defp validate_rcf_conditionals(errors, params) do
+    errors
+    |> require_when(params, text(params, "ssr_mode") != "" and text(params, "ssr_code") == "", "SSR Code wajib diisi jika SSR Mode dipilih")
+    |> require_when(params, text(params, "ssr_mode") == "" and text(params, "ssr_code") != "", "SSR Mode wajib dipilih jika SSR Code diisi")
+  end
+
   defp validate_alr_conditionals(errors, _params) when errors != [], do: errors
 
   defp validate_alr_conditionals(errors, params) do
@@ -584,7 +613,6 @@ defmodule Tp.Aftn.Builder do
       errors
     else
       errors
-      |> require_when_empty(params, "addresses", "AFTN destination/address wajib diisi")
       |> require_when_empty(params, "originator", "Originator wajib diisi")
       |> validate_destinations(params)
       |> validate_format(params, "originator", ~r/^[A-Z]{8}$/, "Originator harus 8 huruf AFTN")

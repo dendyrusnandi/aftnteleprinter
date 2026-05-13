@@ -6,18 +6,18 @@ defmodule Tp.Aftn do
   alias Tp.Udp.Sender
 
   def list_messages(opts \\ []) do
-    if legacy_read?(opts) do
-      Legacy.list_messages(opts)
-    else
-      list_new_messages(opts)
+    cond do
+      all_directions?(opts) -> combined_messages(opts, Keyword.get(opts, :limit, 100))
+      legacy_read?(opts) -> Legacy.list_messages(opts)
+      true -> list_new_messages(opts)
     end
   end
 
   def latest_messages(opts \\ []) do
-    if legacy_read?(opts) do
-      Legacy.latest_messages(opts)
-    else
-      list_new_messages(opts)
+    cond do
+      all_directions?(opts) -> combined_messages(opts, Keyword.get(opts, :limit, Keyword.get(opts, :page_size, 15)))
+      legacy_read?(opts) -> Legacy.latest_messages(opts)
+      true -> list_new_messages(opts)
     end
   end
 
@@ -65,11 +65,14 @@ defmodule Tp.Aftn do
   end
 
   def list_messages_page(opts \\ []) do
-    if legacy_read?(opts) do
-      {messages, pagination} = Legacy.list_messages_page(opts)
-      {:ok, messages, pagination}
-    else
-      list_new_messages_page(opts)
+    cond do
+      all_directions?(opts) -> combined_messages_page(opts)
+      legacy_read?(opts) ->
+        {messages, pagination} = Legacy.list_messages_page(opts)
+        {:ok, messages, pagination}
+
+      true ->
+        list_new_messages_page(opts)
     end
   end
 
@@ -99,6 +102,49 @@ defmodule Tp.Aftn do
      }}
   end
 
+  defp combined_messages(opts, limit_value) do
+    limit = limit_value |> parse_int(100) |> clamp(1, 1000)
+    fetch_limit = limit * 2
+
+    opts
+    |> combined_pool(fetch_limit)
+    |> Enum.take(limit)
+  end
+
+  defp combined_messages_page(opts) do
+    page_size = opts |> Keyword.get(:page_size, 15) |> parse_int(15) |> clamp(1, 1000)
+    page = opts |> Keyword.get(:page, 1) |> parse_int(1) |> max(1)
+    offset = (page - 1) * page_size
+    fetch_limit = offset + page_size
+
+    messages =
+      opts
+      |> combined_pool(fetch_limit)
+      |> Enum.drop(offset)
+      |> Enum.take(page_size)
+
+    total_count = legacy_count(opts) + new_count(Keyword.put(opts, :direction, "outbound"))
+    total_pages = total_count |> div_ceil(page_size) |> max(1)
+
+    {:ok,
+     messages,
+     %{
+       page: min(page, total_pages),
+       page_size: page_size,
+       has_next: page < total_pages,
+       total_count: total_count,
+       total_pages: total_pages
+     }}
+  end
+
+  defp combined_pool(opts, limit) do
+    legacy_opts = Keyword.merge(opts, direction: "inbound", limit: limit, page_size: limit, page: 1)
+    new_opts = Keyword.merge(opts, direction: "outbound", limit: limit)
+
+    (Legacy.latest_messages(legacy_opts) ++ list_new_messages(new_opts))
+    |> sort_messages_desc()
+  end
+
   def get_message(id) do
     Legacy.get_message(id) || Repo.get(Message, id)
   end
@@ -117,17 +163,53 @@ defmodule Tp.Aftn do
   end
 
   def delete_all_messages(opts \\ []) do
-    if legacy_read?(opts) do
-      Legacy.delete_all(opts)
-    else
-      {count, _} =
-        opts
-        |> base_message_query()
-        |> Repo.delete_all()
+    cond do
+      all_directions?(opts) ->
+        {:ok, legacy_deleted} = Legacy.delete_all(Keyword.put(opts, :direction, "inbound"))
+        {new_deleted, _} = opts |> Keyword.put(:direction, "outbound") |> base_message_query() |> Repo.delete_all()
+        {:ok, legacy_deleted + new_deleted}
 
-      {:ok, count}
+      legacy_read?(opts) ->
+        Legacy.delete_all(opts)
+
+      true ->
+        {count, _} =
+          opts
+          |> base_message_query()
+          |> Repo.delete_all()
+
+        {:ok, count}
     end
   end
+
+  defp legacy_count(opts) do
+    {_messages, pagination} = Legacy.list_messages_page(Keyword.merge(opts, direction: "inbound", page_size: 1, page: 1))
+    Map.get(pagination, :total_count, 0)
+  end
+
+  defp new_count(opts) do
+    opts
+    |> base_message_query()
+    |> Repo.aggregate(:count, :id)
+  end
+
+  defp sort_messages_desc(messages) do
+    Enum.sort_by(messages, fn message -> {message_sort_time(message), message.id || 0} end, :desc)
+  end
+
+  defp message_sort_time(%{inserted_at: value}), do: sort_time(value)
+  defp message_sort_time(%{received_at: value}), do: sort_time(value)
+  defp message_sort_time(_message), do: 0
+
+  defp sort_time(%DateTime{} = value), do: DateTime.to_unix(value, :microsecond)
+
+  defp sort_time(%NaiveDateTime{} = value) do
+    value
+    |> DateTime.from_naive!("Etc/UTC")
+    |> DateTime.to_unix(:microsecond)
+  end
+
+  defp sort_time(_value), do: 0
 
   def list_events(limit \\ 20) do
     Event
@@ -326,6 +408,10 @@ defmodule Tp.Aftn do
     Keyword.get(opts, :direction) in [nil, "", "inbound"]
   end
 
+  defp all_directions?(opts) do
+    Keyword.get(opts, :direction) in [nil, ""]
+  end
+
   defp maybe_direction(query, nil), do: query
   defp maybe_direction(query, ""), do: query
   defp maybe_direction(query, "inbound"), do: where(query, [m], m.direction == :inbound)
@@ -421,6 +507,8 @@ defmodule Tp.Aftn do
   defp parse_date(_value), do: nil
 
   defp clamp(number, min_value, max_value), do: number |> max(min_value) |> min(max_value)
+
+  defp div_ceil(number, divisor), do: div(number + divisor - 1, divisor)
 
   defp maybe_queue_search(query, ""), do: query
 
