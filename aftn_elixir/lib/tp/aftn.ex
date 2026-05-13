@@ -1,9 +1,8 @@
 defmodule Tp.Aftn do
   import Ecto.Query
-  require Logger
 
   alias Tp.Aftn.{Builder, Event, Legacy, Message, Parser}
-  alias Tp.{Repo, Settings}
+  alias Tp.Repo
   alias Tp.Udp.Sender
 
   def list_messages(opts \\ []) do
@@ -242,27 +241,38 @@ defmodule Tp.Aftn do
   end
 
   def transmit(raw, attrs \\ %{}) do
-    with {:ok, sent} <- Sender.send(raw, attrs_to_target_opts(attrs)) do
-      increment_tseq_after_success()
+    parsed = Parser.parse_message(raw)
+    display_text = message_body_only(raw, parsed)
+    parsed_fields = parsed |> Map.get(:parsed_fields, %{}) |> ensure_map() |> Map.put("wire_raw", raw)
 
-      with {:ok, message} <-
-             raw
-             |> Parser.parse_message()
-             |> Map.merge(attrs)
-             |> Map.merge(%{direction: :outbound, raw_text: raw, status: "sent", sent_at: DateTime.utc_now()})
-             |> create_message() do
-        {:ok, %{udp: sent, message: message}}
-      end
+    with {:ok, sent} <- Sender.send(raw, attrs_to_target_opts(attrs)),
+         {:ok, message} <-
+           parsed
+           |> Map.merge(attrs)
+           |> Map.merge(%{
+             direction: :outbound,
+             raw_text: display_text,
+             parsed_fields: parsed_fields,
+             status: "sent",
+             sent_at: DateTime.utc_now()
+           })
+           |> create_message() do
+      increment_tseq_after_successful_send()
+      {:ok, %{udp: sent, message: message}}
     end
   end
 
   def enqueue_transmit(raw, attrs \\ %{}) do
-    raw
-    |> Parser.parse_message()
+    parsed = Parser.parse_message(raw)
+    display_text = message_body_only(raw, parsed)
+    parsed_fields = parsed |> Map.get(:parsed_fields, %{}) |> ensure_map() |> Map.put("wire_raw", raw)
+
+    parsed
     |> Map.merge(attrs)
     |> Map.merge(%{
       direction: :outbound,
-      raw_text: raw,
+      raw_text: display_text,
+      parsed_fields: parsed_fields,
       status: "queued",
       transmit_attempts: 0,
       last_error: nil,
@@ -293,13 +303,16 @@ defmodule Tp.Aftn do
     case Builder.validate(type, params) do
       [] ->
         raw = Builder.build(type, params)
+        parsed = Parser.parse_message(raw)
+        display_text = message_body_only(raw, parsed)
+        parsed_fields = parsed |> Map.get(:parsed_fields, %{}) |> ensure_map() |> Map.put("wire_raw", raw)
 
-        raw
-        |> Parser.parse_message()
+        parsed
         |> Map.merge(attrs)
         |> Map.merge(%{
           direction: :outbound,
-          raw_text: raw,
+          raw_text: display_text,
+          parsed_fields: parsed_fields,
           status: "saved",
           transmit_attempts: 0,
           last_error: nil,
@@ -343,17 +356,22 @@ defmodule Tp.Aftn do
   defp do_send_queued(%Message{} = message) do
     attempts = (message.transmit_attempts || 0) + 1
 
-    case Sender.send(message.raw_text, target_opts(message)) do
+    case Sender.send(queued_wire_payload(message), target_opts(message)) do
       {:ok, _sent} ->
-        increment_tseq_after_success()
+        case update_message(message, %{
+               status: "sent",
+               sent_at: DateTime.utc_now(),
+               transmit_attempts: attempts,
+               last_error: nil,
+               next_attempt_at: nil
+             }) do
+          {:ok, _updated} = result ->
+            increment_tseq_after_successful_send()
+            result
 
-        update_message(message, %{
-          status: "sent",
-          sent_at: DateTime.utc_now(),
-          transmit_attempts: attempts,
-          last_error: nil,
-          next_attempt_at: nil
-        })
+          error ->
+            error
+        end
 
       {:error, reason} ->
         update_message(message, %{
@@ -365,21 +383,59 @@ defmodule Tp.Aftn do
     end
   end
 
-  defp increment_tseq_after_success do
-    case Settings.increment_tseq() do
-      {:ok, setting} ->
-        Logger.info("Transmit sequence incremented to #{setting.tseq}")
-        :ok
-
-      {:error, changeset} ->
-        Logger.error("Transmit sequence increment failed: #{inspect(changeset)}")
-        :ok
+  defp increment_tseq_after_successful_send do
+    case Tp.Settings.increment_tseq() do
+      {:ok, _setting} -> :ok
+      {:error, _reason} -> :ok
     end
   rescue
-    error ->
-      Logger.error("Transmit sequence increment failed: #{Exception.message(error)}")
-      :ok
+    _error -> :ok
   end
+
+  defp queued_wire_payload(%Message{} = message) do
+    case message.parsed_fields do
+      %{"wire_raw" => raw} when is_binary(raw) and raw != "" -> raw
+      %{wire_raw: raw} when is_binary(raw) and raw != "" -> raw
+      _ -> message.raw_text || ""
+    end
+  end
+
+  defp message_body_only(raw, parsed) do
+    body = Map.get(parsed, :raw_text)
+
+    cond do
+      is_binary(body) and String.trim(body) != "" -> String.trim(body)
+      true -> strip_aftn_envelope(raw)
+    end
+  end
+
+  defp strip_aftn_envelope(raw) do
+    raw = to_string(raw || "")
+
+    text =
+      case String.split(raw, <<2>>, parts: 2) do
+        [_header, rest] -> rest |> String.split(<<3>>, parts: 2) |> List.first()
+        _ -> raw
+      end
+
+    text
+    |> to_string()
+    |> String.replace(<<1>>, "")
+    |> String.replace(<<2>>, "")
+    |> String.replace(<<3>>, "")
+    |> String.replace(<<7>>, "")
+    |> String.replace(<<11>>, "")
+    |> String.replace("
+", "
+")
+    |> String.replace("
+", "
+")
+    |> String.trim()
+  end
+
+  defp ensure_map(value) when is_map(value), do: value
+  defp ensure_map(_value), do: %{}
 
   def create_message(attrs), do: %Message{} |> Message.changeset(attrs) |> Repo.insert()
   def create_inbound_message(attrs), do: Legacy.insert_inbound(attrs)
@@ -416,23 +472,14 @@ defmodule Tp.Aftn do
     direction = Keyword.get(opts, :direction)
     type = Keyword.get(opts, :type)
     q = Keyword.get(opts, :q)
-    cid = Keyword.get(opts, :cid)
-    seq_from = Keyword.get(opts, :seq_from)
-    seq_to = Keyword.get(opts, :seq_to)
-    text = Keyword.get(opts, :text)
     date_from = Keyword.get(opts, :date_from)
     date_to = Keyword.get(opts, :date_to)
-    filed_by = Keyword.get(opts, :filed_by)
 
     Message
     |> maybe_direction(direction)
     |> maybe_type(type)
     |> maybe_search(q)
-    |> maybe_cid(cid)
-    |> maybe_sequence_range(seq_from, seq_to)
-    |> maybe_text(text)
     |> maybe_date(date_from, date_to)
-    |> maybe_filed_by(filed_by)
   end
 
   defp legacy_read?(opts) do
@@ -452,45 +499,6 @@ defmodule Tp.Aftn do
   defp maybe_type(query, nil), do: query
   defp maybe_type(query, ""), do: query
   defp maybe_type(query, type), do: where(query, [m], m.message_type == ^String.upcase(type))
-
-
-  defp maybe_cid(query, nil), do: query
-  defp maybe_cid(query, ""), do: query
-
-  defp maybe_cid(query, cid) do
-    term = "%#{String.downcase(to_string(cid))}%"
-    where(query, [m], like(fragment("LOWER(?)", m.cid), ^term))
-  end
-
-  defp maybe_sequence_range(query, seq_from, seq_to) when seq_from in [nil, ""] and seq_to in [nil, ""], do: query
-
-  defp maybe_sequence_range(query, seq_from, seq_to) do
-    from_seq = parse_int(seq_from, nil) || parse_int(seq_to, nil)
-    to_seq = parse_int(seq_to, nil) || parse_int(seq_from, nil)
-
-    if from_seq && to_seq do
-      {from_seq, to_seq} = if from_seq > to_seq, do: {to_seq, from_seq}, else: {from_seq, to_seq}
-      where(query, [m], fragment("CAST(? AS UNSIGNED)", m.sequence_no) >= ^from_seq and fragment("CAST(? AS UNSIGNED)", m.sequence_no) <= ^to_seq)
-    else
-      query
-    end
-  end
-
-  defp maybe_text(query, nil), do: query
-  defp maybe_text(query, ""), do: query
-
-  defp maybe_text(query, text) do
-    term = "%#{String.downcase(to_string(text))}%"
-    where(query, [m], like(fragment("LOWER(?)", m.raw_text), ^term))
-  end
-
-  defp maybe_filed_by(query, nil), do: query
-  defp maybe_filed_by(query, ""), do: query
-
-  defp maybe_filed_by(query, filed_by) do
-    term = "%#{String.downcase(to_string(filed_by))}%"
-    where(query, [m], like(fragment("LOWER(?)", m.filed_by), ^term))
-  end
 
   defp maybe_date(query, date_from, date_to) when date_from in [nil, ""] and date_to in [nil, ""], do: query
 

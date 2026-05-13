@@ -53,6 +53,7 @@ defmodule TpWeb.Views do
         </aside>
       </main>
       #{status_panel(events, settings)}
+      #{status_footer_script()}
       #{message_modal_script()}
       #{auto_uppercase_script()}
     </body>
@@ -111,6 +112,7 @@ defmodule TpWeb.Views do
         </section>
       </main>
       #{status_panel([], nil)}
+      #{status_footer_script()}
       #{header_clock_script()}
       #{auto_uppercase_script()}
     </body>
@@ -195,11 +197,11 @@ defmodule TpWeb.Views do
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}.actions{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;align-items:center;margin:-12px -12px 12px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10)}.subhead{background:#f0f3f6;border:1px solid #e4e8ee;border-radius:4px;padding:8px;margin:4px 0 10px;font-size:13px;color:#435466}
         .compose-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start}.compose-main{min-width:0}.compose-side{position:sticky;top:12px;min-width:0}.compose-side .udp-monitor{margin:0;background:white;border:1px solid #d8dee6;border-radius:8px;overflow:hidden;box-shadow:0 12px 28px rgba(20,50,74,.08)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee;background:#fbfcfd}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.icon-button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.udp-monitor-body{padding:9px;max-height:calc(100vh - 178px);overflow:auto}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:150px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.2}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px;background:#fbfcfd}
         .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;min-width:0;font-size:13px;font-weight:700;cursor:pointer}.amo-tool i{font-size:16px}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
-        .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
+        .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.tx-id-display{min-height:34px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;background:#f0f3f6;color:#14324a;padding:7px 9px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:900;display:flex;align-items:center}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
         .alr-scroll{max-height:520px;overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.equipment-control .equipment-open{width:40px;flex:0 0 40px;background:white;color:#14324a;border:1px solid #cbd3dc;border-left:0;border-radius:0 4px 4px 0;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-control .equipment-open:hover{background:#edf4fa}.equipment-control input{border-top-right-radius:0;border-bottom-right-radius:0}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
         .equipment-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(10,18,28,.52);align-items:center;justify-content:center;padding:16px}.equipment-modal.open{display:flex}.equipment-card{width:min(760px,96vw);max-height:90vh;background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden}.equipment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.equipment-head strong{font-size:14px}.equipment-x{background:transparent;color:white;border:0;border-radius:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-body{padding:12px;overflow:auto}.equipment-group{border:1px solid #e4e8ee;border-radius:6px;margin-bottom:10px;overflow:hidden}.equipment-group-title{background:#f0f3f6;color:#14324a;font-size:12px;font-weight:900;text-transform:uppercase;padding:7px 9px}.equipment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.equipment-row{display:grid;grid-template-columns:22px 48px 1fr;gap:7px;align-items:center;margin:0;padding:7px 9px;border-top:1px solid #edf0f3;cursor:pointer;color:#17202a;font-size:12px;font-weight:600}.equipment-row:nth-child(odd){border-right:1px solid #edf0f3}.equipment-row:hover{background:#edf4fa}.equipment-row input{width:auto}.equipment-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:900;color:#14324a}.equipment-desc{font-weight:600;color:#435466}.equipment-notes{background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:8px 10px;color:#5f4400;font-size:12px}.equipment-notes p{margin:0 0 5px}.equipment-notes p:last-child{margin-bottom:0}.equipment-actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-top:1px solid #e4e8ee;flex-wrap:wrap}
         .rcf-body{border:1px solid #d8dee6;background:#fbfcfd;border-radius:6px;padding:12px;margin-top:10px}.rcf-row-main{grid-template-columns:1.25fr 1.2fr 1.1fr .8fr .8fr}.rcf-message-type input:first-of-type{max-width:64px}.rcf-message-type input:not(:first-of-type){min-width:0}.rcf-radio textarea{min-height:74px}.rcf-filled{max-width:260px;margin-top:10px}
-        main{max-width:1560px;padding:14px}form{padding:10px}h2{font-size:15px;padding:11px 14px}button{padding:8px 12px;font-size:13px}textarea,input,select{padding:7px 9px;font-size:13px;min-height:34px}textarea{min-height:78px}label{font-size:12px;margin-bottom:4px}.field{margin-bottom:8px}.grid2,.grid4{gap:8px}.toolbar{gap:8px;margin-bottom:10px}.toolbar a{font-size:13px;padding:7px 10px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:8px;padding:8px 10px}.aftn-tool,.amo-tool{gap:7px;padding:8px 11px;font-size:13px}.aftn-tool i,.amo-tool i{font-size:16px}.aftn-title,.amo-title{font-size:15px;padding:11px 14px}.aftn-title i,.amo-title i{font-size:18px}.aftn-body,.amo-body{padding:12px}.aftn-required-note{font-size:12px;margin-bottom:9px}.aftn-topline{grid-template-columns:170px;gap:9px;margin-bottom:9px}.aftn-card,.rcf-body,.form-band{padding:10px;margin-bottom:10px}.aftn-card-title{font-size:12px;margin-bottom:8px}.aftn-address-row{grid-template-columns:90px 1fr;gap:12px}.aftn-address-grid,.address-grid{gap:6px}.aftn-address-grid input,.address-grid input{padding:6px 7px;min-height:33px}.aftn-meta{grid-template-columns:145px 155px 1fr 102px;gap:8px;margin-top:9px}.aftn-bell{height:34px;display:flex;align-items:center;gap:7px;font-weight:800;color:#14324a}.aftn-bell i{font-size:16px;color:#b26a00}.time-control{gap:6px}.time-button{width:36px}.alr-scroll{max-height:calc(100vh - 190px)}.alr-page{padding:10px}.alr-page-title{font-size:13px;margin-bottom:8px}.alr-grid{gap:8px}.alr-row{gap:8px}.alr-checks{gap:9px;min-height:34px}.alr-checks label,.alr-inline-check{font-size:13px}.alr-text{min-height:58px}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-mark{min-width:26px;padding:0 7px}.rcf-radio textarea{min-height:70px}.rcf-filled{margin-top:7px}.aftn-textarea{min-height:285px;font-size:14px}.amo-footer,.aftn-footer{margin-top:10px;padding-top:10px}.amo-filled input,.aftn-filled input{height:34px}
+        main{max-width:1560px;padding:14px}form{padding:10px}h2{font-size:15px;padding:11px 14px}button{padding:8px 12px;font-size:13px}textarea,input,select{padding:7px 9px;font-size:13px;min-height:34px}textarea{min-height:78px}label{font-size:12px;margin-bottom:4px}.field{margin-bottom:8px}.grid2,.grid4{gap:8px}.toolbar{gap:8px;margin-bottom:10px}.toolbar a{font-size:13px;padding:7px 10px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:8px;padding:8px 10px}.aftn-tool,.amo-tool{gap:7px;padding:8px 11px;font-size:13px}.aftn-tool i,.amo-tool i{font-size:16px}.aftn-title,.amo-title{font-size:15px;padding:11px 14px}.aftn-title i,.amo-title i{font-size:18px}.aftn-body,.amo-body{padding:12px}.aftn-required-note{font-size:12px;margin-bottom:9px}.aftn-topline{grid-template-columns:170px;gap:9px;margin-bottom:9px}.tx-id-display{min-height:34px;padding:7px 9px}.aftn-card,.rcf-body,.form-band{padding:10px;margin-bottom:10px}.aftn-card-title{font-size:12px;margin-bottom:8px}.aftn-address-row{grid-template-columns:90px 1fr;gap:12px}.aftn-address-grid,.address-grid{gap:6px}.aftn-address-grid input,.address-grid input{padding:6px 7px;min-height:33px}.aftn-meta{grid-template-columns:145px 155px 1fr 102px;gap:8px;margin-top:9px}.aftn-bell{height:34px;display:flex;align-items:center;gap:7px;font-weight:800;color:#14324a}.aftn-bell i{font-size:16px;color:#b26a00}.time-control{gap:6px}.time-button{width:36px}.alr-scroll{max-height:calc(100vh - 190px)}.alr-page{padding:10px}.alr-page-title{font-size:13px;margin-bottom:8px}.alr-grid{gap:8px}.alr-row{gap:8px}.alr-checks{gap:9px;min-height:34px}.alr-checks label,.alr-inline-check{font-size:13px}.alr-text{min-height:58px}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-mark{min-width:26px;padding:0 7px}.rcf-radio textarea{min-height:70px}.rcf-filled{margin-top:7px}.aftn-textarea{min-height:285px;font-size:14px}.amo-footer,.aftn-footer{margin-top:10px;padding-top:10px}.amo-filled input,.aftn-filled input{height:34px}
         @media(max-width:900px){.grid2,.grid4,.send-row,.header-meta{grid-template-columns:1fr}}
         @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup,.rcf-row-main{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
         @media(max-width:1100px){.compose-layout{grid-template-columns:1fr}.compose-side{position:static}.udp-monitor-body{max-height:360px}}
@@ -218,6 +220,7 @@ defmodule TpWeb.Views do
         </div>
       </main>
       #{status_panel([], nil)}
+      #{status_footer_script()}
       #{header_clock_script()}
       #{compose_page_script()}
       #{compose_udp_monitor_script()}
@@ -286,6 +289,7 @@ defmodule TpWeb.Views do
         </section>
       </main>
       #{status_panel([], nil)}
+      #{status_footer_script()}
       #{message_modal_script()}
       #{auto_uppercase_script()}
     </body>
@@ -320,6 +324,7 @@ defmodule TpWeb.Views do
         <p>Setelah migration selesai, refresh halaman dashboard.</p>
       </main>
       #{status_panel([], nil)}
+      #{status_footer_script()}
       #{header_clock_script()}
       #{auto_uppercase_script()}
     </body>
@@ -426,6 +431,7 @@ defmodule TpWeb.Views do
         </form>
       </main>
       #{status_panel([], nil)}
+      #{status_footer_script()}
       #{header_clock_script()}
       #{auto_uppercase_script()}
     </body>
@@ -643,6 +649,75 @@ defmodule TpWeb.Views do
         }
         updateHeaderTime();
         window.setInterval(updateHeaderTime, 1000);
+      })();
+    </script>
+    """
+  end
+
+  defp status_footer_script do
+    """
+    <script>
+      (function () {
+        function byId(id) { return document.getElementById(id); }
+        function setText(id, value) {
+          var node = byId(id);
+          if (!node || value == null) return;
+          node.textContent = value;
+        }
+        function updateQueueCard(queueCount) {
+          var card = byId('status-queue-card');
+          if (!card || !card.classList || queueCount == null) return;
+          var count = parseInt(queueCount, 10);
+          card.classList.toggle('warn', !isNaN(count) && count > 0);
+          card.classList.toggle('ok', isNaN(count) || count <= 0);
+        }
+        function updateCurrentCidSeq(payload) {
+          if (!payload || payload.cid == null || payload.tseq == null) return;
+          var value = String(payload.cid) + String(payload.tseq);
+          Array.prototype.forEach.call(document.querySelectorAll('[data-current-cid-seq]'), function (node) {
+            if (!node) return;
+            if (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA') node.value = value;
+            else node.textContent = value;
+          });
+        }
+        function updateLink(payload) {
+          if (!payload) return;
+          var up = payload.link_up === true || payload.link_state === 'Established' || payload.link_state === 'established';
+          var pill = byId('status-link-pill');
+          if (pill && pill.classList) {
+            pill.classList.toggle('up', up);
+            pill.classList.toggle('down', !up);
+          }
+          setText('status-link-value', payload.link_state || (up ? 'Established' : 'Down'));
+        }
+        function pollFooterStatus() {
+          fetch('/api/status', {
+            method: 'GET',
+            headers: {'Accept': 'application/json'},
+            credentials: 'same-origin',
+            cache: 'no-store'
+          })
+            .then(function (response) {
+              if (!response.ok) throw new Error('status failed');
+              return response.json();
+            })
+            .then(function (payload) {
+              if (!payload) return;
+              setText('status-tseq-value', payload.tseq);
+              setText('status-queue-count', payload.queue_count);
+              setText('status-cid-value', payload.cid);
+              setText('status-digit-seq-value', payload.digit_seq);
+              setText('status-local-value', payload.local);
+              setText('status-destination-value', payload.destination);
+              setText('status-check-value', payload.check || payload.link_reason);
+              updateQueueCard(payload.queue_count);
+              updateCurrentCidSeq(payload);
+              updateLink(payload);
+            })
+            .catch(function () {});
+        }
+        pollFooterStatus();
+        window.setInterval(pollFooterStatus, 1000);
       })();
     </script>
     """
@@ -2183,7 +2258,7 @@ defmodule TpWeb.Views do
         <div class="status-summary">
           <div class="status-card #{link_card}">
             <div class="status-label">Link</div>
-            <div class="status-value"><span class="status-pill #{link_pill}"><span class="status-dot"></span>#{html(link_state)}</span></div>
+            <div class="status-value"><span id="status-link-pill" class="status-pill #{link_pill}"><span class="status-dot"></span><span id="status-link-value">#{html(link_state)}</span></span></div>
           </div>
           <div class="status-card info">
             <div class="status-label">UDP</div>
@@ -2191,19 +2266,19 @@ defmodule TpWeb.Views do
           </div>
           <div class="status-card info">
             <div class="status-label">Tseq</div>
-            <div class="status-value">#{html(settings.tseq)}</div>
+            <div id="status-tseq-value" class="status-value">#{html(settings.tseq)}</div>
           </div>
-          <div class="status-card #{queue_card}">
+          <div id="status-queue-card" class="status-card #{queue_card}">
             <div class="status-label">Queue</div>
             <div id="status-queue-count" class="status-value">#{html(queue_count)}</div>
           </div>
           <div class="status-card">
             <div class="status-label">CID</div>
-            <div class="status-value">#{html(settings.cid)}</div>
+            <div id="status-cid-value" class="status-value">#{html(settings.cid)}</div>
           </div>
           <div class="status-card">
             <div class="status-label">Digit Seq</div>
-            <div class="status-value">#{html(settings.digit_seq)}</div>
+            <div id="status-digit-seq-value" class="status-value">#{html(settings.digit_seq)}</div>
           </div>
           <div class="status-card">
             <div class="status-label">Free</div>
@@ -2211,15 +2286,15 @@ defmodule TpWeb.Views do
           </div>
           <div class="status-card info wide">
             <div class="status-label">Local</div>
-            <div class="status-value">0.0.0.0:#{html(local_udp_port())}</div>
+            <div id="status-local-value" class="status-value">0.0.0.0:#{html(local_udp_port())}</div>
           </div>
           <div class="status-card info wide">
             <div class="status-label">Destination</div>
-            <div class="status-value">#{html(settings.destination_ip_address)}:#{html(settings.port)}</div>
+            <div id="status-destination-value" class="status-value">#{html(settings.destination_ip_address)}:#{html(settings.port)}</div>
           </div>
           <div class="status-card #{link_card}">
             <div class="status-label">Check</div>
-            <div class="status-value">#{html(check_text)}</div>
+            <div id="status-check-value" class="status-value">#{html(check_text)}</div>
           </div>
           <div class="status-actions"><a href="/settings">Setting</a></div>
         </div>
@@ -2837,6 +2912,7 @@ defmodule TpWeb.Views do
         <input type="hidden" name="compose_type" value="AFTN_FREE">
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="AFTN_FREE">
+        <input id="aftn-send-at" type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
         <div class="aftn-toolbar">
           <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
           <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
@@ -2846,12 +2922,6 @@ defmodule TpWeb.Views do
         </div>
         <div class="aftn-body">
           <div class="aftn-required-note">Blue field indicates required field.</div>
-          <div class="aftn-topline">
-            <div class="field required">
-              <label>TX ID / CID Seq</label>
-              <input id="aftn-send-at" name="transmission_id" value="#{html(current_cid_seq())}" maxlength="8">
-            </div>
-          </div>
           <div class="aftn-card">
             <div class="aftn-card-title">AFTN Header</div>
             <div class="aftn-address-row">
@@ -3536,22 +3606,7 @@ defmodule TpWeb.Views do
         }
 
         function pollStatus() {
-          var queue = byId('status-queue-count');
-          if (!queue) return;
-
-          fetch('/api/status', {
-            method: 'GET',
-            headers: {'Accept': 'application/json'},
-            credentials: 'same-origin'
-          })
-            .then(function (response) {
-              if (!response.ok) throw new Error('status failed');
-              return response.json();
-            })
-            .then(function (payload) {
-              if (payload && payload.queue_count != null) queue.textContent = payload.queue_count;
-            })
-            .catch(function () {});
+          // Footer status is handled by status_footer_script() on every page.
         }
 
         function openModal() {

@@ -29,11 +29,10 @@ defmodule TpWeb.Router do
 
   get "/compose" do
     selected = Map.get(conn.params, "form", "AFTN_FREE")
-    monitor_items = Tp.Udp.Monitor.drain()
 
     conn
     |> put_resp_content_type("text/html")
-    |> send_resp(200, TpWeb.Views.compose_page(notice(conn.params), selected, conn.params, monitor_items))
+    |> send_resp(200, TpWeb.Views.compose_page(notice(conn.params), selected, conn.params))
   end
 
   get "/queue" do
@@ -177,16 +176,40 @@ defmodule TpWeb.Router do
   end
 
   get "/api/status" do
-    case safe_queue_count() do
-      {:ok, queue_count} ->
-        conn
-        |> put_resp_content_type("application/json")
-        |> send_resp(200, Jason.encode!(%{queue_count: queue_count}))
+    with {:ok, queue_count} <- safe_queue_count(),
+         {:ok, setting} <- safe_settings() do
+      link = Tp.LinkMonitor.status()
+      link_up? = link.state == :up
+      link_state = if link_up?, do: "Established", else: "Down"
+      link_reason = if link_up?, do: "established", else: (link.reason || "down")
 
+      payload = %{
+        queue_count: queue_count,
+        tseq: setting.tseq,
+        cid: setting.cid,
+        digit_seq: setting.digit_seq,
+        local: "0.0.0.0:#{setting.local_udp_port}",
+        destination: "#{setting.destination_ip_address}:#{setting.port}",
+        check: link_reason,
+        link_state: link_state,
+        link_reason: link_reason,
+        link_up: link_up?
+      }
+
+      conn
+      |> put_resp_content_type("application/json")
+      |> put_resp_header("cache-control", "no-store")
+      |> send_resp(200, Jason.encode!(payload))
+    else
       {:error, :database_not_migrated} ->
         conn
         |> put_resp_content_type("application/json")
         |> send_resp(503, Jason.encode!(%{error: "database_not_migrated", run: "mix ecto.migrate"}))
+
+      _error ->
+        conn
+        |> put_resp_content_type("application/json")
+        |> send_resp(500, Jason.encode!(%{error: "status_unavailable"}))
     end
   end
 
@@ -376,13 +399,8 @@ defmodule TpWeb.Router do
       direction: Map.get(params, "direction", ""),
       type: Map.get(params, "type", ""),
       q: Map.get(params, "q", ""),
-      cid: Map.get(params, "cid", ""),
-      seq_from: Map.get(params, "seq_from", ""),
-      seq_to: Map.get(params, "seq_to", ""),
-      text: Map.get(params, "text", ""),
       date_from: Map.get(params, "date_from", ""),
       date_to: Map.get(params, "date_to", ""),
-      filed_by: Map.get(params, "filed_by", ""),
       page: Map.get(params, "page", "1"),
       page_size: Map.get(params, "page_size", "15"),
       after_id: Map.get(params, "after_id", ""),
@@ -447,7 +465,7 @@ defmodule TpWeb.Router do
   defp page_url(opts, page, page_size, cursor, history) do
     base =
       opts
-      |> Keyword.take([:direction, :type, :q, :cid, :seq_from, :seq_to, :text, :date_from, :date_to, :filed_by])
+      |> Keyword.take([:direction, :type, :q, :date_from, :date_to])
       |> Keyword.put(:page, page)
       |> Keyword.put(:page_size, page_size)
       |> Enum.reject(fn {_key, value} -> is_nil(value) or value == "" end)
@@ -499,7 +517,7 @@ defmodule TpWeb.Router do
   defp filters_to_path(filters) do
     params =
       filters
-      |> Keyword.take([:direction, :type, :q, :cid, :seq_from, :seq_to, :text, :date_from, :date_to, :filed_by, :page_size])
+      |> Keyword.take([:direction, :type, :q, :date_from, :date_to, :page_size])
       |> Keyword.put(:page, 1)
       |> Enum.reject(fn {_key, value} -> is_nil(value) or value == "" end)
 
@@ -619,9 +637,9 @@ defmodule TpWeb.Router do
 
   defp redirect_after_compose(%{"return_to" => "compose"} = params, type, action) do
     form = Map.get(params, "return_form", type)
-    notice = compose_success_notice(type, action)
+    verb = if action == "save", do: "saved", else: "queued"
     clear = if action == "send_clear", do: "&clear=1", else: ""
-    "/compose?form=#{URI.encode_www_form(form)}&info=#{URI.encode_www_form(notice)}#{clear}"
+    "/compose?form=#{URI.encode_www_form(form)}&info=#{URI.encode_www_form("#{redirect_type(type)} #{verb}")}#{clear}"
   end
 
   defp redirect_after_compose(_params, type, _action) do
@@ -636,9 +654,6 @@ defmodule TpWeb.Router do
   defp error_redirect(_params, _type, message) do
     "/?error=#{URI.encode_www_form(message)}"
   end
-
-  defp compose_success_notice(type, "save"), do: "#{redirect_type(type)} Message saved"
-  defp compose_success_notice(type, _action), do: "#{redirect_type(type)} Message queued for sending"
 
   defp redirect_type("AFTN_FREE"), do: "FREE"
   defp redirect_type(type), do: type
