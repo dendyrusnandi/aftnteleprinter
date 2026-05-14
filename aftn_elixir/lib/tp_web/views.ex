@@ -12,7 +12,7 @@ defmodule TpWeb.Views do
         body{margin:0;padding:56px 0 62px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{position:fixed;top:0;left:0;right:0;z-index:900;height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px;box-shadow:0 6px 18px rgba(20,50,74,.18)}
-        header a{color:white}#{header_time_css()}.top-nav{display:flex;align-items:center;gap:16px}.top-menu{position:relative}.top-menu summary{cursor:pointer;color:white;font-weight:600;list-style:none;display:flex;align-items:center;gap:6px}.top-menu summary::-webkit-details-marker{display:none}.menu-icon{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.top-submenu{position:absolute;top:28px;left:0;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.16);z-index:20;min-width:260px;padding:6px}.top-submenu a{display:block;color:#17202a;padding:8px 10px;border-radius:4px;white-space:nowrap}.top-submenu a:hover{background:#edf4fa;text-decoration:none}.top-direct-link{color:white;font-weight:600;display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap}.top-direct-link:hover{color:#d8e8f3;text-decoration:none}
+        header a{color:white}#{header_time_css()}.top-nav{display:flex;align-items:center;gap:16px}.top-menu{position:relative}.top-menu summary{cursor:pointer;color:white;font-weight:600;list-style:none;display:flex;align-items:center;gap:6px}.top-menu summary::-webkit-details-marker{display:none}.menu-icon{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.top-submenu{position:absolute;top:28px;left:0;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.16);z-index:20;min-width:260px;padding:6px}.top-submenu a{display:block;color:#17202a;padding:8px 10px;border-radius:4px;white-space:nowrap}.top-submenu a:hover{background:#edf4fa;text-decoration:none}.compose-submenu{display:grid;grid-template-columns:1fr 1fr;min-width:520px}.compose-sep{grid-column:1/-1;height:0;border:none;border-top:1px solid #e4e8ee;margin:3px 0}.top-direct-link{color:white;font-weight:600;display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap}.top-direct-link:hover{color:#d8e8f3;text-decoration:none}
         main{display:grid;grid-template-columns:1fr 360px;gap:16px;padding:16px}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;overflow:hidden}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
@@ -166,7 +166,7 @@ defmodule TpWeb.Views do
         #{pdf_row("Filed By", message.filed_by)}
       </table>
       <pre>#{html(visible_aftn(message.raw_text))}</pre>
-      <script>window.addEventListener('load', function () { window.setTimeout(function () { window.print(); }, 250); });</script>
+      <script>window.addEventListener('load', function ( ) { window.setTimeout(function ( ) { window.print(); }, 250); });</script>
     </body>
     </html>
     """
@@ -343,7 +343,7 @@ defmodule TpWeb.Views do
           <li>Tables have not been created &mdash; run migrations after MySQL is up:</li>
         </ul>
         <div class="migrate-box">
-          <h2>Run migrations (once, after MySQL is running):</h2>
+          <h2>Run migrations ( once, after MySQL is running):</h2>
           <pre>cd aftn_elixir\nmix ecto.migrate</pre>
         </div>
       </main>
@@ -358,7 +358,7 @@ defmodule TpWeb.Views do
 
   def test_message_page(notice \\ nil, settings \\ nil, recent \\ []) do
     settings = settings || Tp.Settings.default_setting()
-    origin   = (settings.originator || "WAJJYFYC") |> to_string() |> String.upcase()
+    origin   = ( settings.originator || "WAJJYFYC") |> to_string() |> String.upcase()
 
     """
     <!doctype html>
@@ -462,7 +462,7 @@ defmodule TpWeb.Views do
       #{status_footer_script()}
       #{auto_uppercase_script()}
       <script>
-        (function () {
+        ( function ( ) {
           var timer    = null;
           var sent     = 0;
           var target   = 0;
@@ -473,18 +473,18 @@ defmodule TpWeb.Views do
           var svcOrigEl  = document.getElementById('svc-originator');
 
           function setStatus(msg, cls) {
-            if (!statusEl) return;
+            if ( !statusEl) return;
             statusEl.textContent = msg;
-            statusEl.className = 'tst-status' + (cls ? ' ' + cls : '');
+            statusEl.className = 'tst-status' + ( cls ? ' ' + cls : '');
           }
 
           function clearTimer() {
-            if (timer) { clearInterval(timer); timer = null; }
+            if ( timer) { clearInterval(timer); timer = null; }
           }
 
           function syncSvcOrigin() {
             var orig = document.getElementById('tst-originator');
-            if (orig && svcOrigEl) svcOrigEl.value = orig.value.trim().toUpperCase();
+            if ( orig && svcOrigEl) svcOrigEl.value = orig.value.trim().toUpperCase();
           }
 
           function readData() {
@@ -499,8 +499,8 @@ defmodule TpWeb.Views do
           }
 
           function validate(data) {
-            if (!data.address    || data.address.length    !== 8 || !/^[A-Z]{8}$/.test(data.address))    return 'Address must be 8 letters (A-Z)';
-            if (!data.originator || data.originator.length !== 8 || !/^[A-Z]{8}$/.test(data.originator)) return 'Originator must be 8 letters (A-Z)';
+            if ( !data.address    || data.address.length    !== 8 || !/^[A-Z]{8}$/.test(data.address))    return 'Address must be 8 letters ( A-Z)';
+            if ( !data.originator || data.originator.length !== 8 || !/^[A-Z]{8}$/.test(data.originator)) return 'Originator must be 8 letters ( A-Z)';
             return null;
           }
 
@@ -513,23 +513,23 @@ defmodule TpWeb.Views do
                     '&originator=' + encodeURIComponent(data.originator) +
                     '&format='     + encodeURIComponent(data.format)
             })
-            .then(function (r) { return r.json(); })
-            .then(function (j) { cb(j.ok ? null : (j.error || 'unknown error')); })
-            .catch(function () { cb('Network error'); });
+            .then(function ( r) { return r.json(); })
+            .then(function ( j) { cb(j.ok ? null : ( j.error || 'unknown error')); })
+            .catch(function ( ) { cb('Network error'); });
           }
 
-          if (stopRadio) {
-            stopRadio.addEventListener('change', function () {
-              if (stopRadio.checked) { clearTimer(); setStatus('Stopped. Sent: ' + sent + ' message(s).', 'ok'); }
+          if ( stopRadio) {
+            stopRadio.addEventListener('change', function ( ) {
+              if ( stopRadio.checked) { clearTimer(); setStatus('Stopped. Sent: ' + sent + ' message(s).', 'ok'); }
             });
           }
 
-          if (btnOK) {
-            btnOK.addEventListener('click', function () {
+          if ( btnOK) {
+            btnOK.addEventListener('click', function ( ) {
               var stateEl = document.querySelector('[name="state"]:checked');
-              if (!stateEl) { setStatus('Please select State (Start or Stop)', 'err'); return; }
+              if ( !stateEl) { setStatus('Please select State ( Start or Stop)', 'err'); return; }
 
-              if (stateEl.value === 'stop') {
+              if ( stateEl.value === 'stop') {
                 clearTimer();
                 setStatus('Stopped. Sent: ' + sent + ' message(s).', 'ok');
                 return;
@@ -537,34 +537,34 @@ defmodule TpWeb.Views do
 
               var data = readData();
               var err  = validate(data);
-              if (err) { setStatus(err, 'err'); return; }
+              if ( err) { setStatus(err, 'err'); return; }
 
               var fmt = document.querySelector('[name="format"]:checked');
-              if (!fmt) { setStatus('Select a test format', 'err'); return; }
+              if ( !fmt) { setStatus('Select a test format', 'err'); return; }
 
               var t = parseInt((document.getElementById('tst-times') || {value:'1'}).value, 10);
-              target = (isNaN(t) || t < 0) ? 1 : t;
+              target = ( isNaN(t) || t < 0) ? 1 : t;
               sent   = 0;
 
               clearTimer();
               syncSvcOrigin();
-              setStatus(target > 0 ? 'Sending 1/' + target + '...' : 'Sending (continuous)...', '');
+              setStatus(target > 0 ? 'Sending 1/' + target + '...' : 'Sending ( continuous)...', '');
 
               function tick() {
-                sendOne(data, function (e) {
-                  if (e) { clearTimer(); setStatus('Error: ' + e, 'err'); return; }
+                sendOne(data, function ( e) {
+                  if ( e) { clearTimer(); setStatus('Error: ' + e, 'err'); return; }
                   sent++;
-                  if (target > 0) {
+                  if ( target > 0) {
                     setStatus('Sending ' + sent + '/' + target + '...', '');
-                    if (sent >= target) { clearTimer(); setStatus('Done. Sent ' + sent + ' message(s).', 'ok'); }
+                    if ( sent >= target) { clearTimer(); setStatus('Done. Sent ' + sent + ' message(s).', 'ok'); }
                   } else {
-                    setStatus('Sending (continuous) — sent: ' + sent, '');
+                    setStatus('Sending ( continuous) — sent: ' + sent, '');
                   }
                 });
               }
 
               tick();
-              if (target !== 1) timer = setInterval(tick, 1000);
+              if ( target !== 1) timer = setInterval(tick, 1000);
             });
           }
         })();
@@ -629,7 +629,7 @@ defmodule TpWeb.Views do
     <body>
       <header>
         <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
-        <h1 class="ac-title"><i class="bi bi-book"></i><span>ICAO Abbreviations and Codes (PANS-ABC)</span></h1>
+        <h1 class="ac-title"><i class="bi bi-book"></i><span>ICAO Abbreviations and Codes ( PANS-ABC)</span></h1>
         #{header_time()}
       </header>
       <main>
@@ -669,10 +669,10 @@ defmodule TpWeb.Views do
       #{status_panel([], nil)}
       #{header_clock_script()}
       <script>
-        (function(){
+        ( function(){
           var gi = document.getElementById('abbr-goto');
-          if (gi) gi.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
+          if ( gi) gi.addEventListener('keydown', function(e) {
+            if ( e.key === 'Enter') {
               var p = parseInt(gi.value, 10) || 1;
               var params = new URLSearchParams(window.location.search || '');
               params.set('page', p);
@@ -810,10 +810,10 @@ defmodule TpWeb.Views do
       #{status_panel([], nil)}
       #{header_clock_script()}
       <script>
-        (function(){
+        ( function(){
           var gi = document.getElementById('warn-goto');
-          if (gi) gi.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
+          if ( gi) gi.addEventListener('keydown', function(e) {
+            if ( e.key === 'Enter') {
               var p = parseInt(gi.value, 10) || 1;
               var params = new URLSearchParams(window.location.search || '');
               params.set('page', p);
@@ -882,7 +882,7 @@ defmodule TpWeb.Views do
     <body>
       <header>
         <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
-        <h1 class="ac-title"><i class="bi bi-card-list"></i><span>Aircraft Registration (REG/)</span></h1>
+        <h1 class="ac-title"><i class="bi bi-card-list"></i><span>Aircraft Registration ( REG/)</span></h1>
         #{header_time()}
       </header>
       <main>
@@ -976,12 +976,12 @@ defmodule TpWeb.Views do
       </main>
       #{status_panel([], nil)}#{header_clock_script()}#{status_footer_script()}#{auto_uppercase_script()}
       <script>
-        (function(){
+        ( function(){
           var sel=null,selId=null;
           var flds={type18:'reg-type18',type9b:'reg-type9b',type10a:'reg-type10a',type10b:'reg-type10b',
                     opr:'reg-type18Opr',pbn:'reg-type18Pbn',sel:'reg-type18Sel'};
           function g(id){return document.getElementById(id);}
-          function v(id){return (g(id)||{value:''}).value.trim().toUpperCase();}
+          function v(id){return ( g(id)||{value:''}).value.trim().toUpperCase();}
           function setRow(row){
             if(sel) sel.classList.remove('selected');
             sel=row; selId=row?row.getAttribute('data-id'):null;
@@ -1129,7 +1129,7 @@ defmodule TpWeb.Views do
             <table>
               <thead><tr>
                 <th style="width:80px">DEP AD</th><th style="width:80px">DEST AD</th>
-                <th>ROUTE</th><th>Addresses (1–8)</th><th style="width:36px"></th>
+                <th>ROUTE</th><th>Addresses ( 1–8)</th><th style="width:36px"></th>
               </tr></thead>
               <tbody id="rte-tbody">#{rows}</tbody>
             </table>
@@ -1171,7 +1171,7 @@ defmodule TpWeb.Views do
             <div class="ac-field" style="margin-bottom:8px"><span class="ac-label">ROUTE</span>
               <textarea class="rte-textarea" id="rte-route" rows="2" placeholder="e.g. W1 W2 DCT POINT"></textarea>
             </div>
-            <div class="ac-field"><span class="ac-label">ADDRESS (1 – 21)</span>
+            <div class="ac-field"><span class="ac-label">ADDRESS ( 1 – 21)</span>
               <div class="rte-addr-grid" id="rte-addr-grid">#{addr_inputs.("af")}</div>
             </div>
             <div style="margin-top:10px;display:flex;gap:6px">
@@ -1195,7 +1195,7 @@ defmodule TpWeb.Views do
       </main>
       #{status_panel([], nil)}#{header_clock_script()}#{status_footer_script()}#{auto_uppercase_script()}
       <script>
-        (function(){
+        ( function(){
           var sel=null,selId=null;
           function g(id){return document.getElementById(id);}
           function v(id){var e=g(id);return e?e.value.trim().toUpperCase():'';}
@@ -1461,7 +1461,7 @@ defmodule TpWeb.Views do
       #{status_footer_script()}
       #{auto_uppercase_script()}
       <script>
-        (function () {
+        ( function ( ) {
           var selRow = null;
           var selId  = null;
 
@@ -1470,70 +1470,70 @@ defmodule TpWeb.Views do
           var locEl   = document.getElementById('loc-location');
 
           function selectRow(row) {
-            if (selRow) selRow.classList.remove('selected');
+            if ( selRow) selRow.classList.remove('selected');
             selRow = row;
             selId  = row ? row.getAttribute('data-id') : null;
-            if (row) {
+            if ( row) {
               row.classList.add('selected');
-              if (indEl) indEl.value = row.getAttribute('data-indicator') || '';
-              if (locEl) locEl.value = row.getAttribute('data-location')  || '';
+              if ( indEl) indEl.value = row.getAttribute('data-indicator') || '';
+              if ( locEl) locEl.value = row.getAttribute('data-location')  || '';
             }
           }
 
-          if (tbody) {
-            tbody.addEventListener('click', function (e) {
+          if ( tbody) {
+            tbody.addEventListener('click', function ( e) {
               var row = e.target && e.target.closest ? e.target.closest('tr.ac-row') : null;
-              if (row && !e.target.closest('form')) selectRow(row);
+              if ( row && !e.target.closest('form')) selectRow(row);
             });
           }
 
-          window.locEdit   = function () { if (!selRow) { alert('Select a row first.'); return; } if (indEl) indEl.focus(); };
-          window.locDelete = function () {
-            if (!selId) { alert('Select a row first.'); return; }
+          window.locEdit   = function ( ) { if ( !selRow) { alert('Select a row first.'); return; } if ( indEl) indEl.focus(); };
+          window.locDelete = function ( ) {
+            if ( !selId) { alert('Select a row first.'); return; }
             var ind = selRow ? selRow.getAttribute('data-indicator') : selId;
-            if (!confirm('Delete "' + ind + '"?')) return;
+            if ( !confirm('Delete "' + ind + '"?')) return;
             var f = document.getElementById('loc-del-form');
             f.action = '/location-indicators/' + selId + '/delete';
             f.submit();
           };
-          window.locSave   = function () {
+          window.locSave   = function ( ) {
             var ind = indEl ? indEl.value.trim().toUpperCase() : '';
             var loc = locEl ? locEl.value.trim().toUpperCase() : '';
-            if (!ind) { alert('Indicator is required.'); indEl && indEl.focus(); return; }
-            if (ind.length !== 4) { alert('Indicator must be exactly 4 letters.'); indEl && indEl.focus(); return; }
-            if (!loc) { alert('Location is required.'); locEl && locEl.focus(); return; }
+            if ( !ind) { alert('Indicator is required.'); indEl && indEl.focus(); return; }
+            if ( ind.length !== 4) { alert('Indicator must be exactly 4 letters.'); indEl && indEl.focus(); return; }
+            if ( !loc) { alert('Location is required.'); locEl && locEl.focus(); return; }
             document.getElementById('loc-save-ind').value = ind;
             document.getElementById('loc-save-loc').value = loc;
             document.getElementById('loc-save-form').submit();
           };
-          window.locUpdate = function () {
-            if (!selId) { alert('Select a row to update first.'); return; }
+          window.locUpdate = function ( ) {
+            if ( !selId) { alert('Select a row to update first.'); return; }
             var ind = indEl ? indEl.value.trim().toUpperCase() : '';
             var loc = locEl ? locEl.value.trim().toUpperCase() : '';
-            if (!ind) { alert('Indicator is required.'); indEl && indEl.focus(); return; }
-            if (!loc) { alert('Location is required.'); locEl && locEl.focus(); return; }
+            if ( !ind) { alert('Indicator is required.'); indEl && indEl.focus(); return; }
+            if ( !loc) { alert('Location is required.'); locEl && locEl.focus(); return; }
             var f = document.getElementById('loc-update-form');
             f.action = '/location-indicators/' + selId + '/update';
             document.getElementById('loc-upd-ind').value = ind;
             document.getElementById('loc-upd-loc').value = loc;
             f.submit();
           };
-          window.locClear  = function () {
-            if (selRow) selRow.classList.remove('selected');
+          window.locClear  = function ( ) {
+            if ( selRow) selRow.classList.remove('selected');
             selRow = null; selId = null;
-            if (indEl) indEl.value = '';
-            if (locEl) locEl.value = '';
+            if ( indEl) indEl.value = '';
+            if ( locEl) locEl.value = '';
           };
-          window.locGoto   = function () {
+          window.locGoto   = function ( ) {
             var inp = document.getElementById('loc-goto');
             var p   = inp ? parseInt(inp.value, 10) : 1;
-            if (isNaN(p) || p < 1) p = 1;
+            if ( isNaN(p) || p < 1) p = 1;
             var params = new URLSearchParams(window.location.search || '');
             params.set('page', p);
             window.location.href = '/location-indicators?' + params.toString();
           };
           var gi = document.getElementById('loc-goto');
-          if (gi) gi.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.keyCode === 13) locGoto(); });
+          if ( gi) gi.addEventListener('keydown', function ( e) { if ( e.key === 'Enter' || e.keyCode === 13) locGoto(); });
         })();
       </script>
     </body>
@@ -1739,7 +1739,7 @@ defmodule TpWeb.Views do
       #{status_footer_script()}
       #{auto_uppercase_script()}
       <script>
-        (function () {
+        ( function ( ) {
           var selectedRow = null;
           var selectedId  = null;
 
@@ -1749,55 +1749,55 @@ defmodule TpWeb.Views do
           var type9cEl    = document.querySelector('[name="ac-type9c-sel"]');
 
           function selectRow(row) {
-            if (selectedRow) selectedRow.classList.remove('selected');
+            if ( selectedRow) selectedRow.classList.remove('selected');
             selectedRow = row;
             selectedId  = row ? row.getAttribute('data-id') : null;
-            if (row) {
+            if ( row) {
               row.classList.add('selected');
               type9bEl.value = row.getAttribute('data-type9b') || '';
-              if (type9cEl) type9cEl.value = row.getAttribute('data-type9c') || '';
-              if (editIdEl) editIdEl.value = selectedId;
+              if ( type9cEl) type9cEl.value = row.getAttribute('data-type9c') || '';
+              if ( editIdEl) editIdEl.value = selectedId;
             }
           }
 
-          if (tbody) {
-            tbody.addEventListener('click', function (e) {
+          if ( tbody) {
+            tbody.addEventListener('click', function ( e) {
               var row = e.target && e.target.closest ? e.target.closest('tr.ac-row') : null;
-              if (row && !e.target.closest('form')) selectRow(row);
+              if ( row && !e.target.closest('form')) selectRow(row);
             });
           }
 
-          window.acEdit = function () {
-            if (!selectedRow) { alert('Please select a row first.'); return; }
-            if (type9bEl) type9bEl.focus();
+          window.acEdit = function ( ) {
+            if ( !selectedRow) { alert('Please select a row first.'); return; }
+            if ( type9bEl) type9bEl.focus();
           };
 
-          window.acDelete = function () {
-            if (!selectedId) { alert('Please select a row first.'); return; }
+          window.acDelete = function ( ) {
+            if ( !selectedId) { alert('Please select a row first.'); return; }
             var type = selectedRow ? selectedRow.getAttribute('data-type9b') : selectedId;
-            if (!confirm('Delete "' + type + '"?')) return;
+            if ( !confirm('Delete "' + type + '"?')) return;
             var form = document.getElementById('ac-del-form');
             form.action = '/aircraft-types/' + selectedId + '/delete';
             form.submit();
           };
 
-          window.acSave = function () {
+          window.acSave = function ( ) {
             var t = type9bEl ? type9bEl.value.trim().toUpperCase() : '';
             var w = type9cEl ? type9cEl.value : '';
-            if (!t) { alert('Type of Aircraft is required.'); type9bEl && type9bEl.focus(); return; }
-            if (!w) { alert('Wake Turb. Category is required.'); return; }
+            if ( !t) { alert('Type of Aircraft is required.'); type9bEl && type9bEl.focus(); return; }
+            if ( !w) { alert('Wake Turb. Category is required.'); return; }
             var form = document.getElementById('ac-save-form');
             document.getElementById('ac-save-type9b').value = t;
             document.getElementById('ac-save-type9c').value = w;
             form.submit();
           };
 
-          window.acUpdate = function () {
-            if (!selectedId) { alert('Please select a row to update first.'); return; }
+          window.acUpdate = function ( ) {
+            if ( !selectedId) { alert('Please select a row to update first.'); return; }
             var t = type9bEl ? type9bEl.value.trim().toUpperCase() : '';
             var w = type9cEl ? type9cEl.value : '';
-            if (!t) { alert('Type of Aircraft is required.'); type9bEl && type9bEl.focus(); return; }
-            if (!w) { alert('Wake Turb. Category is required.'); return; }
+            if ( !t) { alert('Type of Aircraft is required.'); type9bEl && type9bEl.focus(); return; }
+            if ( !w) { alert('Wake Turb. Category is required.'); return; }
             var form = document.getElementById('ac-update-form');
             form.action = '/aircraft-types/' + selectedId + '/update';
             document.getElementById('ac-upd-type9b').value = t;
@@ -1805,27 +1805,27 @@ defmodule TpWeb.Views do
             form.submit();
           };
 
-          window.acClear = function () {
-            if (selectedRow) selectedRow.classList.remove('selected');
+          window.acClear = function ( ) {
+            if ( selectedRow) selectedRow.classList.remove('selected');
             selectedRow = null; selectedId = null;
-            if (type9bEl) type9bEl.value = '';
-            if (type9cEl) type9cEl.value = '';
-            if (editIdEl) editIdEl.value = '';
+            if ( type9bEl) type9bEl.value = '';
+            if ( type9cEl) type9cEl.value = '';
+            if ( editIdEl) editIdEl.value = '';
           };
 
-          window.acGotoPage = function () {
+          window.acGotoPage = function ( ) {
             var inp = document.getElementById('pg-goto-input');
             var p   = inp ? parseInt(inp.value, 10) : 1;
-            if (isNaN(p) || p < 1) p = 1;
+            if ( isNaN(p) || p < 1) p = 1;
             var params = new URLSearchParams(window.location.search || '');
             params.set('page', p);
             window.location.href = '/aircraft-types?' + params.toString();
           };
 
           var gotoInp = document.getElementById('pg-goto-input');
-          if (gotoInp) {
-            gotoInp.addEventListener('keydown', function (e) {
-              if (e.key === 'Enter' || e.keyCode === 13) acGotoPage();
+          if ( gotoInp) {
+            gotoInp.addEventListener('keydown', function ( e) {
+              if ( e.key === 'Enter' || e.keyCode === 13) acGotoPage();
             });
           }
         })();
@@ -1948,11 +1948,15 @@ defmodule TpWeb.Views do
   end
 
   defp compose_dropdown do
+    items_html = compose_menu_groups() |> Enum.map_join("", fn
+      :sep          -> ~s(<hr class="compose-sep">)
+      {type, label} -> ~s(<a href="/compose?form=#{html(type)}"><svg style="width:13px;height:13px;margin-right:6px;opacity:.7;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>#{html(label)}</a>)
+    end)
     """
     <details class="top-menu">
       <summary>#{write_icon()}<span>Message</span></summary>
-      <div class="top-submenu">
-        #{Enum.map_join(compose_menu_items(), "", fn {type, label} -> ~s(<a href="/compose?form=#{html(type)}">#{html(label)}</a>) end)}
+      <div class="top-submenu compose-submenu">
+        #{items_html}
       </div>
     </details>
     """
@@ -1992,7 +1996,7 @@ defmodule TpWeb.Views do
     <details class="top-menu">
       <summary>#{status_icon()}<span>Status</span></summary>
       <div class="top-submenu">
-        <a href="/queue">Queue / Not Delivered</a>
+        <a href="/queue"><i class="bi bi-envelope-exclamation" style="margin-right:5px"></i>Queue / Not Delivered</a>
 
       </div>
     </details>
@@ -2161,7 +2165,7 @@ defmodule TpWeb.Views do
   end
 
   defp header_time_css do
-    ".header-spacer{flex:1}.header-time{display:inline-flex;align-items:center;gap:6px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:700;color:#d8e8f3;white-space:nowrap}.header-clock-icon{display:inline-flex;align-items:center;color:#9bd0ff}.header-clock-icon svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.header-time-label{color:#9bd0ff;font-weight:900;letter-spacing:.03em}"
+    ".header-spacer{flex:1}.header-time{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:#d8e8f3;white-space:nowrap}.header-clock-icon{display:inline-flex;align-items:center;color:#9bd0ff}.header-clock-icon svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.header-time-label{color:#9bd0ff;font-weight:900;letter-spacing:.03em}"
   end
 
   defp maint_page_css do
@@ -2215,12 +2219,12 @@ defmodule TpWeb.Views do
   defp header_clock_script do
     """
     <script>
-      (function () {
+      ( function ( ) {
         function updateHeaderTime() {
           var node = document.getElementById('header-time-value');
-          if (!node) return;
+          if ( !node) return;
           var now = new Date();
-          var pad = function (v) { v = String(v); return v.length < 2 ? '0' + v : v; };
+          var pad = function ( v) { v = String(v); return v.length < 2 ? '0' + v : v; };
           node.textContent = now.getUTCFullYear() + '-' + pad(now.getUTCMonth() + 1) + '-' + pad(now.getUTCDate()) + ' ' + pad(now.getUTCHours()) + ':' + pad(now.getUTCMinutes()) + ':' + pad(now.getUTCSeconds());
         }
         updateHeaderTime();
@@ -2233,38 +2237,38 @@ defmodule TpWeb.Views do
   defp status_footer_script do
     """
     <script>
-      (function () {
+      ( function ( ) {
         function byId(id) { return document.getElementById(id); }
         function setText(id, value) {
           var node = byId(id);
-          if (!node || value == null) return;
+          if ( !node || value == null) return;
           node.textContent = value;
         }
         function updateQueueCard(queueCount) {
           var card = byId('status-queue-card');
-          if (!card || !card.classList || queueCount == null) return;
+          if ( !card || !card.classList || queueCount == null) return;
           var count = parseInt(queueCount, 10);
           card.classList.toggle('warn', !isNaN(count) && count > 0);
           card.classList.toggle('ok', isNaN(count) || count <= 0);
         }
         function updateCurrentCidSeq(payload) {
-          if (!payload || payload.cid == null || payload.tseq == null) return;
+          if ( !payload || payload.cid == null || payload.tseq == null) return;
           var value = String(payload.cid) + String(payload.tseq);
-          Array.prototype.forEach.call(document.querySelectorAll('[data-current-cid-seq]'), function (node) {
-            if (!node) return;
-            if (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA') node.value = value;
+          Array.prototype.forEach.call(document.querySelectorAll('[data-current-cid-seq]'), function ( node) {
+            if ( !node) return;
+            if ( node.tagName === 'INPUT' || node.tagName === 'TEXTAREA') node.value = value;
             else node.textContent = value;
           });
         }
         function updateLink(payload) {
-          if (!payload) return;
+          if ( !payload) return;
           var up = payload.link_up === true || payload.link_state === 'Established' || payload.link_state === 'established';
           var pill = byId('status-link-pill');
-          if (pill && pill.classList) {
+          if ( pill && pill.classList) {
             pill.classList.toggle('up', up);
             pill.classList.toggle('down', !up);
           }
-          setText('status-link-value', payload.link_state || (up ? 'Established' : 'Down'));
+          setText('status-link-value', payload.link_state || ( up ? 'Established' : 'Down'));
         }
         function pollFooterStatus() {
           fetch('/api/status', {
@@ -2273,12 +2277,12 @@ defmodule TpWeb.Views do
             credentials: 'same-origin',
             cache: 'no-store'
           })
-            .then(function (response) {
-              if (!response.ok) throw new Error('status failed');
+            .then(function ( response) {
+              if ( !response.ok) throw new Error('status failed');
               return response.json();
             })
-            .then(function (payload) {
-              if (!payload) return;
+            .then(function ( payload) {
+              if ( !payload) return;
               setText('status-tseq-value', payload.tseq);
               setText('status-queue-count', payload.queue_count);
               setText('status-cid-value', payload.cid);
@@ -2290,7 +2294,7 @@ defmodule TpWeb.Views do
               updateCurrentCidSeq(payload);
               updateLink(payload);
             })
-            .catch(function () {});
+            .catch(function ( ) {});
         }
         pollFooterStatus();
         window.setInterval(pollFooterStatus, 1000);
@@ -2302,7 +2306,7 @@ defmodule TpWeb.Views do
   defp compose_udp_monitor_script do
     """
     <script>
-      (function () {
+      ( function ( ) {
         function byId(id) { return document.getElementById(id); }
 
         function escapeHtml(value) {
@@ -2317,11 +2321,11 @@ defmodule TpWeb.Views do
         function visibleMonitorUdp(value) {
           var text = String(value == null ? '' : value);
           var out = '';
-          for (var i = 0; i < text.length; i++) {
+          for ( var i = 0; i < text.length; i++) {
             var code = text.charCodeAt(i);
-            if (code === 1 || code === 2 || code === 3 || code === 11) continue;
-            if (code === 13) out += String.fromCharCode(10);
-            else if (code === 10 && i > 0 && text.charCodeAt(i - 1) === 13) continue;
+            if ( code === 1 || code === 2 || code === 3 || code === 11) continue;
+            if ( code === 13) out += String.fromCharCode(10);
+            else if ( code === 10 && i > 0 && text.charCodeAt(i - 1) === 13) continue;
             else out += text.charAt(i);
           }
           return out;
@@ -2334,7 +2338,7 @@ defmodule TpWeb.Views do
         function monitorSource(item) {
           var ip = item && item.source_ip ? item.source_ip : '';
           var port = item && item.source_port ? item.source_port : '';
-          if (ip && port) return ip + ':' + port;
+          if ( ip && port) return ip + ':' + port;
           return ip || '';
         }
 
@@ -2356,9 +2360,9 @@ defmodule TpWeb.Views do
 
         function hasBellSignal(item) {
           var raw = String(item && item.raw != null ? item.raw : '');
-          for (var i = 0; i < raw.length; i++) {
+          for ( var i = 0; i < raw.length; i++) {
             var code = raw.charCodeAt(i);
-            if (code === 7 || code === 11) return true;
+            if ( code === 7 || code === 11) return true;
           }
           return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\u0007') !== -1 || raw.indexOf('\u000b') !== -1;
         }
@@ -2366,15 +2370,15 @@ defmodule TpWeb.Views do
         function playBellAlarm() {
           try {
             var AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContext) {
-              if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
+            if ( !AudioContext) {
+              if ( navigator.vibrate) navigator.vibrate([180, 80, 180]);
               return;
             }
             var context = window.__aftnBellAudioContext || new AudioContext();
             window.__aftnBellAudioContext = context;
-            if (context.state === 'suspended' && context.resume) context.resume();
+            if ( context.state === 'suspended' && context.resume) context.resume();
             var start = context.currentTime;
-            [0, 0.28, 0.56].forEach(function (offset) {
+            [0, 0.28, 0.56].forEach(function ( offset) {
               var osc = context.createOscillator();
               var gain = context.createGain();
               osc.type = 'sine';
@@ -2387,13 +2391,13 @@ defmodule TpWeb.Views do
               osc.start(start + offset);
               osc.stop(start + offset + 0.2);
             });
-            if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
-          } catch (_error) {}
+            if ( navigator.vibrate) navigator.vibrate([180, 80, 180]);
+          } catch ( _error) {}
         }
 
         function playBellAlarmForRows(rows) {
-          for (var i = 0; i < rows.length; i++) {
-            if (hasBellSignal(rows[i])) {
+          for ( var i = 0; i < rows.length; i++) {
+            if ( hasBellSignal(rows[i])) {
               playBellAlarm();
               return;
             }
@@ -2402,41 +2406,41 @@ defmodule TpWeb.Views do
 
         function pollUdpMonitor() {
           var body = byId('udp-monitor-body');
-          if (!body) return;
+          if ( !body) return;
 
           fetch('/api/udp-monitor', {
             method: 'GET',
             headers: {'Accept': 'application/json'},
             credentials: 'same-origin'
           })
-            .then(function (response) {
-              if (!response.ok) throw new Error('monitor failed');
+            .then(function ( response) {
+              if ( !response.ok) throw new Error('monitor failed');
               return response.json();
             })
-            .then(function (payload) {
+            .then(function ( payload) {
               var rows = payload && payload.data ? payload.data : [];
-              if (!rows.length) return;
+              if ( !rows.length) return;
 
               playBellAlarmForRows(rows);
 
               var html = '';
-              for (var i = rows.length - 1; i >= 0; i--) html += monitorRow(rows[i]);
+              for ( var i = rows.length - 1; i >= 0; i--) html += monitorRow(rows[i]);
 
-              if (body.querySelector && body.querySelector('.udp-empty')) body.innerHTML = '';
+              if ( body.querySelector && body.querySelector('.udp-empty')) body.innerHTML = '';
               body.insertAdjacentHTML('afterbegin', html);
 
               var items = body.querySelectorAll ? body.querySelectorAll('.udp-item') : [];
-              for (var index = 10; index < items.length; index++) items[index].parentNode.removeChild(items[index]);
+              for ( var index = 10; index < items.length; index++) items[index].parentNode.removeChild(items[index]);
             })
-            .catch(function () {});
+            .catch(function ( ) {});
         }
 
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function ( event) {
           var target = event.target;
-          if (target && (target.id === 'clear-udp-monitor' || (target.closest && target.closest('#clear-udp-monitor')))) {
+          if ( target && ( target.id === 'clear-udp-monitor' || ( target.closest && target.closest('#clear-udp-monitor')))) {
             event.preventDefault();
             var monitor = byId('udp-monitor-body');
-            if (monitor) monitor.innerHTML = udpEmptyHtml();
+            if ( monitor) monitor.innerHTML = udpEmptyHtml();
             return false;
           }
         });
@@ -2450,43 +2454,43 @@ defmodule TpWeb.Views do
   defp auto_uppercase_script do
     """
     <script>
-      (function () {
+      ( function ( ) {
         function shouldUppercase(field) {
-          if (!field || !field.name) return false;
-          var tag = (field.tagName || '').toUpperCase();
-          if (tag !== 'INPUT' && tag !== 'TEXTAREA') return false;
-          var type = (field.type || '').toLowerCase();
+          if ( !field || !field.name) return false;
+          var tag = ( field.tagName || '').toUpperCase();
+          if ( tag !== 'INPUT' && tag !== 'TEXTAREA') return false;
+          var type = ( field.type || '').toLowerCase();
           return ['hidden','submit','button','reset','checkbox','radio','file','date','time','datetime-local','month','week','number','password'].indexOf(type) === -1;
         }
 
         function uppercaseField(field) {
-          if (!shouldUppercase(field) || !field.value) return;
+          if ( !shouldUppercase(field) || !field.value) return;
           var start = field.selectionStart;
           var end = field.selectionEnd;
           var upper = field.value.toUpperCase();
-          if (field.value === upper) return;
+          if ( field.value === upper) return;
           field.value = upper;
-          if (typeof start === 'number' && typeof end === 'number') field.setSelectionRange(start, end);
+          if ( typeof start === 'number' && typeof end === 'number') field.setSelectionRange(start, end);
         }
 
         function uppercaseAll(root) {
           Array.prototype.forEach.call((root || document).querySelectorAll('input, textarea'), uppercaseField);
         }
 
-        document.addEventListener('input', function (event) {
+        document.addEventListener('input', function ( event) {
           uppercaseField(event.target);
         }, true);
 
-        document.addEventListener('change', function (event) {
+        document.addEventListener('change', function ( event) {
           uppercaseField(event.target);
         }, true);
 
-        document.addEventListener('submit', function (event) {
-          if (event.target && event.target.querySelectorAll) uppercaseAll(event.target);
+        document.addEventListener('submit', function ( event) {
+          if ( event.target && event.target.querySelectorAll) uppercaseAll(event.target);
         }, true);
 
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function () { uppercaseAll(document); });
+        if ( document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function ( ) { uppercaseAll(document); });
         } else {
           uppercaseAll(document);
         }
@@ -2498,7 +2502,7 @@ defmodule TpWeb.Views do
   defp compose_page_script do
     """
     <script>
-      (function () {
+      ( function ( ) {
         function pad(value) {
           value = String(value);
           return value.length < 2 ? '0' + value : value;
@@ -2512,116 +2516,116 @@ defmodule TpWeb.Views do
         function formKey(form) {
           var returnForm = form.elements.return_form ? form.elements.return_form.value : '';
           var composeType = form.elements.compose_type ? form.elements.compose_type.value : '';
-          return 'aftn_compose_draft_' + (returnForm || composeType || form.id || 'form');
+          return 'aftn_compose_draft_' + ( returnForm || composeType || form.id || 'form');
         }
 
         function fields(form) {
-          return Array.prototype.filter.call(form.elements, function (field) {
+          return Array.prototype.filter.call(form.elements, function ( field) {
             return field.name && field.type !== 'hidden' && field.type !== 'submit' && field.type !== 'button';
           });
         }
 
         function saveDraft(form) {
-          if (!window.sessionStorage) return;
+          if ( !window.sessionStorage) return;
           var draft = {};
-          fields(form).forEach(function (field) {
-            if (field.type === 'checkbox' || field.type === 'radio') draft[field.name] = field.checked;
+          fields(form).forEach(function ( field) {
+            if ( field.type === 'checkbox' || field.type === 'radio') draft[field.name] = field.checked;
             else draft[field.name] = field.value;
           });
           window.sessionStorage.setItem(formKey(form), JSON.stringify(draft));
         }
 
         function restoreDraft(form) {
-          if (!window.sessionStorage) return;
+          if ( !window.sessionStorage) return;
           var params = new URLSearchParams(window.location.search || '');
-          if (params.get('clear') === '1') {
+          if ( params.get('clear') === '1') {
             window.sessionStorage.removeItem(formKey(form));
             clearForm(form);
             return;
           }
           var hasPrefill = params.has('priority') || params.has('originator') || params.has('message');
-          if (hasPrefill && form.id === 'aftn-free-form') {
+          if ( hasPrefill && form.id === 'aftn-free-form') {
             window.sessionStorage.removeItem(formKey(form));
             return;
           }
           var saved = window.sessionStorage.getItem(formKey(form));
-          if (!saved) return;
+          if ( !saved) return;
 
           try {
             var draft = JSON.parse(saved);
-            fields(form).forEach(function (field) {
-              if (!Object.prototype.hasOwnProperty.call(draft, field.name)) return;
-              if (field.type === 'checkbox' || field.type === 'radio') field.checked = !!draft[field.name];
+            fields(form).forEach(function ( field) {
+              if ( !Object.prototype.hasOwnProperty.call(draft, field.name)) return;
+              if ( field.type === 'checkbox' || field.type === 'radio') field.checked = !!draft[field.name];
               else field.value = draft[field.name];
             });
-          } catch (_error) {
+          } catch ( _error) {
           }
         }
 
         function clearForm(form) {
-          fields(form).forEach(function (field) {
-            if (field.type === 'hidden') return;
-            if (field.name === 'message_type' && form.elements.compose_type) {
+          fields(form).forEach(function ( field) {
+            if ( field.type === 'hidden') return;
+            if ( field.name === 'message_type' && form.elements.compose_type) {
               field.value = form.elements.compose_type.value;
               return;
             }
-            if (field.type === 'checkbox' || field.type === 'radio') field.checked = false;
+            if ( field.type === 'checkbox' || field.type === 'radio') field.checked = false;
             else field.value = '';
           });
           updateAlrRequired(form);
-          if (window.sessionStorage) window.sessionStorage.removeItem(formKey(form));
+          if ( window.sessionStorage) window.sessionStorage.removeItem(formKey(form));
         }
 
         function uppercaseField(field) {
-          if (!field || !field.value || field.type === 'hidden' || field.type === 'submit' || field.type === 'button') return;
+          if ( !field || !field.value || field.type === 'hidden' || field.type === 'submit' || field.type === 'button') return;
           var start = field.selectionStart;
           var end = field.selectionEnd;
           var upper = field.value.toUpperCase();
-          if (field.value === upper) return;
+          if ( field.value === upper) return;
           field.value = upper;
-          if (typeof start === 'number' && typeof end === 'number') field.setSelectionRange(start, end);
+          if ( typeof start === 'number' && typeof end === 'number') field.setSelectionRange(start, end);
         }
 
-        Array.prototype.forEach.call(document.querySelectorAll('form[action="/messages/compose"]'), function (form) {
+        Array.prototype.forEach.call(document.querySelectorAll('form[action="/messages/compose"]'), function ( form) {
           restoreDraft(form);
 
           fields(form).forEach(uppercaseField);
 
-          form.addEventListener('submit', function (event) {
+          form.addEventListener('submit', function ( event) {
             fields(form).forEach(uppercaseField);
             var action = event.submitter ? event.submitter.value : '';
-            if (action === 'send_clear') {
-              if (window.sessionStorage) window.sessionStorage.removeItem(formKey(form));
+            if ( action === 'send_clear') {
+              if ( window.sessionStorage) window.sessionStorage.removeItem(formKey(form));
             } else {
               saveDraft(form);
             }
           });
 
-          form.addEventListener('input', function (event) {
+          form.addEventListener('input', function ( event) {
             var field = event.target;
-            if (field && (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA')) uppercaseField(field);
+            if ( field && ( field.tagName === 'INPUT' || field.tagName === 'TEXTAREA')) uppercaseField(field);
             updateAlrRequired(form);
           });
 
-          form.addEventListener('change', function () {
+          form.addEventListener('change', function ( ) {
             updateAlrRequired(form);
           });
 
-          form.addEventListener('click', function (event) {
+          form.addEventListener('click', function ( event) {
             var target = event.target;
             var button = target && target.closest ? target.closest('.js-clear-form, .js-current-time') : null;
-            if (!button) return;
+            if ( !button) return;
 
-            if (button.classList.contains('js-clear-form')) {
+            if ( button.classList.contains('js-clear-form')) {
               event.preventDefault();
               clearForm(form);
               return;
             }
 
-            if (button.classList.contains('js-current-time')) {
+            if ( button.classList.contains('js-current-time')) {
               event.preventDefault();
               var input = document.getElementById(button.getAttribute('data-target'));
-              if (input) input.value = currentDdHhMm();
+              if ( input) input.value = currentDdHhMm();
             }
           });
 
@@ -2635,27 +2639,27 @@ defmodule TpWeb.Views do
 
         function setRequired(form, name, required) {
           var field = form.elements[name];
-          if (!field) return;
+          if ( !field) return;
           field.required = !!required;
           var box = field.closest ? field.closest('.field') : null;
-          if (box) box.classList.toggle('required', !!required);
+          if ( box) box.classList.toggle('required', !!required);
         }
 
         function updateAlrRequired(form) {
-          if (!form) return;
+          if ( !form) return;
           var composeType = form.elements.compose_type ? form.elements.compose_type.value : '';
-          if (composeType === 'RCF') {
+          if ( composeType === 'RCF') {
             setRequired(form, 'ssr_code', !!form.elements.ssr_mode && form.elements.ssr_mode.checked);
             return;
           }
-          if (form.id !== 'alr-form' && form.id !== 'fpl-form') return;
+          if ( form.id !== 'alr-form' && form.id !== 'fpl-form') return;
           setRequired(form, 'ssr_code', !!form.elements.ssr_mode && form.elements.ssr_mode.checked);
           setRequired(form, 'pbn', value(form, 'equipment').indexOf('R') !== -1);
           setRequired(form, 'typ', value(form, 'aircraft_type') === 'ZZZZ');
           setRequired(form, 'dep_info', ['ZZZZ', 'AFIL'].indexOf(value(form, 'departure')) !== -1);
           setRequired(form, 'dest_info', value(form, 'destination') === 'ZZZZ');
           setRequired(form, 'altn_detail', value(form, 'alternate') === 'ZZZZ');
-          var dinghyDetail = ['dinghy_number', 'dinghy_capacity', 'dinghy_colour'].some(function (name) { return value(form, name) !== ''; }) || (!!form.elements.dinghy_cover && form.elements.dinghy_cover.checked);
+          var dinghyDetail = ['dinghy_number', 'dinghy_capacity', 'dinghy_colour'].some(function ( name) { return value(form, name) !== ''; }) || ( !!form.elements.dinghy_cover && form.elements.dinghy_cover.checked);
           setRequired(form, 'dinghy_number', dinghyDetail);
           setRequired(form, 'dinghy_capacity', dinghyDetail);
         }
@@ -2668,61 +2672,61 @@ defmodule TpWeb.Views do
         };
 
         function valuesFromField(value, order) {
-          value = (value || '').toUpperCase();
-          return order.filter(function (code) { return value.indexOf(code) !== -1; });
+          value = ( value || '').toUpperCase();
+          return order.filter(function ( code) { return value.indexOf(code) !== -1; });
         }
 
         function selectedValues(modal) {
-          return Array.prototype.map.call(modal.querySelectorAll('.equipment-choice:checked'), function (box) { return box.value; });
+          return Array.prototype.map.call(modal.querySelectorAll('.equipment-choice:checked'), function ( box) { return box.value; });
         }
 
         function applyEquipmentRules(modal) {
           var type = modal.getAttribute('data-equipment-modal');
           var selected = selectedValues(modal);
-          modal.querySelectorAll('.equipment-choice').forEach(function (box) { box.disabled = false; });
+          modal.querySelectorAll('.equipment-choice').forEach(function ( box) { box.disabled = false; });
 
-          if (type === '10a') {
-            if (selected.indexOf('N') !== -1) modal.querySelector('[value="S"]').disabled = true;
-            if (selected.indexOf('S') !== -1) modal.querySelector('[value="N"]').disabled = true;
+          if ( type === '10a') {
+            if ( selected.indexOf('N') !== -1) modal.querySelector('[value="S"]').disabled = true;
+            if ( selected.indexOf('S') !== -1) modal.querySelector('[value="N"]').disabled = true;
             return;
           }
 
-          if (type === '10b') {
+          if ( type === '10b') {
             var primary = ['N', 'A', 'C', 'E', 'H', 'I', 'L', 'P', 'S', 'X'];
-            var selectedPrimary = primary.filter(function (code) { return selected.indexOf(code) !== -1; });
-            if (selectedPrimary.length) {
-              primary.forEach(function (code) {
+            var selectedPrimary = primary.filter(function ( code) { return selected.indexOf(code) !== -1; });
+            if ( selectedPrimary.length) {
+              primary.forEach(function ( code) {
                 var box = modal.querySelector('[value="' + code + '"]');
-                if (box && selectedPrimary.indexOf(code) === -1) box.disabled = true;
+                if ( box && selectedPrimary.indexOf(code) === -1) box.disabled = true;
               });
-              if (selectedPrimary.indexOf('N') !== -1) {
-                modal.querySelectorAll('.equipment-choice').forEach(function (box) {
-                  if (box.value !== 'N') box.disabled = true;
+              if ( selectedPrimary.indexOf('N') !== -1) {
+                modal.querySelectorAll('.equipment-choice').forEach(function ( box) {
+                  if ( box.value !== 'N') box.disabled = true;
                 });
               }
             }
 
             var outOnly = ['B1', 'U1', 'V1'];
             var inOut = ['B2', 'U2', 'V2'];
-            var hasOutOnly = outOnly.some(function (code) { return selected.indexOf(code) !== -1; });
-            var hasInOut = inOut.some(function (code) { return selected.indexOf(code) !== -1; });
-            if (hasOutOnly) inOut.forEach(function (code) { modal.querySelector('[value="' + code + '"]').disabled = true; });
-            if (hasInOut) outOnly.forEach(function (code) { modal.querySelector('[value="' + code + '"]').disabled = true; });
+            var hasOutOnly = outOnly.some(function ( code) { return selected.indexOf(code) !== -1; });
+            var hasInOut = inOut.some(function ( code) { return selected.indexOf(code) !== -1; });
+            if ( hasOutOnly) inOut.forEach(function ( code) { modal.querySelector('[value="' + code + '"]').disabled = true; });
+            if ( hasInOut) outOnly.forEach(function ( code) { modal.querySelector('[value="' + code + '"]').disabled = true; });
           }
         }
 
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function ( event) {
           var openButton = event.target.closest ? event.target.closest('.js-equipment-open') : null;
-          if (openButton) {
+          if ( openButton) {
             event.preventDefault();
             var target = openButton.getAttribute('data-target');
             var type = openButton.getAttribute('data-equipment');
             var modal = document.querySelector('[data-equipment-modal="' + type + '"]');
             var input = document.querySelector('[name="' + target + '"]');
-            if (!modal || !input) return;
+            if ( !modal || !input) return;
             modal.setAttribute('data-target', target);
             var selected = valuesFromField(input.value, equipmentOrder[type] || []);
-            modal.querySelectorAll('.equipment-choice').forEach(function (box) {
+            modal.querySelectorAll('.equipment-choice').forEach(function ( box) {
               box.checked = selected.indexOf(box.value) !== -1;
             });
             applyEquipmentRules(modal);
@@ -2731,22 +2735,22 @@ defmodule TpWeb.Views do
           }
 
           var closeButton = event.target.closest ? event.target.closest('.js-equipment-close') : null;
-          if (closeButton) {
+          if ( closeButton) {
             event.preventDefault();
             closeButton.closest('.equipment-modal').classList.remove('open');
             return;
           }
 
           var clearButton = event.target.closest ? event.target.closest('.js-equipment-clear') : null;
-          if (clearButton) {
+          if ( clearButton) {
             event.preventDefault();
             var clearModal = clearButton.closest('.equipment-modal');
-            clearModal.querySelectorAll('.equipment-choice').forEach(function (box) {
+            clearModal.querySelectorAll('.equipment-choice').forEach(function ( box) {
               box.checked = false;
               box.disabled = false;
             });
             var clearInput = document.querySelector('[name="' + clearModal.getAttribute('data-target') + '"]');
-            if (clearInput) {
+            if ( clearInput) {
               clearInput.value = '';
               updateAlrRequired(clearInput.form);
             }
@@ -2754,20 +2758,20 @@ defmodule TpWeb.Views do
           }
 
           var addButton = event.target.closest ? event.target.closest('.js-equipment-add') : null;
-          if (addButton) {
+          if ( addButton) {
             event.preventDefault();
             var addModal = addButton.closest('.equipment-modal');
             var addType = addModal.getAttribute('data-equipment-modal');
             var inputTarget = document.querySelector('[name="' + addModal.getAttribute('data-target') + '"]');
             var picked = selectedValues(addModal);
             var separator = addType === 'sts' ? ' ' : '';
-            var value = (equipmentOrder[addType] || []).filter(function (code) { return picked.indexOf(code) !== -1; }).join(separator);
-            if (addType === 'pbn' && value.length > 16) {
-              if (inputTarget) inputTarget.value = value;
+            var value = ( equipmentOrder[addType] || []).filter(function ( code) { return picked.indexOf(code) !== -1; }).join(separator);
+            if ( addType === 'pbn' && value.length > 16) {
+              if ( inputTarget) inputTarget.value = value;
               window.alert('Please insert maximum 8 entries, i.e. a total of not more than 16 characters !!');
               return;
             }
-            if (inputTarget) {
+            if ( inputTarget) {
               inputTarget.value = value;
               updateAlrRequired(inputTarget.form);
             }
@@ -2776,18 +2780,18 @@ defmodule TpWeb.Views do
           }
 
           var row = event.target.closest ? event.target.closest('.equipment-row') : null;
-          if (row && !event.target.classList.contains('equipment-choice')) {
+          if ( row && !event.target.classList.contains('equipment-choice')) {
             event.preventDefault();
             var choice = row.querySelector('.equipment-choice');
-            if (choice && !choice.disabled) {
+            if ( choice && !choice.disabled) {
               choice.checked = !choice.checked;
               applyEquipmentRules(row.closest('.equipment-modal'));
             }
           }
         });
 
-        document.addEventListener('change', function (event) {
-          if (event.target.classList && event.target.classList.contains('equipment-choice')) {
+        document.addEventListener('change', function ( event) {
+          if ( event.target.classList && event.target.classList.contains('equipment-choice')) {
             applyEquipmentRules(event.target.closest('.equipment-modal'));
           }
         });
@@ -2798,33 +2802,64 @@ defmodule TpWeb.Views do
 
   defp compose_menu_items do
     [
-      {"AMO", "AMO"},
-      {"FREE", "FREE Text"},
-      {"AFTN_FREE", "AFTN Free Text"},
-      {"ALR", "ALR"},
-      {"RCF", "RCF"},
-      {"FPL", "FPL"},
-      {"CHG", "CHG"},
-      {"DLA", "DLA"},
-      {"CNL", "CNL"},
-      {"DEP", "DEP"},
-      {"ARR", "ARR"},
-      {"CDN", "CDN"},
-      {"CPL", "CPL"},
-      {"EST", "EST"},
-      {"ACP", "ACP"},
-      {"LAM", "LAM"},
-      {"RQP", "RQP"},
-      {"RQS", "RQS"},
-      {"SPL", "SPL"}
+      {"AMO",       "AMO — AMO Message"},
+      {"FREE",      "FREE — Free Text"},
+      {"AFTN_FREE", "AFTN — AFTN Free Text"},
+      {"ALR",       "ALR — Alerting Message"},
+      {"RCF",       "RCF — Radio Communication Failure"},
+      {"FPL",       "FPL — Flight Plan"},
+      {"CHG",       "CHG — Modification Message"},
+      {"DLA",       "DLA — Delay Message"},
+      {"CNL",       "CNL — Cancellation Message"},
+      {"DEP",       "DEP — Departure Message"},
+      {"ARR",       "ARR — Arrival Message"},
+      {"CDN",       "CDN — Co-ordination Message"},
+      {"CPL",       "CPL — Current Flight Plan"},
+      {"EST",       "EST — Estimate Message"},
+      {"ACP",       "ACP — Acceptance Message"},
+      {"LAM",       "LAM — Logical Acknowledgement"},
+      {"RQP",       "RQP — Request Flight Plan"},
+      {"RQS",       "RQS — Request Supplementary Flight Plan"},
+      {"SPL",       "SPL — Supplementary Flight Plan"}
+    ]
+  end
+
+  defp compose_menu_groups do
+    [
+      {"AMO",       "AMO ( AMO Message )"},
+      :sep,
+      {"FREE",      "FREE ( Free Text )"},
+      :sep,
+      {"AFTN_FREE", "AFTN ( AFTN Free Text )"},
+      :sep,
+      {"ALR",       "ALR ( Alerting Message )"},
+      {"RCF",       "RCF ( Radio Communication Failure )"},
+      :sep,
+      {"FPL",       "FPL ( Flight Plan )"},
+      {"DLA",       "DLA ( Delay Message )"},
+      {"CHG",       "CHG ( Modification Message )"},
+      {"CNL",       "CNL ( Cancellation Message )"},
+      {"DEP",       "DEP ( Departure Message )"},
+      {"ARR",       "ARR ( Arrival Message )"},
+      :sep,
+      {"CDN",       "CDN ( Co-ordination Message )"},
+      {"CPL",       "CPL ( Current Flight Plan )"},
+      {"EST",       "EST ( Estimate Message )"},
+      {"ACP",       "ACP ( Acceptance Message )"},
+      {"LAM",       "LAM ( Logical Acknowledgement )"},
+      :sep,
+      {"RQP",       "RQP ( Request Flight Plan )"},
+      {"RQS",       "RQS ( Request Supplementary Flight Plan )"},
+      {"SPL",       "SPL ( Supplementary Flight Plan)"}
     ]
   end
 
   defp compose_type_links(selected) do
     compose_menu_items()
     |> Enum.map_join("", fn {type, label} ->
+      short = label |> String.split(" — ") |> List.first()
       class = if type == selected, do: " class=\"active\"", else: ""
-      ~s(<a#{class} href="/compose?form=#{html(type)}">#{html(label)}</a>)
+      ~s(<a#{class} href="/compose?form=#{html(type)}">#{html(short)}</a>)
     end)
   end
 
@@ -2875,7 +2910,7 @@ defmodule TpWeb.Views do
 
     """
     <section id="ALR" class="aftn-window">
-      <div class="aftn-title"><i class="bi bi-exclamation-triangle"></i><span>ALR (Alerting) Message</span></div>
+      <div class="aftn-title"><i class="bi bi-exclamation-triangle"></i><span>ALR ( Alerting) Message</span></div>
       <form id="alr-form" class="aftn-form" method="post" action="/messages/compose">
         <input type="hidden" name="compose_type" value="ALR">
         <input type="hidden" name="return_to" value="compose">
@@ -2912,7 +2947,7 @@ defmodule TpWeb.Views do
 
     """
     <section id="FPL" class="aftn-window">
-      <div class="aftn-title"><i class="bi bi-airplane"></i><span>FPL (Filed Flight Plan) Message</span></div>
+      <div class="aftn-title"><i class="bi bi-airplane"></i><span>FPL ( Filed Flight Plan) Message</span></div>
       <form id="fpl-form" class="aftn-form" method="post" action="/messages/compose">
         <input type="hidden" name="compose_type" value="FPL">
         <input type="hidden" name="return_to" value="compose">
@@ -3451,7 +3486,7 @@ defmodule TpWeb.Views do
     1 to 4 LETTER(S) identifying the sending
     ATS unit, followed by
 
-    OBLIQUE STROKE (/) followed by
+    OBLIQUE STROKE ( /) followed by
 
     1 to 4 LETTER(S) identifying the receiving
     ATS unit, followed by
@@ -3467,11 +3502,11 @@ defmodule TpWeb.Views do
     """
     Reference Data
 
-    1 to 4 LETTER(S) followed by OBLIQUE STROKE (/)
+    1 to 4 LETTER(S) followed by OBLIQUE STROKE ( /)
     followed by 1 to 4 LETTER(S) followed by
 
     3 DECIMAL NUMERICS, giving the 'message number'
-    contained in element (b) of the operational
+    contained in element ( b) of the operational
     message which began the sequence of messages of
     which this message is a part.
     """
@@ -3491,9 +3526,9 @@ defmodule TpWeb.Views do
 
   defp alr_tooltip("alert_originator"), do: "Originator of Message\n------------------------------\n8 LETTERS, being the 4-letter ICAO location indicator plus the 3-letter designator of the ATS unit originating the message followed by the letter X or, if applicable, the one-letter designator identifying the division of the ATS unit originating the message."
   defp alr_tooltip("nature"), do: "Nature of Emergency\n-----------------------------\nSHORT PLAIN LANGUAGE TEXT, as necessary to explain the nature of the emergency, with natural spaces between the words."
-  defp alr_tooltip("aircraft_id"), do: "Aircraft Identification\n\nINSERT one of the following aircraft identification, not exceeding 7 alphanumeric characters and without hypens or symbols:\n\na) the ICAO designator for the aircraft operating agency followed by the flight identification (e.g. KLM511, NGA213, JTR25) when in radiotelephony the call sign to be used by the aircraft will consist of the ICAO telephony designator for the operating agency followed by the flight identification (e.g. KLM511, NIGERIA 213, JESTER 25);\n\nb) in the radiotelephony the call sign to be used by the aircraft will consist of this identification alone (e.g. CGAJS), or preceded by the ICAO telephony designator for the aircraft operating agency (e.g. BLIZZARD CGAJS);"
-  defp alr_tooltip("ssr_mode"), do: "SSR Mode\n\n1 LETTER giving the SSR Mode related to (c)."
-  defp alr_tooltip("ssr_code"), do: "SSR Code\n\n4 NUMERICS giving the SSR Code assigned to the aircraft by ATS and transmitted in the Mode given in (b)."
+  defp alr_tooltip("aircraft_id"), do: "Aircraft Identification\n\nINSERT one of the following aircraft identification, not exceeding 7 alphanumeric characters and without hypens or symbols:\n\na) the ICAO designator for the aircraft operating agency followed by the flight identification ( e.g. KLM511, NGA213, JTR25) when in radiotelephony the call sign to be used by the aircraft will consist of the ICAO telephony designator for the operating agency followed by the flight identification ( e.g. KLM511, NIGERIA 213, JESTER 25);\n\nb) in the radiotelephony the call sign to be used by the aircraft will consist of this identification alone ( e.g. CGAJS), or preceded by the ICAO telephony designator for the aircraft operating agency ( e.g. BLIZZARD CGAJS);"
+  defp alr_tooltip("ssr_mode"), do: "SSR Mode\n\n1 LETTER giving the SSR Mode related to ( c)."
+  defp alr_tooltip("ssr_code"), do: "SSR Code\n\n4 NUMERICS giving the SSR Code assigned to the aircraft by ATS and transmitted in the Mode given in ( b)."
   defp alr_tooltip("radio_failure"), do: "Radio Failure Information\n\nThis field consist of the following specified sequence of elements preceded by a single hypen and separated by spaces. Any information not available is to be shown as 'NIL' or 'NOT KNOWN' and not simply omitted.\n\n(a) Time of Last Two-way Contact : 4 NUMERICS giving the time of the last two-way contact with the aircraft.\n(b) Frequency of Last Contact : NUMERICS as necessary giving the transmitting/receiving frequency of the last two-way contact with the aircraft.\n(c) Last Reported Position : The last reported position expressed in one of the data conventions of 1.6 of this Appendix.\n(d) Time at Last Reported Position : 4 NUMERICS giving the time at the last reported position.\n(e) Remaining COM Capability : LETTERS as necessary identifying the remaining COM capability of the aircraft, if known, using the convention of Filed Type 10, or in plain language.\n(f) Any Necessary Remarks : Plain language text as necessary."
 
   defp alr_tooltip("flight_rules") do
@@ -3527,7 +3562,7 @@ defmodule TpWeb.Views do
     """
   end
 
-  defp alr_tooltip("aircraft_number"), do: "Number of Aircraft (if more than one)\n\n1 to 2 NUMERICS giving the number of aircraft in the flight."
+  defp alr_tooltip("aircraft_number"), do: "Number of Aircraft ( if more than one)\n\n1 to 2 NUMERICS giving the number of aircraft in the flight."
   defp alr_tooltip("aircraft_type"), do: "Type of Aircraft\n\n2 to 4 CHARACTERS, being the appropriate designator chosen from ICAO Doc 8643, Aircraft Type Designators, or\n\nZZZZ if no designator has been assigned or if there is more than one type of aircraft in the flight."
   defp alr_tooltip("wake"), do: "Wake Turbulence Category\n\n1 LETTER to indicate maximum certificated take-off mass of the aircraft:\n\nH - Heavy\nM - Medium\nL - Light\nJ - Jumbo"
 
@@ -3544,7 +3579,7 @@ defmodule TpWeb.Views do
 
     ONE OR MORE OF THE FOLLOWING LETTERS to indicate the serviceable COM/NAV/approach aid equipment and capabilities:
     A : GBAS landing system
-    B : LPV (APV with SBAS)
+    B : LPV ( APV with SBAS)
     C : LORAN C
     D : DME
     E1: FMC WPR ACARS
@@ -3558,14 +3593,14 @@ defmodule TpWeb.Views do
     J2: CPDLC FANS 1/A HFDL
     J3: CPDLC FANS 1/A VDL Mode A
     J4: CPDLC FANS 1/A VDL Mode 2
-    J5: CPDLC FANS 1/A SATCOM (INMARSAT)
-    J6: CPDLC FANS 1/A SATCOM (MTSAT)
-    J7: CPDLC FANS 1/A SATCOM (Iridium)
+    J5: CPDLC FANS 1/A SATCOM ( INMARSAT)
+    J6: CPDLC FANS 1/A SATCOM ( MTSAT)
+    J7: CPDLC FANS 1/A SATCOM ( Iridium)
     K : MLS
     L : ILS
-    M1: ATC RTF SATCOM (INMARSAT)
-    M2: ATC RTF (MTSAT)
-    M3: ATC RTF (Iridium)
+    M1: ATC RTF SATCOM ( INMARSAT)
+    M2: ATC RTF ( MTSAT)
+    M3: ATC RTF ( Iridium)
     O : VOR
     P1-P9: Reserved for RCP
     R : PBN approved
@@ -3585,16 +3620,16 @@ defmodule TpWeb.Views do
 
     N   if no surveillance equipment for the route to be flown is
          carried, or the equipment is unserviceable
-    A   Transponder - Mode A (4 digits - 4 096 codes)
-    C   Transponder - Mode A (4 digits - 4 096 codes) and Mode C
+    A   Transponder - Mode A ( 4 digits - 4 096 codes)
+    C   Transponder - Mode A ( 4 digits - 4 096 codes) and Mode C
     E   Transponder - Mode S, including aircraft identification,
-         pressure-altitude and extend squitter (ADS-B) capability
+         pressure-altitude and extend squitter ( ADS-B) capability
     H   Transponder - Mode S, including aircraft identification,
          pressure-altitude and enhanced survilliance capability
     I   Transponder - Mode S, including aircraft identification,
          but no pressure-altitude capability
     L   Transponder - Mode S, including aircraft identification,
-         pressure-altitude, extend squitter (ADS-B) and enhanced
+         pressure-altitude, extend squitter ( ADS-B) and enhanced
          survilliance capability
     P   Transponder - Mode S, including pressure-altitude, but no
          aircraft identification capability
@@ -3620,44 +3655,44 @@ defmodule TpWeb.Views do
   end
 
   defp alr_tooltip("departure"), do: "Departure Aerodrome\n\nINSERT the ICAO four-letter location indicator of the departure aerodrome as specified in Doc 7910, Location Indicators,\n\nOR if no location indicator has been assigned,\n\nINSERT ZZZZ and SPECIFY, in Item 18, the name and location of the aerodrome preceded by DEP/\n\nOR the first point of the route or the marker radio beacon preceded by DEP/..., if the aircraft has not taken off from the aerodrome,\n\nOR if the flight plan is received from an aircraft in flight,\n\nINSERT AFIL and SPECIFY, in Item 18, the ICAO four-letter location indicator of the location ATS unit from which supplementary flight plan data can be obtained, preceded by DEP/"
-  defp alr_tooltip("departure_time"), do: "Time\n\n4 NUMERICS giving\n\nthe estimated off-block time at the aerodrome in (a) in FPL and DLA messages transmitted before departure and in RQP message, if known, or\n\nthe actual time of departure from the aerodrome in (a) in ALR, DEP and SPL messages, or\n\nthe actual or estimated time of departure from the first point shown in the Route Field (see Field Type 15) in FPL messages derived from flight plans filed in the air, as shown by the letters AFIL in (a)."
-  defp alr_tooltip("speed"), do: "Cruising speed (maximum 5 characters)\n\nINSERT the True Air Speed for the first or the whole cruising portion of the flight, in terms of:\n- Kilometres per hour, expressed as K followed by 4 figures\n  (e.g. K0830), or\n- Knots, expressed as N followed by 4 figures (e.g. N0485), or\n- True Mach number, when so prescribed by the appropriate\n  ATS authority, to the nearest hundredth of unit Mach,\n  expressed as M followed by 3 figures (e.g M082)."
-  defp alr_tooltip("level"), do: "Cruising level (maximum 5 characters)\n\nINSERT the planned cruising level for the first or the whole portion of the route to be flown, in terms if:\n- Flight level, expressed as F followed by 3 figures (e.g.\n  F085; F330), or\n- *Standard Metric Level in tens of metres, expressed as\n  S followed by 4 figures (e.g. S1130), or\n- Altitude in hundreds of feet, expressed as A followed by\n  3 figures (e.g. A045; A100), or\n- Altitude in tens of metres, expressed as M followed by 4\n  figures (e.g. M0840), or\n- for uncontrolled VFR flights, the letters VFR.\n\n*When so prescribed by the appropriate ATS authorities."
+  defp alr_tooltip("departure_time"), do: "Time\n\n4 NUMERICS giving\n\nthe estimated off-block time at the aerodrome in ( a) in FPL and DLA messages transmitted before departure and in RQP message, if known, or\n\nthe actual time of departure from the aerodrome in ( a) in ALR, DEP and SPL messages, or\n\nthe actual or estimated time of departure from the first point shown in the Route Field ( see Field Type 15) in FPL messages derived from flight plans filed in the air, as shown by the letters AFIL in ( a)."
+  defp alr_tooltip("speed"), do: "Cruising speed ( maximum 5 characters)\n\nINSERT the True Air Speed for the first or the whole cruising portion of the flight, in terms of:\n- Kilometres per hour, expressed as K followed by 4 figures\n  ( e.g. K0830), or\n- Knots, expressed as N followed by 4 figures ( e.g. N0485), or\n- True Mach number, when so prescribed by the appropriate\n  ATS authority, to the nearest hundredth of unit Mach,\n  expressed as M followed by 3 figures ( e.g M082)."
+  defp alr_tooltip("level"), do: "Cruising level ( maximum 5 characters)\n\nINSERT the planned cruising level for the first or the whole portion of the route to be flown, in terms if:\n- Flight level, expressed as F followed by 3 figures ( e.g.\n  F085; F330), or\n- *Standard Metric Level in tens of metres, expressed as\n  S followed by 4 figures ( e.g. S1130), or\n- Altitude in hundreds of feet, expressed as A followed by\n  3 figures ( e.g. A045; A100), or\n- Altitude in tens of metres, expressed as M followed by 4\n  figures ( e.g. M0840), or\n- for uncontrolled VFR flights, the letters VFR.\n\n*When so prescribed by the appropriate ATS authorities."
   defp alr_tooltip("route") do
     """
-    Route (including changes of speed, level and/or flight rules)
+    Route ( including changes of speed, level and/or flight rules)
 
     Flights along designated ATS routes
-    1. ATS route (2 to 7 characters)
+    1. ATS route ( 2 to 7 characters)
       The coded designator assigned to the route or route segment
       including, where appropriate, the coded designator
       assigned to the standard departure or arrival route
-      (e.g. BCN1, B1, R14, UB10, KODAP2A)
+      ( e.g. BCN1, B1, R14, UB10, KODAP2A)
 
-    2. Significant point (2 to 11 characters)
-       The coded designator (2 to 5 chars) assigned to the point
-       (e.g. LN, MAY, HADDY), or if no coded designator has been
+    2. Significant point ( 2 to 11 characters)
+       The coded designator ( 2 to 5 chars) assigned to the point
+       ( e.g. LN, MAY, HADDY), or if no coded designator has been
        assigned, one of the following ways:
-       - Degress only (7 chars), e.g. 46N078W
-       - Degress and minutes (11 chars), e.g. 4620N07805W
+       - Degress only ( 7 chars), e.g. 46N078W
+       - Degress and minutes ( 11 chars), e.g. 4620N07805W
        - Bearing distance from significant point, e.g. DUB180040
 
-    3. Change of speed or level (maximum 21 characters)
-       The point at which a change of speed (5% TAS or 0.01 Mach
+    3. Change of speed or level ( maximum 21 characters)
+       The point at which a change of speed ( 5% TAS or 0.01 Mach
        or more) or a change of level is planned to commence,
-       expressed exactly as in (2) above.
+       expressed exactly as in ( 2) above.
        e.g. LN/N0284A045; MAY/N0305F330; HADDY/
        N0420F330; 4602N07805W/N0500F350; 46N078W/
        M082F330; DUB180040/N0350M0840
 
-    4. Change of flight rules (maximum 3 characters)
+    4. Change of flight rules ( maximum 3 characters)
        The point at which the change of flight rules is planned,
-       expressed exactly as in (2) or (3) above as appropriate,
+       expressed exactly as in ( 2) or ( 3) above as appropriate,
        followed by a space and one of the following:
        - VFR if from IFR to VFR    - IFR if from VFR to IFR
        e.g. LN VFR; LN/N0284A050 IFR
 
-    5. Cruise climb (maximum 28 characters)
+    5. Cruise climb ( maximum 28 characters)
        e.g. C/48N050W/M082F290F350; C/48N050W/
        M082F290PLUS; C/52N050W/M220F580F620;
     """
@@ -3668,23 +3703,23 @@ defmodule TpWeb.Views do
   defp alr_tooltip("second_alternate"), do: alr_tooltip("alternate")
 
   defp alr_tooltip("sts"), do: "Reason for special handling by ATS, e.g. a search and rescue mission, as follows:\n\nALTRV:\tfor a flight operated in accordance with an altitude reservation;\nATFMX:\tfor a flight approved for exemption from ATFM measures by the appropriate ATS authority;\nFFR:\tfire-fighting;\nFLTCK:\tflight check for calibration of navaids;\nHAZMAT:for a flight carrying hazardous material;\nHEAD:\ta flight with Head of State status;\nHOSP:\tfor medical flight declared by medical authorities;\nHUM:\tfor a flight operating on a humanitarian mission;\nMARSA:for a flight for which a military entity assumes responsibility for separation of military aircraft;\nMEDEVAC: for a life critical medical emergency evacuation;\nNONRVSM: for non-RVSM capable flight intending to operate in RVSM airspace;\nSAR:\tfor a flight engaged in a search and rescue mission;\nSTATE:\tfor a flight engaged in military, customs or police services."
-  defp alr_tooltip("pbn"), do: "Indication of RNAV and/or RNP capabilities. Include as many of the descriptors below, as apply to the flight, up to maximum 8 entries, i.e. a total of not more than 16 characters.\n\nRNAV SPECIFICATION\nA1: RNAV 10 (RNP 10)\tC1: RNAV 2 all permitted sensors\nB1: RNAV 5 all permitted sensors\tC2: RNAV 2 GNSS\nC3: RNAV 2 DME/DME\nB2: RNAV 5 GNSS\tC4: RNAV 2 DME/DME/IRU\nB3: RNAV 5 DME/DME\tD1: RNAV 1 all permitted sensors\nB4: RNAV 5 VOR/DME\tD2: RNAV 1 GNSS\nB5: RNAV 5 INS or IRS\tD3: RNAV 1 DME/DME\nB6: RNAV 5 LORANC\tD4: RNAV 1 DME/DME/IRU\n\nRNP SPECIFICATION\nL1: RNP 4\tS1: RNP APCH\nO1: Basic RNP 1 all permitted sensors\tS2: RNP APCH with BAR-VNAV\nO2: Basic RNP 1 GNSS\tT1: RNP AR APCH with RF (special auth. req.)\nO3: Basic RNP 1 DME/DME\tT2: RNP AR APCH without RF (special auth. req.)\nO4: Basic RNP 1 DME/DME/IRU\n\nCombinations of alphanumeric characters not indicated above are reserved.\n\n- If B1, B2, C1, C2, D1, D2, O1 or O2 are filed, then a 'G' must be included in Field 10a\n- If B1, B3, C1, C3, D1, D3, O1 or O3 are filed, then a 'D' must be included in Field 10a\n- If B1 or B4 is filed, then an 'O' or 'S' and a 'D' must be included in Field 10a (i.e., 'OD' or 'SD' must appear in 10a)\n- If B1, B5 or C1 are filed, then an 'I' must be included in Field 10a; and\n- If C1, C4, D1, D4, O1 or O4 are filed, then a 'D' and an 'I' must be included in Field 10a (i.e., 'DI' must appear in 10a)"
+  defp alr_tooltip("pbn"), do: "Indication of RNAV and/or RNP capabilities. Include as many of the descriptors below, as apply to the flight, up to maximum 8 entries, i.e. a total of not more than 16 characters.\n\nRNAV SPECIFICATION\nA1: RNAV 10 ( RNP 10)\tC1: RNAV 2 all permitted sensors\nB1: RNAV 5 all permitted sensors\tC2: RNAV 2 GNSS\nC3: RNAV 2 DME/DME\nB2: RNAV 5 GNSS\tC4: RNAV 2 DME/DME/IRU\nB3: RNAV 5 DME/DME\tD1: RNAV 1 all permitted sensors\nB4: RNAV 5 VOR/DME\tD2: RNAV 1 GNSS\nB5: RNAV 5 INS or IRS\tD3: RNAV 1 DME/DME\nB6: RNAV 5 LORANC\tD4: RNAV 1 DME/DME/IRU\n\nRNP SPECIFICATION\nL1: RNP 4\tS1: RNP APCH\nO1: Basic RNP 1 all permitted sensors\tS2: RNP APCH with BAR-VNAV\nO2: Basic RNP 1 GNSS\tT1: RNP AR APCH with RF ( special auth. req.)\nO3: Basic RNP 1 DME/DME\tT2: RNP AR APCH without RF ( special auth. req.)\nO4: Basic RNP 1 DME/DME/IRU\n\nCombinations of alphanumeric characters not indicated above are reserved.\n\n- If B1, B2, C1, C2, D1, D2, O1 or O2 are filed, then a 'G' must be included in Field 10a\n- If B1, B3, C1, C3, D1, D3, O1 or O3 are filed, then a 'D' must be included in Field 10a\n- If B1 or B4 is filed, then an 'O' or 'S' and a 'D' must be included in Field 10a ( i.e., 'OD' or 'SD' must appear in 10a)\n- If B1, B5 or C1 are filed, then an 'I' must be included in Field 10a; and\n- If C1, C4, D1, D4, O1 or O4 are filed, then a 'D' and an 'I' must be included in Field 10a ( i.e., 'DI' must appear in 10a)"
   defp alr_tooltip("nav"), do: "Significant data related to navigation equipment, other than specified in PBN/, as required by the appropriate ATS authority. Indicate GNSS augmentation under this indicator, with a space between two or more methods of augmentation, e.g. NAV/GBAS SBAS."
   defp alr_tooltip("com"), do: "Indicate communications applications or capabilities not specified in Item 10a."
   defp alr_tooltip("dat"), do: "Indicate data applications or capabilities not specified in Item 10a."
   defp alr_tooltip("sur"), do: "Include surveillance applications or capabilities not specified in Item 10b."
-  defp alr_tooltip("dep_info"), do: "Name and location of departure aerodrome, if ZZZZ is inserted in Item 13, or the ATS unit from which supplementary flight plan data can be obtained, if AFIL is inserted in Item 13. For aerodromes not listed in the relevant AIP, indicate location as follows:\n\nWith 4 figures describing latitude in degrees and tens and units of minutes followed by 'N' (North) or 'S' (South), followed by 5 figures describing longitude in degrees and tens and units of minutes, followed by 'E' (East) or 'W' (West). Make up the correct number of figures, where necessary, by insertion of zeros, e.g. 4620N07805W (11 characters).\n\nOR, Bearing and distance from the nearest significant point, as follows:\n\nThe identification of the significant point followed by the bearing from the point in the form of 3 figures giving degrees magnetic, followed by the distance from the point in the form of 3 figures expressing nautical miles. In areas of high latitude where it is determined by the appropriate authority that reference to degrees magnetic is impractical, degrees true may be used. Make up the correct number of figures, where necessary, by insertion of zeros, e.g. a point of 180 degrees magnetic at a distance of 40 nautical miles from VOR 'DUB' should be expressed as DUB180040.\n\nOR, The first point of the route (name or LAT/LONG) or the marker radio beacon, if the aircraft has not taken off from an aerodrome."
+  defp alr_tooltip("dep_info"), do: "Name and location of departure aerodrome, if ZZZZ is inserted in Item 13, or the ATS unit from which supplementary flight plan data can be obtained, if AFIL is inserted in Item 13. For aerodromes not listed in the relevant AIP, indicate location as follows:\n\nWith 4 figures describing latitude in degrees and tens and units of minutes followed by 'N' ( North) or 'S' ( South), followed by 5 figures describing longitude in degrees and tens and units of minutes, followed by 'E' ( East) or 'W' ( West). Make up the correct number of figures, where necessary, by insertion of zeros, e.g. 4620N07805W ( 11 characters).\n\nOR, Bearing and distance from the nearest significant point, as follows:\n\nThe identification of the significant point followed by the bearing from the point in the form of 3 figures giving degrees magnetic, followed by the distance from the point in the form of 3 figures expressing nautical miles. In areas of high latitude where it is determined by the appropriate authority that reference to degrees magnetic is impractical, degrees true may be used. Make up the correct number of figures, where necessary, by insertion of zeros, e.g. a point of 180 degrees magnetic at a distance of 40 nautical miles from VOR 'DUB' should be expressed as DUB180040.\n\nOR, The first point of the route ( name or LAT/LONG) or the marker radio beacon, if the aircraft has not taken off from an aerodrome."
   defp alr_tooltip("dest_info"), do: "Name and location of destination aerodrome, if ZZZZ is inserted in Item 16. For aerodromes not listed in the relevant AIP, indicate location in LAT/LONG or bearing and distance from the nearest significant point, as described under DEP/."
-  defp alr_tooltip("dof"), do: "The date of flight departure in six figure format (YYMMDD, where YY equals the year, MM equals the month and DD equals the day)."
+  defp alr_tooltip("dof"), do: "The date of flight departure in six figure format ( YYMMDD, where YY equals the year, MM equals the month and DD equals the day)."
   defp alr_tooltip("reg"), do: "The nationality or common mark and registration mark of the aircraft, if different from the aircraft identification in field AIRCRAFT ID."
   defp alr_tooltip("eet_detail"), do: "Significant point of FIR boundary designators and accumulated estimated elapsed times from take-off to such points or FIR boundaries, when so prescribed on the basis of regional air navigation agreements, or by the appropriate ATS authority.\n\ne.g., EET/CAP0745 XYZ080 or EET/EINN0204"
   defp alr_tooltip("sel"), do: "SELCAL Code, for aircraft so equipped. A single string of four letters."
   defp alr_tooltip("typ"), do: "Type(s) of aircraft, preceded if necessary without a space by number(s) of aircraft and separated by one space, if ZZZZ is inserted in Item 9.\n\ne.g., TYP/2F15 5F5 3B2"
-  defp alr_tooltip("code"), do: "Aircraft address (expressed in the form of an alphanumerical code of six hexadecimal characters) when required by the appropriate ATS authority. Example: 'F00001' is the lowest aircraft address contained in the specific block administered by ICAO."
-  defp alr_tooltip("dle"), do: "Enroute delay or holding, insert the significant point(s) on the route where a delay is planned to occur, followed by the length of delay using four figure time in hours and minutes (hhmm).\n\ne.g., DLE/MDG0030"
+  defp alr_tooltip("code"), do: "Aircraft address ( expressed in the form of an alphanumerical code of six hexadecimal characters) when required by the appropriate ATS authority. Example: 'F00001' is the lowest aircraft address contained in the specific block administered by ICAO."
+  defp alr_tooltip("dle"), do: "Enroute delay or holding, insert the significant point(s) on the route where a delay is planned to occur, followed by the length of delay using four figure time in hours and minutes ( hhmm).\n\ne.g., DLE/MDG0030"
   defp alr_tooltip("opr"), do: "ICAO designator or name of the aircraft operating agency, if different from the aircraft identification in item 7."
   defp alr_tooltip("orgn"), do: "The originator's 8 letter AFTN address or other appropriate contact details, in cases where the originator of the flight plan may not be readily identified, as required by the appropriate ATS authority."
-  defp alr_tooltip("per"), do: "Aircraft performance data, indicated by a single letter, as shown below:\n* Cat. A : < 169 km/h (91 kt) indicated airspeed (IAS)\n* Cat. B : 169 km/h (91 kt) or more but < 224 km/h (121 kt)\n* Cat. C : 224 km/h (121 kt) or more but < 261 km/h (141 kt)\n* Cat. D : 261 km/h (141 kt) or more but < 307 km/h (166 kt)\n* Cat. E : 307 km/h (166 kt) or more but < 391 km/h (211 kt)\n* Cat. H : Specific procedures for Helicopters"
+  defp alr_tooltip("per"), do: "Aircraft performance data, indicated by a single letter, as shown below:\n* Cat. A : < 169 km/h ( 91 kt) indicated airspeed ( IAS)\n* Cat. B : 169 km/h ( 91 kt) or more but < 224 km/h ( 121 kt)\n* Cat. C : 224 km/h ( 121 kt) or more but < 261 km/h ( 141 kt)\n* Cat. D : 261 km/h ( 141 kt) or more but < 307 km/h ( 166 kt)\n* Cat. E : 307 km/h ( 166 kt) or more but < 391 km/h ( 211 kt)\n* Cat. H : Specific procedures for Helicopters"
   defp alr_tooltip("altn_detail"), do: "Name of destination alternate aerodrome(s), if ZZZZ is inserted in Item 16. For aerodromes not listed in the relevant AIP, indicate location in LAT/LONG or bearing and distance from the nearest significant point, as described in DEP/."
   defp alr_tooltip("ralt"), do: "ICAO four letter indicator(s) for en-route alternate(s), as specified in Doc 7910, Location Indicators, or name(s) of en-route alternate aerodrome(s), if no indicator is allocated. For aerodromes not listed in the relevant AIP, indicate located in LAT/LONG or bearing and distance from the nearest significant point, as described in DEP/."
   defp alr_tooltip("talt"), do: "ICAO four letter indicator(s) for take-off alternate, as specified in Doc 7910, Location Indicators, or name of take-off alternate aerodrome, if no indicator is allocated. For aerodromes not listed in the relevant AIP, indicate located in LAT/LONG or bearing and distance from the nearest significant point, as described in DEP/."
@@ -3694,9 +3729,9 @@ defmodule TpWeb.Views do
   defp alr_tooltip("endurance"), do: "4 NUMERICS giving the fuel endurance in hours and minutes."
   defp alr_tooltip("pob"), do: "1, 2 or 3 NUMERICS giving the total number of persons on board, when so prescribed by the appropriate ATS authority."
   defp alr_tooltip("emergency_radio"), do: "Emergency Radio\n\nIndicate available emergency radio equipment: UHF 243.0 MHz, VHF 121.5 MHz, and/or ELT."
-  defp alr_tooltip("radio_uhf"), do: "Emergency Radio UHF\n\nIf frequency 243.0 MHz (UHF) is available."
-  defp alr_tooltip("radio_vhf"), do: "Emergency Radio VHF\n\nIf frequency 121.5 MHz (VHF) is available."
-  defp alr_tooltip("radio_elt"), do: "If emergency location beacon-aircraft (ELBA) is available."
+  defp alr_tooltip("radio_uhf"), do: "Emergency Radio UHF\n\nIf frequency 243.0 MHz ( UHF) is available."
+  defp alr_tooltip("radio_vhf"), do: "Emergency Radio VHF\n\nIf frequency 121.5 MHz ( VHF) is available."
+  defp alr_tooltip("radio_elt"), do: "If emergency location beacon-aircraft ( ELBA) is available."
   defp alr_tooltip("survival_equipment"), do: "Survival Equipment\n\nIndicate survival equipment carried: Polar, Desert, Maritime, and/or Jungle."
   defp alr_tooltip("survival_polar"), do: "If polar survival equipment is carried."
   defp alr_tooltip("survival_desert"), do: "If desert survival equipment is carried."
@@ -3711,7 +3746,7 @@ defmodule TpWeb.Views do
   defp alr_tooltip("dinghy_capacity"), do: "3 NUMERICS giving the total capacity, in persons carried, all of dinghies."
   defp alr_tooltip("dinghy_cover"), do: "Dinghy Cover\n\nIndicate if dinghies are covered."
   defp alr_tooltip("dinghy_colour"), do: "Dinghy Colour\n\nThe colour of the dinghies."
-  defp alr_tooltip("aircraft_colour"), do: "The colour of the aircraft.\nSignificant markings (this may include the aircraft registration)."
+  defp alr_tooltip("aircraft_colour"), do: "The colour of the aircraft.\nSignificant markings ( this may include the aircraft registration)."
   defp alr_tooltip("remarks"), do: "Plain language indicating any other survival equipment carried and any other useful remarks."
   defp alr_tooltip("pilot"), do: "The name of the pilot-in-command."
   defp alr_tooltip("sar_info"), do: "Alerting Search and Rescue Information\n\nThis field consists of the following specified sequence of elements separated by spaces. Any information not available should be shown as 'NIL' or 'NOT KNOWN' and not simply omitted."
@@ -3736,10 +3771,10 @@ defmodule TpWeb.Views do
 
   defp alr_equipment_modals do
     """
-    #{alr_equipment_modal("10a", "Equipment and Capabilities (Item 10a)", alr_10a_groups(), [
+    #{alr_equipment_modal("10a", "Equipment and Capabilities ( Item 10a)", alr_10a_groups(), [
       "Any alphanumeric characters not indicated above are reserved."
     ])}
-    #{alr_equipment_modal("10b", "Surveillance Equipment and Capabilities (Item 10b)", alr_10b_groups(), [
+    #{alr_equipment_modal("10b", "Surveillance Equipment and Capabilities ( Item 10b)", alr_10b_groups(), [
       "Enhanced surveillance capability is the ability of the aircraft to down-link aircraft derived data via a Mode S transponder.",
       "Alphanumeric characters not indicated above are reserved.",
       "Example: ADE3RV/HB2U2V2G1",
@@ -3801,7 +3836,7 @@ defmodule TpWeb.Views do
       ]},
       {"AND/OR INSERT one or more serviceable COM/NAV/approach aid equipment and capabilities", [
         {"A", "GBAS landing system"},
-        {"B", "LPV (APV with SBAS)"},
+        {"B", "LPV ( APV with SBAS )"},
         {"C", "LORAN C"},
         {"D", "DME"},
         {"E1", "FMC WPR ACARS"},
@@ -3815,14 +3850,14 @@ defmodule TpWeb.Views do
         {"J2", "CPDLC FANS 1/A HFDL"},
         {"J3", "CPDLC FANS 1/A VDL Mode A"},
         {"J4", "CPDLC FANS 1/A VDL Mode 2"},
-        {"J5", "CPDLC FANS 1/A SATCOM (INMARSAT)"},
-        {"J6", "CPDLC FANS 1/A SATCOM (MTSAT)"},
-        {"J7", "CPDLC FANS 1/A SATCOM (Iridium)"},
+        {"J5", "CPDLC FANS 1/A SATCOM ( INMARSAT )"},
+        {"J6", "CPDLC FANS 1/A SATCOM ( MTSAT )"},
+        {"J7", "CPDLC FANS 1/A SATCOM ( Iridium )"},
         {"K", "MLS"},
         {"L", "ILS"},
-        {"M1", "ATC RTF SATCOM (INMARSAT)"},
-        {"M2", "ATC RTF (MTSAT)"},
-        {"M3", "ATC RTF (Iridium)"},
+        {"M1", "ATC RTF SATCOM ( INMARSAT )"},
+        {"M2", "ATC RTF ( MTSAT )"},
+        {"M3", "ATC RTF ( Iridium )"},
         {"O", "VOR"},
         {"P1", "Reserved for RCP"},
         {"P2", "Reserved for RCP"},
@@ -3851,14 +3886,14 @@ defmodule TpWeb.Views do
         {"N", "No surveillance equipment for the route to be flown is carried, or the equipment is unserviceable"}
       ]},
       {"SSR Modes A and C", [
-        {"A", "Transponder - Mode A (4 digits - 4096 codes)"},
-        {"C", "Transponder - Mode A (4 digits - 4096 codes) and Mode C"}
+        {"A", "Transponder - Mode A ( 4 digits - 4096 codes )"},
+        {"C", "Transponder - Mode A ( 4 digits - 4096 codes) and Mode C"}
       ]},
       {"SSR Mode S", [
-        {"E", "Transponder - Mode S, including aircraft identification, pressure-altitude and extended squitter (ADS-B) capability"},
+        {"E", "Transponder - Mode S, including aircraft identification, pressure-altitude and extended squitter ( ADS-B) capability"},
         {"H", "Transponder - Mode S, including aircraft identification, pressure-altitude and enhanced surveillance capability"},
         {"I", "Transponder - Mode S, including aircraft identification, but no pressure-altitude capability"},
-        {"L", "Transponder - Mode S, including aircraft identification, pressure-altitude, extended squitter (ADS-B) and enhanced surveillance capability"},
+        {"L", "Transponder - Mode S, including aircraft identification, pressure-altitude, extended squitter ( ADS-B) and enhanced surveillance capability"},
         {"P", "Transponder - Mode S, including pressure-altitude, but no aircraft identification capability"},
         {"S", "Transponder - Mode S, including both pressure-altitude and aircraft identification capability"},
         {"X", "Transponder - Mode S, with neither aircraft identification nor pressure-altitude capability"}
@@ -3901,7 +3936,7 @@ defmodule TpWeb.Views do
   defp alr_pbn_groups do
     [
       {"RNAV SPECIFICATIONS", [
-        {"A1", "RNAV 10 (RNP 10)"},
+        {"A1", "RNAV 10 ( RNP 10 )"},
         {"B1", "RNAV 5 all permitted sensors"},
         {"B2", "RNAV 5 GNSS"},
         {"B3", "RNAV 5 DME/DME"},
@@ -3925,8 +3960,8 @@ defmodule TpWeb.Views do
         {"O4", "Basic RNP 1 DME/DME/IRU"},
         {"S1", "RNP APCH"},
         {"S2", "RNP APCH with BARO-VNAV"},
-        {"T1", "RNP AR APCH with RF (special authorization required)"},
-        {"T2", "RNP AR APCH without RF (special authorization required)"}
+        {"T1", "RNP AR APCH with RF ( special authorization required )"},
+        {"T2", "RNP AR APCH without RF ( special authorization required)"}
       ]}
     ]
   end
@@ -4013,7 +4048,7 @@ defmodule TpWeb.Views do
     link_up? = link.state == :up
     link_card = if link_up?, do: "ok", else: "warn"
     link_state = if link_up?, do: "Established", else: "Down"
-    check_text = if link_up?, do: "established", else: (link.reason || "down")
+    check_text = if link_up?, do: "established", else: ( link.reason || "down")
     link_pill = if link_up?, do: "up", else: "down"
     queue_count = safe_queue_count()
     queue_card = if is_integer(queue_count) and queue_count > 0, do: "warn", else: "ok"
@@ -4591,7 +4626,7 @@ defmodule TpWeb.Views do
   end
 
   defp wake_options(lists) do
-    (Map.get(lists, :wakes, []) ++ ["H", "M", "L", "J", "Y"])
+    ( Map.get(lists, :wakes, []) ++ ["H", "M", "L", "J", "Y"])
     |> uniq_present()
   end
 
@@ -4897,7 +4932,7 @@ defmodule TpWeb.Views do
 
     """
     <section id="RCF" class="aftn-window">
-      <div class="aftn-title"><i class="bi bi-broadcast-pin"></i><span>RCF (Radio Communication Failure) Message</span></div>
+      <div class="aftn-title"><i class="bi bi-broadcast-pin"></i><span>RCF ( Radio Communication Failure) Message</span></div>
       <form id="rcf-form" class="aftn-form" method="post" action="/messages/compose">
         <input type="hidden" name="compose_type" value="RCF">
         <input type="hidden" name="return_to" value="compose">
@@ -5047,7 +5082,7 @@ defmodule TpWeb.Views do
       </div>
     </div>
     <script>
-      (function () {
+      ( function ( ) {
         function byId(id) { return document.getElementById(id); }
         var latestMessageId = 0;
 
@@ -5063,14 +5098,14 @@ defmodule TpWeb.Views do
         function visibleAftn(value) {
           var text = String(value == null ? '' : value);
           var out = '';
-          for (var i = 0; i < text.length; i++) {
+          for ( var i = 0; i < text.length; i++) {
             var code = text.charCodeAt(i);
-            if (code === 1) out += '[SOH]';
-            else if (code === 2) out += '[STX]';
-            else if (code === 3) out += '[ETX]';
-            else if (code === 11) out += '[VT]';
-            else if (code === 13) out += String.fromCharCode(10);
-            else if (code === 10 && i > 0 && text.charCodeAt(i - 1) === 13) continue;
+            if ( code === 1) out += '[SOH]';
+            else if ( code === 2) out += '[STX]';
+            else if ( code === 3) out += '[ETX]';
+            else if ( code === 11) out += '[VT]';
+            else if ( code === 13) out += String.fromCharCode(10);
+            else if ( code === 10 && i > 0 && text.charCodeAt(i - 1) === 13) continue;
             else out += text.charAt(i);
           }
           return out;
@@ -5079,11 +5114,11 @@ defmodule TpWeb.Views do
         function visibleMonitorUdp(value) {
           var text = String(value == null ? '' : value);
           var out = '';
-          for (var i = 0; i < text.length; i++) {
+          for ( var i = 0; i < text.length; i++) {
             var code = text.charCodeAt(i);
-            if (code === 1 || code === 2 || code === 3 || code === 11) continue;
-            if (code === 13) out += String.fromCharCode(10);
-            else if (code === 10 && i > 0 && text.charCodeAt(i - 1) === 13) continue;
+            if ( code === 1 || code === 2 || code === 3 || code === 11) continue;
+            if ( code === 13) out += String.fromCharCode(10);
+            else if ( code === 10 && i > 0 && text.charCodeAt(i - 1) === 13) continue;
             else out += text.charAt(i);
           }
           return out;
@@ -5093,24 +5128,24 @@ defmodule TpWeb.Views do
           var text = visibleAftn(value || '').trim();
           limit = limit || 45;
           var lines = text.split('\\n');
-          if (lines.length > 2) return {text: lines.slice(0, 2).join('\\n') + '...', hasMore: true};
-          if (text.length > limit) return {text: text.slice(0, limit) + '...', hasMore: true};
+          if ( lines.length > 2) return {text: lines.slice(0, 2).join('\\n') + '...', hasMore: true};
+          if ( text.length > limit) return {text: text.slice(0, limit) + '...', hasMore: true};
           return {text: text, hasMore: false};
         }
 
         function composeMessageText(value) {
           var text = String(value == null ? '' : value);
           var stx = text.indexOf(String.fromCharCode(2));
-          if (stx >= 0) {
+          if ( stx >= 0) {
             text = text.slice(stx + 1);
             var etx = text.indexOf(String.fromCharCode(3));
-            if (etx >= 0) text = text.slice(0, etx);
+            if ( etx >= 0) text = text.slice(0, etx);
           }
           return visibleMonitorUdp(text).trim();
         }
 
         function composeAddresses(value) {
-          if (Array.isArray(value)) return value.filter(Boolean).join(' ');
+          if ( Array.isArray(value)) return value.filter(Boolean).join(' ');
           return String(value == null ? '' : value).trim();
         }
 
@@ -5128,9 +5163,9 @@ defmodule TpWeb.Views do
 
         function hasBellSignal(item) {
           var raw = String(item && item.raw != null ? item.raw : '');
-          for (var i = 0; i < raw.length; i++) {
+          for ( var i = 0; i < raw.length; i++) {
             var code = raw.charCodeAt(i);
-            if (code === 7 || code === 11) return true;
+            if ( code === 7 || code === 11) return true;
           }
           return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\u0007') !== -1 || raw.indexOf('\u000b') !== -1;
         }
@@ -5138,15 +5173,15 @@ defmodule TpWeb.Views do
         function playBellAlarm() {
           try {
             var AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContext) {
-              if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
+            if ( !AudioContext) {
+              if ( navigator.vibrate) navigator.vibrate([180, 80, 180]);
               return;
             }
             var context = window.__aftnBellAudioContext || new AudioContext();
             window.__aftnBellAudioContext = context;
-            if (context.state === 'suspended' && context.resume) context.resume();
+            if ( context.state === 'suspended' && context.resume) context.resume();
             var start = context.currentTime;
-            [0, 0.28, 0.56].forEach(function (offset) {
+            [0, 0.28, 0.56].forEach(function ( offset) {
               var osc = context.createOscillator();
               var gain = context.createGain();
               osc.type = 'sine';
@@ -5159,13 +5194,13 @@ defmodule TpWeb.Views do
               osc.start(start + offset);
               osc.stop(start + offset + 0.2);
             });
-            if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
-          } catch (_error) {}
+            if ( navigator.vibrate) navigator.vibrate([180, 80, 180]);
+          } catch ( _error) {}
         }
 
         function playBellAlarmForRows(rows) {
-          for (var i = 0; i < rows.length; i++) {
-            if (hasBellSignal(rows[i])) {
+          for ( var i = 0; i < rows.length; i++) {
+            if ( hasBellSignal(rows[i])) {
               playBellAlarm();
               return;
             }
@@ -5174,16 +5209,16 @@ defmodule TpWeb.Views do
 
         function updateHeaderTime() {
           var node = byId('header-time-value');
-          if (!node) return;
+          if ( !node) return;
           var now = new Date();
-          var pad = function (value) { value = String(value); return value.length < 2 ? '0' + value : value; };
+          var pad = function ( value) { value = String(value); return value.length < 2 ? '0' + value : value; };
           node.textContent = now.getUTCFullYear() + '-' + pad(now.getUTCMonth() + 1) + '-' + pad(now.getUTCDate()) + ' ' + pad(now.getUTCHours()) + ':' + pad(now.getUTCMinutes()) + ':' + pad(now.getUTCSeconds());
         }
 
         function monitorSource(item) {
           var ip = item && item.source_ip ? item.source_ip : '';
           var port = item && item.source_port ? item.source_port : '';
-          if (ip && port) return ip + ':' + port;
+          if ( ip && port) return ip + ':' + port;
           return ip || '';
         }
 
@@ -5248,15 +5283,15 @@ defmodule TpWeb.Views do
 
         function closeActionMenus(except) {
           var menus = document.querySelectorAll ? document.querySelectorAll('.action-menu.open') : [];
-          for (var i = 0; i < menus.length; i++) {
-            if (!except || menus[i] !== except) menus[i].classList.remove('open');
+          for ( var i = 0; i < menus.length; i++) {
+            if ( !except || menus[i] !== except) menus[i].classList.remove('open');
           }
         }
 
         function syncReturnToFields() {
           var value = window.location.pathname + window.location.search;
           var fields = document.querySelectorAll ? document.querySelectorAll('.js-return-to') : [];
-          for (var i = 0; i < fields.length; i++) fields[i].value = value;
+          for ( var i = 0; i < fields.length; i++) fields[i].value = value;
         }
 
         function interactiveTarget(target) {
@@ -5264,43 +5299,43 @@ defmodule TpWeb.Views do
         }
 
         function selectMessageRow(row) {
-          if (!row || !row.classList) return;
+          if ( !row || !row.classList) return;
           var selected = document.querySelectorAll ? document.querySelectorAll('tr.row-selected') : [];
-          for (var i = 0; i < selected.length; i++) {
-            if (selected[i] !== row) selected[i].classList.remove('row-selected');
+          for ( var i = 0; i < selected.length; i++) {
+            if ( selected[i] !== row) selected[i].classList.remove('row-selected');
           }
           row.classList.add('row-selected');
         }
 
         function openAftnFreeFromRow(row) {
-          if (!row) return;
+          if ( !row) return;
           var params = new URLSearchParams();
           params.set('form', 'AFTN_FREE');
           params.set('priority', row.getAttribute('data-compose-priority') || '');
           params.set('originator', row.getAttribute('data-compose-originator') || '');
           params.set('message', row.getAttribute('data-compose-message') || '');
           var addresses = String(row.getAttribute('data-compose-addresses') || '').trim().split(/\s+/);
-          for (var i = 0; i < addresses.length && i < 21; i++) {
-            if (addresses[i]) params.set('address_' + (i + 1), addresses[i]);
+          for ( var i = 0; i < addresses.length && i < 21; i++) {
+            if ( addresses[i]) params.set('address_' + ( i + 1), addresses[i]);
           }
           window.location.href = '/compose?' + params.toString();
         }
 
         function initLatestMessageId() {
           var body = byId('message-table-body');
-          if (!body || !body.querySelectorAll) return;
+          if ( !body || !body.querySelectorAll) return;
 
           var rows = body.querySelectorAll('button[data-message-id]');
-          for (var i = 0; i < rows.length; i++) {
+          for ( var i = 0; i < rows.length; i++) {
             var id = parseInt(rows[i].getAttribute('data-message-id'), 10);
-            if (!isNaN(id) && id > latestMessageId) latestMessageId = id;
+            if ( !isNaN(id) && id > latestMessageId) latestMessageId = id;
           }
         }
 
         function messagesApiUrl() {
           var params = new URLSearchParams(window.location.search || '');
           params.set('page', '1');
-          params.set('page_size', (byId('message-table-body') && byId('message-table-body').getAttribute('data-page-size')) || '15');
+          params.set('page_size', ( byId('message-table-body') && byId('message-table-body').getAttribute('data-page-size')) || '15');
           params.delete('after_id');
           params.delete('after_ts');
           params.delete('history');
@@ -5309,77 +5344,77 @@ defmodule TpWeb.Views do
 
         function pollMessages() {
           var body = byId('message-table-body');
-          if (!body) return;
+          if ( !body) return;
 
           var qp = new URLSearchParams(window.location.search || '');
           var onFirstPage = parseInt(qp.get('page') || '1', 10) <= 1;
           var hasCursor   = qp.get('after_id') || qp.get('after_ts') || qp.get('history');
-          if (!onFirstPage || hasCursor) return;
+          if ( !onFirstPage || hasCursor) return;
 
           fetch(messagesApiUrl(), {
             method: 'GET',
             headers: {'Accept': 'application/json'},
             credentials: 'same-origin'
           })
-            .then(function (response) {
-              if (!response.ok) throw new Error('messages failed');
+            .then(function ( response) {
+              if ( !response.ok) throw new Error('messages failed');
               return response.json();
             })
-            .then(function (payload) {
+            .then(function ( payload) {
               var rows = payload && payload.data ? payload.data : [];
               var fresh = [];
 
-              for (var i = 0; i < rows.length; i++) {
+              for ( var i = 0; i < rows.length; i++) {
                 var id = parseInt(rows[i].id, 10);
-                if (!isNaN(id) && !body.querySelector('[data-message-id="' + id + '"]')) fresh.push(rows[i]);
+                if ( !isNaN(id) && !body.querySelector('[data-message-id="' + id + '"]')) fresh.push(rows[i]);
               }
 
-              if (!fresh.length) return;
+              if ( !fresh.length) return;
               var empty = body.querySelector('.empty-row');
-              if (empty) empty.parentNode.removeChild(empty);
+              if ( empty) empty.parentNode.removeChild(empty);
 
-              for (var index = fresh.length - 1; index >= 0; index--) {
+              for ( var index = fresh.length - 1; index >= 0; index--) {
                 body.insertAdjacentHTML('afterbegin', messageRow(fresh[index]));
                 var freshId = parseInt(fresh[index].id, 10);
-                if (!isNaN(freshId) && freshId > latestMessageId) latestMessageId = freshId;
+                if ( !isNaN(freshId) && freshId > latestMessageId) latestMessageId = freshId;
               }
 
               var limit = parseInt(body.getAttribute('data-page-size') || '15', 10);
               var tableRows = body.querySelectorAll ? body.querySelectorAll('tr') : [];
-              for (var rowIndex = limit; rowIndex < tableRows.length; rowIndex++) tableRows[rowIndex].parentNode.removeChild(tableRows[rowIndex]);
+              for ( var rowIndex = limit; rowIndex < tableRows.length; rowIndex++) tableRows[rowIndex].parentNode.removeChild(tableRows[rowIndex]);
             })
-            .catch(function () {});
+            .catch(function ( ) {});
         }
 
         function pollUdpMonitor() {
           var body = byId('udp-monitor-body');
-          if (!body) return;
+          if ( !body) return;
 
           fetch('/api/udp-monitor', {
             method: 'GET',
             headers: {'Accept': 'application/json'},
             credentials: 'same-origin'
           })
-            .then(function (response) {
-              if (!response.ok) throw new Error('monitor failed');
+            .then(function ( response) {
+              if ( !response.ok) throw new Error('monitor failed');
               return response.json();
             })
-            .then(function (payload) {
+            .then(function ( payload) {
               var rows = payload && payload.data ? payload.data : [];
-              if (!rows.length) return;
+              if ( !rows.length) return;
 
               playBellAlarmForRows(rows);
 
               var html = '';
-              for (var i = rows.length - 1; i >= 0; i--) html += monitorRow(rows[i]);
+              for ( var i = rows.length - 1; i >= 0; i--) html += monitorRow(rows[i]);
 
-              if (body.querySelector && body.querySelector('.udp-empty')) body.innerHTML = '';
+              if ( body.querySelector && body.querySelector('.udp-empty')) body.innerHTML = '';
               body.insertAdjacentHTML('afterbegin', html);
 
               var items = body.querySelectorAll ? body.querySelectorAll('.udp-item') : [];
-              for (var index = 10; index < items.length; index++) items[index].parentNode.removeChild(items[index]);
+              for ( var index = 10; index < items.length; index++) items[index].parentNode.removeChild(items[index]);
             })
-            .catch(function () {});
+            .catch(function ( ) {});
         }
 
         function pollStatus() {
@@ -5388,15 +5423,15 @@ defmodule TpWeb.Views do
 
         function openModal() {
           var modal = byId('message-modal');
-          if (!modal) return;
-          if (modal.classList) modal.classList.add('open');
-          else if (String(modal.className).indexOf('open') < 0) modal.className += ' open';
+          if ( !modal) return;
+          if ( modal.classList) modal.classList.add('open');
+          else if ( String(modal.className).indexOf('open') < 0) modal.className += ' open';
         }
 
         function closeModal() {
           var modal = byId('message-modal');
-          if (!modal) return;
-          if (modal.classList) modal.classList.remove('open');
+          if ( !modal) return;
+          if ( modal.classList) modal.classList.remove('open');
           else modal.className = String(modal.className).split('open').join('');
         }
 
@@ -5404,7 +5439,7 @@ defmodule TpWeb.Views do
           var body = byId('message-modal-body');
           var title = byId('message-modal-title');
           var template = byId('message-detail-' + id);
-          if (!body || !title || !template) return false;
+          if ( !body || !title || !template) return false;
           title.textContent = 'Message #' + id;
           body.innerHTML = template.innerHTML;
           return true;
@@ -5413,7 +5448,7 @@ defmodule TpWeb.Views do
         function renderFromApi(id) {
           var body = byId('message-modal-body');
           var title = byId('message-modal-title');
-          if (!body || !title) return;
+          if ( !body || !title) return;
 
           title.textContent = 'Message #' + id;
           body.innerHTML = '<div class="muted">Loading message #' + escapeHtml(id) + '...</div>';
@@ -5423,11 +5458,11 @@ defmodule TpWeb.Views do
             headers: {'Accept': 'application/json'},
             credentials: 'same-origin'
           })
-            .then(function (response) {
-              if (!response.ok) throw new Error('Message tidak ditemukan / gagal dimuat. HTTP ' + response.status);
+            .then(function ( response) {
+              if ( !response.ok) throw new Error('Message tidak ditemukan / gagal dimuat. HTTP ' + response.status);
               return response.json();
             })
-            .then(function (message) {
+            .then(function ( message) {
               title.textContent = 'Message #' + message.id;
               body.innerHTML =
                 '<dl class="modal-grid">' +
@@ -5448,69 +5483,69 @@ defmodule TpWeb.Views do
                 '</dl>' +
                 '<pre class="modal-raw">' + escapeHtml(visibleAftn(message.raw_text)) + '</pre>';
             })
-            .catch(function (error) {
+            .catch(function ( error) {
               body.innerHTML = '<div class="modal-error">' + escapeHtml(error.message) + '</div>';
             });
         }
 
-        window.showMessagePopup = function (id) {
-          if (!id) return false;
+        window.showMessagePopup = function ( id) {
+          if ( !id) return false;
           openModal();
-          if (!renderFromTemplate(id)) renderFromApi(id);
+          if ( !renderFromTemplate(id)) renderFromApi(id);
           return false;
         };
 
-        window.showMessagePopupFromButton = function (button) {
-          if (!button) return false;
+        window.showMessagePopupFromButton = function ( button) {
+          if ( !button) return false;
           return window.showMessagePopup(button.getAttribute('data-message-id'));
         };
 
-        window.toggleActionMenuFromButton = function (button, event) {
-          if (event && event.preventDefault) event.preventDefault();
-          if (event && event.stopPropagation) event.stopPropagation();
-          if (!button) return false;
+        window.toggleActionMenuFromButton = function ( button, event) {
+          if ( event && event.preventDefault) event.preventDefault();
+          if ( event && event.stopPropagation) event.stopPropagation();
+          if ( !button) return false;
 
           var menu = button.closest ? button.closest('.action-menu') : null;
-          if (!menu) return false;
+          if ( !menu) return false;
 
           var willOpen = !(menu.classList && menu.classList.contains('open'));
           closeActionMenus(menu);
-          if (willOpen && menu.classList) menu.classList.add('open');
+          if ( willOpen && menu.classList) menu.classList.add('open');
           return false;
         };
 
-        window.handleMessageRowClick = function (event, row) {
-          var target = event && (event.target || event.srcElement);
-          if (!row || interactiveTarget(target)) return false;
+        window.handleMessageRowClick = function ( event, row) {
+          var target = event && ( event.target || event.srcElement);
+          if ( !row || interactiveTarget(target)) return false;
           selectMessageRow(row);
           return false;
         };
 
-        window.handleMessageRowDblClick = function (event, row) {
-          var target = event && (event.target || event.srcElement);
-          if (!row || interactiveTarget(target)) return false;
-          if (event && event.preventDefault) event.preventDefault();
-          if (event && event.stopPropagation) event.stopPropagation();
+        window.handleMessageRowDblClick = function ( event, row) {
+          var target = event && ( event.target || event.srcElement);
+          if ( !row || interactiveTarget(target)) return false;
+          if ( event && event.preventDefault) event.preventDefault();
+          if ( event && event.stopPropagation) event.stopPropagation();
           selectMessageRow(row);
           openAftnFreeFromRow(row);
           return false;
         };
 
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function ( event) {
           var target = event.target;
           var toggle = target && target.closest ? target.closest('.js-action-toggle') : null;
 
-          if (toggle) {
+          if ( toggle) {
             return window.toggleActionMenuFromButton(toggle, event);
           }
 
           var button = target;
 
-          while (button && button !== document && !(button.className && String(button.className).indexOf('js-show-message') >= 0)) {
+          while ( button && button !== document && !(button.className && String(button.className).indexOf('js-show-message') >= 0)) {
             button = button.parentNode;
           }
 
-          if (button && button !== document && button.getAttribute) {
+          if ( button && button !== document && button.getAttribute) {
             event.preventDefault();
             closeActionMenus();
             window.showMessagePopupFromButton(button);
@@ -5518,31 +5553,31 @@ defmodule TpWeb.Views do
           }
 
           var row = target && target.closest ? target.closest('tr[data-message-id]') : null;
-          if (row && !interactiveTarget(target)) selectMessageRow(row);
+          if ( row && !interactiveTarget(target)) selectMessageRow(row);
 
-          if (target && (target.id === 'clear-udp-monitor' || (target.closest && target.closest('#clear-udp-monitor')))) {
+          if ( target && ( target.id === 'clear-udp-monitor' || ( target.closest && target.closest('#clear-udp-monitor')))) {
             event.preventDefault();
             var monitor = byId('udp-monitor-body');
-            if (monitor) monitor.innerHTML = udpEmptyHtml();
+            if ( monitor) monitor.innerHTML = udpEmptyHtml();
             return false;
           }
 
-          if (target && target.id === 'message-modal') closeModal();
-          if (target && target.id === 'message-modal-close') closeModal();
-          if (!(target && target.closest && target.closest('.action-menu'))) closeActionMenus();
+          if ( target && target.id === 'message-modal') closeModal();
+          if ( target && target.id === 'message-modal-close') closeModal();
+          if ( !(target && target.closest && target.closest('.action-menu'))) closeActionMenus();
         });
 
-        document.addEventListener('keydown', function (event) {
-          if (event.key === 'Escape' || event.keyCode === 27) {
+        document.addEventListener('keydown', function ( event) {
+          if ( event.key === 'Escape' || event.keyCode === 27) {
             closeModal();
             closeActionMenus();
           }
         });
 
-        document.addEventListener('dblclick', function (event) {
+        document.addEventListener('dblclick', function ( event) {
           var target = event.target;
           var row = target && target.closest ? target.closest('tr[data-message-id]') : null;
-          if (!row || interactiveTarget(target)) return;
+          if ( !row || interactiveTarget(target)) return;
           return window.handleMessageRowDblClick(event, row);
         });
 
