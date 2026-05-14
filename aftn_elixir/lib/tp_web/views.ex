@@ -24,11 +24,11 @@ defmodule TpWeb.Views do
         textarea{width:100%;min-height:130px}
         form{padding:12px} button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:8px 12px;font-weight:600}
         label{display:block;font-size:12px;color:#435466;font-weight:600;margin-bottom:4px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.field{margin-bottom:8px}.field input,.field select{width:100%}
-        .filters{display:flex;flex-wrap:wrap;gap:8px;padding:12px;border-bottom:1px solid #e4e8ee;align-items:end;background:#fbfcfd;max-width:100%;box-sizing:border-box}.filters .field{margin-bottom:0;min-width:0}.filters .filter-cid{flex:0 0 72px}.filters .filter-seq{flex:0 0 90px}.filters .filter-text{flex:1 1 220px}.filters .filter-date{flex:0 0 145px}.filters .filter-filed{flex:1 1 130px}.filters .filter-select{flex:0 0 112px}.filters input,.filters select{width:100%;height:34px}.filters button,.filters .clear-filter{height:34px;align-self:end;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;flex:0 0 auto}.filters .clear-filter{background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:4px;padding:0 12px;font-size:12px;font-weight:700}.filters .clear-filter:hover{background:#edf4fa;text-decoration:none}.filters .search-label{font-size:11px;color:#435466;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+        .filters{display:flex;flex-wrap:wrap;gap:8px;padding:12px;border-bottom:1px solid #e4e8ee;align-items:end;background:#fbfcfd;max-width:100%;box-sizing:border-box}.filters .field{margin-bottom:0;min-width:0}.filters .filter-cid{flex:0 0 72px}.filters .filter-seq{flex:0 0 90px}.filters .filter-text{flex:1 1 220px}.filters .filter-date{flex:0 0 145px}.filters .filter-filed{flex:1 1 130px}.filters .filter-select{flex:0 0 112px}.filters input,.filters select{width:100%;height:34px}.filters button,.filters .clear-filter{height:36px;align-self:end;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;flex:0 0 auto;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1}.filters button{background:#14324a;color:white;border:1px solid #14324a}.filters button:hover{background:#195b86;border-color:#195b86}.filters .clear-filter{background:white;color:#17202a;border:1px solid #cbd3dc}.filters .clear-filter:hover{background:#edf4fa;text-decoration:none}.filters button i,.filters .clear-filter i{font-size:15px;line-height:1}.filters .search-label{font-size:11px;color:#435466;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
         .notice{margin:12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}
         .message-cell{max-width:560px}.message-preview{display:inline;white-space:pre-wrap;word-break:break-word}.read-more{display:inline;border:0;background:transparent;color:#195b86;padding:0 0 0 6px;font-size:12px;font-weight:700;cursor:pointer}.read-more:hover{text-decoration:underline}.muted{color:#6d7b88}.events{padding:12px}.event{border-bottom:1px solid #edf0f3;padding:8px 0}
-        .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:7px 9px}.status-summary{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:10px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto;display:flex;align-items:center}.status-actions a{height:34px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:0 12px;font-size:13px;font-weight:700;line-height:1;white-space:nowrap;min-width:76px}.status-actions a:hover{text-decoration:none;background:#195b86}
+        .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:7px 9px}.status-summary{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:12px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto;display:flex;align-items:center}.status-actions a{height:34px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:0 12px;font-size:13px;font-weight:700;line-height:1;white-space:nowrap;min-width:76px}.status-actions a:hover{text-decoration:none;background:#195b86}
         .udp-monitor{margin-top:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:#fbfcfd;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.udp-monitor-body{padding:9px}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:110px;overflow:auto;white-space:pre-wrap;font-size:12px;line-height:1.15}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px}
         @media(max-width:900px){main{grid-template-columns:1fr}.grid2,.grid4{grid-template-columns:1fr}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.filters .field,.filters .filter-cid,.filters .filter-seq,.filters .filter-text,.filters .filter-date,.filters .filter-filed,.filters .filter-select{flex:auto}.filters button,.filters .clear-filter{width:100%}}@media(max-width:560px){.filters{grid-template-columns:1fr}}
       </style>
@@ -202,12 +202,12 @@ defmodule TpWeb.Views do
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}.actions{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;align-items:center;margin:-12px -12px 12px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10)}.subhead{background:#f0f3f6;border:1px solid #e4e8ee;border-radius:4px;padding:8px;margin:4px 0 10px;font-size:13px;color:#435466}
         .compose-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start}.compose-main{min-width:0}.compose-side{position:sticky;top:12px;min-width:0}.compose-side .udp-monitor{margin:0;background:white;border:1px solid #d8dee6;border-radius:8px;overflow:hidden;box-shadow:0 12px 28px rgba(20,50,74,.08)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee;background:#fbfcfd}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.icon-button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.udp-monitor-body{padding:9px;max-height:calc(100vh - 178px);overflow:auto}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:150px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.2}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px;background:#fbfcfd}
-        .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;min-width:0;font-size:13px;font-weight:700;cursor:pointer}.amo-tool i{font-size:16px}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
-        .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.tx-id-display{min-height:34px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;background:#f0f3f6;color:#14324a;padding:7px 9px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:900;display:flex;align-items:center}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
+        .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;height:36px;padding:0 14px;box-sizing:border-box;min-width:0;font-size:13px;font-weight:700;line-height:1;cursor:pointer}.amo-tool i{font-size:15px;line-height:1}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
+        .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;height:36px;padding:0 14px;box-sizing:border-box;font-size:13px;font-weight:700;line-height:1;cursor:pointer}.aftn-tool i{font-size:15px;line-height:1}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.tx-id-display{min-height:34px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;background:#f0f3f6;color:#14324a;padding:7px 9px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:900;display:flex;align-items:center}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
         .alr-scroll{overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.equipment-control .equipment-open{width:40px;flex:0 0 40px;background:white;color:#14324a;border:1px solid #cbd3dc;border-left:0;border-radius:0 4px 4px 0;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-control .equipment-open:hover{background:#edf4fa}.equipment-control input{border-top-right-radius:0;border-bottom-right-radius:0}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
         .equipment-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(10,18,28,.52);align-items:center;justify-content:center;padding:16px}.equipment-modal.open{display:flex}.equipment-card{width:min(760px,96vw);max-height:90vh;background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden}.equipment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.equipment-head strong{font-size:14px}.equipment-x{background:transparent;color:white;border:0;border-radius:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-body{padding:12px;overflow:auto}.equipment-group{border:1px solid #e4e8ee;border-radius:6px;margin-bottom:10px;overflow:hidden}.equipment-group-title{background:#f0f3f6;color:#14324a;font-size:12px;font-weight:900;text-transform:uppercase;padding:7px 9px}.equipment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.equipment-row{display:grid;grid-template-columns:22px 48px 1fr;gap:7px;align-items:center;margin:0;padding:7px 9px;border-top:1px solid #edf0f3;cursor:pointer;color:#17202a;font-size:12px;font-weight:600}.equipment-row:nth-child(odd){border-right:1px solid #edf0f3}.equipment-row:hover{background:#edf4fa}.equipment-row input{width:auto}.equipment-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:900;color:#14324a}.equipment-desc{font-weight:600;color:#435466}.equipment-notes{background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:8px 10px;color:#5f4400;font-size:12px}.equipment-notes p{margin:0 0 5px}.equipment-notes p:last-child{margin-bottom:0}.equipment-actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-top:1px solid #e4e8ee;flex-wrap:wrap}
         .rcf-body{border:1px solid #d8dee6;background:#fbfcfd;border-radius:6px;padding:12px;margin-top:10px}.rcf-row-main{grid-template-columns:1.25fr 1.2fr 1.1fr .8fr .8fr}.rcf-message-type input:first-of-type{max-width:64px}.rcf-message-type input:not(:first-of-type){min-width:0}.rcf-radio textarea{min-height:74px}.rcf-filled{max-width:260px;margin-top:10px}
-        main{max-width:1560px;padding:14px}form{padding:10px}h2{font-size:15px;padding:11px 14px}button{padding:8px 12px;font-size:13px}textarea,input,select{padding:7px 9px;font-size:13px;min-height:34px}textarea{min-height:78px}label{font-size:12px;margin-bottom:4px}.field{margin-bottom:8px}.grid2,.grid4{gap:8px}.toolbar{gap:8px;margin-bottom:10px}.toolbar a{font-size:13px;padding:7px 10px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:8px;padding:8px 10px}.aftn-tool,.amo-tool{gap:7px;padding:8px 11px;font-size:13px}.aftn-tool i,.amo-tool i{font-size:16px}.aftn-title,.amo-title{font-size:15px;padding:11px 14px}.aftn-title i,.amo-title i{font-size:18px}.aftn-body,.amo-body{padding:12px}.aftn-required-note{font-size:12px;margin-bottom:9px}.aftn-topline{grid-template-columns:170px;gap:9px;margin-bottom:9px}.tx-id-display{min-height:34px;padding:7px 9px}.aftn-card,.rcf-body,.form-band{padding:10px;margin-bottom:10px}.aftn-card-title{font-size:12px;margin-bottom:8px}.aftn-address-row{grid-template-columns:90px 1fr;gap:12px}.aftn-address-grid,.address-grid{gap:6px}.aftn-address-grid input,.address-grid input{padding:6px 7px;min-height:33px}.aftn-meta{grid-template-columns:145px 155px 1fr 102px;gap:8px;margin-top:9px}.aftn-bell{height:34px;display:flex;align-items:center;gap:7px;font-weight:800;color:#14324a}.aftn-bell i{font-size:16px;color:#b26a00}.time-control{gap:6px}.time-button{width:36px}.alr-scroll{}.alr-page{padding:10px}.alr-page-title{font-size:13px;margin-bottom:8px}.alr-grid{gap:8px}.alr-row{gap:8px}.alr-checks{gap:9px;min-height:34px}.alr-checks label,.alr-inline-check{font-size:13px}.alr-text{min-height:58px}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-mark{min-width:26px;padding:0 7px}.rcf-radio textarea{min-height:70px}.rcf-filled{margin-top:7px}.aftn-textarea{min-height:285px;font-size:14px}.amo-footer,.aftn-footer{margin-top:10px;padding-top:10px}.amo-filled input,.aftn-filled input{height:34px}
+        main{max-width:1560px;padding:14px}form{padding:10px}h2{font-size:15px;padding:11px 14px}button{padding:8px 12px;font-size:13px}textarea,input,select{padding:7px 9px;font-size:13px;min-height:34px}textarea{min-height:78px}label{font-size:12px;margin-bottom:4px}.field{margin-bottom:8px}.grid2,.grid4{gap:8px}.toolbar{gap:8px;margin-bottom:10px}.toolbar a{font-size:13px;padding:7px 10px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:8px;padding:8px 10px}.aftn-tool,.amo-tool{gap:7px;height:36px;padding:0 14px;font-size:13px}.aftn-tool i,.amo-tool i{font-size:15px}.aftn-title,.amo-title{font-size:15px;padding:11px 14px}.aftn-title i,.amo-title i{font-size:18px}.aftn-body,.amo-body{padding:12px}.aftn-required-note{font-size:12px;margin-bottom:9px}.aftn-topline{grid-template-columns:170px;gap:9px;margin-bottom:9px}.tx-id-display{min-height:34px;padding:7px 9px}.aftn-card,.rcf-body,.form-band{padding:10px;margin-bottom:10px}.aftn-card-title{font-size:12px;margin-bottom:8px}.aftn-address-row{grid-template-columns:90px 1fr;gap:12px}.aftn-address-grid,.address-grid{gap:6px}.aftn-address-grid input,.address-grid input{padding:6px 7px;min-height:33px}.aftn-meta{grid-template-columns:145px 155px 1fr 102px;gap:8px;margin-top:9px}.aftn-bell{height:34px;display:flex;align-items:center;gap:7px;font-weight:800;color:#14324a}.aftn-bell i{font-size:16px;color:#b26a00}.time-control{gap:6px}.time-button{width:36px}.alr-scroll{}.alr-page{padding:10px}.alr-page-title{font-size:13px;margin-bottom:8px}.alr-grid{gap:8px}.alr-row{gap:8px}.alr-checks{gap:9px;min-height:34px}.alr-checks label,.alr-inline-check{font-size:13px}.alr-text{min-height:58px}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-mark{min-width:26px;padding:0 7px}.rcf-radio textarea{min-height:70px}.rcf-filled{margin-top:7px}.aftn-textarea{min-height:285px;font-size:14px}.amo-footer,.aftn-footer{margin-top:10px;padding-top:10px}.amo-filled input,.aftn-filled input{height:34px}
         .amo-toolbar,.aftn-toolbar{position:sticky!important;top:0!important;z-index:1200!important;background:rgba(247,249,251,.96)!important;backdrop-filter:blur(6px);border-bottom:1px solid #d8dee6!important;box-shadow:0 10px 22px rgba(20,50,74,.16)!important}.amo-window,.aftn-window{overflow:visible!important}.compose-layout,.compose-main{overflow:visible!important}.compose-main{padding-bottom:96px}.amo-body,.aftn-body{padding-bottom:20px}.amo-footer,.aftn-footer{margin-bottom:18px}.section-head{background:#f7f9fb!important;border-radius:8px 8px 0 0}
         @media(max-width:900px){.grid2,.grid4,.send-row,.header-meta{grid-template-columns:1fr}}
         @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup,.rcf-row-main{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
@@ -237,7 +237,7 @@ defmodule TpWeb.Views do
     """
   end
 
-  def queue_page(messages, q \\ "", notice \\ nil) do
+  def queue_page(messages, q \\ "", notice \\ nil, pagination \\ %{}) do
     """
     <!doctype html>
     <html lang="id">
@@ -247,18 +247,18 @@ defmodule TpWeb.Views do
       <title>Queue / Not Delivered Messages</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <style>
-        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
+        body{margin:0;padding-bottom:104px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
-        header a{color:white}.queue-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.queue-back:hover{text-decoration:none;color:#d8e8f3}.queue-back i{font-size:18px;line-height:1}.queue-title{display:inline-flex;align-items:center;gap:8px}.queue-title i{color:#9bd0ff;font-size:18px;line-height:1}#{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px}
+        header a{color:white}.queue-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.queue-back:hover{text-decoration:none;color:#d8e8f3}.queue-back i{font-size:18px;line-height:1}.queue-title{display:inline-flex;align-items:center;gap:8px}.queue-title i{color:#9bd0ff;font-size:18px;line-height:1}#{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px 16px 112px}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         table{width:100%;border-collapse:collapse;font-size:13px} th,td{border-bottom:1px solid #edf0f3;padding:7px 8px;text-align:left;vertical-align:top}
         th{background:#f0f3f6;color:#435466;font-weight:700;white-space:nowrap}.table-wrap{overflow:auto}.muted{color:#6d7b88}.empty-row{text-align:center;color:#6d7b88;padding:18px}.message-preview{white-space:pre-wrap;word-break:break-word}
         form.queue-search{display:flex;align-items:end;gap:8px;padding:12px;border-bottom:1px solid #e4e8ee;background:#fbfcfd;flex-wrap:wrap}
         label{display:block;font-size:12px;color:#435466;font-weight:700;margin-bottom:4px} input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:8px;background:white}
-        button,.btn{display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:8px 12px;font-weight:700;cursor:pointer}.queue-search .btn{height:36px;box-sizing:border-box;padding:0 12px;font-size:13px;line-height:1}.btn.secondary{background:white;color:#17202a;border:1px solid #cbd3dc}.btn:hover{text-decoration:none;background:#195b86}.btn.secondary:hover{background:#edf4fa}
-        .queue-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px;font-weight:700;color:#195b86}tbody tr[data-message-id]{cursor:pointer}tbody tr.row-selected td{background:#eaf4ff}
+        button,.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#14324a;color:white;border:1px solid #14324a;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;height:36px;box-sizing:border-box}.queue-search .btn i{font-size:15px;line-height:1}.btn.secondary{background:white;color:#17202a;border:1px solid #cbd3dc}.btn:hover{text-decoration:none;background:#195b86;border-color:#195b86}.btn.secondary:hover{background:#edf4fa}
+        .queue-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px;font-weight:700;color:#195b86;flex-wrap:wrap}.queue-footer-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.queue-pagination{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.queue-pagination a,.queue-pagination span{border:1px solid #cbd3dc;background:white;border-radius:4px;padding:6px 9px;color:#17202a;font-weight:700}.queue-pagination a:hover{background:#edf4fa;text-decoration:none}.queue-pagination .active{background:#14324a;color:white;border-color:#14324a}.queue-pagination .disabled{color:#9aa6b2;background:#f0f3f6}.queue-page-info{color:#435466;font-weight:700}tbody tr[data-message-id]{cursor:pointer}tbody tr.row-selected td{background:#eaf4ff}
         .table-actions{white-space:nowrap;text-align:center;vertical-align:middle}.btn-small{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#14324a;color:white;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}.btn-small:hover{background:#195b86;text-decoration:none}.icon-action{width:30px;height:30px;padding:0}.icon-action svg,.btn-small svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.btn-small .pdf-text{font-size:7px;font-weight:800;fill:currentColor;stroke:none}.btn-outline{background:white;color:#435466;border:1px solid #cbd3dc}.btn-outline:hover{background:#edf4fa;color:#14324a}.inline-form{display:inline;margin:0;padding:0}
         .action-menu{position:relative;display:inline-flex}.action-menu .js-action-toggle{background:transparent;color:#435466;border:0;border-radius:0;box-shadow:none}.action-menu .js-action-toggle:hover{background:transparent;color:#14324a}.action-popup{display:none;position:absolute;right:0;top:28px;z-index:60;min-width:132px;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.18);padding:5px}.action-menu.open .action-popup{display:block}.action-item{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;background:white;color:#17202a;border:0;border-radius:4px;padding:7px 9px;font-size:12px;font-weight:700;text-align:left;cursor:pointer}.action-item:hover{background:#edf4fa;text-decoration:none}.action-item.danger{color:#b42318}.action-item svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.action-item .pdf-text{font-size:7px;font-weight:800;fill:currentColor;stroke:none}
         .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(10,18,28,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal-card{background:white;border-radius:8px;box-shadow:0 22px 60px rgba(0,0,0,.28);width:min(920px,96vw);max-height:90vh;overflow:hidden;border:1px solid #d8dee6}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.modal-head h3{margin:0;font-size:15px}.modal-close{background:transparent;color:white;border:0;font-size:22px;line-height:1;cursor:pointer;padding:0 4px}.modal-body{padding:14px;overflow:auto;max-height:calc(90vh - 48px)}.modal-grid{display:grid;grid-template-columns:140px minmax(0,1fr) 140px minmax(0,1fr);gap:0;border:1px solid #edf0f3;border-bottom:0;margin-bottom:12px}.modal-grid dt,.modal-grid dd{border-bottom:1px solid #edf0f3;margin:0;padding:7px 9px}.modal-grid dt{background:#f0f3f6;color:#435466;font-weight:700}.modal-raw{margin:0;border:1px solid #d8dee6;border-radius:6px;background:#fbfcfd;padding:12px;white-space:pre-wrap;max-height:430px;overflow:auto}.modal-error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11;border-radius:4px;padding:10px 12px}@media(max-width:720px){.modal-grid{grid-template-columns:130px minmax(0,1fr)}}
@@ -277,8 +277,8 @@ defmodule TpWeb.Views do
               <label>AIRCRAFT ID</label>
               <input name="q" value="#{html(q)}" autofocus>
             </div>
-            <button class="btn" type="submit">Search</button>
-            <a class="btn secondary" href="/queue">Clear</a>
+            <button class="btn" type="submit"><i class="bi bi-search"></i><span>Search</span></button>
+            <a class="btn secondary" href="/queue"><i class="bi bi-eraser"></i><span>Clear</span></a>
           </form>
         </section>
         <section>
@@ -291,7 +291,10 @@ defmodule TpWeb.Views do
           </div>
           #{message_detail_templates(messages)}
           <div class="queue-footer">
-            <span>#{length(messages)} Element(s) in this table</span>
+            <div class="queue-footer-left">
+              <span>#{html(Map.get(pagination, :total_count, length(messages)))} Element(s) in this table</span>
+              #{queue_pagination_controls(q, pagination)}
+            </div>
             #{queue_delete_all_form(q)}
           </div>
         </section>
@@ -386,13 +389,13 @@ defmodule TpWeb.Views do
         .format-col{display:flex;flex-direction:column;gap:5px}
         .radio-label{display:inline-flex;align-items:center;gap:5px;font-size:13px;cursor:pointer}
         .tst-btns{margin-top:6px;gap:6px}
-        .btn-ok{background:#14324a;color:white;border:0;border-radius:4px;padding:7px 18px;font-size:13px;font-weight:700;cursor:pointer}.btn-ok:hover{background:#195b86}
-        .btn-cancel{background:white;color:#435466;border:1px solid #cbd3dc;border-radius:4px;padding:6px 14px;font-size:13px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center}.btn-cancel:hover{background:#edf4fa;text-decoration:none}
+        .btn-ok{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;height:36px;background:#14324a;color:white;border:1px solid #14324a;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer}.btn-ok:hover{background:#195b86;border-color:#195b86}
+        .btn-cancel{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;height:36px;background:white;color:#435466;border:1px solid #cbd3dc;border-radius:6px;font-size:13px;font-weight:700;line-height:1;text-decoration:none}.btn-cancel:hover{background:#edf4fa;text-decoration:none}.btn-ok i,.btn-cancel i{font-size:15px;line-height:1}
         .tst-status{font-size:12px;font-weight:700;color:#195b86;min-height:16px;padding:4px 0 0}
         .tst-status.err{color:#b42318}.tst-status.ok{color:#1c6b4f}
         .svc-row{display:flex;gap:8px;align-items:flex-start;margin-top:6px}
         .tst-svc{flex:1;min-height:70px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:7px 8px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical;text-transform:uppercase}
-        .btn-send{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;align-self:flex-start}.btn-send:hover{background:#17583f}
+        .btn-send{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;height:36px;background:#1c6b4f;color:white;border:1px solid #1c6b4f;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;white-space:nowrap;align-self:flex-start;box-sizing:border-box}.btn-send:hover{background:#17583f;border-color:#17583f}
         .outbox-pre{margin:0;padding:12px;max-height:200px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.4;background:#fbfcfd}
         .outbox-empty{padding:12px;color:#6d7b88;font-size:13px}
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
@@ -433,8 +436,8 @@ defmodule TpWeb.Views do
             </div>
             <div class="tst-row tst-btns">
               <span class="tst-label"></span>
-              <button class="btn-ok" type="button" id="btn-test-ok">OK</button>
-              <a class="btn-cancel" href="/">Cancel</a>
+              <button class="btn-ok" type="button" id="btn-test-ok"><i class="bi bi-check2-circle"></i><span>OK</span></button>
+             
             </div>
             <div class="tst-status" id="tst-status"></div>
           </div>
@@ -452,7 +455,8 @@ defmodule TpWeb.Views do
               <textarea class="tst-svc" name="svc_message" rows="4" placeholder="SVC TRAF message..."></textarea>
             </div>
              <br>
-              <button class="btn-send" type="submit">Send</button>
+              <button class="btn-send" type="submit"><i class="bi bi-send"></i><span>Send</span></button>
+               <a class="btn-cancel" href="/"><i class="bi bi-x-circle"></i><span>Cancel</span></a>
           </form>
         </section>
 
@@ -646,7 +650,7 @@ defmodule TpWeb.Views do
               <input class="mean-input" name="mean" value="#{html(mean)}" placeholder="Search meaning..." autocomplete="off">
             </div>
             <button class="btn btn-search" type="submit"><i class="bi bi-search"></i> Search</button>
-            <a class="btn btn-clear" href="/icao-abbreviations"><i class="bi bi-x-lg"></i> Clear</a>
+            <a class="btn btn-clear" href="/icao-abbreviations"><i class="bi bi-eraser"></i><span>Clear</span></a>
           </form>
         </section>
         <section>
@@ -766,7 +770,7 @@ defmodule TpWeb.Views do
               <input class="warn-date" type="date" name="date_to" value="#{html(eff_date_to)}">
             </div>
             <button class="btn btn-search" type="submit"><i class="bi bi-search"></i> Search</button>
-            <a class="btn btn-clear" href="/warning-messages"><i class="bi bi-x-lg"></i> Clear</a>
+            <a class="btn btn-clear" href="/warning-messages"><i class="bi bi-eraser"></i><span>Clear</span></a>
           </form>
         </section>
         <section>
@@ -792,7 +796,7 @@ defmodule TpWeb.Views do
                   <input type="hidden" name="reason"  value="#{html(reason)}">
                   <input type="hidden" name="date_fr" value="#{html(eff_date_fr)}">
                   <input type="hidden" name="date_to" value="#{html(eff_date_to)}">
-                  <button class="btn-sm btn-delall" type="submit">
+                  <button class="btn btn-delall" type="submit">
                     <i class="bi bi-trash"></i> Delete All
                   </button>
                 </form>
@@ -897,7 +901,7 @@ defmodule TpWeb.Views do
               <input class="ac-input-sm" name="q18" value="#{html(q18)}" maxlength="7" autocomplete="off" placeholder="PKBDO">
             </div>
             <button class="btn btn-search" type="submit"><i class="bi bi-search" style="margin-right:4px"></i>Search</button>
-            <a class="btn btn-clear" href="/aircraft-reg"><i class="bi bi-x-circle" style="margin-right:4px"></i>Clear</a>
+            <a class="btn btn-clear" href="/aircraft-reg"><i class="bi bi-eraser"></i><span>Clear</span></a>
           </form>
         </section>
         <section>
@@ -915,13 +919,13 @@ defmodule TpWeb.Views do
             <div style="display:flex;align-items:center;gap:10px">
               <span class="ac-count">#{total} Element(s) in this table</span>
               <div class="ac-actions">
-                <button class="btn-sm btn-edit" onclick="regEdit()"><i class="bi bi-pencil"></i> Edit</button>
-                <button class="btn-sm btn-del"  onclick="regDelete()"><i class="bi bi-trash"></i> Delete</button>
+                <button class="btn btn-edit" onclick="regEdit()"><i class="bi bi-pencil-square"></i> Edit</button>
+                <button class="btn btn-del"  onclick="regDelete()"><i class="bi bi-trash"></i> Delete</button>
                 <form class="inline-form" method="post" action="/aircraft-reg/delete-all"
                       onsubmit="return confirm('Delete all #{total} record(s)?')">
                   <input type="hidden" name="q18" value="#{html(q18)}">
                   <input type="hidden" name="q9b" value="#{html(q9b)}">
-                  <button class="btn-sm btn-delall"><i class="bi bi-trash3"></i> Delete All</button>
+                  <button class="btn btn-delall"><i class="bi bi-trash3"></i> Delete All</button>
                 </form>
               </div>
             </div>
@@ -929,7 +933,7 @@ defmodule TpWeb.Views do
               <span class="pg-info">Page #{page} of #{total_pages}</span>
               #{next_link}#{last_link}
               <span class="pg-goto">Go to <input type="number" id="reg-goto" value="#{page}" min="1" max="#{total_pages}">
-                <button class="btn-sm" type="button" onclick="regGoto()">Go</button>
+                <button class="btn" type="button" onclick="regGoto()">Go</button>
               </span>
             </div>
           </div>
@@ -955,9 +959,9 @@ defmodule TpWeb.Views do
             <input class="ac-input reg-input-xl" id="reg-type18Opr" maxlength="100" placeholder="GARUDA INDONESIA">
           </div>
           <div style="padding:0 12px 12px;display:flex;gap:6px">
-            <button class="btn-sm btn-save"   onclick="regSave()"><i class="bi bi-floppy"></i> Save</button>
-            <button class="btn-sm btn-update" onclick="regUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
-            <button class="btn-sm btn-clr"    onclick="regClear()"><i class="bi bi-x-circle"></i> Clear</button>
+            <button class="btn btn-save"   onclick="regSave()"><i class="bi bi-save"></i> Save</button>
+            <button class="btn btn-update" onclick="regUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
+            <button class="btn btn-clr"    onclick="regClear()"><i class="bi bi-eraser"></i> Clear</button>
           </div>
           <form id="reg-save-form" method="post" action="/aircraft-reg/save" style="display:none">
             <input type="hidden" id="rs-type18" name="type18"><input type="hidden" id="rs-type9b" name="type9b">
@@ -1120,7 +1124,7 @@ defmodule TpWeb.Views do
               <input class="ac-input-sm" name="dest" value="#{html(dest)}" maxlength="4" placeholder="WADD">
             </div>
             <button class="btn btn-search" type="submit"><i class="bi bi-search" style="margin-right:4px"></i>Search</button>
-            <a class="btn btn-clear" href="/routes"><i class="bi bi-x-circle" style="margin-right:4px"></i>Clear</a>
+            <a class="btn btn-clear" href="/routes"><i class="bi bi-eraser"></i><span>Clear</span></a>
           </form>
         </section>
         <section>
@@ -1138,13 +1142,13 @@ defmodule TpWeb.Views do
             <div style="display:flex;align-items:center;gap:10px">
               <span class="ac-count">#{total} Element(s) in this table</span>
               <div class="ac-actions">
-                <button class="btn-sm btn-edit" onclick="rteEdit()"><i class="bi bi-pencil"></i> Edit</button>
-                <button class="btn-sm btn-del"  onclick="rteDelete()"><i class="bi bi-trash"></i> Delete</button>
+                <button class="btn btn-edit" onclick="rteEdit()"><i class="bi bi-pencil-square"></i> Edit</button>
+                <button class="btn btn-del"  onclick="rteDelete()"><i class="bi bi-trash"></i> Delete</button>
                 <form class="inline-form" method="post" action="/routes/delete-all"
                       onsubmit="return confirm('Delete all #{total} record(s)?')">
                   <input type="hidden" name="dep" value="#{html(dep)}">
                   <input type="hidden" name="dest" value="#{html(dest)}">
-                  <button class="btn-sm btn-delall"><i class="bi bi-trash3"></i> Delete All</button>
+                  <button class="btn btn-delall"><i class="bi bi-trash3"></i> Delete All</button>
                 </form>
               </div>
             </div>
@@ -1175,9 +1179,9 @@ defmodule TpWeb.Views do
               <div class="rte-addr-grid" id="rte-addr-grid">#{addr_inputs.("af")}</div>
             </div>
             <div style="margin-top:10px;display:flex;gap:6px">
-              <button class="btn-sm btn-save"   onclick="rteSave()"><i class="bi bi-floppy"></i> Save</button>
-              <button class="btn-sm btn-update" onclick="rteUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
-              <button class="btn-sm btn-clr"    onclick="rteClear()"><i class="bi bi-x-circle"></i> Clear</button>
+              <button class="btn btn-save"   onclick="rteSave()"><i class="bi bi-save"></i> Save</button>
+              <button class="btn btn-update" onclick="rteUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
+              <button class="btn btn-clr"    onclick="rteClear()"><i class="bi bi-eraser"></i> Clear</button>
             </div>
           </div>
           <form id="rte-save-form"   method="post" action="/routes/save"  style="display:none">
@@ -1330,7 +1334,7 @@ defmodule TpWeb.Views do
         .ac-label{display:block;font-size:12px;color:#435466;font-weight:600;margin-bottom:2px}
         .ac-input-sm{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;width:80px}
         .ac-input-lg{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;width:300px}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer;height:34px;box-sizing:border-box}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;height:36px;box-sizing:border-box}.btn i{font-size:15px;line-height:1}
         .btn-search{background:#14324a;color:white}.btn-search:hover{background:#195b86}
         .btn-clear{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clear:hover{background:#edf4fa;text-decoration:none}
         table{width:100%;border-collapse:collapse;font-size:13px}
@@ -1342,7 +1346,7 @@ defmodule TpWeb.Views do
         .ac-empty{text-align:center;color:#6d7b88;padding:20px}
         .ac-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px}
         .ac-count{color:#195b86;font-weight:700}.ac-actions{display:flex;align-items:center;gap:6px}
-        .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}
+        .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;height:36px;box-sizing:border-box}.btn-sm i{font-size:15px;line-height:1}
         .btn-edit{background:#14324a;color:white}.btn-edit:hover{background:#195b86}
         .btn-del{background:#b42318;color:white}.btn-del:hover{background:#8a1f11}
         .btn-delall{background:white;color:#b42318;border:1px solid #b42318}.btn-delall:hover{background:#fff1f0}
@@ -1382,7 +1386,7 @@ defmodule TpWeb.Views do
               <input class="ac-input-lg" name="loc" value="#{html(loc)}" autocomplete="off" placeholder="e.g. JAKARTA">
             </div>
             <button class="btn btn-search" type="submit"><i class="bi bi-search" style="margin-right:4px"></i>Search</button>
-            <a class="btn btn-clear" href="/location-indicators"><i class="bi bi-x-circle" style="margin-right:4px"></i>Clear</a>
+            <a class="btn btn-clear" href="/location-indicators"><i class="bi bi-eraser"></i><span>Clear</span></a>
           </form>
         </section>
 
@@ -1404,13 +1408,13 @@ defmodule TpWeb.Views do
             <div style="display:flex;align-items:center;gap:12px">
               <span class="ac-count">#{total} Element(s) in this table</span>
               <div class="ac-actions">
-                <button class="btn-sm btn-edit" type="button" onclick="locEdit()"><i class="bi bi-pencil"></i> Edit</button>
-                <button class="btn-sm btn-del"  type="button" onclick="locDelete()"><i class="bi bi-trash"></i> Delete</button>
+                <button class="btn btn-edit" type="button" onclick="locEdit()"><i class="bi bi-pencil-square"></i> Edit</button>
+                <button class="btn btn-del"  type="button" onclick="locDelete()"><i class="bi bi-trash"></i> Delete</button>
                 <form class="inline-form" method="post" action="/location-indicators/delete-all"
                       onsubmit="return confirm('Delete all #{total} record(s) matching current filter?')">
                   <input type="hidden" name="q"   value="#{html(q)}">
                   <input type="hidden" name="loc" value="#{html(loc)}">
-                  <button class="btn-sm btn-delall" type="submit"><i class="bi bi-trash3"></i> Delete All</button>
+                  <button class="btn btn-delall" type="submit"><i class="bi bi-trash3"></i> Delete All</button>
                 </form>
               </div>
             </div>
@@ -1439,9 +1443,9 @@ defmodule TpWeb.Views do
                 <input class="ac-input-loc" id="loc-location" autocomplete="off" placeholder="Location name">
               </div>
               <div style="display:flex;gap:6px;align-self:flex-end">
-                <button class="btn-sm btn-save"   type="button" onclick="locSave()"><i class="bi bi-floppy"></i> Save</button>
-                <button class="btn-sm btn-update" type="button" onclick="locUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
-                <button class="btn-sm btn-clr"    type="button" onclick="locClear()"><i class="bi bi-x-circle"></i> Clear</button>
+                <button class="btn btn-save"   type="button" onclick="locSave()"><i class="bi bi-save"></i> Save</button>
+                <button class="btn btn-update" type="button" onclick="locUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
+                <button class="btn btn-clr"    type="button" onclick="locClear()"><i class="bi bi-eraser"></i> Clear</button>
               </div>
             </div>
             <form id="loc-save-form"   method="post" action="/location-indicators/save"   style="display:none">
@@ -1619,7 +1623,7 @@ defmodule TpWeb.Views do
         .ac-label{display:block;font-size:12px;color:#435466;font-weight:600;margin-bottom:2px}
         .ac-input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em}
         .ac-wake-sel{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:5px 7px;font-size:13px;height:34px;min-width:160px}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer;height:34px;box-sizing:border-box}.btn-search{background:#14324a;color:white}.btn-search:hover{background:#195b86}.btn-clear{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clear:hover{background:#edf4fa;text-decoration:none}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;height:36px;box-sizing:border-box}.btn i{font-size:15px;line-height:1}.btn-search{background:#14324a;color:white}.btn-search:hover{background:#195b86}.btn-clear{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clear:hover{background:#edf4fa;text-decoration:none}
         table{width:100%;border-collapse:collapse;font-size:13px}
         th,td{border-bottom:1px solid #edf0f3;padding:8px 12px;text-align:left;vertical-align:middle}
         th{background:#f0f3f6;color:#435466;font-weight:600;font-size:13px;white-space:nowrap}
@@ -1629,7 +1633,7 @@ defmodule TpWeb.Views do
         .ac-empty{text-align:center;color:#6d7b88;padding:20px}
         .ac-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px}
         .ac-count{color:#195b86;font-weight:700}.ac-actions{display:flex;align-items:center;gap:6px}
-        .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}.btn-edit{background:#14324a;color:white}.btn-edit:hover{background:#195b86}.btn-del{background:#b42318;color:white}.btn-del:hover{background:#8a1f11}.btn-delall{background:white;color:#b42318;border:1px solid #b42318}.btn-delall:hover{background:#fff1f0}
+        .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;height:36px;box-sizing:border-box}.btn-sm i{font-size:15px;line-height:1}.btn-edit{background:#14324a;color:white}.btn-edit:hover{background:#195b86}.btn-del{background:#b42318;color:white}.btn-del:hover{background:#8a1f11}.btn-delall{background:white;color:#b42318;border:1px solid #b42318}.btn-delall:hover{background:#fff1f0}
         .pg{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.pg-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#17202a;font-size:14px;text-decoration:none}.pg-btn:hover{background:#edf4fa;text-decoration:none}.pg-btn.disabled{color:#9aa6b2;background:#f0f3f6;pointer-events:none}.pg-info{font-size:13px;color:#435466;white-space:nowrap;padding:0 4px}.pg-goto{display:inline-flex;align-items:center;gap:4px;font-size:13px}.pg-goto input{width:44px;text-align:center;border:1px solid #cbd3dc;border-radius:4px;padding:4px 5px;font-size:13px}
         .ac-form-body{padding:12px}
         .ac-form-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:4px}
@@ -1659,7 +1663,7 @@ defmodule TpWeb.Views do
               #{wake_select.("wake", wake)}
             </div>
             <button class="btn btn-search" type="submit"><i class="bi bi-search"></i> Search</button>
-            <a class="btn btn-clear" href="/aircraft-types"><i class="bi bi-x-lg"></i> Clear</a>
+            <a class="btn btn-clear" href="/aircraft-types"><i class="bi bi-eraser"></i><span>Clear</span></a>
           </form>
         </section>
 
@@ -1681,7 +1685,7 @@ defmodule TpWeb.Views do
             <div style="display:flex;align-items:center;gap:12px">
               <span class="ac-count">#{total} Element(s) in this table</span>
               <div class="ac-actions">
-                <button class="btn btn-edit" type="button" id="btn-edit" onclick="acEdit()"><i class="bi bi-pencil"></i> Edit</button>
+                <button class="btn btn-edit" type="button" id="btn-edit" onclick="acEdit()"><i class="bi bi-pencil-square"></i> Edit</button>
                 <button class="btn btn-del" type="button" id="btn-delete" onclick="acDelete()"><i class="bi bi-trash"></i> Delete</button>
                 <form class="inline-form" method="post" action="/aircraft-types/delete-all"
                       onsubmit="return confirm('Delete all #{total} record(s) matching current filter?')">
@@ -1717,9 +1721,9 @@ defmodule TpWeb.Views do
                 #{wake_select.("ac-type9c-sel", "")}
               </div>
               <div style="display:flex;gap:6px;align-self:flex-end">
-                <button class="btn btn-save" type="button" onclick="acSave()"><i class="bi bi-floppy"></i> Save</button>
+                <button class="btn btn-save" type="button" onclick="acSave()"><i class="bi bi-save"></i> Save</button>
                 <button class="btn btn-update" type="button" onclick="acUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
-                <button class="btn btn-clr" type="button" onclick="acClear()"><i class="bi bi-x-circle"></i> Clear</button>
+                <button class="btn btn-clr" type="button" onclick="acClear()"><i class="bi bi-eraser"></i> Clear</button>
               </div>
             </div>
             <form id="ac-save-form" method="post" action="/aircraft-types/save" style="display:none">
@@ -1856,7 +1860,7 @@ defmodule TpWeb.Views do
         input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:8px;background:white}
         .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field{margin-bottom:10px}.field input[type=text],.field input[type=number]{width:100%}
         .radio-row{display:flex;align-items:center;gap:12px;min-height:36px}.radio-row label{display:flex;align-items:center;gap:5px;margin:0;font-weight:600;color:#17202a}
-        button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:9px 14px;font-weight:700}.actions{display:flex;gap:8px;align-items:center;margin-top:8px}.actions a{padding:9px 12px;border:1px solid #cbd3dc;border-radius:4px;background:white}
+        button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:9px 14px;font-weight:700}.actions{display:flex;gap:8px;align-items:center;margin-top:8px}.actions button,.actions a{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;height:36px;box-sizing:border-box;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;text-decoration:none}.actions button{background:#1c6b4f;color:white;border:1px solid #1c6b4f}.actions button:hover{background:#17583f;border-color:#17583f}.actions a{background:white;color:#435466;border:1px solid #cbd3dc}.actions a:hover{background:#edf4fa;text-decoration:none}.actions i{font-size:15px;line-height:1}
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .errors{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11;border-radius:4px;padding:10px 12px;margin:0 0 12px}
         @media(max-width:760px){.grid2,.grid4{grid-template-columns:1fr}}
@@ -1933,8 +1937,8 @@ defmodule TpWeb.Views do
             </div>
           </section>
           <div class="actions">
-            <button type="submit"> Save Setting</button>
-            <a href="/" class="btn-cancel" > Back</a>
+            <button type="submit"><i class="bi bi-save"></i><span>Save</span></button>
+            <a href="/"><i class="bi bi-x-circle"></i><span>Cancel</span></a>
           </div>
         </form>
       </main>
@@ -1982,8 +1986,7 @@ defmodule TpWeb.Views do
     <details class="top-menu">
       <summary>#{views_icon()}<span>Views</span></summary>
       <div class="top-submenu">
-        <a href="/"><i class="bi bi-envelope" style="margin-right:5px"></i>ATS Messages</a>
-        <a href="/?direction=inbound"><i class="bi bi-inbox" style="margin-right:5px"></i>Incoming Messages</a>
+        
         <a href="/icao-abbreviations"><i class="bi bi-book" style="margin-right:5px"></i>ICAO Abbreviations and Codes</a>
         <a href="/warning-messages"><i class="bi bi-exclamation-triangle" style="margin-right:5px"></i>Warning Messages</a>
       </div>
@@ -2150,7 +2153,7 @@ defmodule TpWeb.Views do
 
   defp status_footer_css do
     """
-    .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:7px 9px}.status-summary{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:10px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto;display:flex;align-items:center}.status-actions a{height:34px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:0 12px;font-size:13px;font-weight:700;line-height:1;white-space:nowrap;min-width:76px}.status-actions a:hover{text-decoration:none;background:#195b86}
+    .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:7px 9px}.status-summary{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:12px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto;display:flex;align-items:center}.status-actions a{height:34px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:0 12px;font-size:13px;font-weight:700;line-height:1;white-space:nowrap;min-width:76px}.status-actions a:hover{text-decoration:none;background:#195b86}
     """
   end
 
@@ -2186,7 +2189,7 @@ defmodule TpWeb.Views do
     .ac-input-sm{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;width:80px}
     .ac-input-lg{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;width:300px}
     .ac-input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer;height:34px;box-sizing:border-box}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;height:36px;box-sizing:border-box}.btn i{font-size:15px;line-height:1}
     .btn-search{background:#14324a;color:white}.btn-search:hover{background:#195b86}
     .btn-clear{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clear:hover{background:#edf4fa;text-decoration:none}
     table{width:100%;border-collapse:collapse;font-size:13px}
@@ -2198,7 +2201,7 @@ defmodule TpWeb.Views do
     .ac-empty{text-align:center;color:#6d7b88;padding:20px}
     .ac-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px}
     .ac-count{color:#195b86;font-weight:700}.ac-actions{display:flex;align-items:center;gap:6px}
-    .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}
+    .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;height:36px;box-sizing:border-box}.btn-sm i{font-size:15px;line-height:1}
     .btn-edit{background:#14324a;color:white}.btn-edit:hover{background:#195b86}
     .btn-del{background:#b42318;color:white}.btn-del:hover{background:#8a1f11}
     .btn-delall{background:white;color:#b42318;border:1px solid #b42318}.btn-delall:hover{background:#fff1f0}
@@ -2916,10 +2919,10 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="ALR">
         <div class="aftn-toolbar">
-          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
-          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
-          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
-          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-plus-fill"></i><span>Send+Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-fill"></i><span>Send</span></button>
+          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save"></i><span>Save</span></button>
+          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-eraser"></i><span>Clear</span></button>
           <a class="aftn-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
         <input type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
@@ -2953,10 +2956,10 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="FPL">
         <div class="aftn-toolbar">
-          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
-          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
-          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
-          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-plus-fill"></i><span>Send+Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-fill"></i><span>Send</span></button>
+          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save"></i><span>Save</span></button>
+          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-eraser"></i><span>Clear</span></button>
           <a class="aftn-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
         <input type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
@@ -3801,7 +3804,7 @@ defmodule TpWeb.Views do
         </div>
         <div class="equipment-actions">
           <button type="button" class="aftn-tool primary js-equipment-add"><i class="bi bi-plus-lg"></i><span>Add</span></button>
-          <button type="button" class="aftn-tool discard js-equipment-clear"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <button type="button" class="aftn-tool discard js-equipment-clear"><i class="bi bi-eraser"></i><span>Clear</span></button>
           <button type="button" class="aftn-tool close js-equipment-close"><i class="bi bi-x-lg"></i><span>Close</span></button>
         </div>
       </div>
@@ -3975,10 +3978,10 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="FREE">
         <div class="amo-toolbar">
-          <button class="amo-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
-          <button class="amo-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
-          <button class="amo-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
-          <button class="amo-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <button class="amo-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-plus-fill"></i><span>Send+Clear</span></button>
+          <button class="amo-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-fill"></i><span>Send</span></button>
+          <button class="amo-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save"></i><span>Save</span></button>
+          <button class="amo-tool discard js-clear-form" type="button"><i class="bi bi-eraser"></i><span>Clear</span></button>
           <a class="amo-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
         <input type="hidden" name="cid_seq" value="#{html(current_cid_seq())}" data-current-cid-seq>
@@ -4018,10 +4021,10 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="AMO">
         <div class="amo-toolbar">
-          <button class="amo-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
-          <button class="amo-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
-          <button class="amo-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
-          <button class="amo-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <button class="amo-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-plus-fill"></i><span>Send+Clear</span></button>
+          <button class="amo-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-fill"></i><span>Send</span></button>
+          <button class="amo-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save"></i><span>Save</span></button>
+          <button class="amo-tool discard js-clear-form" type="button"><i class="bi bi-eraser"></i><span>Clear</span></button>
           <a class="amo-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
         <div class="amo-body">
@@ -4098,7 +4101,7 @@ defmodule TpWeb.Views do
             <div id="status-destination-value" class="status-value">#{html(settings.destination_ip_address)}:#{html(settings.port)}</div>
           </div>
          
-          <div class="status-actions"><a href="/settings">Setting</a></div>
+          <div class="status-actions"><a href="/settings"> <i class="bi bi-gear" style="margin-right:5px"></i> Setting</a></div>
         </div>
       </div>
     </footer>
@@ -4286,6 +4289,55 @@ defmodule TpWeb.Views do
     """
   end
 
+  defp queue_pagination_controls(q, pagination) do
+    page = Map.get(pagination, :page, 1)
+    total_pages = Map.get(pagination, :total_pages, 1)
+
+    if total_pages <= 1 do
+      ~s(<span class="queue-page-info">Page #{html(page)} of #{html(total_pages)}</span>)
+    else
+      first_link = if page > 1, do: queue_page_link(q, 1, "&laquo;"), else: ~s(<span class="disabled">&laquo;</span>)
+      prev_link = if page > 1, do: queue_page_link(q, page - 1, "&lsaquo;"), else: ~s(<span class="disabled">&lsaquo;</span>)
+      next_link = if page < total_pages, do: queue_page_link(q, page + 1, "&rsaquo;"), else: ~s(<span class="disabled">&rsaquo;</span>)
+      last_link = if page < total_pages, do: queue_page_link(q, total_pages, "&raquo;"), else: ~s(<span class="disabled">&raquo;</span>)
+
+      """
+      <div class="queue-pagination">
+        #{first_link}
+        #{prev_link}
+        #{queue_page_number_links(q, page, total_pages)}
+        #{next_link}
+        #{last_link}
+        <span class="queue-page-info">Page #{html(page)} of #{html(total_pages)}</span>
+      </div>
+      """
+    end
+  end
+
+  defp queue_page_link(q, page, label) do
+    params = if q in [nil, ""], do: %{page: page}, else: %{q: q, page: page}
+    ~s(<a href="/queue?#{html(URI.encode_query(params))}">#{label}</a>)
+  end
+
+  defp queue_page_number_links(q, page, total_pages) do
+    1..total_pages
+    |> Enum.filter(fn number -> number == 1 or number == total_pages or abs(number - page) <= 2 end)
+    |> Enum.reduce({[], nil}, fn number, {items, previous} ->
+      gap = if previous && number - previous > 1, do: [~s(<span class="disabled">...</span>)], else: []
+
+      item =
+        if number == page do
+          ~s(<span class="active">#{html(number)}</span>)
+        else
+          queue_page_link(q, number, number)
+        end
+
+      {items ++ gap ++ [item], number}
+    end)
+    |> elem(0)
+    |> Enum.join("")
+  end
+
   defp queue_message_type(%{message_type: type}) when type in [nil, "", "FREE"], do: "FREE TEXT"
   defp queue_message_type(%{message_type: type}), do: type
 
@@ -4450,8 +4502,8 @@ defmodule TpWeb.Views do
        <div class="field filter-date"><label class="search-label">Date From</label><input type="date" name="date_from" value="#{html(date_from)}"></div>
       <div class="field filter-date"><label class="search-label">Date To</label><input type="date" name="date_to" value="#{html(date_to)}"></div>
     
-      <button type="submit"><i class="bi bi-search" style="margin-right:4px"></i>Filter</button>
-      <a class="clear-filter" href="/?page_size=#{html(page_size)}"><i class="bi bi-x-lg" style="margin-right:4px"></i>Clear</a>
+      <button type="submit"><i class="bi bi-funnel-fill"></i><span>Filter</span></button>
+      <a class="clear-filter" href="/?page_size=#{html(page_size)}"><i class="bi bi-eraser"></i><span>Clear</span></a>
     </form>
     """
   end
@@ -4726,10 +4778,10 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_form" value="AFTN_FREE">
         <input id="aftn-send-at" type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>
         <div class="aftn-toolbar">
-          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
-          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
-          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
-          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-plus-fill"></i><span>Send+Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-fill"></i><span>Send</span></button>
+          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save"></i><span>Save</span></button>
+          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-eraser"></i><span>Clear</span></button>
           <a class="aftn-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
         <div class="aftn-body">
@@ -4938,10 +4990,10 @@ defmodule TpWeb.Views do
         <input type="hidden" name="return_to" value="compose">
         <input type="hidden" name="return_form" value="RCF">
         <div class="aftn-toolbar">
-          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-check-fill"></i><span>Send+Clear</span></button>
-          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-check"></i><span>Send</span></button>
-          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save2"></i><span>Save</span></button>
-          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-arrow-counterclockwise"></i><span>Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send_clear"><i class="bi bi-send-plus-fill"></i><span>Send+Clear</span></button>
+          <button class="aftn-tool primary" type="submit" name="compose_action" value="send"><i class="bi bi-send-fill"></i><span>Send</span></button>
+          <button class="aftn-tool save" type="submit" name="compose_action" value="save"><i class="bi bi-save"></i><span>Save</span></button>
+          <button class="aftn-tool discard js-clear-form" type="button"><i class="bi bi-eraser"></i><span>Clear</span></button>
           <a class="aftn-tool close" href="/"><i class="bi bi-x-lg"></i><span>Close</span></a>
         </div>
         <input type="hidden" name="transmission_id" value="#{html(current_cid_seq())}" data-current-cid-seq>

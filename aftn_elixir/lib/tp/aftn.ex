@@ -34,6 +34,40 @@ defmodule Tp.Aftn do
     |> Repo.all()
   end
 
+  def queue_messages_page(opts \\ []) do
+    page_size = opts |> Keyword.get(:page_size, 15) |> parse_int(15) |> clamp(1, 200)
+    requested_page = opts |> Keyword.get(:page, 1) |> parse_int(1) |> max(1)
+    q = opts |> Keyword.get(:q, "") |> to_string() |> String.downcase()
+
+    base_query =
+      Message
+      |> where([m], m.direction == :outbound)
+      |> where([m], m.status in ["queued", "retrying"])
+      |> maybe_queue_search(q)
+
+    total_count = Repo.aggregate(base_query, :count, :id)
+    total_pages = total_count |> div_ceil(page_size) |> max(1)
+    page = min(requested_page, total_pages)
+    offset = (page - 1) * page_size
+
+    messages =
+      base_query
+      |> order_by([m], asc: m.next_attempt_at, asc: m.inserted_at)
+      |> offset(^offset)
+      |> limit(^page_size)
+      |> Repo.all()
+
+    {:ok,
+     messages,
+     %{
+       page: page,
+       page_size: page_size,
+       total_count: total_count,
+       total_pages: total_pages,
+       has_next: page < total_pages
+     }}
+  end
+
   def queue_count do
     Message
     |> where([m], m.direction == :outbound)

@@ -37,12 +37,13 @@ defmodule TpWeb.Router do
 
   get "/queue" do
     q = Map.get(conn.params, "q", "")
+    page = Map.get(conn.params, "page", "1")
 
-    case safe_queue_messages(q: q) do
-      {:ok, messages} ->
+    case safe_queue_messages_page(q: q, page: page) do
+      {:ok, messages, pagination} ->
         conn
         |> put_resp_content_type("text/html")
-        |> send_resp(200, TpWeb.Views.queue_page(messages, q, notice(conn.params)))
+        |> send_resp(200, TpWeb.Views.queue_page(messages, q, notice(conn.params), pagination))
 
       {:error, :database_not_migrated} ->
         conn
@@ -760,6 +761,15 @@ defmodule TpWeb.Router do
 
   defp safe_queue_messages(opts) do
     {:ok, Aftn.queue_messages(opts)}
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
+  end
+
+  defp safe_queue_messages_page(opts) do
+    Aftn.queue_messages_page(opts)
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
