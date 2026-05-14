@@ -11,7 +11,7 @@ defmodule Tp.Settings do
   def get_or_default do
     get()
   rescue
-    MyXQL.Error -> default_setting()
+    _ -> default_setting()
   end
 
   def update(attrs) do

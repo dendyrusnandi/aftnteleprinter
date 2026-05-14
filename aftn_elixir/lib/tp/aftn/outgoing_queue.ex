@@ -45,6 +45,9 @@ defmodule Tp.Aftn.OutgoingQueue do
           Logger.error("Failed to update outgoing message #{message.id}: #{inspect(changeset.errors)}")
       end
     end)
+  rescue
+    error ->
+      Logger.debug("OutgoingQueue drain skipped: #{Exception.message(error)}")
   end
 
   defp schedule do

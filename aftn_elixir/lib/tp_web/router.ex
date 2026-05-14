@@ -333,6 +333,80 @@ defmodule TpWeb.Router do
     end
   end
 
+  get "/test-message" do
+    settings = Settings.get_or_default()
+    recent = case safe_latest_messages(direction: "outbound", limit: 5) do
+      {:ok, msgs} -> msgs
+      _ -> []
+    end
+    conn
+    |> put_resp_content_type("text/html")
+    |> send_resp(200, TpWeb.Views.test_message_page(notice(conn.params), settings, recent))
+  end
+
+  post "/test-message/send-one" do
+    settings   = Settings.get_or_default()
+    destination = conn.params |> Map.get("address", "")    |> to_string() |> String.upcase() |> String.trim()
+    originator  = conn.params |> Map.get("originator", "") |> to_string() |> String.upcase() |> String.trim()
+    format      = Map.get(conn.params, "format", "qjh")
+
+    result =
+      with :ok <- validate_aftn_addr("Address", destination),
+           :ok <- validate_aftn_addr("Originator", originator) do
+        tx_id  = build_tx_id(settings)
+        filing = Calendar.strftime(DateTime.utc_now(), "%d%H%M")
+        body   = test_msg_body(format, originator)
+        params = %{"transmission_id" => tx_id, "priority" => "GG", "address_1" => destination,
+                   "originator" => originator, "filing_time" => filing, "message" => body}
+        attrs  = %{filed_by: "WEB_TEST", next_attempt_at: nil, udp_target_host: nil, udp_target_port: nil}
+
+        case Aftn.compose_and_enqueue("AFTN_FREE", params, attrs) do
+          {:ok, _}    -> Tp.Aftn.OutgoingQueue.kick(); :ok
+          {:error, e} -> {:error, e}
+        end
+      end
+
+    payload = case result do
+      :ok                        -> %{ok: true}
+      {:error, {:validation, e}} -> %{ok: false, error: Enum.join(e, ", ")}
+      {:error, e}                -> %{ok: false, error: inspect(e)}
+    end
+
+    conn
+    |> put_resp_content_type("application/json")
+    |> put_resp_header("cache-control", "no-store")
+    |> send_resp(200, Jason.encode!(payload))
+  end
+
+  post "/test-message/svc" do
+    settings  = Settings.get_or_default()
+    destination = conn.params |> Map.get("address", "")      |> to_string() |> String.upcase() |> String.trim()
+    originator  = conn.params |> Map.get("originator", "")   |> to_string() |> String.upcase() |> String.trim()
+    message     = conn.params |> Map.get("svc_message", "")  |> to_string() |> String.upcase() |> String.trim()
+
+    with :ok <- validate_aftn_addr("Address", destination),
+         :ok <- validate_aftn_addr("Originator", originator),
+         :ok <- (if message == "", do: {:error, "Message is required"}, else: :ok) do
+      tx_id  = build_tx_id(settings)
+      filing = Calendar.strftime(DateTime.utc_now(), "%d%H%M")
+      params = %{"transmission_id" => tx_id, "priority" => "FF", "address_1" => destination,
+                 "originator" => originator, "filing_time" => filing, "message" => message}
+      attrs  = %{filed_by: "WEB_SVC", next_attempt_at: nil, udp_target_host: nil, udp_target_port: nil}
+
+      case Aftn.compose_and_enqueue("AFTN_FREE", params, attrs) do
+        {:ok, _} ->
+          Tp.Aftn.OutgoingQueue.kick()
+          redirect(conn, "/test-message?info=#{URI.encode_www_form("SVC TRAF sent to #{destination}")}")
+        {:error, {:validation, errs}} ->
+          redirect(conn, "/test-message?error=#{URI.encode_www_form(Enum.join(errs, ", "))}")
+        {:error, reason} ->
+          redirect(conn, "/test-message?error=#{URI.encode_www_form(inspect(reason))}")
+      end
+    else
+      {:error, msg} -> redirect(conn, "/test-message?error=#{URI.encode_www_form(msg)}")
+    end
+  end
+
   match _ do
     send_resp(conn, 404, "not found")
   end
@@ -356,6 +430,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_latest_messages(opts) do
@@ -363,6 +439,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_queue_messages(opts) do
@@ -370,6 +448,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_queue_count do
@@ -377,6 +457,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_delete_message(id) do
@@ -388,6 +470,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_delete_all_messages(opts) do
@@ -395,6 +479,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_delete_queue_messages(opts) do
@@ -402,6 +488,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_message_page(opts) do
@@ -410,6 +498,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_message(id) do
@@ -418,6 +508,8 @@ defmodule TpWeb.Router do
     ArgumentError -> {:ok, nil}
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:error, :database_not_migrated}
   end
 
   defp safe_settings do
@@ -425,6 +517,8 @@ defmodule TpWeb.Router do
   rescue
     error in MyXQL.Error ->
       if undefined_table?(error), do: {:ok, Settings.default_setting()}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError ->
+      {:ok, Settings.default_setting()}
   end
 
   defp filters(params) do
@@ -702,4 +796,37 @@ defmodule TpWeb.Router do
   defp undefined_table?(%MyXQL.Error{mysql: %{code: 1146}}), do: true
   defp undefined_table?(%MyXQL.Error{mysql: %{name: :ER_NO_SUCH_TABLE}}), do: true
   defp undefined_table?(_error), do: false
+
+  defp validate_aftn_addr(field, addr) do
+    cond do
+      addr == "" -> {:error, "#{field} is required"}
+      String.length(addr) != 8 -> {:error, "#{field} must be 8 letters"}
+      not String.match?(addr, ~r/^[A-Z]{8}$/) -> {:error, "#{field} must be 8 uppercase letters (A-Z)"}
+      true -> :ok
+    end
+  end
+
+  defp build_tx_id(settings) do
+    cid = (settings.cid || "TST") |> to_string() |> String.upcase()
+    seq = (settings.tseq || "0001") |> to_string() |> String.replace(~r/\D/, "") |> String.pad_leading(4, "0") |> String.slice(0, 4)
+    cid <> seq
+  end
+
+  defp test_times(str) do
+    case Integer.parse(str) do
+      {n, _} when n > 0 -> min(n, 20)
+      _ -> 1
+    end
+  end
+
+  defp test_msg_body("qjh", _orig),
+    do: "QJH RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY"
+
+  defp test_msg_body("fox", _orig),
+    do: "THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG 1234567890"
+
+  defp test_msg_body("de", _orig),
+    do: "DE RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY"
+
+  defp test_msg_body(_, _), do: "TEST"
 end

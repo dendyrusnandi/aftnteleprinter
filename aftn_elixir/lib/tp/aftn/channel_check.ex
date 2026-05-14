@@ -51,31 +51,53 @@ defmodule Tp.Aftn.ChannelCheck do
     if setting.channel_check do
       filing_time = Calendar.strftime(now, "%d%H%M")
       current_seq = current_sequence(setting.tseq, setting.digit_seq || 4)
-      tx_id = "#{setting.cid}#{current_seq}"
-      raw = <<1>> <> tx_id <> " " <> filing_time <> "\r\n" <> <<2>> <> "CH\r\n" <> <<3>>
+      tx_id       = "#{setting.cid}#{current_seq}"
+      raw         = <<1>> <> tx_id <> " " <> filing_time <> "\r\n" <> <<2>> <> "CH\r\n" <> <<3>>
+      target      = "#{setting.destination_ip_address}:#{setting.port}"
 
-      attrs = %{
-        filed_by: "SYSTEM",
-        message_type: "CH",
-        cid: setting.cid,
-        sequence_no: current_seq,
-        filing_time: filing_time,
-        raw_text: raw,
+      queue_attrs = %{
+        filed_by:        "SYSTEM",
+        next_attempt_at: DateTime.utc_now(),
         udp_target_host: setting.destination_ip_address,
         udp_target_port: setting.port
       }
 
-      case Aftn.transmit(raw, attrs) do
-        {:ok, _result} ->
-          Logger.info("Channel check CH sent to #{setting.destination_ip_address}:#{setting.port} seq=#{tx_id}")
+      link = Tp.LinkMonitor.status()
 
-        {:error, reason} ->
-          Logger.error("Channel check CH failed to #{setting.destination_ip_address}:#{setting.port}: #{inspect(reason)}")
+      if link.state == :up do
+        transmit_attrs = %{
+          filed_by:        "SYSTEM",
+          udp_target_host: setting.destination_ip_address,
+          udp_target_port: setting.port
+        }
+
+        case Aftn.transmit(raw, transmit_attrs) do
+          {:ok, _} ->
+            Logger.info("Channel check CH sent to #{target} seq=#{tx_id}")
+
+          {:error, reason} ->
+            Logger.warning("Channel check CH transmit failed (#{inspect(reason)}), queuing for retry")
+            queue_channel_check(raw, queue_attrs, tx_id, target)
+        end
+      else
+        Logger.info("Channel check CH: link #{link.state}, queuing for retry seq=#{tx_id}")
+        queue_channel_check(raw, queue_attrs, tx_id, target)
       end
     end
   rescue
     error ->
       Logger.error("Channel check failed: #{Exception.message(error)}")
+  end
+
+  defp queue_channel_check(raw, attrs, tx_id, target) do
+    case Aftn.enqueue_transmit(raw, attrs) do
+      {:ok, _} ->
+        Logger.info("Channel check CH queued for retry seq=#{tx_id} target=#{target}")
+        Tp.Aftn.OutgoingQueue.kick()
+
+      {:error, reason} ->
+        Logger.error("Channel check CH queue failed seq=#{tx_id}: #{inspect(reason)}")
+    end
   end
 
   defp current_sequence(value, digits) do

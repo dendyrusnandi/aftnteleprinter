@@ -6,7 +6,12 @@ config :tp, Tp.Repo,
   hostname: System.get_env("MYSQL_HOST") || "localhost",
   database: System.get_env("MYSQL_DATABASE") || "tp",
   port: String.to_integer(System.get_env("MYSQL_PORT") || "3306"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  connect_timeout: 5_000,
+  pool_timeout: 3_000,
+  backoff_type: :rand_exp,
+  backoff_min: 500,
+  backoff_max: 30_000
 
 config :tp, :udp,
   port: String.to_integer(System.get_env("AFTN_UDP_PORT") || "101"),

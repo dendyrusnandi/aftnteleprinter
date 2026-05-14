@@ -11,7 +11,7 @@ defmodule TpWeb.Views do
         body{margin:0;padding:56px 0 62px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{position:fixed;top:0;left:0;right:0;z-index:900;height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px;box-shadow:0 6px 18px rgba(20,50,74,.18)}
-        header a{color:white}#{header_time_css()}.top-nav{display:flex;align-items:center;gap:16px}.top-menu{position:relative}.top-menu summary{cursor:pointer;color:white;font-weight:600;list-style:none;display:flex;align-items:center;gap:6px}.top-menu summary::-webkit-details-marker{display:none}.menu-icon{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.top-submenu{position:absolute;top:28px;left:0;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.16);z-index:20;min-width:260px;padding:6px}.top-submenu a{display:block;color:#17202a;padding:8px 10px;border-radius:4px;white-space:nowrap}.top-submenu a:hover{background:#edf4fa;text-decoration:none}
+        header a{color:white}#{header_time_css()}.top-nav{display:flex;align-items:center;gap:16px}.top-menu{position:relative}.top-menu summary{cursor:pointer;color:white;font-weight:600;list-style:none;display:flex;align-items:center;gap:6px}.top-menu summary::-webkit-details-marker{display:none}.menu-icon{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.top-submenu{position:absolute;top:28px;left:0;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 12px 26px rgba(23,32,42,.16);z-index:20;min-width:260px;padding:6px}.top-submenu a{display:block;color:#17202a;padding:8px 10px;border-radius:4px;white-space:nowrap}.top-submenu a:hover{background:#edf4fa;text-decoration:none}.top-direct-link{color:white;font-weight:600;display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap}.top-direct-link:hover{color:#d8e8f3;text-decoration:none}
         main{display:grid;grid-template-columns:1fr 360px;gap:16px;padding:16px}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;overflow:hidden}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
@@ -33,7 +33,7 @@ defmodule TpWeb.Views do
       </style>
     </head>
     <body>
-      <header><h1>AFTN Teleprinter</h1><nav class="top-nav">#{compose_dropdown()}#{maintenance_dropdown()}#{views_dropdown()}#{status_dropdown()}</nav>#{header_time()}</header>
+      <header><h1>AFTN Teleprinter</h1><nav class="top-nav">#{compose_dropdown()}#{maintenance_dropdown()}#{views_dropdown()}#{status_dropdown()}#{test_message_link()}</nav>#{header_time()}</header>
       <main>
         <section>
           <h2>AFTN Message</h2>
@@ -70,11 +70,13 @@ defmodule TpWeb.Views do
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>AFTN Message #{html(message.id)}</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <style>
         body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
-        header a{color:white}#{header_time_css()} main{max-width:1100px;margin:16px auto;padding:0 16px}
+        header a{color:white}.back-btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none}.back-btn:hover{color:#d8e8f3;text-decoration:none}.back-btn i{font-size:18px;line-height:1}.msg-title{display:inline-flex;align-items:center;gap:8px}.msg-title i{color:#9bd0ff;font-size:18px;line-height:1}
+        #{header_time_css()} main{max-width:1100px;margin:16px auto;padding:0 16px}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         dl{display:grid;grid-template-columns:180px 1fr;margin:0} dt,dd{border-bottom:1px solid #edf0f3;padding:8px 12px;margin:0}
@@ -83,7 +85,7 @@ defmodule TpWeb.Views do
       </style>
     </head>
     <body>
-      <header><a href="/">Back</a><h1>Message #{html(message.id)}</h1>#{header_time()}</header>
+      <header><a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a><h1 class="msg-title"><i class="bi bi-envelope-text"></i><span>Message #{html(message.id)}</span></h1>#{header_time()}</header>
       <main>
         <section>
           <h2>Header</h2>
@@ -310,24 +312,39 @@ defmodule TpWeb.Views do
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>AFTN Teleprinter Setup</title>
+      <meta http-equiv="refresh" content="5">
+      <title>AFTN Teleprinter — Database Unavailable</title>
       <style>
         body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
         #{header_time_css()} main{max-width:760px;margin:16px auto;background:white;border:1px solid #d8dee6;border-radius:6px;padding:24px}
         header h1{font-size:18px;margin:0} main h1{font-size:22px;margin:0 0 12px} p{line-height:1.55} code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
         pre{background:#eef2f6;border:1px solid #d8dee6;border-radius:4px;padding:12px;overflow:auto}
+        .retry-bar{display:flex;align-items:center;gap:10px;background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:10px 14px;margin-bottom:18px;font-size:13px;color:#5f4400}
+        .spinner{width:16px;height:16px;border:2px solid #ffe082;border-top-color:#b26a00;border-radius:50%;animation:spin 1s linear infinite;flex-shrink:0}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .migrate-box{margin-top:16px;background:#f0f3f6;border:1px solid #d8dee6;border-radius:6px;padding:14px}
+        .migrate-box h2{font-size:14px;margin:0 0 8px;color:#435466}
               #{status_footer_css()}
       </style>
     </head>
     <body>
-      <header><h1>AFTN Teleprinter Setup</h1>#{header_time()}</header>
+      <header><h1>AFTN Teleprinter</h1>#{header_time()}</header>
       <main>
-        <h1>Database belum dimigrasi</h1>
-        <p>Aplikasi sudah jalan, tapi tabel MySQL seperti <code>air_messages</code> belum ada di database <code>tp</code>.</p>
-        <pre>cd aftn_elixir
-    mix ecto.migrate</pre>
-        <p>Setelah migration selesai, refresh halaman dashboard.</p>
+        <div class="retry-bar">
+          <div class="spinner"></div>
+          <span>Connecting to MySQL database&hellip; this page will automatically refresh every 5 seconds.</span>
+        </div>
+        <h1>Database Unavailable</h1>
+        <p>The application is running, but the MySQL connection has not been established. Possible causes:</p>
+        <ul>
+          <li>MySQL is not running &mdash; please wait, the page will refresh automatically.</li>
+          <li>Tables have not been created &mdash; run migrations after MySQL is up:</li>
+        </ul>
+        <div class="migrate-box">
+          <h2>Run migrations (once, after MySQL is running):</h2>
+          <pre>cd aftn_elixir\nmix ecto.migrate</pre>
+        </div>
       </main>
       #{status_panel([], nil)}
       #{status_footer_script()}
@@ -338,6 +355,237 @@ defmodule TpWeb.Views do
     """
   end
 
+  def test_message_page(notice \\ nil, settings \\ nil, recent \\ []) do
+    settings = settings || Tp.Settings.default_setting()
+    origin   = (settings.originator || "WAJJYFYC") |> to_string() |> String.upcase()
+
+    """
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Test Message &amp; SVC TRAF</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <style>
+        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
+        a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
+        header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
+        header a{color:white}.tst-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.tst-back:hover{text-decoration:none;color:#d8e8f3}.tst-back i{font-size:18px;line-height:1}.tst-title{display:inline-flex;align-items:center;gap:8px}.tst-title i{color:#9bd0ff;font-size:18px;line-height:1}
+        #{header_time_css()} main{max-width:820px;margin:0 auto;padding:16px}
+        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:14px;overflow:visible}
+        h1{font-size:18px;margin:0} h2{font-size:14px;font-weight:800;margin:0;padding:10px 14px;border-bottom:1px solid #e4e8ee;background:#f7f9fb;border-radius:6px 6px 0 0}
+        .tst-body{padding:12px}
+        .tst-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+        .tst-row-top{align-items:flex-start}
+        .tst-label{min-width:110px;font-size:12px;font-weight:700;color:#435466;flex-shrink:0}
+        .tst-times{width:58px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:5px 7px;font-size:13px;text-align:center}
+        .tst-hint{font-size:12px;color:#6d7b88;font-style:italic}
+        .tst-addr{width:120px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em}
+        .format-col{display:flex;flex-direction:column;gap:5px}
+        .radio-label{display:inline-flex;align-items:center;gap:5px;font-size:13px;cursor:pointer}
+        .tst-btns{margin-top:6px;gap:6px}
+        .btn-ok{background:#14324a;color:white;border:0;border-radius:4px;padding:7px 18px;font-size:13px;font-weight:700;cursor:pointer}.btn-ok:hover{background:#195b86}
+        .btn-cancel{background:white;color:#435466;border:1px solid #cbd3dc;border-radius:4px;padding:6px 14px;font-size:13px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center}.btn-cancel:hover{background:#edf4fa;text-decoration:none}
+        .tst-status{font-size:12px;font-weight:700;color:#195b86;min-height:16px;padding:4px 0 0}
+        .tst-status.err{color:#b42318}.tst-status.ok{color:#1c6b4f}
+        .svc-row{display:flex;gap:8px;align-items:flex-start;margin-top:6px}
+        .tst-svc{flex:1;min-height:70px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:7px 8px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical;text-transform:uppercase}
+        .btn-send{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;align-self:flex-start}.btn-send:hover{background:#17583f}
+        .outbox-pre{margin:0;padding:12px;max-height:200px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.4;background:#fbfcfd}
+        .outbox-empty{padding:12px;color:#6d7b88;font-size:13px}
+        .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
+        input[type=text]{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;background:white;font-size:13px}
+        #{status_footer_css()}
+      </style>
+    </head>
+    <body>
+      <header>
+        <a class="tst-back" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
+        <h1 class="tst-title"><i class="bi bi-envelope-check"></i><span>Test Message &amp; SVC TRAF</span></h1>
+        #{header_time()}
+      </header>
+      <main>
+        #{notice_banner(notice)}
+
+        <section>
+          <h2>Test Message</h2>
+          <div class="tst-body">
+            <div class="tst-row">
+              <span class="tst-label">State :</span>
+              <label class="radio-label"><input type="radio" id="state-start" name="state" value="start"> Start</label>
+              <label class="radio-label"><input type="radio" id="state-stop"  name="state" value="stop"> Stop</label>
+              <input class="tst-times" type="text" id="tst-times" value="1" maxlength="3" inputmode="numeric">
+              <span class="tst-hint">times &nbsp;( 0 = continuous )</span>
+            </div>
+            <div class="tst-row tst-row-top">
+              <span class="tst-label">Test format :</span>
+              <div class="format-col">
+                <label class="radio-label"><input type="radio" name="format" value="qjh" checked> QJH RYRY&hellip;</label>
+                <label class="radio-label"><input type="radio" name="format" value="fox"> QUICK BROWN FOX&hellip;</label>
+                <label class="radio-label"><input type="radio" name="format" value="de"> DE RYRY&hellip;</label>
+              </div>
+            </div>
+            <div class="tst-row">
+              <span class="tst-label">Origin :</span>
+              <input class="tst-addr" type="text" id="tst-originator" value="#{html(origin)}" maxlength="8" autocomplete="off">
+            </div>
+            <div class="tst-row tst-btns">
+              <span class="tst-label"></span>
+              <button class="btn-ok" type="button" id="btn-test-ok">OK</button>
+              <a class="btn-cancel" href="/">Cancel</a>
+            </div>
+            <div class="tst-status" id="tst-status"></div>
+          </div>
+        </section>
+
+        <section>
+          <h2>SVC TRAF</h2>
+          <form class="tst-body" method="post" action="/test-message/svc" id="svc-form">
+            <div class="tst-row">
+              <span class="tst-label">Address :</span>
+              <input class="tst-addr" type="text" name="address" id="svc-address" value="#{html(origin)}" maxlength="8" autocomplete="off">
+            </div>
+            <input type="hidden" name="originator" id="svc-originator" value="#{html(origin)}">
+            <div class="svc-row">
+              <textarea class="tst-svc" name="svc_message" rows="4" placeholder="SVC TRAF message..."></textarea>
+              <button class="btn-send" type="submit">Send</button>
+            </div>
+          </form>
+        </section>
+
+      </main>
+      #{status_panel([], nil)}
+      #{header_clock_script()}
+      #{status_footer_script()}
+      #{auto_uppercase_script()}
+      <script>
+        (function () {
+          var timer    = null;
+          var sent     = 0;
+          var target   = 0;
+
+          var btnOK      = document.getElementById('btn-test-ok');
+          var stopRadio  = document.getElementById('state-stop');
+          var statusEl   = document.getElementById('tst-status');
+          var svcOrigEl  = document.getElementById('svc-originator');
+
+          function setStatus(msg, cls) {
+            if (!statusEl) return;
+            statusEl.textContent = msg;
+            statusEl.className = 'tst-status' + (cls ? ' ' + cls : '');
+          }
+
+          function clearTimer() {
+            if (timer) { clearInterval(timer); timer = null; }
+          }
+
+          function syncSvcOrigin() {
+            var orig = document.getElementById('tst-originator');
+            if (orig && svcOrigEl) svcOrigEl.value = orig.value.trim().toUpperCase();
+          }
+
+          function readData() {
+            var addr = document.getElementById('svc-address');
+            var orig = document.getElementById('tst-originator');
+            var fmt  = document.querySelector('[name="format"]:checked');
+            return {
+              address:    addr ? addr.value.trim().toUpperCase() : '',
+              originator: orig ? orig.value.trim().toUpperCase() : '',
+              format:     fmt  ? fmt.value : 'qjh'
+            };
+          }
+
+          function validate(data) {
+            if (!data.address    || data.address.length    !== 8 || !/^[A-Z]{8}$/.test(data.address))    return 'Address must be 8 letters (A-Z)';
+            if (!data.originator || data.originator.length !== 8 || !/^[A-Z]{8}$/.test(data.originator)) return 'Originator must be 8 letters (A-Z)';
+            return null;
+          }
+
+          function sendOne(data, cb) {
+            fetch('/test-message/send-one', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              credentials: 'same-origin',
+              body: 'address='    + encodeURIComponent(data.address) +
+                    '&originator=' + encodeURIComponent(data.originator) +
+                    '&format='     + encodeURIComponent(data.format)
+            })
+            .then(function (r) { return r.json(); })
+            .then(function (j) { cb(j.ok ? null : (j.error || 'unknown error')); })
+            .catch(function () { cb('Network error'); });
+          }
+
+          if (stopRadio) {
+            stopRadio.addEventListener('change', function () {
+              if (stopRadio.checked) { clearTimer(); setStatus('Stopped. Sent: ' + sent + ' message(s).', 'ok'); }
+            });
+          }
+
+          if (btnOK) {
+            btnOK.addEventListener('click', function () {
+              var stateEl = document.querySelector('[name="state"]:checked');
+              if (!stateEl) { setStatus('Please select State (Start or Stop)', 'err'); return; }
+
+              if (stateEl.value === 'stop') {
+                clearTimer();
+                setStatus('Stopped. Sent: ' + sent + ' message(s).', 'ok');
+                return;
+              }
+
+              var data = readData();
+              var err  = validate(data);
+              if (err) { setStatus(err, 'err'); return; }
+
+              var fmt = document.querySelector('[name="format"]:checked');
+              if (!fmt) { setStatus('Select a test format', 'err'); return; }
+
+              var t = parseInt((document.getElementById('tst-times') || {value:'1'}).value, 10);
+              target = (isNaN(t) || t < 0) ? 1 : t;
+              sent   = 0;
+
+              clearTimer();
+              syncSvcOrigin();
+              setStatus(target > 0 ? 'Sending 1/' + target + '...' : 'Sending (continuous)...', '');
+
+              function tick() {
+                sendOne(data, function (e) {
+                  if (e) { clearTimer(); setStatus('Error: ' + e, 'err'); return; }
+                  sent++;
+                  if (target > 0) {
+                    setStatus('Sending ' + sent + '/' + target + '...', '');
+                    if (sent >= target) { clearTimer(); setStatus('Done. Sent ' + sent + ' message(s).', 'ok'); }
+                  } else {
+                    setStatus('Sending (continuous) — sent: ' + sent, '');
+                  }
+                });
+              }
+
+              tick();
+              if (target !== 1) timer = setInterval(tick, 1000);
+            });
+          }
+        })();
+      </script>
+    </body>
+    </html>
+    """
+  end
+
+  defp test_outbox([]) do
+    ~s(<div class="outbox-empty">No recent messages.</div>)
+  end
+
+  defp test_outbox(messages) do
+    text = messages
+    |> Enum.map_join("\n#{String.duplicate("-", 40)}\n", fn m ->
+      raw = m.raw_text || ""
+      ts  = format_time(m.inserted_at)
+      "[#{ts}]\n#{String.trim(visible_aftn(raw))}"
+    end)
+    ~s(<pre class="outbox-pre">#{html(text)}</pre>)
+  end
+
   def settings_page(setting_or_changeset, notice \\ nil) do
     """
     <!doctype html>
@@ -346,11 +594,13 @@ defmodule TpWeb.Views do
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Communication Setting</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <style>
         body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
-        header a{color:white}#{header_time_css()} main{max-width:920px;margin:0 auto;padding:16px}
+        header a{color:white}.back-btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:white;text-decoration:none}.back-btn:hover{color:#d8e8f3;text-decoration:none}.back-btn i{font-size:18px;line-height:1}.settings-title{display:inline-flex;align-items:center;gap:8px}.settings-title i{color:#9bd0ff;font-size:18px;line-height:1}
+        #{header_time_css()} main{max-width:920px;margin:0 auto;padding:16px}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         form{padding:14px} label{display:block;font-size:12px;color:#435466;font-weight:700;margin-bottom:4px}
@@ -365,13 +615,16 @@ defmodule TpWeb.Views do
       </style>
     </head>
     <body>
-      <header><a href="/">Back</a><h1>Communication Setting</h1>#{header_time()}</header>
+      <header>
+        <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
+        <h1 class="settings-title"><i class="bi bi-gear-fill"></i><span>Communication Setting</span></h1>#{header_time()}
+      </header>
       <main>
         #{notice_banner(notice)}
         #{settings_errors(setting_or_changeset)}
         <form method="post" action="/settings">
           <section>
-            <h2>UDP Setup</h2>
+            <h2><i class="bi bi-router" style="color:#195b86;margin-right:6px"></i>UDP Setup</h2>
             <div style="padding:14px">
               <div class="grid2">
                 #{setting_input(setting_or_changeset, :local_udp_port, "Local Receive Port", "number")}
@@ -381,7 +634,7 @@ defmodule TpWeb.Views do
             </div>
           </section>
           <section>
-            <h2>Communication Setup</h2>
+            <h2><i class="bi bi-gear" style="color:#195b86;margin-right:6px"></i>Communication Setup</h2>
             <div style="padding:14px">
               <div class="grid4">
                 <div class="field">
@@ -431,8 +684,8 @@ defmodule TpWeb.Views do
             </div>
           </section>
           <div class="actions">
-            <button type="submit">Save Setting</button>
-            <a href="/">Close</a>
+            <button type="submit"> Save Setting</button>
+            <a href="/" class="btn-cancel" > Back</a>
           </div>
         </form>
       </main>
@@ -461,7 +714,7 @@ defmodule TpWeb.Views do
     <details class="top-menu">
       <summary>#{maintenance_icon()}<span>Maintenance</span></summary>
       <div class="top-submenu">
-        <a href="/settings">Communication Setup</a>
+        <a href="/settings"><i class="bi bi-gear-fill" style="margin-right:5px"></i>Communication Setup</a>
         <a href="#">Type of Aircraft</a>
         <a href="#">Aircraft Registration</a>
         <a href="#">ICAO Location Indicator</a>
@@ -494,6 +747,22 @@ defmodule TpWeb.Views do
 
       </div>
     </details>
+    """
+  end
+
+  defp test_message_link do
+    """
+    <a href="/test-message" class="top-direct-link">#{test_icon()}<span>Test &amp; Svc Traf</span></a>
+    """
+  end
+
+  defp test_icon do
+    """
+    <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M10 2v7.53a2 2 0 0 1-.21.9L4.72 20.55A1 1 0 0 0 5.63 22h12.74a1 1 0 0 0 .9-1.45L14.21 10.43A2 2 0 0 1 14 9.53V2"></path>
+      <path d="M8.5 2h7"></path>
+      <path d="M7 16h10"></path>
+    </svg>
     """
   end
 
@@ -3744,6 +4013,11 @@ defmodule TpWeb.Views do
         function pollMessages() {
           var body = byId('message-table-body');
           if (!body) return;
+
+          var qp = new URLSearchParams(window.location.search || '');
+          var onFirstPage = parseInt(qp.get('page') || '1', 10) <= 1;
+          var hasCursor   = qp.get('after_id') || qp.get('after_ts') || qp.get('history');
+          if (!onFirstPage || hasCursor) return;
 
           fetch(messagesApiUrl(), {
             method: 'GET',
