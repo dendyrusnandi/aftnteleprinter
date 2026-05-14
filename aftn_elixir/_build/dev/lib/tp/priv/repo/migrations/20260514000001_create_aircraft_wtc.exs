@@ -6,7 +6,5 @@ defmodule Tp.Repo.Migrations.CreateAircraftWtc do
       add :type9b, :string, null: false
       add :type9c, :string, null: false
     end
-
-    create_if_not_exists unique_index(:aircraft_wtc, [:type9b])
   end
 end

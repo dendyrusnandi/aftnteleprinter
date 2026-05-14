@@ -409,6 +409,245 @@ defmodule TpWeb.Router do
     end
   end
 
+  get "/aircraft-reg" do
+    q18  = Map.get(conn.params, "q18", "")
+    q9b  = Map.get(conn.params, "q9b", "")
+    page = parse_int(Map.get(conn.params, "page", "1"), 1)
+    case safe_list_reg(q18: q18, q9b: q9b, page: page) do
+      {:ok, items, pag} ->
+        conn |> put_resp_content_type("text/html")
+             |> send_resp(200, TpWeb.Views.aircraft_reg_page(items, pag, q18, q9b, notice(conn.params)))
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/aircraft-reg/save" do
+    case safe_crud_reg(:create, conn.params) do
+      {:ok, _}  -> redirect(conn, "/aircraft-reg?info=#{URI.encode_www_form("Registration saved")}")
+      {:error, {:validation, e}} -> redirect(conn, "/aircraft-reg?error=#{URI.encode_www_form(Enum.join(e, ", "))}")
+      {:error, :database_not_migrated} -> conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/aircraft-reg/:id/update" do
+    case safe_crud_reg(:update, id, conn.params) do
+      {:ok, _}  -> redirect(conn, "/aircraft-reg?info=#{URI.encode_www_form("Registration updated")}")
+      {:error, :not_found} -> redirect(conn, "/aircraft-reg?error=#{URI.encode_www_form("Not found")}")
+      {:error, {:validation, e}} -> redirect(conn, "/aircraft-reg?error=#{URI.encode_www_form(Enum.join(e, ", "))}")
+      {:error, :database_not_migrated} -> conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/aircraft-reg/:id/delete" do
+    rt = return_path(Map.get(conn.params, "return_to", "/aircraft-reg"))
+    case safe_crud_reg(:delete, id) do
+      {:ok, _}  -> redirect(conn, with_notice(rt, :info, "Deleted"))
+      {:error, :not_found} -> redirect(conn, with_notice(rt, :error, "Not found"))
+      {:error, :database_not_migrated} -> conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+      {:error, _} -> redirect(conn, with_notice(rt, :error, "Delete failed"))
+    end
+  end
+
+  post "/aircraft-reg/delete-all" do
+    q18 = Map.get(conn.params, "q18", ""); q9b = Map.get(conn.params, "q9b", "")
+    case safe_delete_all_reg(q18: q18, q9b: q9b) do
+      {:ok, n} -> redirect(conn, "/aircraft-reg?info=#{URI.encode_www_form("#{n} record(s) deleted")}")
+      {:error, :database_not_migrated} -> conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  get "/routes" do
+    dep  = Map.get(conn.params, "dep", "")
+    dest = Map.get(conn.params, "dest", "")
+    page = parse_int(Map.get(conn.params, "page", "1"), 1)
+    case safe_list_route(dep: dep, dest: dest, page: page) do
+      {:ok, items, pag} ->
+        conn |> put_resp_content_type("text/html")
+             |> send_resp(200, TpWeb.Views.route_page(items, pag, dep, dest, notice(conn.params)))
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/routes/save" do
+    case safe_crud_route(:create, conn.params) do
+      {:ok, _}  -> redirect(conn, "/routes?info=#{URI.encode_www_form("Route saved")}")
+      {:error, {:validation, e}} -> redirect(conn, "/routes?error=#{URI.encode_www_form(Enum.join(e, ", "))}")
+      {:error, :database_not_migrated} -> conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/routes/:id/update" do
+    case safe_crud_route(:update, id, conn.params) do
+      {:ok, _}  -> redirect(conn, "/routes?info=#{URI.encode_www_form("Route updated")}")
+      {:error, :not_found} -> redirect(conn, "/routes?error=#{URI.encode_www_form("Not found")}")
+      {:error, {:validation, e}} -> redirect(conn, "/routes?error=#{URI.encode_www_form(Enum.join(e, ", "))}")
+      {:error, :database_not_migrated} -> conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/routes/:id/delete" do
+    rt = return_path(Map.get(conn.params, "return_to", "/routes"))
+    case safe_crud_route(:delete, id) do
+      {:ok, _}  -> redirect(conn, with_notice(rt, :info, "Deleted"))
+      {:error, :not_found} -> redirect(conn, with_notice(rt, :error, "Not found"))
+      {:error, :database_not_migrated} -> conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+      {:error, _} -> redirect(conn, with_notice(rt, :error, "Delete failed"))
+    end
+  end
+
+  post "/routes/delete-all" do
+    dep = Map.get(conn.params, "dep", ""); dest = Map.get(conn.params, "dest", "")
+    case safe_delete_all_route(dep: dep, dest: dest) do
+      {:ok, n} -> redirect(conn, "/routes?info=#{URI.encode_www_form("#{n} record(s) deleted")}")
+      {:error, :database_not_migrated} -> conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  get "/location-indicators" do
+    q    = Map.get(conn.params, "q", "")
+    loc  = Map.get(conn.params, "loc", "")
+    page = parse_int(Map.get(conn.params, "page", "1"), 1)
+
+    case safe_list_location(q: q, loc: loc, page: page) do
+      {:ok, items, pagination} ->
+        conn
+        |> put_resp_content_type("text/html")
+        |> send_resp(200, TpWeb.Views.location_indicator_page(items, pagination, q, loc, notice(conn.params)))
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/location-indicators/save" do
+    case safe_create_location(conn.params) do
+      {:ok, _} ->
+        redirect(conn, "/location-indicators?info=#{URI.encode_www_form("Location indicator saved")}")
+
+      {:error, {:validation, errors}} ->
+        redirect(conn, "/location-indicators?error=#{URI.encode_www_form(Enum.join(errors, ", "))}")
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/location-indicators/:id/update" do
+    case safe_update_location(id, conn.params) do
+      {:ok, _} ->
+        redirect(conn, "/location-indicators?info=#{URI.encode_www_form("Location indicator updated")}")
+
+      {:error, :not_found} ->
+        redirect(conn, "/location-indicators?error=#{URI.encode_www_form("Record not found")}")
+
+      {:error, {:validation, errors}} ->
+        redirect(conn, "/location-indicators?error=#{URI.encode_www_form(Enum.join(errors, ", "))}")
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/location-indicators/:id/delete" do
+    return_to = return_path(Map.get(conn.params, "return_to", "/location-indicators"))
+
+    case safe_delete_location(id) do
+      {:ok, _} ->
+        redirect(conn, with_notice(return_to, :info, "Location indicator deleted"))
+
+      {:error, :not_found} ->
+        redirect(conn, with_notice(return_to, :error, "Record not found"))
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+
+      {:error, _} ->
+        redirect(conn, with_notice(return_to, :error, "Delete failed"))
+    end
+  end
+
+  post "/location-indicators/delete-all" do
+    q   = Map.get(conn.params, "q", "")
+    loc = Map.get(conn.params, "loc", "")
+
+    case safe_delete_all_location(q: q, loc: loc) do
+      {:ok, count} ->
+        redirect(conn, "/location-indicators?info=#{URI.encode_www_form("#{count} record(s) deleted")}")
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  get "/icao-abbreviations" do
+    q    = Map.get(conn.params, "q", "")
+    mean = Map.get(conn.params, "mean", "")
+    page = parse_int(Map.get(conn.params, "page", "1"), 1)
+
+    case safe_list_abbr(q: q, mean: mean, page: page) do
+      {:ok, items, pagination} ->
+        conn
+        |> put_resp_content_type("text/html")
+        |> send_resp(200, TpWeb.Views.icao_abbreviations_page(items, pagination, q, mean, notice(conn.params)))
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  get "/warning-messages" do
+    msg     = Map.get(conn.params, "msg", "")
+    reason  = Map.get(conn.params, "reason", "")
+    date_fr = Map.get(conn.params, "date_fr", "")
+    date_to = Map.get(conn.params, "date_to", "")
+    page    = parse_int(Map.get(conn.params, "page", "1"), 1)
+
+    case safe_list_warnings(msg: msg, reason: reason, date_fr: date_fr, date_to: date_to, page: page) do
+      {:ok, items, pagination} ->
+        conn
+        |> put_resp_content_type("text/html")
+        |> send_resp(200, TpWeb.Views.warning_messages_page(items, pagination, msg, reason, date_fr, date_to, notice(conn.params)))
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/warning-messages/:id/delete" do
+    return_to = Map.get(conn.params, "return_to", "/warning-messages")
+
+    case safe_delete_warning(String.to_integer(id)) do
+      {:ok, _} ->
+        redirect(conn, with_notice(return_to, :info, "Warning message deleted"))
+
+      {:error, :not_found} ->
+        redirect(conn, with_notice(return_to, :error, "Record not found"))
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+
+      {:error, _} ->
+        redirect(conn, with_notice(return_to, :error, "Delete failed"))
+    end
+  end
+
+  post "/warning-messages/delete-all" do
+    msg     = Map.get(conn.params, "msg", "")
+    reason  = Map.get(conn.params, "reason", "")
+    date_fr = Map.get(conn.params, "date_fr", "")
+    date_to = Map.get(conn.params, "date_to", "")
+
+    case safe_delete_all_warnings(msg: msg, reason: reason, date_fr: date_fr, date_to: date_to) do
+      {:ok, count} ->
+        redirect(conn, "/warning-messages?info=#{URI.encode_www_form("#{count} record(s) deleted")}")
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
   get "/test-message" do
     settings = Settings.get_or_default()
     recent = case safe_latest_messages(direction: "outbound", limit: 5) do
@@ -869,6 +1108,149 @@ defmodule TpWeb.Router do
     end
   end
 
+  defp safe_list_reg(opts) do
+    Tp.Registration.list(opts)
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_crud_reg(:create, params) do
+    case Tp.Registration.create(params) do
+      {:ok, r} -> {:ok, r}
+      {:error, cs} -> {:error, {:validation, changeset_errors(cs)}}
+    end
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_crud_reg(:update, id, params) do
+    with {n, ""} <- Integer.parse(to_string(id)), r when not is_nil(r) <- Tp.Registration.get(n) do
+      case Tp.Registration.update(r, params) do
+        {:ok, rec} -> {:ok, rec}
+        {:error, cs} -> {:error, {:validation, changeset_errors(cs)}}
+      end
+    else _ -> {:error, :not_found}
+    end
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_crud_reg(:delete, id) do
+    with {n, ""} <- Integer.parse(to_string(id)), do: Tp.Registration.delete(n)
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_delete_all_reg(opts) do
+    Tp.Registration.delete_all(opts)
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_list_route(opts) do
+    Tp.RouteData.list(opts)
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_crud_route(:create, params) do
+    case Tp.RouteData.create(params) do
+      {:ok, r} -> {:ok, r}
+      {:error, cs} -> {:error, {:validation, changeset_errors(cs)}}
+    end
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_crud_route(:update, id, params) do
+    with {n, ""} <- Integer.parse(to_string(id)), r when not is_nil(r) <- Tp.RouteData.get(n) do
+      case Tp.RouteData.update(r, params) do
+        {:ok, rec} -> {:ok, rec}
+        {:error, cs} -> {:error, {:validation, changeset_errors(cs)}}
+      end
+    else _ -> {:error, :not_found}
+    end
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_crud_route(:delete, id) do
+    with {n, ""} <- Integer.parse(to_string(id)), do: Tp.RouteData.delete(n)
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_delete_all_route(opts) do
+    Tp.RouteData.delete_all(opts)
+  rescue
+    error in MyXQL.Error -> if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_list_location(opts) do
+    Tp.Location.list(opts)
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_create_location(params) do
+    case Tp.Location.create(params) do
+      {:ok, r} -> {:ok, r}
+      {:error, cs} -> {:error, {:validation, changeset_errors(cs)}}
+    end
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_update_location(id, params) do
+    with {n, ""} <- Integer.parse(to_string(id)),
+         record  when not is_nil(record) <- Tp.Location.get(n) do
+      case Tp.Location.update(record, params) do
+        {:ok, r} -> {:ok, r}
+        {:error, cs} -> {:error, {:validation, changeset_errors(cs)}}
+      end
+    else
+      _ -> {:error, :not_found}
+    end
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_delete_location(id) do
+    with {n, ""} <- Integer.parse(to_string(id)) do
+      Tp.Location.delete(n)
+    else
+      _ -> {:error, :not_found}
+    end
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_delete_all_location(opts) do
+    Tp.Location.delete_all(opts)
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
   defp safe_list_aircraft(opts) do
     Tp.Aircraft.list(opts)
   rescue
@@ -969,4 +1351,36 @@ defmodule TpWeb.Router do
     do: "DE RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY"
 
   defp test_msg_body(_, _), do: "TEST"
+
+  defp safe_list_abbr(opts) do
+    Tp.Abbreviations.list(opts)
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_list_warnings(opts) do
+    Tp.Warnings.list(opts)
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_delete_warning(id) do
+    Tp.Warnings.delete(id)
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_delete_all_warnings(opts) do
+    Tp.Warnings.delete_all(opts)
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
 end

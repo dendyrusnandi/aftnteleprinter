@@ -34,7 +34,7 @@ defmodule TpWeb.Views do
       </style>
     </head>
     <body>
-      <header><h1>AFTN Teleprinter</h1><nav class="top-nav">#{compose_dropdown()}#{maintenance_dropdown()}#{views_dropdown()}#{status_dropdown()}#{test_message_link()}</nav>#{header_time()}</header>
+      <header><h1>AFTN Teleprinter</h1><nav class="top-nav">#{compose_dropdown()}#{test_message_link()}#{maintenance_dropdown()}#{views_dropdown()}#{status_dropdown()}</nav>#{header_time()}</header>
       <main>
         <section>
           <h2>AFTN Message</h2>
@@ -450,8 +450,9 @@ defmodule TpWeb.Views do
             <input type="hidden" name="originator" id="svc-originator" value="#{html(origin)}">
             <div class="svc-row">
               <textarea class="tst-svc" name="svc_message" rows="4" placeholder="SVC TRAF message..."></textarea>
-              <button class="btn-send" type="submit">Send</button>
             </div>
+             <br>
+              <button class="btn-send" type="submit">Send</button>
           </form>
         </section>
 
@@ -585,6 +586,959 @@ defmodule TpWeb.Views do
       "[#{ts}]\n#{String.trim(visible_aftn(raw))}"
     end)
     ~s(<pre class="outbox-pre">#{html(text)}</pre>)
+  end
+
+  def icao_abbreviations_page(items, pagination, q, mean, notice) do
+    total       = Map.get(pagination, :total, 0)
+    page        = Map.get(pagination, :page, 1)
+    total_pages = Map.get(pagination, :total_pages, 1)
+
+    pl = fn p -> "/icao-abbreviations?" <> URI.encode_query(%{q: q, mean: mean, page: p}) end
+    first_link = if page > 1,          do: ~s(<a href="#{pl.(1)}"            class="pg-btn" title="First">&#171;</a>),    else: ~s(<span class="pg-btn disabled">&#171;</span>)
+    prev_link  = if page > 1,          do: ~s(<a href="#{pl.(page-1)}"       class="pg-btn" title="Previous">&#8249;</a>), else: ~s(<span class="pg-btn disabled">&#8249;</span>)
+    next_link  = if page < total_pages, do: ~s(<a href="#{pl.(page+1)}"      class="pg-btn" title="Next">&#8250;</a>),    else: ~s(<span class="pg-btn disabled">&#8250;</span>)
+    last_link  = if page < total_pages, do: ~s(<a href="#{pl.(total_pages)}" class="pg-btn" title="Last">&#187;</a>),     else: ~s(<span class="pg-btn disabled">&#187;</span>)
+
+    rows = if items == [] do
+      ~s(<tr><td colspan="2" class="ac-empty">No records found.</td></tr>)
+    else
+      Enum.map_join(items, "", fn r ->
+        """
+        <tr>
+          <td style="width:180px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:600">#{html(r.abbr)}</td>
+          <td>#{html(r.mean)}</td>
+        </tr>
+        """
+      end)
+    end
+
+    """
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>ICAO Abbreviations and Codes</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <style>
+        #{maint_page_css()}
+        .abbr-input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;width:120px}
+        .mean-input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;width:340px}
+        #{status_footer_css()}
+      </style>
+    </head>
+    <body>
+      <header>
+        <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
+        <h1 class="ac-title"><i class="bi bi-book"></i><span>ICAO Abbreviations and Codes (PANS-ABC)</span></h1>
+        #{header_time()}
+      </header>
+      <main>
+        #{notice_banner(notice)}
+        <section>
+          <h2>Search Abbreviations and Codes</h2>
+          <form class="ac-search" method="get" action="/icao-abbreviations">
+            <div class="ac-field">
+              <label class="ac-label">Abbreviations</label>
+              <input class="abbr-input" name="q" value="#{html(q)}" placeholder="e.g. ACC" autocomplete="off">
+            </div>
+            <div class="ac-field">
+              <label class="ac-label">Meaning</label>
+              <input class="mean-input" name="mean" value="#{html(mean)}" placeholder="Search meaning..." autocomplete="off">
+            </div>
+            <button class="btn btn-search" type="submit"><i class="bi bi-search"></i> Search</button>
+            <a class="btn btn-clear" href="/icao-abbreviations"><i class="bi bi-x-lg"></i> Clear</a>
+          </form>
+        </section>
+        <section>
+          <h2>List of Abbreviation(s)</h2>
+          <table>
+            <thead><tr><th>Abbreviations</th><th>Meaning</th></tr></thead>
+            <tbody>#{rows}</tbody>
+          </table>
+          <div class="ac-footer">
+            <span class="ac-count">#{total} Element(s) in this table</span>
+            <div class="pg">
+              #{first_link}#{prev_link}
+              <span class="pg-info">Page #{page} of #{total_pages}</span>
+              #{next_link}#{last_link}
+              <span class="pg-goto">Go to <input id="abbr-goto" type="number" min="1" max="#{total_pages}" value="#{page}"></span>
+            </div>
+          </div>
+        </section>
+      </main>
+      #{status_panel([], nil)}
+      #{header_clock_script()}
+      <script>
+        (function(){
+          var gi = document.getElementById('abbr-goto');
+          if (gi) gi.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+              var p = parseInt(gi.value, 10) || 1;
+              var params = new URLSearchParams(window.location.search || '');
+              params.set('page', p);
+              window.location.href = '/icao-abbreviations?' + params.toString();
+            }
+          });
+        })();
+      </script>
+    </body>
+    </html>
+    """
+  end
+
+  def warning_messages_page(items, pagination, msg, reason, date_fr, date_to, notice) do
+    total       = Map.get(pagination, :total, 0)
+    page        = Map.get(pagination, :page, 1)
+    total_pages = Map.get(pagination, :total_pages, 1)
+
+    today = Date.utc_today() |> Date.to_string()
+    eff_date_fr = if date_fr == "", do: today, else: date_fr
+    eff_date_to = if date_to == "", do: today, else: date_to
+
+    pl = fn p -> "/warning-messages?" <> URI.encode_query(%{msg: msg, reason: reason, date_fr: eff_date_fr, date_to: eff_date_to, page: p}) end
+    first_link = if page > 1,          do: ~s(<a href="#{pl.(1)}"            class="pg-btn" title="First">&#171;</a>),    else: ~s(<span class="pg-btn disabled">&#171;</span>)
+    prev_link  = if page > 1,          do: ~s(<a href="#{pl.(page-1)}"       class="pg-btn" title="Previous">&#8249;</a>), else: ~s(<span class="pg-btn disabled">&#8249;</span>)
+    next_link  = if page < total_pages, do: ~s(<a href="#{pl.(page+1)}"      class="pg-btn" title="Next">&#8250;</a>),    else: ~s(<span class="pg-btn disabled">&#8250;</span>)
+    last_link  = if page < total_pages, do: ~s(<a href="#{pl.(total_pages)}" class="pg-btn" title="Last">&#187;</a>),     else: ~s(<span class="pg-btn disabled">&#187;</span>)
+
+    ret = html(URI.encode_query(%{msg: msg, reason: reason, date_fr: eff_date_fr, date_to: eff_date_to, page: page}))
+
+    rows = if items == [] do
+      ~s(<tr><td colspan="4" class="ac-empty">No records found.</td></tr>)
+    else
+      Enum.map_join(items, "", fn r ->
+        ts = if r.tgl, do: NaiveDateTime.to_string(r.tgl) |> String.slice(0, 19), else: ""
+        """
+        <tr>
+          <td style="max-width:380px;word-break:break-word;font-size:12px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">#{html(r.message)}</td>
+          <td style="max-width:260px;word-break:break-word;font-size:12px">#{html(r.reason)}</td>
+          <td style="white-space:nowrap;font-size:12px;color:#6d7b88">#{html(ts)}</td>
+          <td class="ac-act">
+            <form class="inline-form" method="post" action="/warning-messages/#{r.idcnt}/delete"
+                  onsubmit="return confirm('Delete this warning message?')">
+              <input type="hidden" name="return_to" value="/warning-messages?#{ret}">
+              <button class="ac-del-row" type="submit" title="Delete">&#10005;</button>
+            </form>
+          </td>
+        </tr>
+        """
+      end)
+    end
+
+    """
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Incoming Warning Messages</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <style>
+        #{maint_page_css()}
+        .warn-date{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;width:150px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+        #{status_footer_css()}
+      </style>
+    </head>
+    <body>
+      <header>
+        <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
+        <h1 class="ac-title"><i class="bi bi-exclamation-triangle"></i><span>Incoming Warning Messages</span></h1>
+        #{header_time()}
+      </header>
+      <main>
+        #{notice_banner(notice)}
+        <section>
+          <h2>Search Incoming Warning Messages</h2>
+          <form class="ac-search" method="get" action="/warning-messages">
+            <div class="ac-field">
+              <label class="ac-label">Message</label>
+              <input class="ac-input-lg" name="msg" value="#{html(msg)}" placeholder="Search by message..." autocomplete="off">
+            </div>
+            <div class="ac-field">
+              <label class="ac-label">Reason</label>
+              <input class="ac-input-lg" name="reason" value="#{html(reason)}" placeholder="Search by reason..." autocomplete="off">
+            </div>
+            <div class="ac-field">
+              <label class="ac-label">From</label>
+              <input class="warn-date" type="date" name="date_fr" value="#{html(eff_date_fr)}">
+            </div>
+            <div class="ac-field">
+              <label class="ac-label">To</label>
+              <input class="warn-date" type="date" name="date_to" value="#{html(eff_date_to)}">
+            </div>
+            <button class="btn btn-search" type="submit"><i class="bi bi-search"></i> Search</button>
+            <a class="btn btn-clear" href="/warning-messages"><i class="bi bi-x-lg"></i> Clear</a>
+          </form>
+        </section>
+        <section>
+          <h2>List of Incoming Warning Messages</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Message</th>
+                <th>Reason</th>
+                <th style="white-space:nowrap">Date/Time</th>
+                <th style="width:36px"></th>
+              </tr>
+            </thead>
+            <tbody>#{rows}</tbody>
+          </table>
+          <div class="ac-footer">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span class="ac-count">#{total} Element(s) in this table</span>
+              <div class="ac-actions">
+                <form class="inline-form" method="post" action="/warning-messages/delete-all"
+                      onsubmit="return confirm('Delete ALL #{total} warning message(s) matching current filter?')">
+                  <input type="hidden" name="msg"     value="#{html(msg)}">
+                  <input type="hidden" name="reason"  value="#{html(reason)}">
+                  <input type="hidden" name="date_fr" value="#{html(eff_date_fr)}">
+                  <input type="hidden" name="date_to" value="#{html(eff_date_to)}">
+                  <button class="btn-sm btn-delall" type="submit">
+                    <i class="bi bi-trash"></i> Delete All
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="pg">
+              #{first_link}#{prev_link}
+              <span class="pg-info">Page #{page} of #{total_pages}</span>
+              #{next_link}#{last_link}
+              <span class="pg-goto">Go to <input id="warn-goto" type="number" min="1" max="#{total_pages}" value="#{page}"></span>
+            </div>
+          </div>
+        </section>
+      </main>
+      #{status_panel([], nil)}
+      #{header_clock_script()}
+      <script>
+        (function(){
+          var gi = document.getElementById('warn-goto');
+          if (gi) gi.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+              var p = parseInt(gi.value, 10) || 1;
+              var params = new URLSearchParams(window.location.search || '');
+              params.set('page', p);
+              window.location.href = '/warning-messages?' + params.toString();
+            }
+          });
+        })();
+      </script>
+    </body>
+    </html>
+    """
+  end
+
+  def aircraft_reg_page(items, pagination, q18, q9b, notice) do
+    total       = Map.get(pagination, :total, 0)
+    page        = Map.get(pagination, :page, 1)
+    total_pages = Map.get(pagination, :total_pages, 1)
+
+    pl = fn p -> "/aircraft-reg?" <> URI.encode_query(%{q18: q18, q9b: q9b, page: p}) end
+    first_link = if page > 1,          do: ~s(<a href="#{pl.(1)}"           class="pg-btn">&#171;</a>),    else: ~s(<span class="pg-btn disabled">&#171;</span>)
+    prev_link  = if page > 1,          do: ~s(<a href="#{pl.(page-1)}"      class="pg-btn">&#8249;</a>),   else: ~s(<span class="pg-btn disabled">&#8249;</span>)
+    next_link  = if page < total_pages, do: ~s(<a href="#{pl.(page+1)}"     class="pg-btn">&#8250;</a>),   else: ~s(<span class="pg-btn disabled">&#8250;</span>)
+    last_link  = if page < total_pages, do: ~s(<a href="#{pl.(total_pages)}" class="pg-btn">&#187;</a>),   else: ~s(<span class="pg-btn disabled">&#187;</span>)
+
+    ret = html(URI.encode_query(%{q18: q18, q9b: q9b, page: page}))
+    rows = if items == [] do
+      ~s(<tr><td colspan="9" class="ac-empty">No records found.</td></tr>)
+    else
+      Enum.map_join(items, "", fn r ->
+        """
+        <tr class="ac-row" data-id="#{r.id}"
+            data-type18="#{html(r.type18)}" data-type9b="#{html(r.type9b)}"
+            data-type10a="#{html(r.type10a)}" data-type10b="#{html(r.type10b)}"
+            data-opr="#{html(r.type18Opr)}" data-pbn="#{html(r.type18Pbn)}" data-sel="#{html(r.type18Sel)}">
+          <td>#{html(r.type18)}</td><td>#{html(r.type9b)}</td>
+          <td>#{html(r.type10a)}</td><td>#{html(r.type10b)}</td>
+          <td>#{html(r.type18Opr)}</td><td>#{html(r.type18Pbn)}</td><td>#{html(r.type18Sel)}</td>
+          <td class="ac-act">
+            <form class="inline-form" method="post" action="/aircraft-reg/#{r.id}/delete"
+                  onsubmit="return confirm('Delete #{html(r.type18)}?')">
+              <input type="hidden" name="return_to" value="/aircraft-reg?#{ret}">
+              <button class="ac-del-row" type="submit">&#10005;</button>
+            </form>
+          </td>
+        </tr>
+        """
+      end)
+    end
+
+    """
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Aircraft Registration</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <style>
+        #{maint_page_css()}
+        .reg-input-sm{width:80px}.reg-input-md{width:120px}.reg-input-lg{width:200px}.reg-input-xl{width:280px}
+        .reg-form-grid{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:6px 10px;align-items:center;padding:12px}
+        .reg-lbl{font-size:12px;font-weight:600;color:#195b86;white-space:nowrap}
+        .reg-equip{display:flex;align-items:center;gap:4px}
+        #{status_footer_css()}
+      </style>
+    </head>
+    <body>
+      <header>
+        <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
+        <h1 class="ac-title"><i class="bi bi-card-list"></i><span>Aircraft Registration (REG/)</span></h1>
+        #{header_time()}
+      </header>
+      <main>
+        #{notice_banner(notice)}
+        <section>
+          <h2>Search REG/</h2>
+          <form class="ac-search" method="get" action="/aircraft-reg">
+            <div class="ac-field"><span class="ac-label">TYPE</span>
+              <input class="ac-input-sm" name="q9b" value="#{html(q9b)}" maxlength="4" autocomplete="off" placeholder="B737">
+            </div>
+            <div class="ac-field"><span class="ac-label">REG/</span>
+              <input class="ac-input-sm" name="q18" value="#{html(q18)}" maxlength="7" autocomplete="off" placeholder="PKBDO">
+            </div>
+            <button class="btn btn-search" type="submit"><i class="bi bi-search" style="margin-right:4px"></i>Search</button>
+            <a class="btn btn-clear" href="/aircraft-reg"><i class="bi bi-x-circle" style="margin-right:4px"></i>Clear</a>
+          </form>
+        </section>
+        <section>
+          <h2>List of REG/(s)</h2>
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr>
+                <th>REG/</th><th>TYPE</th><th>EQUIP 10a</th><th>EQUIP 10b</th>
+                <th>OPR/</th><th>PBN/</th><th>SEL/</th><th style="width:36px"></th>
+              </tr></thead>
+              <tbody id="reg-tbody">#{rows}</tbody>
+            </table>
+          </div>
+          <div class="ac-footer">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span class="ac-count">#{total} Element(s) in this table</span>
+              <div class="ac-actions">
+                <button class="btn-sm btn-edit" onclick="regEdit()"><i class="bi bi-pencil"></i> Edit</button>
+                <button class="btn-sm btn-del"  onclick="regDelete()"><i class="bi bi-trash"></i> Delete</button>
+                <form class="inline-form" method="post" action="/aircraft-reg/delete-all"
+                      onsubmit="return confirm('Delete all #{total} record(s)?')">
+                  <input type="hidden" name="q18" value="#{html(q18)}">
+                  <input type="hidden" name="q9b" value="#{html(q9b)}">
+                  <button class="btn-sm btn-delall"><i class="bi bi-trash3"></i> Delete All</button>
+                </form>
+              </div>
+            </div>
+            <div class="pg">#{first_link}#{prev_link}
+              <span class="pg-info">Page #{page} of #{total_pages}</span>
+              #{next_link}#{last_link}
+              <span class="pg-goto">Go to <input type="number" id="reg-goto" value="#{page}" min="1" max="#{total_pages}">
+                <button class="btn-sm" type="button" onclick="regGoto()">Go</button>
+              </span>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Add / Edit REG/</h2>
+          <div class="reg-form-grid">
+            <span class="reg-lbl">9. TYPE</span>
+            <input class="ac-input reg-input-sm" id="reg-type9b" maxlength="4" placeholder="B737">
+            <span class="reg-lbl">10. EQUIP</span>
+            <div class="reg-equip">
+              <input class="ac-input reg-input-md" id="reg-type10a" maxlength="20" placeholder="SACDR">
+              <span style="color:#6d7b88;padding:0 4px">/</span>
+              <input class="ac-input reg-input-md" id="reg-type10b" maxlength="20" placeholder="AB1">
+            </div>
+            <span class="reg-lbl">18. REG/</span>
+            <input class="ac-input reg-input-md" id="reg-type18" maxlength="7" placeholder="PKBDO">
+            <span class="reg-lbl">18. SEL/</span>
+            <input class="ac-input reg-input-md" id="reg-type18Sel" maxlength="10">
+            <span class="reg-lbl">18. PBN/</span>
+            <input class="ac-input reg-input-md" id="reg-type18Pbn" maxlength="20">
+            <span class="reg-lbl">18. OPR/</span>
+            <input class="ac-input reg-input-xl" id="reg-type18Opr" maxlength="100" placeholder="GARUDA INDONESIA">
+          </div>
+          <div style="padding:0 12px 12px;display:flex;gap:6px">
+            <button class="btn-sm btn-save"   onclick="regSave()"><i class="bi bi-floppy"></i> Save</button>
+            <button class="btn-sm btn-update" onclick="regUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
+            <button class="btn-sm btn-clr"    onclick="regClear()"><i class="bi bi-x-circle"></i> Clear</button>
+          </div>
+          <form id="reg-save-form" method="post" action="/aircraft-reg/save" style="display:none">
+            <input type="hidden" id="rs-type18" name="type18"><input type="hidden" id="rs-type9b" name="type9b">
+            <input type="hidden" id="rs-type10a" name="type10a"><input type="hidden" id="rs-type10b" name="type10b">
+            <input type="hidden" id="rs-opr" name="type18Opr"><input type="hidden" id="rs-pbn" name="type18Pbn">
+            <input type="hidden" id="rs-sel" name="type18Sel">
+          </form>
+          <form id="reg-update-form" method="post" action="" style="display:none">
+            <input type="hidden" id="ru-type18" name="type18"><input type="hidden" id="ru-type9b" name="type9b">
+            <input type="hidden" id="ru-type10a" name="type10a"><input type="hidden" id="ru-type10b" name="type10b">
+            <input type="hidden" id="ru-opr" name="type18Opr"><input type="hidden" id="ru-pbn" name="type18Pbn">
+            <input type="hidden" id="ru-sel" name="type18Sel">
+          </form>
+          <form id="reg-del-form" method="post" action="" style="display:none"></form>
+        </section>
+      </main>
+      #{status_panel([], nil)}#{header_clock_script()}#{status_footer_script()}#{auto_uppercase_script()}
+      <script>
+        (function(){
+          var sel=null,selId=null;
+          var flds={type18:'reg-type18',type9b:'reg-type9b',type10a:'reg-type10a',type10b:'reg-type10b',
+                    opr:'reg-type18Opr',pbn:'reg-type18Pbn',sel:'reg-type18Sel'};
+          function g(id){return document.getElementById(id);}
+          function v(id){return (g(id)||{value:''}).value.trim().toUpperCase();}
+          function setRow(row){
+            if(sel) sel.classList.remove('selected');
+            sel=row; selId=row?row.getAttribute('data-id'):null;
+            if(!row) return;
+            row.classList.add('selected');
+            var d=row.dataset;
+            var m={type18:d.type18,type9b:d.type9b,type10a:d.type10a,type10b:d.type10b,opr:d.opr,pbn:d.pbn,sel:d.sel};
+            Object.keys(m).forEach(function(k){var el=g(flds[k]);if(el) el.value=m[k]||'';});
+          }
+          var tb=g('reg-tbody');
+          if(tb) tb.addEventListener('click',function(e){
+            var row=e.target&&e.target.closest?e.target.closest('tr.ac-row'):null;
+            if(row&&!e.target.closest('form')) setRow(row);
+          });
+          function fillForm(prefix){
+            g(prefix+'-type18').value=v('reg-type18'); g(prefix+'-type9b').value=v('reg-type9b');
+            g(prefix+'-type10a').value=v('reg-type10a'); g(prefix+'-type10b').value=v('reg-type10b');
+            var opr=g('reg-type18Opr');
+            g(prefix+'-opr').value=opr?opr.value.trim():'';
+            g(prefix+'-pbn').value=v('reg-type18Pbn'); g(prefix+'-sel').value=v('reg-type18Sel');
+          }
+          window.regEdit=function(){if(!sel){alert('Select a row.');return;}g('reg-type18').focus();};
+          window.regDelete=function(){
+            if(!selId){alert('Select a row.');return;}
+            var t=sel?sel.getAttribute('data-type18'):selId;
+            if(!confirm('Delete "'+t+'"?')) return;
+            var f=g('reg-del-form'); f.action='/aircraft-reg/'+selId+'/delete'; f.submit();
+          };
+          window.regSave=function(){
+            if(!v('reg-type18')){alert('REG/ is required.');g('reg-type18').focus();return;}
+            if(!v('reg-type9b')){alert('TYPE is required.');g('reg-type9b').focus();return;}
+            fillForm('rs'); g('reg-save-form').submit();
+          };
+          window.regUpdate=function(){
+            if(!selId){alert('Select a row to update.');return;}
+            if(!v('reg-type18')){alert('REG/ is required.');g('reg-type18').focus();return;}
+            var f=g('reg-update-form'); f.action='/aircraft-reg/'+selId+'/update';
+            fillForm('ru'); f.submit();
+          };
+          window.regClear=function(){
+            if(sel) sel.classList.remove('selected'); sel=null; selId=null;
+            Object.keys(flds).forEach(function(k){var el=g(flds[k]);if(el) el.value='';});
+          };
+          window.regGoto=function(){
+            var p=parseInt((g('reg-goto')||{value:1}).value,10)||1;
+            var params=new URLSearchParams(window.location.search||'');
+            params.set('page',p); window.location.href='/aircraft-reg?'+params.toString();
+          };
+          var gi=g('reg-goto');
+          if(gi) gi.addEventListener('keydown',function(e){if(e.key==='Enter') regGoto();});
+        })();
+      </script>
+    </body></html>
+    """
+  end
+
+  def route_page(items, pagination, dep, dest, notice) do
+    total       = Map.get(pagination, :total, 0)
+    page        = Map.get(pagination, :page, 1)
+    total_pages = Map.get(pagination, :total_pages, 1)
+
+    pl = fn p -> "/routes?" <> URI.encode_query(%{dep: dep, dest: dest, page: p}) end
+    first_link = if page > 1,          do: ~s(<a href="#{pl.(1)}"           class="pg-btn">&#171;</a>),  else: ~s(<span class="pg-btn disabled">&#171;</span>)
+    prev_link  = if page > 1,          do: ~s(<a href="#{pl.(page-1)}"      class="pg-btn">&#8249;</a>), else: ~s(<span class="pg-btn disabled">&#8249;</span>)
+    next_link  = if page < total_pages, do: ~s(<a href="#{pl.(page+1)}"     class="pg-btn">&#8250;</a>), else: ~s(<span class="pg-btn disabled">&#8250;</span>)
+    last_link  = if page < total_pages, do: ~s(<a href="#{pl.(total_pages)}" class="pg-btn">&#187;</a>), else: ~s(<span class="pg-btn disabled">&#187;</span>)
+
+    dest_list = fn item ->
+      1..8
+      |> Enum.map(fn i -> Map.get(item, :"destination#{i}") || "" end)
+      |> Enum.reject(&(&1 == ""))
+      |> Enum.join(", ")
+    end
+
+    ret = html(URI.encode_query(%{dep: dep, dest: dest, page: page}))
+    rows = if items == [] do
+      ~s(<tr><td colspan="5" class="ac-empty">No records found.</td></tr>)
+    else
+      Enum.map_join(items, "", fn r ->
+        dests_json = 1..21 |> Enum.map(fn i -> ~s("#{html(Map.get(r, :"destination#{i}") || "")}") end) |> Enum.join(",")
+        """
+        <tr class="ac-row" data-id="#{r.id_number}"
+            data-dep="#{html(r.type13a)}" data-dest="#{html(r.type16a)}"
+            data-route="#{html(r.type15c)}" data-dests="[#{dests_json}]">
+          <td>#{html(r.type13a)}</td><td>#{html(r.type16a)}</td>
+          <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">#{html(r.type15c)}</td>
+          <td style="max-width:260px;font-size:12px;color:#6d7b88">#{html(dest_list.(r))}</td>
+          <td class="ac-act">
+            <form class="inline-form" method="post" action="/routes/#{r.id_number}/delete"
+                  onsubmit="return confirm('Delete #{html(r.type13a)}-#{html(r.type16a)}?')">
+              <input type="hidden" name="return_to" value="/routes?#{ret}">
+              <button class="ac-del-row" type="submit">&#10005;</button>
+            </form>
+          </td>
+        </tr>
+        """
+      end)
+    end
+
+    addr_inputs = fn prefix ->
+      Enum.map_join(1..21, "", fn i ->
+        ~s(<input class="ac-input rte-addr" id="#{prefix}-dest#{i}" name="destination#{i}" maxlength="8" placeholder="ADDR #{i}">)
+      end)
+    end
+
+    """
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Route</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <style>
+        #{maint_page_css()}
+        .rte-addr{width:84px;font-size:12px;padding:4px 6px;height:30px}
+        .rte-addr-grid{display:grid;grid-template-columns:repeat(7,84px);gap:5px;margin-top:4px}
+        .rte-textarea{width:100%;min-height:64px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical;text-transform:uppercase}
+        #{status_footer_css()}
+      </style>
+    </head>
+    <body>
+      <header>
+        <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
+        <h1 class="ac-title"><i class="bi bi-sign-turn-right"></i><span>Route</span></h1>
+        #{header_time()}
+      </header>
+      <main>
+        #{notice_banner(notice)}
+        <section>
+          <h2>Search Route</h2>
+          <form class="ac-search" method="get" action="/routes">
+            <div class="ac-field"><span class="ac-label">DEP AD</span>
+              <input class="ac-input-sm" name="dep" value="#{html(dep)}" maxlength="4" placeholder="WAJJ">
+            </div>
+            <div class="ac-field"><span class="ac-label">DEST AD</span>
+              <input class="ac-input-sm" name="dest" value="#{html(dest)}" maxlength="4" placeholder="WADD">
+            </div>
+            <button class="btn btn-search" type="submit"><i class="bi bi-search" style="margin-right:4px"></i>Search</button>
+            <a class="btn btn-clear" href="/routes"><i class="bi bi-x-circle" style="margin-right:4px"></i>Clear</a>
+          </form>
+        </section>
+        <section>
+          <h2>List of Route(s)</h2>
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr>
+                <th style="width:80px">DEP AD</th><th style="width:80px">DEST AD</th>
+                <th>ROUTE</th><th>Addresses (1–8)</th><th style="width:36px"></th>
+              </tr></thead>
+              <tbody id="rte-tbody">#{rows}</tbody>
+            </table>
+          </div>
+          <div class="ac-footer">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span class="ac-count">#{total} Element(s) in this table</span>
+              <div class="ac-actions">
+                <button class="btn-sm btn-edit" onclick="rteEdit()"><i class="bi bi-pencil"></i> Edit</button>
+                <button class="btn-sm btn-del"  onclick="rteDelete()"><i class="bi bi-trash"></i> Delete</button>
+                <form class="inline-form" method="post" action="/routes/delete-all"
+                      onsubmit="return confirm('Delete all #{total} record(s)?')">
+                  <input type="hidden" name="dep" value="#{html(dep)}">
+                  <input type="hidden" name="dest" value="#{html(dest)}">
+                  <button class="btn-sm btn-delall"><i class="bi bi-trash3"></i> Delete All</button>
+                </form>
+              </div>
+            </div>
+            <div class="pg">#{first_link}#{prev_link}
+              <span class="pg-info">Page #{page} of #{total_pages}</span>
+              #{next_link}#{last_link}
+              <span class="pg-goto">Go to <input type="number" id="rte-goto" value="#{page}" min="1" max="#{total_pages}">
+                <button class="btn-sm" type="button" onclick="rteGoto()">Go</button>
+              </span>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Add / Edit Route</h2>
+          <div style="padding:12px">
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px">
+              <div class="ac-field"><span class="ac-label">DEP AD</span>
+                <input class="ac-input-sm" id="rte-dep" maxlength="4" placeholder="WAJJ">
+              </div>
+              <div class="ac-field"><span class="ac-label">DEST AD</span>
+                <input class="ac-input-sm" id="rte-dest" maxlength="4" placeholder="WADD">
+              </div>
+            </div>
+            <div class="ac-field" style="margin-bottom:8px"><span class="ac-label">ROUTE</span>
+              <textarea class="rte-textarea" id="rte-route" rows="2" placeholder="e.g. W1 W2 DCT POINT"></textarea>
+            </div>
+            <div class="ac-field"><span class="ac-label">ADDRESS (1 – 21)</span>
+              <div class="rte-addr-grid" id="rte-addr-grid">#{addr_inputs.("af")}</div>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:6px">
+              <button class="btn-sm btn-save"   onclick="rteSave()"><i class="bi bi-floppy"></i> Save</button>
+              <button class="btn-sm btn-update" onclick="rteUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
+              <button class="btn-sm btn-clr"    onclick="rteClear()"><i class="bi bi-x-circle"></i> Clear</button>
+            </div>
+          </div>
+          <form id="rte-save-form"   method="post" action="/routes/save"  style="display:none">
+            <input type="hidden" id="rfs-dep"  name="type13a"><input type="hidden" id="rfs-dest" name="type16a">
+            <input type="hidden" id="rfs-route" name="type15c">
+            #{Enum.map_join(1..21, "", fn i -> ~s(<input type="hidden" id="rfs-d#{i}" name="destination#{i}">) end)}
+          </form>
+          <form id="rte-update-form" method="post" action="" style="display:none">
+            <input type="hidden" id="rfu-dep"  name="type13a"><input type="hidden" id="rfu-dest" name="type16a">
+            <input type="hidden" id="rfu-route" name="type15c">
+            #{Enum.map_join(1..21, "", fn i -> ~s(<input type="hidden" id="rfu-d#{i}" name="destination#{i}">) end)}
+          </form>
+          <form id="rte-del-form" method="post" action="" style="display:none"></form>
+        </section>
+      </main>
+      #{status_panel([], nil)}#{header_clock_script()}#{status_footer_script()}#{auto_uppercase_script()}
+      <script>
+        (function(){
+          var sel=null,selId=null;
+          function g(id){return document.getElementById(id);}
+          function v(id){var e=g(id);return e?e.value.trim().toUpperCase():'';}
+          function setRow(row){
+            if(sel) sel.classList.remove('selected');
+            sel=row; selId=row?row.getAttribute('data-id'):null;
+            if(!row) return;
+            row.classList.add('selected');
+            var d=row.dataset;
+            g('rte-dep').value=d.dep||''; g('rte-dest').value=d.dest||'';
+            var rt=g('rte-route'); if(rt) rt.value=d.route||'';
+            try{
+              var dsts=JSON.parse(d.dests||'[]');
+              for(var i=0;i<21;i++){var el=g('af-dest'+(i+1));if(el) el.value=dsts[i]||'';}
+            } catch(e){}
+          }
+          var tb=g('rte-tbody');
+          if(tb) tb.addEventListener('click',function(e){
+            var row=e.target&&e.target.closest?e.target.closest('tr.ac-row'):null;
+            if(row&&!e.target.closest('form')) setRow(row);
+          });
+          function fillHidden(prefix){
+            g(prefix+'-dep').value=v('rte-dep'); g(prefix+'-dest').value=v('rte-dest');
+            var rt=g('rte-route'); g(prefix+'-route').value=rt?rt.value.trim():'';
+            for(var i=1;i<=21;i++){
+              var el=g('af-dest'+i); var h=g(prefix.replace('r','r')+'s-d'+i)||g(prefix+'u-d'+i)||g(prefix+'-d'+i);
+              if(h&&el) h.value=el.value.trim().toUpperCase();
+            }
+          }
+          function fillSave(){
+            g('rfs-dep').value=v('rte-dep'); g('rfs-dest').value=v('rte-dest');
+            var rt=g('rte-route'); g('rfs-route').value=rt?rt.value.trim():'';
+            for(var i=1;i<=21;i++){var el=g('af-dest'+i),h=g('rfs-d'+i);if(h&&el) h.value=el.value.trim().toUpperCase();}
+          }
+          function fillUpdate(){
+            g('rfu-dep').value=v('rte-dep'); g('rfu-dest').value=v('rte-dest');
+            var rt=g('rte-route'); g('rfu-route').value=rt?rt.value.trim():'';
+            for(var i=1;i<=21;i++){var el=g('af-dest'+i),h=g('rfu-d'+i);if(h&&el) h.value=el.value.trim().toUpperCase();}
+          }
+          window.rteEdit=function(){if(!sel){alert('Select a row.');return;}g('rte-dep').focus();};
+          window.rteDelete=function(){
+            if(!selId){alert('Select a row.');return;}
+            if(!confirm('Delete "'+v('rte-dep')+'-'+v('rte-dest')+'"?')) return;
+            var f=g('rte-del-form'); f.action='/routes/'+selId+'/delete'; f.submit();
+          };
+          window.rteSave=function(){
+            if(!v('rte-dep')){alert('DEP AD is required.');g('rte-dep').focus();return;}
+            if(!v('rte-dest')){alert('DEST AD is required.');g('rte-dest').focus();return;}
+            fillSave(); g('rte-save-form').submit();
+          };
+          window.rteUpdate=function(){
+            if(!selId){alert('Select a row to update.');return;}
+            if(!v('rte-dep')){alert('DEP AD is required.');g('rte-dep').focus();return;}
+            var f=g('rte-update-form'); f.action='/routes/'+selId+'/update';
+            fillUpdate(); f.submit();
+          };
+          window.rteClear=function(){
+            if(sel) sel.classList.remove('selected'); sel=null; selId=null;
+            g('rte-dep').value=''; g('rte-dest').value='';
+            var rt=g('rte-route'); if(rt) rt.value='';
+            for(var i=1;i<=21;i++){var el=g('af-dest'+i);if(el) el.value='';}
+          };
+          window.rteGoto=function(){
+            var p=parseInt((g('rte-goto')||{value:1}).value,10)||1;
+            var params=new URLSearchParams(window.location.search||'');
+            params.set('page',p); window.location.href='/routes?'+params.toString();
+          };
+          var gi=g('rte-goto');
+          if(gi) gi.addEventListener('keydown',function(e){if(e.key==='Enter') rteGoto();});
+        })();
+      </script>
+    </body></html>
+    """
+  end
+
+  def location_indicator_page(items, pagination, q, loc, notice) do
+    total       = Map.get(pagination, :total, 0)
+    page        = Map.get(pagination, :page, 1)
+    total_pages = Map.get(pagination, :total_pages, 1)
+
+    page_link = fn p ->
+      "/location-indicators?" <> URI.encode_query(%{q: q, loc: loc, page: p})
+    end
+
+    first_link = if page > 1,         do: ~s(<a href="#{page_link.(1)}"           class="pg-btn" title="First">&#171;</a>),    else: ~s(<span class="pg-btn disabled">&#171;</span>)
+    prev_link  = if page > 1,         do: ~s(<a href="#{page_link.(page - 1)}"     class="pg-btn" title="Previous">&#8249;</a>), else: ~s(<span class="pg-btn disabled">&#8249;</span>)
+    next_link  = if page < total_pages, do: ~s(<a href="#{page_link.(page + 1)}"   class="pg-btn" title="Next">&#8250;</a>),    else: ~s(<span class="pg-btn disabled">&#8250;</span>)
+    last_link  = if page < total_pages, do: ~s(<a href="#{page_link.(total_pages)}" class="pg-btn" title="Last">&#187;</a>),    else: ~s(<span class="pg-btn disabled">&#187;</span>)
+
+    rows = if items == [] do
+      ~s(<tr><td colspan="3" class="ac-empty">No records found.</td></tr>)
+    else
+      return_param = html(URI.encode_query(%{q: q, loc: loc, page: page}))
+      Enum.map_join(items, "", fn item ->
+        """
+        <tr class="ac-row" data-id="#{item.id}" data-indicator="#{html(item.indicator)}" data-location="#{html(item.location)}">
+          <td>#{html(item.indicator)}</td>
+          <td>#{html(item.location)}</td>
+          <td class="ac-act">
+            <form class="inline-form" method="post" action="/location-indicators/#{item.id}/delete"
+                  onsubmit="return confirm('Delete #{html(item.indicator)}?')">
+              <input type="hidden" name="return_to" value="/location-indicators?#{return_param}">
+              <button class="ac-del-row" type="submit" title="Delete">&#10005;</button>
+            </form>
+          </td>
+        </tr>
+        """
+      end)
+    end
+
+    """
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>ICAO Location Indicator</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <style>
+        body{margin:0;padding-bottom:62px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
+        a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
+        header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
+        header a{color:white}.back-btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none}.back-btn:hover{color:#d8e8f3;text-decoration:none}.back-btn i{font-size:18px;line-height:1}
+        .ac-title{display:inline-flex;align-items:center;gap:8px}.ac-title i{color:#9bd0ff;font-size:18px;line-height:1}
+        #{header_time_css()} main{max-width:960px;margin:0 auto;padding:16px}
+        h1{font-size:18px;margin:0}
+        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:14px;overflow:visible}
+        h2{font-size:15px;font-weight:600;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee;background:#f7f9fb;border-radius:6px 6px 0 0}
+        .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
+        .ac-search{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;padding:12px}
+        .ac-field{display:flex;flex-direction:column;gap:4px}
+        .ac-label{display:block;font-size:12px;color:#435466;font-weight:600;margin-bottom:2px}
+        .ac-input-sm{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;width:80px}
+        .ac-input-lg{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;width:300px}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer;height:34px;box-sizing:border-box}
+        .btn-search{background:#14324a;color:white}.btn-search:hover{background:#195b86}
+        .btn-clear{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clear:hover{background:#edf4fa;text-decoration:none}
+        table{width:100%;border-collapse:collapse;font-size:13px}
+        th,td{border-bottom:1px solid #edf0f3;padding:8px 12px;text-align:left;vertical-align:middle}
+        th{background:#f0f3f6;color:#435466;font-weight:600;font-size:13px;white-space:nowrap}
+        .ac-row{cursor:pointer}.ac-row:hover td{background:#edf4fa}.ac-row.selected td{background:#dbeeff}
+        .ac-act{width:36px;text-align:center;padding:4px}
+        .ac-del-row{background:transparent;border:0;color:#b42318;cursor:pointer;font-size:14px;padding:2px 6px;border-radius:3px}.ac-del-row:hover{background:#fff1f0}
+        .ac-empty{text-align:center;color:#6d7b88;padding:20px}
+        .ac-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px}
+        .ac-count{color:#195b86;font-weight:700}.ac-actions{display:flex;align-items:center;gap:6px}
+        .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}
+        .btn-edit{background:#14324a;color:white}.btn-edit:hover{background:#195b86}
+        .btn-del{background:#b42318;color:white}.btn-del:hover{background:#8a1f11}
+        .btn-delall{background:white;color:#b42318;border:1px solid #b42318}.btn-delall:hover{background:#fff1f0}
+        .pg{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+        .pg-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#17202a;font-size:14px;text-decoration:none}
+        .pg-btn:hover{background:#edf4fa;text-decoration:none}.pg-btn.disabled{color:#9aa6b2;background:#f0f3f6;pointer-events:none}
+        .pg-info{font-size:13px;color:#435466;white-space:nowrap;padding:0 4px}
+        .pg-goto{display:inline-flex;align-items:center;gap:4px;font-size:13px}.pg-goto input{width:44px;text-align:center;border:1px solid #cbd3dc;border-radius:4px;padding:4px 5px;font-size:13px}
+        .ac-form-body{padding:12px}
+        .ac-form-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
+        .ac-input-loc{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;width:360px;text-transform:uppercase}
+        .btn-save{background:#1c6b4f;color:white}.btn-save:hover{background:#17583f}
+        .btn-update{background:#195b86;color:white}.btn-update:hover{background:#1a4f72}
+        .btn-clr{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clr:hover{background:#edf4fa}
+        .inline-form{display:inline;margin:0;padding:0}
+        #{status_footer_css()}
+      </style>
+    </head>
+    <body>
+      <header>
+        <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
+        <h1 class="ac-title"><i class="bi bi-geo-alt-fill"></i><span>ICAO Location Indicator</span></h1>
+        #{header_time()}
+      </header>
+      <main>
+        #{notice_banner(notice)}
+
+        <section>
+          <h2>Search ICAO Location Indicator</h2>
+          <form class="ac-search" method="get" action="/location-indicators">
+            <div class="ac-field">
+              <span class="ac-label">Indicator</span>
+              <input class="ac-input-sm" name="q" value="#{html(q)}" maxlength="4" autocomplete="off" placeholder="e.g. WAJJ">
+            </div>
+            <div class="ac-field">
+              <span class="ac-label">Location</span>
+              <input class="ac-input-lg" name="loc" value="#{html(loc)}" autocomplete="off" placeholder="e.g. JAKARTA">
+            </div>
+            <button class="btn btn-search" type="submit"><i class="bi bi-search" style="margin-right:4px"></i>Search</button>
+            <a class="btn btn-clear" href="/location-indicators"><i class="bi bi-x-circle" style="margin-right:4px"></i>Clear</a>
+          </form>
+        </section>
+
+        <section>
+          <h2>List of ICAO Location Indicator(s)</h2>
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:140px">Indicator</th>
+                  <th>Location</th>
+                  <th style="width:36px"></th>
+                </tr>
+              </thead>
+              <tbody id="loc-tbody">#{rows}</tbody>
+            </table>
+          </div>
+          <div class="ac-footer">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span class="ac-count">#{total} Element(s) in this table</span>
+              <div class="ac-actions">
+                <button class="btn-sm btn-edit" type="button" onclick="locEdit()"><i class="bi bi-pencil"></i> Edit</button>
+                <button class="btn-sm btn-del"  type="button" onclick="locDelete()"><i class="bi bi-trash"></i> Delete</button>
+                <form class="inline-form" method="post" action="/location-indicators/delete-all"
+                      onsubmit="return confirm('Delete all #{total} record(s) matching current filter?')">
+                  <input type="hidden" name="q"   value="#{html(q)}">
+                  <input type="hidden" name="loc" value="#{html(loc)}">
+                  <button class="btn-sm btn-delall" type="submit"><i class="bi bi-trash3"></i> Delete All</button>
+                </form>
+              </div>
+            </div>
+            <div class="pg">
+              #{first_link}#{prev_link}
+              <span class="pg-info">Page #{page} of #{total_pages}</span>
+              #{next_link}#{last_link}
+              <span class="pg-goto">Go to
+                <input type="number" id="loc-goto" value="#{page}" min="1" max="#{total_pages}">
+                <button class="btn-sm" type="button" onclick="locGoto()">Go</button>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Add / Edit ICAO Location Indicator</h2>
+          <div class="ac-form-body">
+            <div class="ac-form-row">
+              <div class="ac-field">
+                <span class="ac-label">Indicator</span>
+                <input class="ac-input-sm" id="loc-indicator" maxlength="4" autocomplete="off" placeholder="e.g. WAJJ">
+              </div>
+              <div class="ac-field">
+                <span class="ac-label">Location</span>
+                <input class="ac-input-loc" id="loc-location" autocomplete="off" placeholder="Location name">
+              </div>
+              <div style="display:flex;gap:6px;align-self:flex-end">
+                <button class="btn-sm btn-save"   type="button" onclick="locSave()"><i class="bi bi-floppy"></i> Save</button>
+                <button class="btn-sm btn-update" type="button" onclick="locUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
+                <button class="btn-sm btn-clr"    type="button" onclick="locClear()"><i class="bi bi-x-circle"></i> Clear</button>
+              </div>
+            </div>
+            <form id="loc-save-form"   method="post" action="/location-indicators/save"   style="display:none">
+              <input type="hidden" id="loc-save-ind" name="indicator">
+              <input type="hidden" id="loc-save-loc" name="location">
+            </form>
+            <form id="loc-update-form" method="post" action="" style="display:none">
+              <input type="hidden" id="loc-upd-ind" name="indicator">
+              <input type="hidden" id="loc-upd-loc" name="location">
+            </form>
+            <form id="loc-del-form" method="post" action="" style="display:none"></form>
+          </div>
+        </section>
+      </main>
+      #{status_panel([], nil)}
+      #{header_clock_script()}
+      #{status_footer_script()}
+      #{auto_uppercase_script()}
+      <script>
+        (function () {
+          var selRow = null;
+          var selId  = null;
+
+          var tbody   = document.getElementById('loc-tbody');
+          var indEl   = document.getElementById('loc-indicator');
+          var locEl   = document.getElementById('loc-location');
+
+          function selectRow(row) {
+            if (selRow) selRow.classList.remove('selected');
+            selRow = row;
+            selId  = row ? row.getAttribute('data-id') : null;
+            if (row) {
+              row.classList.add('selected');
+              if (indEl) indEl.value = row.getAttribute('data-indicator') || '';
+              if (locEl) locEl.value = row.getAttribute('data-location')  || '';
+            }
+          }
+
+          if (tbody) {
+            tbody.addEventListener('click', function (e) {
+              var row = e.target && e.target.closest ? e.target.closest('tr.ac-row') : null;
+              if (row && !e.target.closest('form')) selectRow(row);
+            });
+          }
+
+          window.locEdit   = function () { if (!selRow) { alert('Select a row first.'); return; } if (indEl) indEl.focus(); };
+          window.locDelete = function () {
+            if (!selId) { alert('Select a row first.'); return; }
+            var ind = selRow ? selRow.getAttribute('data-indicator') : selId;
+            if (!confirm('Delete "' + ind + '"?')) return;
+            var f = document.getElementById('loc-del-form');
+            f.action = '/location-indicators/' + selId + '/delete';
+            f.submit();
+          };
+          window.locSave   = function () {
+            var ind = indEl ? indEl.value.trim().toUpperCase() : '';
+            var loc = locEl ? locEl.value.trim().toUpperCase() : '';
+            if (!ind) { alert('Indicator is required.'); indEl && indEl.focus(); return; }
+            if (ind.length !== 4) { alert('Indicator must be exactly 4 letters.'); indEl && indEl.focus(); return; }
+            if (!loc) { alert('Location is required.'); locEl && locEl.focus(); return; }
+            document.getElementById('loc-save-ind').value = ind;
+            document.getElementById('loc-save-loc').value = loc;
+            document.getElementById('loc-save-form').submit();
+          };
+          window.locUpdate = function () {
+            if (!selId) { alert('Select a row to update first.'); return; }
+            var ind = indEl ? indEl.value.trim().toUpperCase() : '';
+            var loc = locEl ? locEl.value.trim().toUpperCase() : '';
+            if (!ind) { alert('Indicator is required.'); indEl && indEl.focus(); return; }
+            if (!loc) { alert('Location is required.'); locEl && locEl.focus(); return; }
+            var f = document.getElementById('loc-update-form');
+            f.action = '/location-indicators/' + selId + '/update';
+            document.getElementById('loc-upd-ind').value = ind;
+            document.getElementById('loc-upd-loc').value = loc;
+            f.submit();
+          };
+          window.locClear  = function () {
+            if (selRow) selRow.classList.remove('selected');
+            selRow = null; selId = null;
+            if (indEl) indEl.value = '';
+            if (locEl) locEl.value = '';
+          };
+          window.locGoto   = function () {
+            var inp = document.getElementById('loc-goto');
+            var p   = inp ? parseInt(inp.value, 10) : 1;
+            if (isNaN(p) || p < 1) p = 1;
+            var params = new URLSearchParams(window.location.search || '');
+            params.set('page', p);
+            window.location.href = '/location-indicators?' + params.toString();
+          };
+          var gi = document.getElementById('loc-goto');
+          if (gi) gi.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.keyCode === 13) locGoto(); });
+        })();
+      </script>
+    </body>
+    </html>
+    """
   end
 
   def aircraft_type_page(items, pagination, q, wake, notice) do
@@ -1009,11 +1963,11 @@ defmodule TpWeb.Views do
     <details class="top-menu">
       <summary>#{maintenance_icon()}<span>Maintenance</span></summary>
       <div class="top-submenu">
-        <a href="/settings"> Communication Setup</a>
-        <a href="/aircraft-types">Type of Aircraft</a>
-        <a href="#">Aircraft Registration</a>
-        <a href="#">ICAO Location Indicator</a>
-        <a href="#">Route</a>
+        <a href="/settings"><i class="bi bi-gear" style="margin-right:5px"></i>  Communication Setup</a>
+        <a href="/aircraft-types"><i class="bi bi-airplane" style="margin-right:5px"></i> Type of Aircraft</a>
+        <a href="/aircraft-reg"><i class="bi bi-card-list" style="margin-right:5px"></i>Aircraft Registration</a>
+        <a href="/location-indicators"><i class="bi bi-geo-alt" style="margin-right:5px"></i>ICAO Location Indicator</a>
+        <a href="/routes"><i class="bi bi-sign-turn-right" style="margin-right:5px"></i>Route</a>
       </div>
     </details>
     """
@@ -1024,10 +1978,10 @@ defmodule TpWeb.Views do
     <details class="top-menu">
       <summary>#{views_icon()}<span>Views</span></summary>
       <div class="top-submenu">
-        <a href="/">ATS Messages</a>
-        <a href="/?direction=inbound">Incoming Messages</a>
-        <a href="#">ICAO Abbreviations and Codes</a>
-        <a href="#">Warning Messages</a>
+        <a href="/"><i class="bi bi-envelope" style="margin-right:5px"></i>ATS Messages</a>
+        <a href="/?direction=inbound"><i class="bi bi-inbox" style="margin-right:5px"></i>Incoming Messages</a>
+        <a href="/icao-abbreviations"><i class="bi bi-book" style="margin-right:5px"></i>ICAO Abbreviations and Codes</a>
+        <a href="/warning-messages"><i class="bi bi-exclamation-triangle" style="margin-right:5px"></i>Warning Messages</a>
       </div>
     </details>
     """
@@ -1208,6 +2162,54 @@ defmodule TpWeb.Views do
 
   defp header_time_css do
     ".header-spacer{flex:1}.header-time{display:inline-flex;align-items:center;gap:6px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:700;color:#d8e8f3;white-space:nowrap}.header-clock-icon{display:inline-flex;align-items:center;color:#9bd0ff}.header-clock-icon svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.header-time-label{color:#9bd0ff;font-weight:900;letter-spacing:.03em}"
+  end
+
+  defp maint_page_css do
+    """
+    body{margin:0;padding-bottom:62px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
+    a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
+    header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
+    header a{color:white}.back-btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none}.back-btn:hover{color:#d8e8f3;text-decoration:none}.back-btn i{font-size:18px;line-height:1}
+    .ac-title{display:inline-flex;align-items:center;gap:8px}.ac-title i{color:#9bd0ff;font-size:18px;line-height:1}
+    #{header_time_css()} main{max-width:960px;margin:0 auto;padding:16px}
+    h1{font-size:18px;margin:0}
+    section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:14px;overflow:visible}
+    h2{font-size:15px;font-weight:600;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee;background:#f7f9fb;border-radius:6px 6px 0 0}
+    .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
+    .ac-search{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;padding:12px}
+    .ac-field{display:flex;flex-direction:column;gap:4px}
+    .ac-label{display:block;font-size:12px;color:#435466;font-weight:600;margin-bottom:2px}
+    .ac-input-sm{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;width:80px}
+    .ac-input-lg{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;width:300px}
+    .ac-input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer;height:34px;box-sizing:border-box}
+    .btn-search{background:#14324a;color:white}.btn-search:hover{background:#195b86}
+    .btn-clear{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clear:hover{background:#edf4fa;text-decoration:none}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{border-bottom:1px solid #edf0f3;padding:8px 12px;text-align:left;vertical-align:middle}
+    th{background:#f0f3f6;color:#435466;font-weight:600;font-size:13px;white-space:nowrap}
+    .ac-row{cursor:pointer}.ac-row:hover td{background:#edf4fa}.ac-row.selected td{background:#dbeeff}
+    .ac-act{width:36px;text-align:center;padding:4px}
+    .ac-del-row{background:transparent;border:0;color:#b42318;cursor:pointer;font-size:14px;padding:2px 6px;border-radius:3px}.ac-del-row:hover{background:#fff1f0}
+    .ac-empty{text-align:center;color:#6d7b88;padding:20px}
+    .ac-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px}
+    .ac-count{color:#195b86;font-weight:700}.ac-actions{display:flex;align-items:center;gap:6px}
+    .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}
+    .btn-edit{background:#14324a;color:white}.btn-edit:hover{background:#195b86}
+    .btn-del{background:#b42318;color:white}.btn-del:hover{background:#8a1f11}
+    .btn-delall{background:white;color:#b42318;border:1px solid #b42318}.btn-delall:hover{background:#fff1f0}
+    .pg{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+    .pg-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#17202a;font-size:14px;text-decoration:none}
+    .pg-btn:hover{background:#edf4fa;text-decoration:none}.pg-btn.disabled{color:#9aa6b2;background:#f0f3f6;pointer-events:none}
+    .pg-info{font-size:13px;color:#435466;white-space:nowrap;padding:0 4px}
+    .pg-goto{display:inline-flex;align-items:center;gap:4px;font-size:13px}.pg-goto input{width:44px;text-align:center;border:1px solid #cbd3dc;border-radius:4px;padding:4px 5px;font-size:13px}
+    .ac-form-body{padding:12px}
+    .ac-form-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
+    .btn-save{background:#1c6b4f;color:white}.btn-save:hover{background:#17583f}
+    .btn-update{background:#195b86;color:white}.btn-update:hover{background:#1a4f72}
+    .btn-clr{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clr:hover{background:#edf4fa}
+    .inline-form{display:inline;margin:0;padding:0}
+    """
   end
 
   defp header_clock_script do
