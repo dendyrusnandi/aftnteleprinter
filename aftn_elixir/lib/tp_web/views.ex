@@ -201,10 +201,10 @@ defmodule TpWeb.Views do
         .compose-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start}.compose-main{min-width:0}.compose-side{position:sticky;top:12px;min-width:0}.compose-side .udp-monitor{margin:0;background:white;border:1px solid #d8dee6;border-radius:8px;overflow:hidden;box-shadow:0 12px 28px rgba(20,50,74,.08)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee;background:#fbfcfd}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.icon-button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.udp-monitor-body{padding:9px;max-height:calc(100vh - 178px);overflow:auto}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:150px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.2}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px;background:#fbfcfd}
         .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;min-width:0;font-size:13px;font-weight:700;cursor:pointer}.amo-tool i{font-size:16px}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
         .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer}.aftn-tool i{font-size:16px}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.tx-id-display{min-height:34px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;background:#f0f3f6;color:#14324a;padding:7px 9px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:900;display:flex;align-items:center}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
-        .alr-scroll{max-height:520px;overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.equipment-control .equipment-open{width:40px;flex:0 0 40px;background:white;color:#14324a;border:1px solid #cbd3dc;border-left:0;border-radius:0 4px 4px 0;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-control .equipment-open:hover{background:#edf4fa}.equipment-control input{border-top-right-radius:0;border-bottom-right-radius:0}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
+        .alr-scroll{overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.equipment-control .equipment-open{width:40px;flex:0 0 40px;background:white;color:#14324a;border:1px solid #cbd3dc;border-left:0;border-radius:0 4px 4px 0;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-control .equipment-open:hover{background:#edf4fa}.equipment-control input{border-top-right-radius:0;border-bottom-right-radius:0}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
         .equipment-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(10,18,28,.52);align-items:center;justify-content:center;padding:16px}.equipment-modal.open{display:flex}.equipment-card{width:min(760px,96vw);max-height:90vh;background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden}.equipment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14324a;color:white;padding:11px 14px}.equipment-head strong{font-size:14px}.equipment-x{background:transparent;color:white;border:0;border-radius:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-body{padding:12px;overflow:auto}.equipment-group{border:1px solid #e4e8ee;border-radius:6px;margin-bottom:10px;overflow:hidden}.equipment-group-title{background:#f0f3f6;color:#14324a;font-size:12px;font-weight:900;text-transform:uppercase;padding:7px 9px}.equipment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.equipment-row{display:grid;grid-template-columns:22px 48px 1fr;gap:7px;align-items:center;margin:0;padding:7px 9px;border-top:1px solid #edf0f3;cursor:pointer;color:#17202a;font-size:12px;font-weight:600}.equipment-row:nth-child(odd){border-right:1px solid #edf0f3}.equipment-row:hover{background:#edf4fa}.equipment-row input{width:auto}.equipment-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:900;color:#14324a}.equipment-desc{font-weight:600;color:#435466}.equipment-notes{background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:8px 10px;color:#5f4400;font-size:12px}.equipment-notes p{margin:0 0 5px}.equipment-notes p:last-child{margin-bottom:0}.equipment-actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-top:1px solid #e4e8ee;flex-wrap:wrap}
         .rcf-body{border:1px solid #d8dee6;background:#fbfcfd;border-radius:6px;padding:12px;margin-top:10px}.rcf-row-main{grid-template-columns:1.25fr 1.2fr 1.1fr .8fr .8fr}.rcf-message-type input:first-of-type{max-width:64px}.rcf-message-type input:not(:first-of-type){min-width:0}.rcf-radio textarea{min-height:74px}.rcf-filled{max-width:260px;margin-top:10px}
-        main{max-width:1560px;padding:14px}form{padding:10px}h2{font-size:15px;padding:11px 14px}button{padding:8px 12px;font-size:13px}textarea,input,select{padding:7px 9px;font-size:13px;min-height:34px}textarea{min-height:78px}label{font-size:12px;margin-bottom:4px}.field{margin-bottom:8px}.grid2,.grid4{gap:8px}.toolbar{gap:8px;margin-bottom:10px}.toolbar a{font-size:13px;padding:7px 10px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:8px;padding:8px 10px}.aftn-tool,.amo-tool{gap:7px;padding:8px 11px;font-size:13px}.aftn-tool i,.amo-tool i{font-size:16px}.aftn-title,.amo-title{font-size:15px;padding:11px 14px}.aftn-title i,.amo-title i{font-size:18px}.aftn-body,.amo-body{padding:12px}.aftn-required-note{font-size:12px;margin-bottom:9px}.aftn-topline{grid-template-columns:170px;gap:9px;margin-bottom:9px}.tx-id-display{min-height:34px;padding:7px 9px}.aftn-card,.rcf-body,.form-band{padding:10px;margin-bottom:10px}.aftn-card-title{font-size:12px;margin-bottom:8px}.aftn-address-row{grid-template-columns:90px 1fr;gap:12px}.aftn-address-grid,.address-grid{gap:6px}.aftn-address-grid input,.address-grid input{padding:6px 7px;min-height:33px}.aftn-meta{grid-template-columns:145px 155px 1fr 102px;gap:8px;margin-top:9px}.aftn-bell{height:34px;display:flex;align-items:center;gap:7px;font-weight:800;color:#14324a}.aftn-bell i{font-size:16px;color:#b26a00}.time-control{gap:6px}.time-button{width:36px}.alr-scroll{max-height:calc(100vh - 190px)}.alr-page{padding:10px}.alr-page-title{font-size:13px;margin-bottom:8px}.alr-grid{gap:8px}.alr-row{gap:8px}.alr-checks{gap:9px;min-height:34px}.alr-checks label,.alr-inline-check{font-size:13px}.alr-text{min-height:58px}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-mark{min-width:26px;padding:0 7px}.rcf-radio textarea{min-height:70px}.rcf-filled{margin-top:7px}.aftn-textarea{min-height:285px;font-size:14px}.amo-footer,.aftn-footer{margin-top:10px;padding-top:10px}.amo-filled input,.aftn-filled input{height:34px}
+        main{max-width:1560px;padding:14px}form{padding:10px}h2{font-size:15px;padding:11px 14px}button{padding:8px 12px;font-size:13px}textarea,input,select{padding:7px 9px;font-size:13px;min-height:34px}textarea{min-height:78px}label{font-size:12px;margin-bottom:4px}.field{margin-bottom:8px}.grid2,.grid4{gap:8px}.toolbar{gap:8px;margin-bottom:10px}.toolbar a{font-size:13px;padding:7px 10px}.actions,.aftn-toolbar,.amo-toolbar{top:0;gap:8px;padding:8px 10px}.aftn-tool,.amo-tool{gap:7px;padding:8px 11px;font-size:13px}.aftn-tool i,.amo-tool i{font-size:16px}.aftn-title,.amo-title{font-size:15px;padding:11px 14px}.aftn-title i,.amo-title i{font-size:18px}.aftn-body,.amo-body{padding:12px}.aftn-required-note{font-size:12px;margin-bottom:9px}.aftn-topline{grid-template-columns:170px;gap:9px;margin-bottom:9px}.tx-id-display{min-height:34px;padding:7px 9px}.aftn-card,.rcf-body,.form-band{padding:10px;margin-bottom:10px}.aftn-card-title{font-size:12px;margin-bottom:8px}.aftn-address-row{grid-template-columns:90px 1fr;gap:12px}.aftn-address-grid,.address-grid{gap:6px}.aftn-address-grid input,.address-grid input{padding:6px 7px;min-height:33px}.aftn-meta{grid-template-columns:145px 155px 1fr 102px;gap:8px;margin-top:9px}.aftn-bell{height:34px;display:flex;align-items:center;gap:7px;font-weight:800;color:#14324a}.aftn-bell i{font-size:16px;color:#b26a00}.time-control{gap:6px}.time-button{width:36px}.alr-scroll{}.alr-page{padding:10px}.alr-page-title{font-size:13px;margin-bottom:8px}.alr-grid{gap:8px}.alr-row{gap:8px}.alr-checks{gap:9px;min-height:34px}.alr-checks label,.alr-inline-check{font-size:13px}.alr-text{min-height:58px}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-mark{min-width:26px;padding:0 7px}.rcf-radio textarea{min-height:70px}.rcf-filled{margin-top:7px}.aftn-textarea{min-height:285px;font-size:14px}.amo-footer,.aftn-footer{margin-top:10px;padding-top:10px}.amo-filled input,.aftn-filled input{height:34px}
         .amo-toolbar,.aftn-toolbar{position:sticky!important;top:0!important;z-index:1200!important;background:rgba(247,249,251,.96)!important;backdrop-filter:blur(6px);border-bottom:1px solid #d8dee6!important;box-shadow:0 10px 22px rgba(20,50,74,.16)!important}.amo-window,.aftn-window{overflow:visible!important}.compose-layout,.compose-main{overflow:visible!important}.compose-main{padding-bottom:96px}.amo-body,.aftn-body{padding-bottom:20px}.amo-footer,.aftn-footer{margin-bottom:18px}.section-head{background:#f7f9fb!important;border-radius:8px 8px 0 0}
         @media(max-width:900px){.grid2,.grid4,.send-row,.header-meta{grid-template-columns:1fr}}
         @media(max-width:900px){.alr-row,.alr-row-head,.alr-row-5,.alr-row-5b,.alr-row-2,.alr-row-3,.alr-row-4,.alr-row-18,.alr-row-sup,.rcf-row-main{grid-template-columns:1fr}.alr-wide{grid-column:auto}}
@@ -294,6 +294,7 @@ defmodule TpWeb.Views do
         </section>
       </main>
       #{status_panel([], nil)}
+      #{header_clock_script()}
       #{status_footer_script()}
       #{message_modal_script()}
       #{auto_uppercase_script()}
@@ -639,6 +640,31 @@ defmodule TpWeb.Views do
       <span class="header-time-label">UTC</span>
       <span id="header-time-value">#{html(format_time(DateTime.utc_now()))}</span>
     </div>
+    <script>
+      (function () {
+        function pad(value) {
+          value = String(value);
+          return value.length < 2 ? '0' + value : value;
+        }
+
+        function renderHeaderTime() {
+          var node = document.getElementById('header-time-value');
+          if (!node) return;
+          var now = new Date();
+          node.textContent =
+            now.getUTCFullYear() + '-' +
+            pad(now.getUTCMonth() + 1) + '-' +
+            pad(now.getUTCDate()) + ' ' +
+            pad(now.getUTCHours()) + ':' +
+            pad(now.getUTCMinutes()) + ':' +
+            pad(now.getUTCSeconds());
+        }
+
+        if (window.__aftnHeaderClockTimer) window.clearInterval(window.__aftnHeaderClockTimer);
+        renderHeaderTime();
+        window.__aftnHeaderClockTimer = window.setInterval(renderHeaderTime, 1000);
+      })();
+    </script>
     """
   end
 
@@ -1428,7 +1454,7 @@ defmodule TpWeb.Views do
             <button class="time-button js-current-time" type="button" data-target="#{html(prefix)}-filing-time" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
           </div>
         </div>
-        <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}" required></div>
+        <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}" maxlength="8" required></div>
         <div class="field"><label>Originator's Reference</label><input name="originator_reference" value=""></div>
         <label class="aftn-bell"><input type="checkbox" name="bell" value="1"><i class="bi bi-bell-fill" aria-hidden="true"></i><span>Bell</span></label>
       </div>
@@ -1722,6 +1748,12 @@ defmodule TpWeb.Views do
     readonly = if Keyword.get(opts, :readonly, false), do: " readonly", else: ""
     class = Keyword.get(opts, :class, "")
     list = if list_id = Keyword.get(opts, :list), do: ~s( list="#{html(list_id)}"), else: ""
+    maxlength =
+      cond do
+        max = Keyword.get(opts, :maxlength) -> ~s( maxlength="#{max}")
+        to_string(name) in ["originator", "alert_originator"] -> ~s( maxlength="8")
+        true -> ""
+      end
     prefix = alr_mark(Keyword.get(opts, :prefix))
     suffix = alr_mark(Keyword.get(opts, :suffix))
     title = alr_title_attr(Keyword.get(opts, :tooltip) || alr_tooltip(name))
@@ -1729,7 +1761,7 @@ defmodule TpWeb.Views do
     """
     <div class="field #{html(class)}#{required}"#{title}>
       <label#{title}>#{html(label)}</label>
-      <div class="alr-control">#{prefix}<input name="#{html(name)}" value="#{html(value)}"#{readonly}#{required}#{list}#{title}>#{suffix}</div>
+      <div class="alr-control">#{prefix}<input name="#{html(name)}" value="#{html(value)}"#{readonly}#{required}#{list}#{maxlength}#{title}>#{suffix}</div>
     </div>
     """
   end
@@ -2687,7 +2719,7 @@ defmodule TpWeb.Views do
       <td><code class="message-preview">#{html(preview)}</code></td>
       <td class="#{html(queue_status_class(message.status))}">#{html(queue_status(message))}</td>
       <td>#{html(format_time(message.next_attempt_at || message.inserted_at))}</td>
-      <td class="table-actions">#{action_menu(id)}</td>
+      <td class="table-actions">#{action_menu(id, delete_path: "/queue/#{id}/delete", return_to: "/queue")}</td>
     </tr>
     """
   end
@@ -2807,15 +2839,18 @@ defmodule TpWeb.Views do
     """
   end
 
-  defp action_menu(id) do
+  defp action_menu(id, opts \\ []) do
+    delete_path = Keyword.get(opts, :delete_path, "/messages/#{id}/delete")
+    return_to = Keyword.get(opts, :return_to, "/")
+
     """
     <div class="action-menu">
-      <button class="btn-small icon-action js-action-toggle" type="button" title="Action" aria-label="Action menu">#{kebab_icon()}</button>
+      <button class="btn-small icon-action js-action-toggle" type="button" title="Action" aria-label="Action menu" onclick="return toggleActionMenuFromButton(this,event)">#{kebab_icon()}</button>
       <div class="action-popup">
         <button class="action-item js-show-message" type="button" data-message-id="#{id}" onclick="return showMessagePopupFromButton(this)">#{eye_icon()}<span>View</span></button>
         <a class="action-item" href="/messages/#{id}/pdf" target="_blank">#{pdf_icon()}<span>PDF</span></a>
-        <form class="inline-form" method="post" action="/messages/#{id}/delete" onsubmit="return confirm('Hapus message ini?')">
-          <input class="js-return-to" type="hidden" name="return_to" value="/">
+        <form class="inline-form" method="post" action="#{delete_path}" onsubmit="return confirm('Hapus message ini?')">
+          <input class="js-return-to" type="hidden" name="return_to" value="#{html(return_to)}">
           <button class="action-item danger" type="submit">#{trash_icon()}<span>Delete</span></button>
         </form>
       </div>
@@ -3071,10 +3106,16 @@ defmodule TpWeb.Views do
   end
 
   defp input(name, label, value) do
+    maxlength =
+      case to_string(name) do
+        "originator" -> ~s( maxlength="8")
+        _ -> ""
+      end
+
     """
     <div class="field">
       <label>#{html(label)}</label>
-      <input name="#{html(name)}" value="#{html(value)}">
+      <input name="#{html(name)}" value="#{html(value)}"#{maxlength}>
     </div>
     """
   end
@@ -3167,7 +3208,7 @@ defmodule TpWeb.Views do
                   <button class="time-button js-current-time" type="button" data-target="aftn-filing-time" title="Use current DDHHMM" aria-label="Use current DDHHMM"><i class="bi bi-clock-history"></i></button>
                 </div>
               </div>
-              <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}"></div>
+              <div class="field required"><label>Originator</label><input name="originator" value="#{html(originator)}" maxlength="8"></div>
               <div class="field"><label>Originator's Reference</label><input name="originator_reference" value=""></div>
               <label class="aftn-bell"><input type="checkbox" name="bell" value="1"><i class="bi bi-bell-fill" aria-hidden="true"></i><span>Bell</span></label>
             </div>
@@ -3686,7 +3727,7 @@ defmodule TpWeb.Views do
             '<td>' + escapeHtml(message.filed_by || '') + '</td>' +
             '<td class="table-actions">' +
               '<div class="action-menu">' +
-                '<button class="btn-small icon-action js-action-toggle" type="button" title="Action" aria-label="Action menu">' + kebabIcon() + '</button>' +
+                '<button class="btn-small icon-action js-action-toggle" type="button" title="Action" aria-label="Action menu" onclick="return toggleActionMenuFromButton(this,event)">' + kebabIcon() + '</button>' +
                 '<div class="action-popup">' +
                   '<button class="action-item js-show-message" type="button" data-message-id="' + id + '" onclick="return showMessagePopupFromButton(this)">' + eyeIcon() + '<span>View</span></button>' +
                   '<a class="action-item" href="/messages/' + id + '/pdf" target="_blank">' + pdfIcon() + '<span>PDF</span></a>' +
@@ -3914,19 +3955,43 @@ defmodule TpWeb.Views do
           return window.showMessagePopup(button.getAttribute('data-message-id'));
         };
 
+        window.toggleActionMenuFromButton = function (button, event) {
+          if (event && event.preventDefault) event.preventDefault();
+          if (event && event.stopPropagation) event.stopPropagation();
+          if (!button) return false;
+
+          var menu = button.closest ? button.closest('.action-menu') : null;
+          if (!menu) return false;
+
+          var willOpen = !(menu.classList && menu.classList.contains('open'));
+          closeActionMenus(menu);
+          if (willOpen && menu.classList) menu.classList.add('open');
+          return false;
+        };
+
+        window.handleMessageRowClick = function (event, row) {
+          var target = event && (event.target || event.srcElement);
+          if (!row || interactiveTarget(target)) return false;
+          selectMessageRow(row);
+          return false;
+        };
+
+        window.handleMessageRowDblClick = function (event, row) {
+          var target = event && (event.target || event.srcElement);
+          if (!row || interactiveTarget(target)) return false;
+          if (event && event.preventDefault) event.preventDefault();
+          if (event && event.stopPropagation) event.stopPropagation();
+          selectMessageRow(row);
+          openAftnFreeFromRow(row);
+          return false;
+        };
+
         document.addEventListener('click', function (event) {
           var target = event.target;
           var toggle = target && target.closest ? target.closest('.js-action-toggle') : null;
 
           if (toggle) {
-            event.preventDefault();
-            var menu = toggle.closest ? toggle.closest('.action-menu') : null;
-            if (menu) {
-              var willOpen = !(menu.classList && menu.classList.contains('open'));
-              closeActionMenus(menu);
-              if (willOpen && menu.classList) menu.classList.add('open');
-            }
-            return false;
+            return window.toggleActionMenuFromButton(toggle, event);
           }
 
           var button = target;
@@ -3968,9 +4033,7 @@ defmodule TpWeb.Views do
           var target = event.target;
           var row = target && target.closest ? target.closest('tr[data-message-id]') : null;
           if (!row || interactiveTarget(target)) return;
-          event.preventDefault();
-          selectMessageRow(row);
-          openAftnFreeFromRow(row);
+          return window.handleMessageRowDblClick(event, row);
         });
 
         initLatestMessageId();

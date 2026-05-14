@@ -271,6 +271,39 @@ defmodule TpWeb.Router do
     end
   end
 
+  post "/queue/:id/delete" do
+    q = Map.get(conn.params, "q", "")
+    requested_return_to = Map.get(conn.params, "return_to", nil)
+
+    return_to =
+      cond do
+        requested_return_to not in [nil, ""] ->
+          return_path(requested_return_to)
+
+        q in [nil, ""] ->
+          "/queue"
+
+        true ->
+          "/queue?#{URI.encode_query(%{q: q})}"
+      end
+
+    case safe_delete_message(id) do
+      {:ok, _deleted} ->
+        redirect(conn, with_notice(return_to, :info, "Queue message deleted"))
+
+      {:error, :not_found} ->
+        redirect(conn, with_notice(return_to, :error, "Message tidak ditemukan"))
+
+      {:error, :database_not_migrated} ->
+        conn
+        |> put_resp_content_type("text/html")
+        |> send_resp(503, TpWeb.Views.setup_required())
+
+      {:error, _reason} ->
+        redirect(conn, with_notice(return_to, :error, "Delete gagal"))
+    end
+  end
+
   post "/messages/delete-all" do
     filters = filters(conn.params)
 
