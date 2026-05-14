@@ -3413,8 +3413,8 @@ defmodule TpWeb.Views do
        <div class="field filter-date"><label class="search-label">Date From</label><input type="date" name="date_from" value="#{html(date_from)}"></div>
       <div class="field filter-date"><label class="search-label">Date To</label><input type="date" name="date_to" value="#{html(date_to)}"></div>
     
-      <button type="submit"><i class="bi bi-search"></i> Filter</button>
-      <a class="clear-filter" href="/?page_size=#{html(page_size)}"><i class="bi bi-x-lg"></i> Clear</a>
+      <button type="submit"><i class="bi bi-search" style="margin-right:4px"></i>Filter</button>
+      <a class="clear-filter" href="/?page_size=#{html(page_size)}"><i class="bi bi-x-lg" style="margin-right:4px"></i>Clear</a>
     </form>
     """
   end
