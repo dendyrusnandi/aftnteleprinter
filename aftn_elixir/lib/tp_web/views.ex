@@ -636,35 +636,9 @@ defmodule TpWeb.Views do
     """
     <div class="header-spacer"></div>
     <div id="header-time" class="header-time" title="Aviation UTC Time">
-      <span class="header-clock-icon" aria-hidden="true">#{clock_icon()}</span>
       <span class="header-time-label">UTC</span>
       <span id="header-time-value">#{html(format_time(DateTime.utc_now()))}</span>
     </div>
-    <script>
-      (function () {
-        function pad(value) {
-          value = String(value);
-          return value.length < 2 ? '0' + value : value;
-        }
-
-        function renderHeaderTime() {
-          var node = document.getElementById('header-time-value');
-          if (!node) return;
-          var now = new Date();
-          node.textContent =
-            now.getUTCFullYear() + '-' +
-            pad(now.getUTCMonth() + 1) + '-' +
-            pad(now.getUTCDate()) + ' ' +
-            pad(now.getUTCHours()) + ':' +
-            pad(now.getUTCMinutes()) + ':' +
-            pad(now.getUTCSeconds());
-        }
-
-        if (window.__aftnHeaderClockTimer) window.clearInterval(window.__aftnHeaderClockTimer);
-        renderHeaderTime();
-        window.__aftnHeaderClockTimer = window.setInterval(renderHeaderTime, 1000);
-      })();
-    </script>
     """
   end
 
@@ -672,37 +646,15 @@ defmodule TpWeb.Views do
     ".header-spacer{flex:1}.header-time{display:inline-flex;align-items:center;gap:6px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:700;color:#d8e8f3;white-space:nowrap}.header-clock-icon{display:inline-flex;align-items:center;color:#9bd0ff}.header-clock-icon svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.header-time-label{color:#9bd0ff;font-weight:900;letter-spacing:.03em}"
   end
 
-  defp clock_icon do
-    """
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="9"></circle>
-      <path d="M12 7v5l3 2"></path>
-    </svg>
-    """
-  end
-
   defp header_clock_script do
     """
     <script>
       (function () {
-        function ensureHeaderTimeMarkup() {
-          var root = document.getElementById('header-time');
-          if (!root) return null;
-          var value = document.getElementById('header-time-value');
-          if (value) return value;
-
-          root.setAttribute('title', 'Aviation UTC Time');
-          root.innerHTML = '<span class="header-clock-icon" aria-hidden="true">#{String.replace(clock_icon(), "\n", "")}</span>' +
-            '<span class="header-time-label">UTC</span>' +
-            '<span id="header-time-value"></span>';
-          return document.getElementById('header-time-value');
-        }
-
         function updateHeaderTime() {
-          var node = ensureHeaderTimeMarkup();
+          var node = document.getElementById('header-time-value');
           if (!node) return;
           var now = new Date();
-          var pad = function (value) { value = String(value); return value.length < 2 ? '0' + value : value; };
+          var pad = function (v) { v = String(v); return v.length < 2 ? '0' + v : v; };
           node.textContent = now.getUTCFullYear() + '-' + pad(now.getUTCMonth() + 1) + '-' + pad(now.getUTCDate()) + ' ' + pad(now.getUTCHours()) + ':' + pad(now.getUTCMinutes()) + ':' + pad(now.getUTCSeconds());
         }
         updateHeaderTime();
@@ -3654,21 +3606,8 @@ defmodule TpWeb.Views do
           }
         }
 
-        function ensureHeaderTimeValue() {
-          var root = byId('header-time');
-          if (!root) return null;
-          var value = byId('header-time-value');
-          if (value) return value;
-
-          root.setAttribute('title', 'Aviation UTC Time');
-          root.innerHTML = '<span class="header-clock-icon" aria-hidden="true">#{String.replace(clock_icon(), "\n", "")}</span>' +
-            '<span class="header-time-label">UTC</span>' +
-            '<span id="header-time-value"></span>';
-          return byId('header-time-value');
-        }
-
         function updateHeaderTime() {
-          var node = ensureHeaderTimeValue();
+          var node = byId('header-time-value');
           if (!node) return;
           var now = new Date();
           var pad = function (value) { value = String(value); return value.length < 2 ? '0' + value : value; };
