@@ -250,7 +250,7 @@ defmodule TpWeb.Views do
         body{margin:0;padding-bottom:104px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
-        header a{color:white}.queue-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.queue-back:hover{text-decoration:none;color:#d8e8f3}.queue-back i{font-size:18px;line-height:1}.queue-title{display:inline-flex;align-items:center;gap:8px}.queue-title i{color:#9bd0ff;font-size:18px;line-height:1}#{header_time_css()} main{max-width:1280px;margin:0 auto;padding:16px 16px 112px}
+        header a{color:white}.queue-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.queue-back:hover{text-decoration:none;color:#d8e8f3}.queue-back i{font-size:18px;line-height:1}.queue-title{display:inline-flex;align-items:center;gap:8px}.queue-title i{color:#9bd0ff;font-size:18px;line-height:1}#{header_time_css()} main{max-width:1280px;margin:0 auto;}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:16px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         table{width:100%;border-collapse:collapse;font-size:13px} th,td{border-bottom:1px solid #edf0f3;padding:7px 8px;text-align:left;vertical-align:top}
