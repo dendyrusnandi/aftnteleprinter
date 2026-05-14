@@ -7,6 +7,7 @@ defmodule TpWeb.Views do
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>AFTN Teleprinter</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <style>
         body{margin:0;padding:56px 0 62px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
@@ -586,6 +587,300 @@ defmodule TpWeb.Views do
     ~s(<pre class="outbox-pre">#{html(text)}</pre>)
   end
 
+  def aircraft_type_page(items, pagination, q, wake, notice) do
+    total       = Map.get(pagination, :total, 0)
+    page        = Map.get(pagination, :page, 1)
+    total_pages = Map.get(pagination, :total_pages, 1)
+    wake_opts   = Tp.AircraftWtc.wake_categories()
+
+    wake_option = fn val, label ->
+      sel = if wake == val, do: " selected", else: ""
+      ~s(<option value="#{val}"#{sel}>#{val} – #{label}</option>)
+    end
+
+    wake_select = fn name, current ->
+      sel = fn v -> if current == v, do: " selected", else: "" end
+      """
+      <select name="#{name}" class="ac-wake-sel">
+        <option value=""#{sel.("")}></option>
+        <option value="L"#{sel.("L")}>L – Light</option>
+        <option value="M"#{sel.("M")}>M – Medium</option>
+        <option value="H"#{sel.("H")}>H – Heavy</option>
+        <option value="J"#{sel.("J")}>J – Super Heavy</option>
+      </select>
+      """
+    end
+
+    page_link = fn p ->
+      params = URI.encode_query(%{q: q, wake: wake, page: p})
+      ~s(/aircraft-types?#{params})
+    end
+
+    prev_link  = if page > 1, do: ~s(<a href="#{page_link.(page - 1)}" class="pg-btn" title="Previous">&#8249;</a>), else: ~s(<span class="pg-btn disabled">&#8249;</span>)
+    next_link  = if page < total_pages, do: ~s(<a href="#{page_link.(page + 1)}" class="pg-btn" title="Next">&#8250;</a>), else: ~s(<span class="pg-btn disabled">&#8250;</span>)
+    first_link = if page > 1, do: ~s(<a href="#{page_link.(1)}" class="pg-btn" title="First">&#171;</a>), else: ~s(<span class="pg-btn disabled">&#171;</span>)
+    last_link  = if page < total_pages, do: ~s(<a href="#{page_link.(total_pages)}" class="pg-btn" title="Last">&#187;</a>), else: ~s(<span class="pg-btn disabled">&#187;</span>)
+
+    rows = if items == [] do
+      ~s(<tr><td colspan="3" class="ac-empty">No records found.</td></tr>)
+    else
+      Enum.map_join(items, "", fn item ->
+        """
+        <tr class="ac-row" data-id="#{item.id}" data-type9b="#{html(item.type9b)}" data-type9c="#{html(item.type9c)}">
+          <td>#{html(item.type9b)}</td>
+          <td>#{html(item.type9c)}</td>
+          <td class="ac-act">
+            <form class="inline-form" method="post" action="/aircraft-types/#{item.id}/delete"
+                  onsubmit="return confirm('Delete #{html(item.type9b)}?')">
+              <input type="hidden" name="return_to" value="/aircraft-types?#{html(URI.encode_query(%{q: q, wake: wake, page: page}))}">
+              <button class="ac-del-row" type="submit" title="Delete">&#10005;</button>
+            </form>
+          </td>
+        </tr>
+        """
+      end)
+    end
+
+    """
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Type of Aircraft</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <style>
+        body{margin:0;padding-bottom:62px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7f9;color:#17202a}
+        a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
+        header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
+        header a{color:white}.back-btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none}.back-btn:hover{color:#d8e8f3;text-decoration:none}.back-btn i{font-size:18px;line-height:1}
+        .ac-title{display:inline-flex;align-items:center;gap:8px}.ac-title i{color:#9bd0ff;font-size:18px;line-height:1}
+        #{header_time_css()} main{max-width:900px;margin:0 auto;padding:16px}
+        h1{font-size:18px;margin:0}
+        section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:14px;overflow:visible}
+        h2{font-size:15px;font-weight:600;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee;background:#f7f9fb;border-radius:6px 6px 0 0}
+        .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
+        .ac-search{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;padding:12px}
+        .ac-field{display:flex;flex-direction:column;gap:4px}
+        .ac-label{display:block;font-size:12px;color:#435466;font-weight:600;margin-bottom:2px}
+        .ac-input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px;height:34px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em}
+        .ac-wake-sel{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:5px 7px;font-size:13px;height:34px;min-width:160px}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer;height:34px;box-sizing:border-box}.btn-search{background:#14324a;color:white}.btn-search:hover{background:#195b86}.btn-clear{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clear:hover{background:#edf4fa;text-decoration:none}
+        table{width:100%;border-collapse:collapse;font-size:13px}
+        th,td{border-bottom:1px solid #edf0f3;padding:8px 12px;text-align:left;vertical-align:middle}
+        th{background:#f0f3f6;color:#435466;font-weight:600;font-size:13px;white-space:nowrap}
+        .ac-row{cursor:pointer}.ac-row:hover td{background:#edf4fa}.ac-row.selected td{background:#dbeeff}
+        .ac-act{width:36px;text-align:center;padding:4px}
+        .ac-del-row{background:transparent;border:0;color:#b42318;cursor:pointer;font-size:14px;padding:2px 6px;border-radius:3px}.ac-del-row:hover{background:#fff1f0}
+        .ac-empty{text-align:center;color:#6d7b88;padding:20px}
+        .ac-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid #e4e8ee;background:#fbfcfd;font-size:13px}
+        .ac-count{color:#195b86;font-weight:700}.ac-actions{display:flex;align-items:center;gap:6px}
+        .btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:4px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer}.btn-edit{background:#14324a;color:white}.btn-edit:hover{background:#195b86}.btn-del{background:#b42318;color:white}.btn-del:hover{background:#8a1f11}.btn-delall{background:white;color:#b42318;border:1px solid #b42318}.btn-delall:hover{background:#fff1f0}
+        .pg{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.pg-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#17202a;font-size:14px;text-decoration:none}.pg-btn:hover{background:#edf4fa;text-decoration:none}.pg-btn.disabled{color:#9aa6b2;background:#f0f3f6;pointer-events:none}.pg-info{font-size:13px;color:#435466;white-space:nowrap;padding:0 4px}.pg-goto{display:inline-flex;align-items:center;gap:4px;font-size:13px}.pg-goto input{width:44px;text-align:center;border:1px solid #cbd3dc;border-radius:4px;padding:4px 5px;font-size:13px}
+        .ac-form-body{padding:12px}
+        .ac-form-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+        .btn-save{background:#1c6b4f;color:white}.btn-save:hover{background:#17583f}.btn-update{background:#195b86;color:white}.btn-update:hover{background:#1a4f72}.btn-clr{background:white;color:#435466;border:1px solid #cbd3dc}.btn-clr:hover{background:#edf4fa}
+        .inline-form{display:inline;margin:0;padding:0}
+        #{status_footer_css()}
+      </style>
+    </head>
+    <body>
+      <header>
+        <a class="back-btn" href="/"><i class="bi bi-arrow-left"></i><span>Back</span></a>
+        <h1 class="ac-title"><i class="bi bi-airplane"></i><span>Type of Aircraft</span></h1>
+        #{header_time()}
+      </header>
+      <main>
+        #{notice_banner(notice)}
+
+        <section>
+          <h2>Search Type of Aircraft</h2>
+          <form class="ac-search" method="get" action="/aircraft-types">
+            <div class="ac-field">
+              <span class="ac-label">Type of Aircraft</span>
+              <input class="ac-input" name="q" value="#{html(q)}" maxlength="4" autocomplete="off" placeholder="e.g. B737">
+            </div>
+            <div class="ac-field">
+              <span class="ac-label">Wake Turb. Category</span>
+              #{wake_select.("wake", wake)}
+            </div>
+            <button class="btn btn-search" type="submit"><i class="bi bi-search"></i> Search</button>
+            <a class="btn btn-clear" href="/aircraft-types"><i class="bi bi-x-lg"></i> Clear</a>
+          </form>
+        </section>
+
+        <section>
+          <h2>List of Type of Aircraft(s)</h2>
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Type of Aircraft</th>
+                  <th>Wake Turb. Category</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="ac-tbody">#{rows}</tbody>
+            </table>
+          </div>
+          <div class="ac-footer">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span class="ac-count">#{total} Element(s) in this table</span>
+              <div class="ac-actions">
+                <button class="btn btn-edit" type="button" id="btn-edit" onclick="acEdit()"><i class="bi bi-pencil"></i> Edit</button>
+                <button class="btn btn-del" type="button" id="btn-delete" onclick="acDelete()"><i class="bi bi-trash"></i> Delete</button>
+                <form class="inline-form" method="post" action="/aircraft-types/delete-all"
+                      onsubmit="return confirm('Delete all #{total} record(s) matching current filter?')">
+                  <input type="hidden" name="q" value="#{html(q)}">
+                  <input type="hidden" name="wake" value="#{html(wake)}">
+                  <button class="btn btn-delall" type="submit"><i class="bi bi-trash3"></i> Delete All</button>
+                </form>
+              </div>
+            </div>
+            <div class="pg">
+              #{first_link}#{prev_link}
+              <span class="pg-info">Page #{page} of #{total_pages}</span>
+              #{next_link}#{last_link}
+              <span class="pg-goto">Go to
+                <input type="number" id="pg-goto-input" value="#{page}" min="1" max="#{total_pages}">
+                <button class="btn-sm" type="button" onclick="acGotoPage()">Go</button>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Add / Edit Type of Aircraft</h2>
+          <div class="ac-form-body">
+            <input type="hidden" id="ac-edit-id" value="">
+            <div class="ac-form-row">
+              <div class="ac-field">
+                <span class="ac-label">Type of Aircraft</span>
+                <input class="ac-input" id="ac-type9b" name="type9b" maxlength="4" autocomplete="off" placeholder="e.g. B737" style="width:110px">
+              </div>
+              <div class="ac-field">
+                <span class="ac-label">Wake Turb. Category</span>
+                #{wake_select.("ac-type9c-sel", "")}
+              </div>
+              <div style="display:flex;gap:6px;align-self:flex-end">
+                <button class="btn btn-save" type="button" onclick="acSave()"><i class="bi bi-floppy"></i> Save</button>
+                <button class="btn btn-update" type="button" onclick="acUpdate()"><i class="bi bi-arrow-repeat"></i> Update</button>
+                <button class="btn btn-clr" type="button" onclick="acClear()"><i class="bi bi-x-circle"></i> Clear</button>
+              </div>
+            </div>
+            <form id="ac-save-form" method="post" action="/aircraft-types/save" style="display:none">
+              <input type="hidden" name="type9b" id="ac-save-type9b">
+              <input type="hidden" name="type9c" id="ac-save-type9c">
+            </form>
+            <form id="ac-update-form" method="post" action="" style="display:none">
+              <input type="hidden" name="type9b" id="ac-upd-type9b">
+              <input type="hidden" name="type9c" id="ac-upd-type9c">
+            </form>
+            <form id="ac-del-form" method="post" action="" style="display:none"></form>
+          </div>
+        </section>
+      </main>
+      #{status_panel([], nil)}
+      #{header_clock_script()}
+      #{status_footer_script()}
+      #{auto_uppercase_script()}
+      <script>
+        (function () {
+          var selectedRow = null;
+          var selectedId  = null;
+
+          var tbody       = document.getElementById('ac-tbody');
+          var editIdEl    = document.getElementById('ac-edit-id');
+          var type9bEl    = document.getElementById('ac-type9b');
+          var type9cEl    = document.querySelector('[name="ac-type9c-sel"]');
+
+          function selectRow(row) {
+            if (selectedRow) selectedRow.classList.remove('selected');
+            selectedRow = row;
+            selectedId  = row ? row.getAttribute('data-id') : null;
+            if (row) {
+              row.classList.add('selected');
+              type9bEl.value = row.getAttribute('data-type9b') || '';
+              if (type9cEl) type9cEl.value = row.getAttribute('data-type9c') || '';
+              if (editIdEl) editIdEl.value = selectedId;
+            }
+          }
+
+          if (tbody) {
+            tbody.addEventListener('click', function (e) {
+              var row = e.target && e.target.closest ? e.target.closest('tr.ac-row') : null;
+              if (row && !e.target.closest('form')) selectRow(row);
+            });
+          }
+
+          window.acEdit = function () {
+            if (!selectedRow) { alert('Please select a row first.'); return; }
+            if (type9bEl) type9bEl.focus();
+          };
+
+          window.acDelete = function () {
+            if (!selectedId) { alert('Please select a row first.'); return; }
+            var type = selectedRow ? selectedRow.getAttribute('data-type9b') : selectedId;
+            if (!confirm('Delete "' + type + '"?')) return;
+            var form = document.getElementById('ac-del-form');
+            form.action = '/aircraft-types/' + selectedId + '/delete';
+            form.submit();
+          };
+
+          window.acSave = function () {
+            var t = type9bEl ? type9bEl.value.trim().toUpperCase() : '';
+            var w = type9cEl ? type9cEl.value : '';
+            if (!t) { alert('Type of Aircraft is required.'); type9bEl && type9bEl.focus(); return; }
+            if (!w) { alert('Wake Turb. Category is required.'); return; }
+            var form = document.getElementById('ac-save-form');
+            document.getElementById('ac-save-type9b').value = t;
+            document.getElementById('ac-save-type9c').value = w;
+            form.submit();
+          };
+
+          window.acUpdate = function () {
+            if (!selectedId) { alert('Please select a row to update first.'); return; }
+            var t = type9bEl ? type9bEl.value.trim().toUpperCase() : '';
+            var w = type9cEl ? type9cEl.value : '';
+            if (!t) { alert('Type of Aircraft is required.'); type9bEl && type9bEl.focus(); return; }
+            if (!w) { alert('Wake Turb. Category is required.'); return; }
+            var form = document.getElementById('ac-update-form');
+            form.action = '/aircraft-types/' + selectedId + '/update';
+            document.getElementById('ac-upd-type9b').value = t;
+            document.getElementById('ac-upd-type9c').value = w;
+            form.submit();
+          };
+
+          window.acClear = function () {
+            if (selectedRow) selectedRow.classList.remove('selected');
+            selectedRow = null; selectedId = null;
+            if (type9bEl) type9bEl.value = '';
+            if (type9cEl) type9cEl.value = '';
+            if (editIdEl) editIdEl.value = '';
+          };
+
+          window.acGotoPage = function () {
+            var inp = document.getElementById('pg-goto-input');
+            var p   = inp ? parseInt(inp.value, 10) : 1;
+            if (isNaN(p) || p < 1) p = 1;
+            var params = new URLSearchParams(window.location.search || '');
+            params.set('page', p);
+            window.location.href = '/aircraft-types?' + params.toString();
+          };
+
+          var gotoInp = document.getElementById('pg-goto-input');
+          if (gotoInp) {
+            gotoInp.addEventListener('keydown', function (e) {
+              if (e.key === 'Enter' || e.keyCode === 13) acGotoPage();
+            });
+          }
+        })();
+      </script>
+    </body>
+    </html>
+    """
+  end
+
   def settings_page(setting_or_changeset, notice \\ nil) do
     """
     <!doctype html>
@@ -714,8 +1009,8 @@ defmodule TpWeb.Views do
     <details class="top-menu">
       <summary>#{maintenance_icon()}<span>Maintenance</span></summary>
       <div class="top-submenu">
-        <a href="/settings"><i class="bi bi-gear-fill" style="margin-right:5px"></i>Communication Setup</a>
-        <a href="#">Type of Aircraft</a>
+        <a href="/settings"> Communication Setup</a>
+        <a href="/aircraft-types">Type of Aircraft</a>
         <a href="#">Aircraft Registration</a>
         <a href="#">ICAO Location Indicator</a>
         <a href="#">Route</a>
@@ -3118,8 +3413,8 @@ defmodule TpWeb.Views do
        <div class="field filter-date"><label class="search-label">Date From</label><input type="date" name="date_from" value="#{html(date_from)}"></div>
       <div class="field filter-date"><label class="search-label">Date To</label><input type="date" name="date_to" value="#{html(date_to)}"></div>
     
-      <button type="submit">Filter</button>
-      <a class="clear-filter" href="/?page_size=#{html(page_size)}">Clear</a>
+      <button type="submit"><i class="bi bi-search"></i> Filter</button>
+      <a class="clear-filter" href="/?page_size=#{html(page_size)}"><i class="bi bi-x-lg"></i> Clear</a>
     </form>
     """
   end

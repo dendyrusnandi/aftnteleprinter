@@ -333,6 +333,82 @@ defmodule TpWeb.Router do
     end
   end
 
+  get "/aircraft-types" do
+    q    = Map.get(conn.params, "q", "")
+    wake = Map.get(conn.params, "wake", "")
+    page = parse_int(Map.get(conn.params, "page", "1"), 1)
+
+    case safe_list_aircraft(q: q, wake: wake, page: page) do
+      {:ok, items, pagination} ->
+        conn
+        |> put_resp_content_type("text/html")
+        |> send_resp(200, TpWeb.Views.aircraft_type_page(items, pagination, q, wake, notice(conn.params)))
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/aircraft-types/save" do
+    case safe_create_aircraft(conn.params) do
+      {:ok, _} ->
+        redirect(conn, "/aircraft-types?info=#{URI.encode_www_form("Aircraft type saved")}")
+
+      {:error, {:validation, errors}} ->
+        redirect(conn, "/aircraft-types?error=#{URI.encode_www_form(Enum.join(errors, ", "))}")
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/aircraft-types/:id/update" do
+    case safe_update_aircraft(id, conn.params) do
+      {:ok, _} ->
+        redirect(conn, "/aircraft-types?info=#{URI.encode_www_form("Aircraft type updated")}")
+
+      {:error, :not_found} ->
+        redirect(conn, "/aircraft-types?error=#{URI.encode_www_form("Record not found")}")
+
+      {:error, {:validation, errors}} ->
+        redirect(conn, "/aircraft-types?error=#{URI.encode_www_form(Enum.join(errors, ", "))}")
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
+  post "/aircraft-types/:id/delete" do
+    return_to = return_path(Map.get(conn.params, "return_to", "/aircraft-types"))
+
+    case safe_delete_aircraft(id) do
+      {:ok, _} ->
+        redirect(conn, with_notice(return_to, :info, "Aircraft type deleted"))
+
+      {:error, :not_found} ->
+        redirect(conn, with_notice(return_to, :error, "Record not found"))
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+
+      {:error, _} ->
+        redirect(conn, with_notice(return_to, :error, "Delete failed"))
+    end
+  end
+
+  post "/aircraft-types/delete-all" do
+    q    = Map.get(conn.params, "q", "")
+    wake = Map.get(conn.params, "wake", "")
+
+    case safe_delete_all_aircraft(q: q, wake: wake) do
+      {:ok, count} ->
+        redirect(conn, "/aircraft-types?info=#{URI.encode_www_form("#{count} record(s) deleted")}")
+
+      {:error, :database_not_migrated} ->
+        conn |> put_resp_content_type("text/html") |> send_resp(503, TpWeb.Views.setup_required())
+    end
+  end
+
   get "/test-message" do
     settings = Settings.get_or_default()
     recent = case safe_latest_messages(direction: "outbound", limit: 5) do
@@ -791,6 +867,70 @@ defmodule TpWeb.Router do
       info = Map.get(params, "info") -> {:info, info}
       true -> nil
     end
+  end
+
+  defp safe_list_aircraft(opts) do
+    Tp.Aircraft.list(opts)
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_create_aircraft(params) do
+    case Tp.Aircraft.create(params) do
+      {:ok, record} -> {:ok, record}
+      {:error, changeset} -> {:error, {:validation, changeset_errors(changeset)}}
+    end
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_update_aircraft(id, params) do
+    with {n, ""} <- Integer.parse(to_string(id)),
+         record  when not is_nil(record) <- Tp.Aircraft.get(n) do
+      case Tp.Aircraft.update(record, params) do
+        {:ok, r} -> {:ok, r}
+        {:error, changeset} -> {:error, {:validation, changeset_errors(changeset)}}
+      end
+    else
+      _ -> {:error, :not_found}
+    end
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_delete_aircraft(id) do
+    with {n, ""} <- Integer.parse(to_string(id)) do
+      Tp.Aircraft.delete(n)
+    else
+      _ -> {:error, :not_found}
+    end
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp safe_delete_all_aircraft(opts) do
+    Tp.Aircraft.delete_all(opts)
+  rescue
+    error in MyXQL.Error ->
+      if undefined_table?(error), do: {:error, :database_not_migrated}, else: reraise(error, __STACKTRACE__)
+    _error in DBConnection.ConnectionError -> {:error, :database_not_migrated}
+  end
+
+  defp changeset_errors(changeset) do
+    Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
+      Enum.reduce(opts, msg, fn {key, value}, acc ->
+        String.replace(acc, "%{#{key}}", to_string(value))
+      end)
+    end)
+    |> Enum.flat_map(fn {_field, msgs} -> msgs end)
   end
 
   defp undefined_table?(%MyXQL.Error{mysql: %{code: 1146}}), do: true
