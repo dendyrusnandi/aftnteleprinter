@@ -51,10 +51,35 @@ defmodule Tp.Aftn.Builder do
 
   def validate(type, params) when type in @fpl_like_types do
     params
-    |> require_fields(["aircraft_id", "aircraft_type", "equipment", "departure", "departure_time", "destination", "speed_level", "route", "eet"])
-    |> validate_common_flight(params)
+    |> require_fields([
+      "aircraft_id",
+      "flight_rules",
+      "flight_type",
+      "aircraft_type",
+      "wake",
+      "equipment",
+      "equipment_surveillance",
+      "departure",
+      "departure_time",
+      "speed",
+      "level",
+      "route",
+      "destination",
+      "eet",
+      "dof"
+    ])
+    |> validate_alr_conditionals(params)
+    |> validate_format(params, "aircraft_id", ~r/^[A-Z0-9]{2,7}$/, "Aircraft harus 2-7 huruf/angka")
+    |> validate_optional_format(params, "message_number", ~r/^[A-Z0-9\/]{0,12}$/, "Message number maksimal 12 huruf/angka atau /")
     |> validate_format(params, "aircraft_type", ~r/^[A-Z0-9]{2,4}$/, "Type aircraft harus 2-4 huruf/angka")
+    |> validate_format(params, "departure", ~r/^[A-Z]{4}$/, "Departure harus ICAO 4 huruf")
+    |> validate_format(params, "departure_time", ~r/^\d{4}$/, "Departure time harus HHMM 4 digit")
+    |> validate_format(params, "destination", ~r/^[A-Z]{4}$/, "Destination harus ICAO 4 huruf")
     |> validate_format(params, "eet", ~r/^\d{4}$/, "EET harus HHMM 4 digit")
+    |> validate_optional_format(params, "alternate", ~r/^[A-Z]{4}$/, "Alternate harus ICAO 4 huruf")
+    |> validate_optional_format(params, "second_alternate", ~r/^[A-Z]{4}$/, "Second alternate harus ICAO 4 huruf")
+    |> validate_optional_format(params, "ssr_code", ~r/^\d{4}$/, "SSR Code harus 4 angka")
+    |> validate_format(params, "dof", ~r/^\d{6}$/, "DOF harus YYMMDD 6 digit")
     |> validate_aftn_header(params)
   end
 
@@ -109,7 +134,17 @@ defmodule Tp.Aftn.Builder do
     |> validate_aftn_header(params)
   end
 
-  def validate(type, params) when type in ~w(ACP ARR) do
+  def validate("ACP", params) do
+    params
+    |> require_fields(["aircraft_id", "departure", "destination"])
+    |> validate_format(params, "aircraft_id", ~r/^[A-Z0-9]{2,7}$/, "Aircraft harus 2-7 huruf/angka")
+    |> validate_format(params, "departure", ~r/^[A-Z]{4}$/, "Departure harus ICAO 4 huruf")
+    |> validate_format(params, "destination", ~r/^[A-Z]{4}$/, "Destination harus ICAO 4 huruf")
+    |> validate_optional_format(params, "ssr_code", ~r/^\d{4}$/, "SSR Code harus 4 angka")
+    |> validate_aftn_header(params)
+  end
+
+  def validate(type, params) when type in ~w(ARR) do
     params
     |> require_fields(["aircraft_id", "departure", "destination", "arrival_time"])
     |> validate_format(params, "aircraft_id", ~r/^[A-Z0-9]{2,7}$/, "Aircraft harus 2-7 huruf/angka")
@@ -121,7 +156,7 @@ defmodule Tp.Aftn.Builder do
 
   def validate("LAM", params) do
     params
-    |> require_fields(["reference"])
+    |> require_fields(["reference_data"])
     |> validate_aftn_header(params)
   end
 
@@ -211,7 +246,7 @@ defmodule Tp.Aftn.Builder do
 
   def build(type, params) when type in @fpl_like_types do
     params
-    |> fpl_like_body(type)
+    |> fpl_body(type)
     |> maybe_wrap_aftn(params)
   end
 
@@ -229,18 +264,17 @@ defmodule Tp.Aftn.Builder do
 
   def build(type, params) when type in ~w(CNL DEP RQP RQS), do: basic_flight_body(type, params) |> maybe_wrap_aftn(params)
 
-  def build("CDN", params) do
-    "(CDN-#{up(params, "aircraft_id")}-#{up(params, "departure")}#{digits(params, "departure_time")}-#{up(params, "destination")}-#{up(params, "item22")})"
-    |> maybe_wrap_aftn(params)
-  end
+  def build("CDN", params), do: basic_flight_body("CDN", params, "-#{up(params, "item22")}") |> maybe_wrap_aftn(params)
 
   def build("EST", params) do
     [
-      "(EST-#{up(params, "aircraft_id")}",
+      "(EST#{up(params, "message_number")}#{up(params, "reference_data")}",
+      flight_item7(params),
       "-#{up(params, "departure")}#{digits(params, "departure_time")}",
-      "-#{up(params, "fix")}#{digits(params, "fix_time")} #{up(params, "estimate_level")}",
-      "-#{up(params, "destination")})"
+      String.trim("-#{up(params, "fix")}#{digits(params, "fix_time")} #{up(params, "estimate_level")} #{up(params, "crossing_data")}"),
+      "-#{up(params, "destination")}#{digits(params, "eet")})"
     ]
+    |> Enum.reject(&(&1 in ["", "-"]))
     |> Enum.join("")
     |> maybe_wrap_aftn(params)
   end
@@ -257,11 +291,16 @@ defmodule Tp.Aftn.Builder do
   end
 
   def build(type, params) when type in ~w(ACP) do
-    "(#{type}-#{up(params, "aircraft_id")}-#{up(params, "departure")}-#{up(params, "destination")}#{digits(params, "arrival_time")})"
+    item3 = type <> up(params, "message_number") <> up(params, "reference_data")
+
+    [item3, flight_item7(params), "-#{up(params, "departure")}", "-#{up(params, "destination")}"]
+    |> Enum.reject(&(&1 in ["", "-"]))
+    |> Enum.join("")
+    |> then(&"(#{&1})")
     |> maybe_wrap_aftn(params)
   end
 
-  def build("LAM", params), do: "(LAM-#{up(params, "reference")})" |> maybe_wrap_aftn(params)
+  def build("LAM", params), do: "(LAM#{up(params, "message_number")}#{up(params, "reference_data")})" |> maybe_wrap_aftn(params)
 
   def build("RCF", params) do
     params
@@ -369,9 +408,9 @@ defmodule Tp.Aftn.Builder do
     |> Enum.join("\r\n")
   end
 
-  defp fpl_body(params) do
+  defp fpl_body(params, type \\ "FPL") do
     [
-      "(FPL#{up(params, "message_number")}",
+      "(#{type}#{up(params, "message_number")}",
       alr_item7(params),
       alr_item8(params),
       alr_item9_10(params),
