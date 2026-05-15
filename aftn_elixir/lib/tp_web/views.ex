@@ -362,7 +362,7 @@ defmodule TpWeb.Views do
     """
   end
 
-  def test_message_page(notice \\ nil, settings \\ nil, recent \\ [], received_messages \\ [], initial_outbox \\ nil) do
+  def test_message_page(notice \\ nil, settings \\ nil, recent \\ [], received_messages \\ [], _initial_outbox \\ nil) do
     settings = settings || Tp.Settings.default_setting()
     origin   = ( settings.originator || "WAJJYFYC") |> to_string() |> String.upcase()
 
@@ -379,7 +379,7 @@ defmodule TpWeb.Views do
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
         header a{color:white}.tst-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.tst-back:hover{text-decoration:none;color:#d8e8f3}.tst-back i{font-size:18px;line-height:1}.tst-title{display:inline-flex;align-items:center;gap:8px}.tst-title i{color:#9bd0ff;font-size:18px;line-height:1}
-        #{header_time_css()} main{max-width:1240px;margin:0 auto;padding:16px}.test-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:14px;align-items:start}.test-main{min-width:0}.test-side{position:sticky;top:12px;min-width:0}
+        #{header_time_css()} main{max-width:1240px;margin:0 auto;padding:16px 16px 92px}.test-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:14px;align-items:start}.test-main{min-width:0}.test-side{position:sticky;top:12px;min-width:0}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:14px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:14px;font-weight:800;margin:0;padding:10px 14px;border-bottom:1px solid #e4e8ee;background:#f7f9fb;border-radius:6px 6px 0 0}
         .tst-body{padding:12px}
@@ -399,7 +399,7 @@ defmodule TpWeb.Views do
         .svc-row{display:flex;gap:8px;align-items:flex-start;margin-top:6px}
         .tst-svc{flex:1;min-height:70px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:7px 8px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical;text-transform:uppercase}
         .btn-send{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;height:36px;background:#1c6b4f;color:white;border:1px solid #1c6b4f;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;white-space:nowrap;align-self:flex-start;box-sizing:border-box}.btn-send:hover{background:#17583f;border-color:#17583f}
-        .outbox-pre{margin:0;padding:12px;max-height:200px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.4;background:#fbfcfd}
+        .outbox-pre{margin:0;padding:12px;max-height:240px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.4;background:#fbfcfd}
         .outbox-empty{padding:12px;color:#6d7b88;font-size:13px}
         .test-side .udp-monitor{margin:0;background:white;border:1px solid #d8dee6;border-radius:8px;overflow:hidden;box-shadow:0 12px 28px rgba(20,50,74,.08)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee;background:#fbfcfd}.section-head h2{border:0;background:transparent}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.icon-button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.udp-monitor-body{padding:9px;max-height:calc(100vh - 152px);overflow:auto}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-source{display:inline-flex;align-items:center;gap:4px}.udp-source i{color:#195b86;font-size:13px;line-height:1}.udp-raw{margin:0;padding:7px 8px;max-height:150px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.2}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px;background:#fbfcfd}
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
@@ -416,7 +416,6 @@ defmodule TpWeb.Views do
       </header>
       <main>
         #{notice_banner(notice)}
-        #{test_outbox_seed(initial_outbox)}
         <div class="test-layout">
           <div class="test-main">
 
@@ -425,7 +424,7 @@ defmodule TpWeb.Views do
               <div class="tst-body">
                 <div class="tst-row">
                   <span class="tst-label">State :</span>
-                  <label class="radio-label"><input type="radio" id="state-start" name="state" value="start"> Start</label>
+                  <label class="radio-label"><input type="radio" id="state-start" name="state" value="start" checked> Start</label>
                   <label class="radio-label"><input type="radio" id="state-stop"  name="state" value="stop"> Stop</label>
                   <input class="tst-times" type="text" id="tst-times" value="1" maxlength="3" inputmode="numeric">
                   <span class="tst-hint">times &nbsp;( 0 = continuous )</span>
@@ -492,8 +491,8 @@ defmodule TpWeb.Views do
           var statusEl   = document.getElementById('tst-status');
           var svcOrigEl  = document.getElementById('svc-originator');
           var svcForm    = document.getElementById('svc-form');
-          var outboxKey  = 'aftn-test-message-outbox';
-          var divider    = '\n----------------------------------------\n';
+          var outboxItems = [];
+          var divider    = '\\n----------------------------------------\\n';
 
           function setStatus(msg, cls) {
             if ( !statusEl) return;
@@ -510,14 +509,22 @@ defmodule TpWeb.Views do
             if ( orig && svcOrigEl) svcOrigEl.value = orig.value.trim().toUpperCase();
           }
 
-          function readData() {
-            var addr = document.getElementById('svc-address');
+          function readTestData() {
             var orig = document.getElementById('tst-originator');
             var fmt  = document.querySelector('[name="format"]:checked');
             return {
-              address:    addr ? addr.value.trim().toUpperCase() : '',
               originator: orig ? orig.value.trim().toUpperCase() : '',
               format:     fmt  ? fmt.value : 'qjh'
+            };
+          }
+
+          function readSvcData() {
+            var addr = document.getElementById('svc-address');
+            var orig = document.getElementById('tst-originator');
+            return {
+              address:    addr ? addr.value.trim().toUpperCase() : '',
+              originator: orig ? orig.value.trim().toUpperCase() : '',
+              format:     'svc'
             };
           }
 
@@ -527,34 +534,33 @@ defmodule TpWeb.Views do
             return null;
           }
 
+          function validateOrigin(data) {
+            if ( !data.originator || data.originator.length !== 8 || !/^[A-Z]{8}$/.test(data.originator)) return 'Originator must be 8 letters ( A-Z)';
+            return null;
+          }
+
           function visibleAftn(value) {
             return String(value == null ? '' : value)
-              .replace(/\u0001/g, '[SOH]')
-              .replace(/\u0002/g, '[STX]')
-              .replace(/\u0003/g, '[ETX]')
-              .replace(/\u000b/g, '[VT]')
-              .replace(/\r\n/g, '\n')
-              .replace(/\r/g, '\n')
+              .replace(/\\u0001/g, '[SOH]')
+              .replace(/\\u0002/g, '[STX]')
+              .replace(/\\u0003/g, '[ETX]')
+              .replace(/\\u000b/g, '[VT]')
+              .replace(/\\r\\n/g, '\\n')
+              .replace(/\\r/g, '\\n')
               .trim();
           }
 
-          function formatOutboxTime(value) {
-            return String(value || new Date().toISOString()).replace('T', ' ').replace('Z', '').slice(0, 19);
+          function testBody(format) {
+            var uLine = 'U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*U*';
+            var foxLine = 'THE QUICK BROWN FOX JUMPS OVER THE LAZY DOGS 1234567890';
+            var line = format === 'fox' ? foxLine : uLine;
+            return [line, line, line].join('\\n');
           }
 
-          function readOutbox() {
-            try {
-              var raw = window.localStorage ? window.localStorage.getItem(outboxKey) : '';
-              return raw ? JSON.parse(raw) : [];
-            } catch ( _error) {
-              return [];
-            }
-          }
-
-          function writeOutbox(items) {
-            try {
-              if ( window.localStorage) window.localStorage.setItem(outboxKey, JSON.stringify(items.slice(0, 20)));
-            } catch ( _error) {}
+          function testPreview(data) {
+            var origin = data.originator || '';
+            if ( data.format === 'de') return 'DE ' + origin + ' ' + origin + ' ' + origin + '\\n' + testBody(data.format);
+            return 'QJH ' + origin + '\\n' + testBody(data.format);
           }
 
           function renderOutbox(items) {
@@ -565,20 +571,18 @@ defmodule TpWeb.Views do
               return;
             }
             outbox.textContent = items.map(function ( item) {
-              return '[' + formatOutboxTime(item.sent_at) + ']\n' + visibleAftn(item.raw || '');
+              return visibleAftn(item.raw || '');
             }).join(divider);
           }
 
-          function addOutbox(raw, sentAt) {
+          function addOutbox(raw, sentAt, kind) {
             if ( !raw) return;
-            var items = readOutbox();
-            items = items.filter(function ( item) {
+            outboxItems = outboxItems.filter(function ( item) {
               return !( item.raw === raw && item.sent_at === sentAt);
             });
-            items.unshift({raw: raw, sent_at: sentAt || new Date().toISOString()});
-            items = items.slice(0, 20);
-            writeOutbox(items);
-            renderOutbox(items);
+            outboxItems.unshift({kind: kind || 'MESSAGE', raw: raw, sent_at: sentAt || new Date().toISOString()});
+            outboxItems = outboxItems.slice(0, 20);
+            renderOutbox(outboxItems);
           }
 
           function formBody(form) {
@@ -593,36 +597,30 @@ defmodule TpWeb.Views do
             return pairs.join('&');
           }
 
-          function seedOutboxFromPage() {
-            var seed = document.getElementById('test-outbox-seed');
-            if ( !seed) return;
-            var raw = '';
-            try {
-              raw = window.atob ? window.atob(seed.getAttribute('data-raw-b64') || '') : '';
-            } catch ( _error) {
-              raw = '';
-            }
-            var sentAt = seed.getAttribute('data-sent-at') || '';
-            if ( raw) addOutbox(raw, sentAt);
-            seed.parentNode.removeChild(seed);
-          }
-
           function sendOne(data, cb) {
             fetch('/test-message/send-one', {
               method: 'POST',
               headers: {'Content-Type': 'application/x-www-form-urlencoded'},
               credentials: 'same-origin',
-              body: 'address='    + encodeURIComponent(data.address) +
-                    '&originator=' + encodeURIComponent(data.originator) +
+              body: 'originator=' + encodeURIComponent(data.originator) +
                     '&format='     + encodeURIComponent(data.format)
             })
-            .then(function ( r) { return r.json(); })
+            .then(parseJsonResponse)
             .then(function ( j) { cb(j.ok ? null : ( j.error || 'unknown error'), j); })
-            .catch(function ( ) { cb('Network error'); });
+            .catch(function ( error) { cb(error && error.message ? error.message : 'Network error'); });
           }
 
-          renderOutbox(readOutbox());
-          seedOutboxFromPage();
+          function parseJsonResponse(r) {
+            return r.text().then(function ( text) {
+              var json = {};
+              try { json = text ? JSON.parse(text) : {}; }
+              catch ( _error) { json = {ok:false, error:text || 'Invalid server response'}; }
+              if ( !r.ok && !json.error) json.error = 'HTTP ' + r.status;
+              return json;
+            });
+          }
+
+          renderOutbox(outboxItems);
 
           if ( stopRadio) {
             stopRadio.addEventListener('change', function ( ) {
@@ -634,7 +632,7 @@ defmodule TpWeb.Views do
             svcForm.addEventListener('submit', function ( event) {
               event.preventDefault();
               syncSvcOrigin();
-              var data = readData();
+              var data = readSvcData();
               var err = validate(data);
               var message = svcForm.querySelector('[name="svc_message"]');
               if ( err) { setStatus(err, 'err'); return; }
@@ -647,10 +645,10 @@ defmodule TpWeb.Views do
                 credentials: 'same-origin',
                 body: formBody(svcForm)
               })
-                .then(function ( r) { return r.json(); })
+                .then(parseJsonResponse)
                 .then(function ( j) {
                   if ( !j.ok) { setStatus('Error: ' + ( j.error || 'unknown error'), 'err'); return; }
-                  addOutbox(j.raw, j.sent_at);
+                  addOutbox(j.raw, j.sent_at, j.kind || 'SVC TRAF');
                   message.value = '';
                   setStatus('SVC sent.', 'ok');
                 })
@@ -669,8 +667,8 @@ defmodule TpWeb.Views do
                 return;
               }
 
-              var data = readData();
-              var err  = validate(data);
+              var data = readTestData();
+              var err  = validateOrigin(data);
               if ( err) { setStatus(err, 'err'); return; }
 
               var fmt = document.querySelector('[name="format"]:checked');
@@ -687,7 +685,7 @@ defmodule TpWeb.Views do
               function tick() {
                 sendOne(data, function ( e, payload) {
                   if ( e) { clearTimer(); setStatus('Error: ' + e, 'err'); return; }
-                  if ( payload && payload.raw) addOutbox(payload.raw, payload.sent_at);
+                  addOutbox(( payload && payload.raw) || testPreview(data), payload && payload.sent_at, ( payload && payload.kind) || 'TEST MESSAGE');
                   sent++;
                   if ( target > 0) {
                     setStatus('Sending ' + sent + '/' + target + '...', '');
@@ -714,12 +712,6 @@ defmodule TpWeb.Views do
   end
 
   defp test_outbox(_messages), do: test_outbox([])
-
-  defp test_outbox_seed(nil), do: ""
-
-  defp test_outbox_seed(%{raw: raw, sent_at: sent_at}) do
-    ~s(<div id="test-outbox-seed" hidden data-raw-b64="#{Base.encode64(raw)}" data-sent-at="#{html(sent_at)}"></div>)
-  end
 
   def icao_abbreviations_page(items, pagination, q, mean, notice) do
     total       = Map.get(pagination, :total, 0)
@@ -2530,7 +2522,7 @@ defmodule TpWeb.Views do
             var code = raw.charCodeAt(i);
             if ( code === 7 || code === 11) return true;
           }
-          return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\u0007') !== -1 || raw.indexOf('\u000b') !== -1;
+          return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\\u0007') !== -1 || raw.indexOf('\\u000b') !== -1;
         }
 
         function soundSettings() {
@@ -5435,7 +5427,7 @@ defmodule TpWeb.Views do
             var code = raw.charCodeAt(i);
             if ( code === 7 || code === 11) return true;
           }
-          return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\u0007') !== -1 || raw.indexOf('\u000b') !== -1;
+          return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\\u0007') !== -1 || raw.indexOf('\\u000b') !== -1;
         }
 
         function soundSettings() {

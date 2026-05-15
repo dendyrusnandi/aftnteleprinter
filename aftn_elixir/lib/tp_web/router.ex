@@ -652,38 +652,28 @@ defmodule TpWeb.Router do
   get "/test-message" do
     settings = Settings.get_or_default()
     monitor_items = Tp.Udp.Monitor.drain()
-    initial_outbox = test_message_outbox_seed(conn.params)
 
     conn
     |> put_resp_content_type("text/html")
-    |> send_resp(200, TpWeb.Views.test_message_page(notice(conn.params), settings, [], monitor_items, initial_outbox))
+    |> send_resp(200, TpWeb.Views.test_message_page(notice(conn.params), settings, [], monitor_items))
   end
 
   post "/test-message/send-one" do
-    settings   = Settings.get_or_default()
-    destination = conn.params |> Map.get("address", "")    |> to_string() |> String.upcase() |> String.trim()
     originator  = conn.params |> Map.get("originator", "") |> to_string() |> String.upcase() |> String.trim()
     format      = Map.get(conn.params, "format", "qjh")
 
     result =
-      with :ok <- validate_aftn_addr("Address", destination),
-           :ok <- validate_aftn_addr("Originator", originator) do
-        tx_id  = build_tx_id(settings)
-        filing = Calendar.strftime(DateTime.utc_now(), "%d%H%M")
-        body   = test_msg_body(format, originator)
-        params = %{"transmission_id" => tx_id, "priority" => "GG", "address_1" => destination,
-                   "originator" => originator, "filing_time" => filing, "message" => body}
-        attrs  = %{filed_by: "WEB_TEST", next_attempt_at: nil, udp_target_host: nil, udp_target_port: nil}
-        raw = Tp.Aftn.Builder.build("AFTN_FREE", params)
+      with :ok <- validate_aftn_addr("Originator", originator) do
+        raw = test_message_wire_body(format, originator)
 
-        case Aftn.compose_and_enqueue("AFTN_FREE", params, attrs) do
-          {:ok, _}    -> Tp.Aftn.OutgoingQueue.kick(); {:ok, raw}
-          {:error, e} -> {:error, e}
+        case safe_udp_send(raw) do
+          {:ok, _sent} -> {:ok, raw}
+          {:error, reason} -> {:error, reason}
         end
       end
 
     payload = case result do
-      {:ok, raw}                 -> %{ok: true, raw: raw, sent_at: DateTime.to_iso8601(DateTime.utc_now())}
+      {:ok, raw}                 -> %{ok: true, kind: "TEST MESSAGE", raw: raw, sent_at: DateTime.to_iso8601(DateTime.utc_now())}
       {:error, {:validation, e}} -> %{ok: false, error: Enum.join(e, ", ")}
       {:error, e}                -> %{ok: false, error: inspect(e)}
     end
@@ -709,19 +699,19 @@ defmodule TpWeb.Router do
                  "originator" => originator, "filing_time" => filing, "message" => message}
       attrs  = %{filed_by: "WEB_SVC", next_attempt_at: nil, udp_target_host: nil, udp_target_port: nil}
       raw = Tp.Aftn.Builder.build("AFTN_FREE", params)
+      preview = svc_traf_preview(destination, originator, filing, message)
 
-      case Aftn.compose_and_enqueue("AFTN_FREE", params, attrs) do
-        {:ok, _} ->
-          Tp.Aftn.OutgoingQueue.kick()
+      case send_or_queue_test_packet(raw, attrs) do
+        {:ok, _raw} ->
           sent_at = DateTime.to_iso8601(DateTime.utc_now())
 
           if wants_json?(conn) do
             conn
             |> put_resp_content_type("application/json")
             |> put_resp_header("cache-control", "no-store")
-            |> send_resp(200, Jason.encode!(%{ok: true, raw: raw, sent_at: sent_at}))
+            |> send_resp(200, Jason.encode!(%{ok: true, kind: "SVC TRAF", raw: preview, sent_at: sent_at}))
           else
-            redirect(conn, "/test-message?#{URI.encode_query(%{info: "SVC TRAF sent to #{destination}", outbox_raw: raw, outbox_at: sent_at})}")
+            redirect(conn, "/test-message?#{URI.encode_query(%{info: "SVC TRAF sent to #{destination}"})}")
           end
         {:error, {:validation, errs}} ->
           test_message_error(conn, Enum.join(errs, ", "))
@@ -1354,11 +1344,22 @@ defmodule TpWeb.Router do
     cid <> seq
   end
 
-  defp test_message_outbox_seed(%{"outbox_raw" => raw} = params) when is_binary(raw) and raw != "" do
-    %{raw: raw, sent_at: Map.get(params, "outbox_at") || DateTime.to_iso8601(DateTime.utc_now())}
-  end
+  defp send_or_queue_test_packet(raw, attrs) do
+    case Aftn.transmit(raw, attrs) do
+      {:ok, _result} ->
+        {:ok, raw}
 
-  defp test_message_outbox_seed(_params), do: nil
+      {:error, _reason} ->
+        case Aftn.enqueue_transmit(raw, Map.put(attrs, :next_attempt_at, DateTime.utc_now())) do
+          {:ok, _message} ->
+            Tp.Aftn.OutgoingQueue.kick()
+            {:ok, raw}
+
+          error ->
+            error
+        end
+    end
+  end
 
   defp wants_json?(conn) do
     conn
@@ -1384,16 +1385,40 @@ defmodule TpWeb.Router do
     end
   end
 
-  defp test_msg_body("qjh", _orig),
-    do: "QJH RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY"
+  defp svc_traf_preview(destination, originator, filing, message) do
+    "FF #{destination}\r\n#{filing} #{originator}\r\n#{message}"
+  end
 
-  defp test_msg_body("fox", _orig),
-    do: "THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG 1234567890"
+  defp safe_udp_send(raw) do
+    Tp.Udp.Sender.send(raw)
+  rescue
+    error -> {:error, Exception.message(error)}
+  catch
+    :exit, reason -> {:error, {:exit, reason}}
+  end
 
-  defp test_msg_body("de", _orig),
-    do: "DE RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY RYRY"
+  defp test_message_wire_body(format, originator) do
+    origin = originator |> to_string() |> String.upcase() |> String.trim()
 
-  defp test_msg_body(_, _), do: "TEST"
+    test_msg_body(format, origin)
+  end
+
+  defp test_msg_body("fox", origin),
+    do: Enum.join(["QJH #{origin}" | List.duplicate(test_fox_line(), 3)], "\r\n")
+
+  defp test_msg_body("de", origin),
+    do: Enum.join(["DE #{origin} #{origin} #{origin}" | List.duplicate(test_u_line(), 3)], "\r\n")
+
+  defp test_msg_body(_format, origin),
+    do: Enum.join(["QJH #{origin}" | List.duplicate(test_u_line(), 3)], "\r\n")
+
+  defp test_u_line do
+    String.duplicate("U*", 30)
+  end
+
+  defp test_fox_line do
+    "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOGS 1234567890"
+  end
 
   defp safe_list_abbr(opts) do
     Tp.Abbreviations.list(opts)
