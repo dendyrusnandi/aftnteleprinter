@@ -58,7 +58,37 @@ defmodule Tp.Aftn.Builder do
     |> validate_aftn_header(params)
   end
 
+  def validate("CHG", params) do
+    validate_mini_flight(params, false)
+    |> require_when_empty(params, "item22", "Item 22 wajib diisi")
+  end
+
+  def validate(type, params) when type in ~w(CNL) do
+    validate_mini_flight(params, false)
+  end
+
+  def validate(type, params) when type in ~w(DLA DEP) do
+    validate_mini_flight(params, true)
+  end
+
   def validate(type, params) when type in @basic_flight_types do
+    validate_basic_flight(params)
+  end
+
+  defp validate_mini_flight(params, requires_time?) do
+    fields = ["aircraft_id", "departure", "destination"] ++ if(requires_time?, do: ["departure_time"], else: [])
+
+    params
+    |> require_fields(fields)
+    |> validate_format(params, "aircraft_id", ~r/^[A-Z0-9]{2,7}$/, "Aircraft harus 2-7 huruf/angka")
+    |> validate_format(params, "departure", ~r/^[A-Z]{4}$/, "Departure harus ICAO 4 huruf")
+    |> validate_format(params, "destination", ~r/^[A-Z]{4}$/, "Destination harus ICAO 4 huruf")
+    |> validate_optional_format(params, "departure_time", ~r/^\d{4}$/, "Time harus HHMM 4 digit")
+    |> validate_optional_format(params, "dof", ~r/^\d{6}$/, "DOF harus YYMMDD 6 digit")
+    |> validate_aftn_header(params)
+  end
+
+  defp validate_basic_flight(params) do
     params
     |> require_fields(["aircraft_id", "departure", "departure_time", "destination"])
     |> validate_common_flight(params)
@@ -215,7 +245,18 @@ defmodule Tp.Aftn.Builder do
     |> maybe_wrap_aftn(params)
   end
 
-  def build(type, params) when type in ~w(ACP ARR) do
+  def build("ARR", params) do
+    item3 = "ARR" <> up(params, "message_number") <> up(params, "reference_data")
+    aerodrome = if text(params, "arrival_aerodrome") == "", do: "", else: " #{up(params, "arrival_aerodrome")}"
+
+    [item3, flight_item7(params), "-#{up(params, "departure")}", "-#{up(params, "destination")}#{digits(params, "arrival_time")}#{aerodrome}"]
+    |> Enum.reject(&(&1 in ["", "-"]))
+    |> Enum.join("")
+    |> then(&"(#{&1})")
+    |> maybe_wrap_aftn(params)
+  end
+
+  def build(type, params) when type in ~w(ACP) do
     "(#{type}-#{up(params, "aircraft_id")}-#{up(params, "departure")}-#{up(params, "destination")}#{digits(params, "arrival_time")})"
     |> maybe_wrap_aftn(params)
   end
@@ -271,15 +312,33 @@ defmodule Tp.Aftn.Builder do
         value -> "-DOF/#{upcase(value)}"
       end
 
-    "(#{type}-#{up(params, "aircraft_id")}-#{up(params, "departure")}#{digits(params, "departure_time")}-#{up(params, "destination")}#{dof}#{extra})"
+    item16 =
+      [
+        up(params, "destination"),
+        digits(params, "eet"),
+        up(params, "alternate"),
+        up(params, "second_alternate")
+      ]
+      |> Enum.reject(&(&1 == ""))
+      |> Enum.join(" ")
+
+    [type <> up(params, "message_number") <> up(params, "reference_data"), flight_item7(params), "-#{up(params, "departure")}#{digits(params, "departure_time")}", "-#{item16}", dof, extra]
+    |> Enum.reject(&(&1 in ["", "-"]))
+    |> Enum.join("")
+    |> then(&"(#{&1})")
+  end
+
+  defp flight_item7(params) do
+    aircraft = up(params, "aircraft_id")
+    mode = if text(params, "ssr_mode") == "", do: "", else: "/#{up(params, "ssr_mode")}"
+    code = digits(params, "ssr_code")
+
+    if aircraft == "" and mode == "" and code == "", do: "", else: "-#{aircraft}#{mode}#{code}"
   end
 
   defp rcf_body(params) do
     item3 = "RCF" <> up(params, "message_number") <> up(params, "reference_data")
-    aircraft = up(params, "aircraft_id")
-    mode = if text(params, "ssr_mode") == "", do: "", else: "/#{up(params, "ssr_mode")}"
-    code = digits(params, "ssr_code")
-    item7 = if aircraft == "" and mode == "" and code == "", do: "", else: "-#{aircraft}#{mode}#{code}"
+    item7 = flight_item7(params)
     item21 = if text(params, "radio_failure") == "", do: "", else: "-#{up(params, "radio_failure")}"
 
     body =
