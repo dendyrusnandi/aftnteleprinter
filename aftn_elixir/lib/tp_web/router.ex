@@ -652,9 +652,11 @@ defmodule TpWeb.Router do
   get "/test-message" do
     settings = Settings.get_or_default()
     monitor_items = Tp.Udp.Monitor.drain()
+    initial_outbox = test_message_outbox_seed(conn.params)
+
     conn
     |> put_resp_content_type("text/html")
-    |> send_resp(200, TpWeb.Views.test_message_page(notice(conn.params), settings, [], monitor_items))
+    |> send_resp(200, TpWeb.Views.test_message_page(notice(conn.params), settings, [], monitor_items, initial_outbox))
   end
 
   post "/test-message/send-one" do
@@ -711,13 +713,15 @@ defmodule TpWeb.Router do
       case Aftn.compose_and_enqueue("AFTN_FREE", params, attrs) do
         {:ok, _} ->
           Tp.Aftn.OutgoingQueue.kick()
+          sent_at = DateTime.to_iso8601(DateTime.utc_now())
+
           if wants_json?(conn) do
             conn
             |> put_resp_content_type("application/json")
             |> put_resp_header("cache-control", "no-store")
-            |> send_resp(200, Jason.encode!(%{ok: true, raw: raw, sent_at: DateTime.to_iso8601(DateTime.utc_now())}))
+            |> send_resp(200, Jason.encode!(%{ok: true, raw: raw, sent_at: sent_at}))
           else
-            redirect(conn, "/test-message?info=#{URI.encode_www_form("SVC TRAF sent to #{destination}")}")
+            redirect(conn, "/test-message?#{URI.encode_query(%{info: "SVC TRAF sent to #{destination}", outbox_raw: raw, outbox_at: sent_at})}")
           end
         {:error, {:validation, errs}} ->
           test_message_error(conn, Enum.join(errs, ", "))
@@ -1349,6 +1353,12 @@ defmodule TpWeb.Router do
     seq = (settings.tseq || "0001") |> to_string() |> String.replace(~r/\D/, "") |> String.pad_leading(4, "0") |> String.slice(0, 4)
     cid <> seq
   end
+
+  defp test_message_outbox_seed(%{"outbox_raw" => raw} = params) when is_binary(raw) and raw != "" do
+    %{raw: raw, sent_at: Map.get(params, "outbox_at") || DateTime.to_iso8601(DateTime.utc_now())}
+  end
+
+  defp test_message_outbox_seed(_params), do: nil
 
   defp wants_json?(conn) do
     conn

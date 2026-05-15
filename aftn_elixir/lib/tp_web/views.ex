@@ -362,7 +362,7 @@ defmodule TpWeb.Views do
     """
   end
 
-  def test_message_page(notice \\ nil, settings \\ nil, recent \\ [], received_messages \\ []) do
+  def test_message_page(notice \\ nil, settings \\ nil, recent \\ [], received_messages \\ [], initial_outbox \\ nil) do
     settings = settings || Tp.Settings.default_setting()
     origin   = ( settings.originator || "WAJJYFYC") |> to_string() |> String.upcase()
 
@@ -416,6 +416,7 @@ defmodule TpWeb.Views do
       </header>
       <main>
         #{notice_banner(notice)}
+        #{test_outbox_seed(initial_outbox)}
         <div class="test-layout">
           <div class="test-main">
 
@@ -492,6 +493,7 @@ defmodule TpWeb.Views do
           var svcOrigEl  = document.getElementById('svc-originator');
           var svcForm    = document.getElementById('svc-form');
           var outboxKey  = 'aftn-test-message-outbox';
+          var divider    = '\n----------------------------------------\n';
 
           function setStatus(msg, cls) {
             if ( !statusEl) return;
@@ -564,16 +566,45 @@ defmodule TpWeb.Views do
             }
             outbox.textContent = items.map(function ( item) {
               return '[' + formatOutboxTime(item.sent_at) + ']\n' + visibleAftn(item.raw || '');
-            }).join('\n' + '-'.repeat(40) + '\n');
+            }).join(divider);
           }
 
           function addOutbox(raw, sentAt) {
             if ( !raw) return;
             var items = readOutbox();
+            items = items.filter(function ( item) {
+              return !( item.raw === raw && item.sent_at === sentAt);
+            });
             items.unshift({raw: raw, sent_at: sentAt || new Date().toISOString()});
             items = items.slice(0, 20);
             writeOutbox(items);
             renderOutbox(items);
+          }
+
+          function formBody(form) {
+            var pairs = [];
+            var fields = form.querySelectorAll('input, textarea, select');
+            for ( var i = 0; i < fields.length; i++) {
+              var field = fields[i];
+              if ( !field.name || field.disabled) continue;
+              if (( field.type === 'checkbox' || field.type === 'radio') && !field.checked) continue;
+              pairs.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(field.value || ''));
+            }
+            return pairs.join('&');
+          }
+
+          function seedOutboxFromPage() {
+            var seed = document.getElementById('test-outbox-seed');
+            if ( !seed) return;
+            var raw = '';
+            try {
+              raw = window.atob ? window.atob(seed.getAttribute('data-raw-b64') || '') : '';
+            } catch ( _error) {
+              raw = '';
+            }
+            var sentAt = seed.getAttribute('data-sent-at') || '';
+            if ( raw) addOutbox(raw, sentAt);
+            seed.parentNode.removeChild(seed);
           }
 
           function sendOne(data, cb) {
@@ -591,6 +622,7 @@ defmodule TpWeb.Views do
           }
 
           renderOutbox(readOutbox());
+          seedOutboxFromPage();
 
           if ( stopRadio) {
             stopRadio.addEventListener('change', function ( ) {
@@ -613,7 +645,7 @@ defmodule TpWeb.Views do
                 method: 'POST',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json'},
                 credentials: 'same-origin',
-                body: new URLSearchParams(new FormData(svcForm)).toString()
+                body: formBody(svcForm)
               })
                 .then(function ( r) { return r.json(); })
                 .then(function ( j) {
@@ -682,6 +714,12 @@ defmodule TpWeb.Views do
   end
 
   defp test_outbox(_messages), do: test_outbox([])
+
+  defp test_outbox_seed(nil), do: ""
+
+  defp test_outbox_seed(%{raw: raw, sent_at: sent_at}) do
+    ~s(<div id="test-outbox-seed" hidden data-raw-b64="#{Base.encode64(raw)}" data-sent-at="#{html(sent_at)}"></div>)
+  end
 
   def icao_abbreviations_page(items, pagination, q, mean, notice) do
     total       = Map.get(pagination, :total, 0)
