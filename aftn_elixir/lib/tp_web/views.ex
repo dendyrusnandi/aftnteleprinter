@@ -114,8 +114,8 @@ defmodule TpWeb.Views do
           </dl>
         </section>
         <section>
-          <h2>Raw Message</h2>
-          <pre>#{html(message.raw_text)}</pre>
+          <h2>Full Format Message</h2>
+          <pre>#{html(full_format_message(message))}</pre>
         </section>
       </main>
       #{status_panel([], nil)}
@@ -168,7 +168,7 @@ defmodule TpWeb.Views do
         #{pdf_row("Note", Map.get(message, :note))}
         #{pdf_row("Filed By", message.filed_by)}
       </table>
-      <pre>#{html(visible_aftn(message.raw_text))}</pre>
+      <pre>#{html(full_format_message(message))}</pre>
       <script>window.addEventListener('load', function ( ) { window.setTimeout(function ( ) { window.print(); }, 250); });</script>
     </body>
     </html>
@@ -4485,7 +4485,7 @@ defmodule TpWeb.Views do
     id = html(message.id)
 
     """
-    <tr data-message-id="#{id}" data-compose-priority="#{html(message.priority)}" data-compose-originator="#{html(message.originator)}" data-compose-addresses="#{html(compose_addresses(message))}" data-compose-message="#{html(compose_message_text(message.raw_text))}">
+    <tr data-message-id="#{id}" data-compose-type="#{html(message.message_type)}" data-compose-priority="#{html(message.priority)}" data-compose-originator="#{html(message.originator)}" data-compose-addresses="#{html(compose_addresses(message))}" data-compose-message="#{html(compose_message_text(message.raw_text))}">
       <td>#{html(queue_message_type(message))}</td>
       <td>#{html(message.filing_time)}</td>
       <td>#{html(format_queue_send_at(message))}</td>
@@ -4605,6 +4605,51 @@ defmodule TpWeb.Views do
 
   defp compose_addresses(_message), do: ""
 
+  defp full_format_message(message) do
+    raw = message.raw_text |> visible_aftn() |> String.trim()
+    priority = compact_string(message.priority)
+    destinations = compose_addresses(message)
+    filing_time = compact_string(message.filing_time)
+    originator = compact_string(message.originator)
+
+    header_line =
+      [priority, destinations]
+      |> Enum.reject(&(&1 == ""))
+      |> Enum.join(" ")
+      |> String.trim()
+
+    originator_line =
+      [filing_time, originator]
+      |> Enum.reject(&(&1 == ""))
+      |> Enum.join(" ")
+      |> String.trim()
+
+    first_line =
+      raw
+      |> String.split("\n", parts: 2)
+      |> List.first()
+      |> to_string()
+      |> String.trim()
+
+    cond do
+      raw == "" ->
+        [header_line, originator_line]
+        |> Enum.reject(&(&1 == ""))
+        |> Enum.join("\n")
+
+      String.starts_with?(raw, "[SOH]") or (header_line != "" and first_line == header_line) ->
+        raw
+
+      true ->
+        [header_line, originator_line, raw]
+        |> Enum.reject(&(&1 == ""))
+        |> Enum.join("\n")
+    end
+  end
+
+  defp compact_string(nil), do: ""
+  defp compact_string(value), do: value |> to_string() |> String.trim()
+
   defp message_detail_templates(messages) do
     messages
     |> Enum.map_join("", &message_detail_template/1)
@@ -4632,7 +4677,7 @@ defmodule TpWeb.Views do
         #{detail_item("Note", Map.get(message, :note))}
         #{detail_item("Filed By", message.filed_by)}
       </dl>
-      <pre class="modal-raw">#{html(visible_aftn(message.raw_text))}</pre>
+      <pre class="modal-raw">#{html(full_format_message(message))}</pre>
     </div>
     """
   end
@@ -4649,7 +4694,7 @@ defmodule TpWeb.Views do
       end
 
     """
-    <tr data-message-id="#{id}" data-compose-priority="#{html(message.priority)}" data-compose-originator="#{html(message.originator)}" data-compose-addresses="#{html(compose_addresses(message))}" data-compose-message="#{html(compose_message_text(message.raw_text))}">
+    <tr data-message-id="#{id}" data-compose-type="#{html(message.message_type)}" data-compose-priority="#{html(message.priority)}" data-compose-originator="#{html(message.originator)}" data-compose-addresses="#{html(compose_addresses(message))}" data-compose-message="#{html(compose_message_text(message.raw_text))}">
       <td class="muted">#{html(format_time(message.inserted_at))}</td>
       <td>#{html(message.direction)}</td>
       <td>#{html(message.cid)}</td>
@@ -5546,6 +5591,21 @@ defmodule TpWeb.Views do
           return '<dt>' + escapeHtml(label) + '</dt><dd>' + escapeHtml(value || '-') + '</dd>';
         }
 
+        function fullFormatMessage(message) {
+          var raw = String(visibleAftn(message && message.raw_text ? message.raw_text : '')).trim();
+          var priority = String(( message && message.priority) || '').trim();
+          var destinations = composeAddresses(message && message.destinations).trim();
+          var filingTime = String(( message && message.filing_time) || '').trim();
+          var originator = String(( message && message.originator) || '').trim();
+          var header = [priority, destinations].filter(Boolean).join(' ').trim();
+          var origin = [filingTime, originator].filter(Boolean).join(' ').trim();
+          var firstLine = String(raw.split('\\n')[0] || '').trim();
+
+          if ( !raw) return [header, origin].filter(Boolean).join('\\n');
+          if ( raw.indexOf('[SOH]') === 0 || ( header && firstLine === header)) return raw;
+          return [header, origin, raw].filter(Boolean).join('\\n');
+        }
+
         function formatMonitorTime(value) {
           return String(value || '').replace('T', ' ').replace('Z', '').slice(0, 19);
         }
@@ -5702,7 +5762,7 @@ defmodule TpWeb.Views do
           var readMore = preview.hasMore ? '<button class="read-more js-show-message" type="button" data-message-id="' + id + '" onclick="return showMessagePopupFromButton(this)">More</button>' : '';
           var returnTo = escapeHtml(window.location.pathname + window.location.search);
 
-          return '<tr data-message-id="' + id + '" data-compose-priority="' + escapeHtml(message.priority || '') + '" data-compose-originator="' + escapeHtml(message.originator || '') + '" data-compose-addresses="' + escapeHtml(composeAddresses(message.destinations)) + '" data-compose-message="' + escapeHtml(composeMessageText(message.raw_text || '')) + '">' +
+          return '<tr data-message-id="' + id + '" data-compose-type="' + escapeHtml(message.message_type || '') + '" data-compose-priority="' + escapeHtml(message.priority || '') + '" data-compose-originator="' + escapeHtml(message.originator || '') + '" data-compose-addresses="' + escapeHtml(composeAddresses(message.destinations)) + '" data-compose-message="' + escapeHtml(composeMessageText(message.raw_text || '')) + '">' +
             '<td class="muted">' + escapeHtml(formatMonitorTime(message.inserted_at)) + '</td>' +
             '<td>' + escapeHtml(message.direction || '') + '</td>' +
             '<td>' + escapeHtml(message.cid || '') + '</td>' +
@@ -5753,10 +5813,58 @@ defmodule TpWeb.Views do
           row.classList.add('row-selected');
         }
 
-        function openAftnFreeFromRow(row) {
+        function supportedComposeForm(value) {
+          var type = String(value || '').toUpperCase().trim();
+          var forms = {
+            ALR: true,
+            RCF: true,
+            FPL: true,
+            CHG: true,
+            DLA: true,
+            CNL: true,
+            DEP: true,
+            ARR: true,
+            CDN: true,
+            CPL: true,
+            EST: true,
+            ACP: true,
+            LAM: true,
+            RQP: true,
+            RQS: true,
+            SPL: true
+          };
+          return forms[type] ? type : '';
+        }
+
+        function detectComposeForm(row) {
+          var fromType = supportedComposeForm(row && row.getAttribute('data-compose-type'));
+          if ( fromType) return fromType;
+
+          var text = String(( row && row.getAttribute('data-compose-message')) || '').toUpperCase().trim();
+          text = text.replace(/^\\(+/, '');
+          var direct = text.match(/^([A-Z]{3})(?=[\\s\\-\\(]|$)/);
+          var fromBody = supportedComposeForm(direct && direct[1]);
+          if ( fromBody) return fromBody;
+
+          var bracketed = text.match(/\\(([A-Z]{3})(?=[\\s\\-\\(]|$)/);
+          var fromBracket = supportedComposeForm(bracketed && bracketed[1]);
+          if ( fromBracket) return fromBracket;
+
+          var lines = text.split(/\\r?\\n/);
+          for ( var i = 0; i < lines.length; i++) {
+            var line = String(lines[i] || '').trim().replace(/^\\(+/, '');
+            var lineMatch = line.match(/^([A-Z]{3})(?=[\\s\\-\\(]|$)/);
+            var fromLine = supportedComposeForm(lineMatch && lineMatch[1]);
+            if ( fromLine) return fromLine;
+          }
+
+          return 'AFTN_FREE';
+        }
+
+        function openComposeFromRow(row) {
           if ( !row) return;
           var params = new URLSearchParams();
-          params.set('form', 'AFTN_FREE');
+          params.set('form', detectComposeForm(row));
           params.set('priority', row.getAttribute('data-compose-priority') || '');
           params.set('originator', row.getAttribute('data-compose-originator') || '');
           params.set('message', row.getAttribute('data-compose-message') || '');
@@ -5927,7 +6035,7 @@ defmodule TpWeb.Views do
                 detailItem('Note', message.note) +
                 detailItem('Filed By', message.filed_by) +
                 '</dl>' +
-                '<pre class="modal-raw">' + escapeHtml(visibleAftn(message.raw_text)) + '</pre>';
+                '<pre class="modal-raw">' + escapeHtml(fullFormatMessage(message)) + '</pre>';
             })
             .catch(function ( error) {
               body.innerHTML = '<div class="modal-error">' + escapeHtml(error.message) + '</div>';
@@ -5973,7 +6081,7 @@ defmodule TpWeb.Views do
           if ( event && event.preventDefault) event.preventDefault();
           if ( event && event.stopPropagation) event.stopPropagation();
           selectMessageRow(row);
-          openAftnFreeFromRow(row);
+          openComposeFromRow(row);
           return false;
         };
 

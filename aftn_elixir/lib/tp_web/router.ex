@@ -999,6 +999,7 @@ defmodule TpWeb.Router do
       priority: safe_text(message.priority),
       message_type: message.message_type,
       originator: message.originator,
+      filing_time: safe_text(message.filing_time),
       destinations: message.destinations,
       aircraft_id: message.aircraft_id,
       departure: message.departure,
