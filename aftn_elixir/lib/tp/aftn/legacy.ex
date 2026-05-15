@@ -566,7 +566,7 @@ defmodule Tp.Aftn.Legacy do
 
   defp truthy?(value), do: value in [true, 1, "1", "true", "TRUE", "Y", "y"]
   defp bool_value(value), do: if(truthy?(value), do: "1", else: "0")
-  defp legacy_type(type) when type in [nil, "", "FREE"], do: ""
+  defp legacy_type(type) when type in [nil, "", "FREE", "CH"], do: ""
   defp legacy_type(type), do: type
 
   defp source_note(fields) do

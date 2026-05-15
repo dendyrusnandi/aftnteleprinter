@@ -46,6 +46,8 @@ defmodule Tp.Settings do
       prev_st: setting.prev_st,
       channel_check: setting.channel_check,
       automatic_repeat: setting.automatic_repeat,
+      sound_enabled: setting.sound_enabled,
+      alarm_repeat_count: setting.alarm_repeat_count,
       originator: setting.originator
     }
 
@@ -95,6 +97,8 @@ defmodule Tp.Settings do
       prev_st: "WAJJYFYZ",
       channel_check: true,
       automatic_repeat: false,
+      sound_enabled: true,
+      alarm_repeat_count: 1,
       originator: "WAJJYFYC"
     }
   end
@@ -125,6 +129,8 @@ defmodule Tp.Settings do
       prev_st: blank_to_nil(Map.get(attrs, "prev_st")),
       channel_check: checkbox?(Map.get(attrs, "channel_check")),
       automatic_repeat: checkbox?(Map.get(attrs, "automatic_repeat")),
+      sound_enabled: checkbox?(Map.get(attrs, "sound_enabled")),
+      alarm_repeat_count: parse_alarm_repeat_count(Map.get(attrs, "alarm_repeat_count")),
       originator: attrs |> Map.get("originator", "") |> String.upcase()
     }
   end
@@ -137,6 +143,16 @@ defmodule Tp.Settings do
     case Integer.parse(to_string(value)) do
       {int, ""} -> int
       _ -> nil
+    end
+  end
+
+  defp parse_alarm_repeat_count(nil), do: 1
+  defp parse_alarm_repeat_count(""), do: 1
+
+  defp parse_alarm_repeat_count(value) do
+    case parse_int(value) do
+      nil -> 1
+      int -> int |> max(0) |> min(999)
     end
   end
 

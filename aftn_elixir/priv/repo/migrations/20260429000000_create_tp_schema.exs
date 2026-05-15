@@ -91,6 +91,8 @@ defmodule Tp.Repo.Migrations.CreateTpSchema do
       add :prev_st, :string, size: 32
       add :channel_check, :boolean, null: false, default: true
       add :automatic_repeat, :boolean, null: false, default: false
+      add :sound_enabled, :boolean, null: false, default: true
+      add :alarm_repeat_count, :integer, null: false, default: 1
       add :originator, :string, size: 8, null: false, default: "WAJJYFYC"
 
       timestamps(type: :utc_datetime_usec)

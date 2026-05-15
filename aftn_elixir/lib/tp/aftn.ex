@@ -1,7 +1,7 @@
 defmodule Tp.Aftn do
   import Ecto.Query
 
-  alias Tp.Aftn.{Builder, Event, Legacy, Message, Parser}
+  alias Tp.Aftn.{Builder, Event, Legacy, Message, Parser, ServiceMessage}
   alias Tp.Repo
   alias Tp.Udp.Sender
 
@@ -271,8 +271,16 @@ defmodule Tp.Aftn do
         attrs
         |> Map.merge(%{direction: :inbound, parsed_fields: parsed_fields})
         |> create_inbound_message()
+        |> maybe_handle_service_message()
     end
   end
+
+  defp maybe_handle_service_message({:ok, message} = result) do
+    ServiceMessage.maybe_handle(message)
+    result
+  end
+
+  defp maybe_handle_service_message(result), do: result
 
   def transmit(raw, attrs \\ %{}) do
     parsed = Parser.parse_message(raw)

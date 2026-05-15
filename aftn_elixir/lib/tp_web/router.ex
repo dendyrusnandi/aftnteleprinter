@@ -651,13 +651,10 @@ defmodule TpWeb.Router do
 
   get "/test-message" do
     settings = Settings.get_or_default()
-    recent = case safe_latest_messages(direction: "outbound", limit: 5) do
-      {:ok, msgs} -> msgs
-      _ -> []
-    end
+    monitor_items = Tp.Udp.Monitor.drain()
     conn
     |> put_resp_content_type("text/html")
-    |> send_resp(200, TpWeb.Views.test_message_page(notice(conn.params), settings, recent))
+    |> send_resp(200, TpWeb.Views.test_message_page(notice(conn.params), settings, [], monitor_items))
   end
 
   post "/test-message/send-one" do
@@ -675,15 +672,16 @@ defmodule TpWeb.Router do
         params = %{"transmission_id" => tx_id, "priority" => "GG", "address_1" => destination,
                    "originator" => originator, "filing_time" => filing, "message" => body}
         attrs  = %{filed_by: "WEB_TEST", next_attempt_at: nil, udp_target_host: nil, udp_target_port: nil}
+        raw = Tp.Aftn.Builder.build("AFTN_FREE", params)
 
         case Aftn.compose_and_enqueue("AFTN_FREE", params, attrs) do
-          {:ok, _}    -> Tp.Aftn.OutgoingQueue.kick(); :ok
+          {:ok, _}    -> Tp.Aftn.OutgoingQueue.kick(); {:ok, raw}
           {:error, e} -> {:error, e}
         end
       end
 
     payload = case result do
-      :ok                        -> %{ok: true}
+      {:ok, raw}                 -> %{ok: true, raw: raw, sent_at: DateTime.to_iso8601(DateTime.utc_now())}
       {:error, {:validation, e}} -> %{ok: false, error: Enum.join(e, ", ")}
       {:error, e}                -> %{ok: false, error: inspect(e)}
     end
@@ -708,18 +706,26 @@ defmodule TpWeb.Router do
       params = %{"transmission_id" => tx_id, "priority" => "FF", "address_1" => destination,
                  "originator" => originator, "filing_time" => filing, "message" => message}
       attrs  = %{filed_by: "WEB_SVC", next_attempt_at: nil, udp_target_host: nil, udp_target_port: nil}
+      raw = Tp.Aftn.Builder.build("AFTN_FREE", params)
 
       case Aftn.compose_and_enqueue("AFTN_FREE", params, attrs) do
         {:ok, _} ->
           Tp.Aftn.OutgoingQueue.kick()
-          redirect(conn, "/test-message?info=#{URI.encode_www_form("SVC TRAF sent to #{destination}")}")
+          if wants_json?(conn) do
+            conn
+            |> put_resp_content_type("application/json")
+            |> put_resp_header("cache-control", "no-store")
+            |> send_resp(200, Jason.encode!(%{ok: true, raw: raw, sent_at: DateTime.to_iso8601(DateTime.utc_now())}))
+          else
+            redirect(conn, "/test-message?info=#{URI.encode_www_form("SVC TRAF sent to #{destination}")}")
+          end
         {:error, {:validation, errs}} ->
-          redirect(conn, "/test-message?error=#{URI.encode_www_form(Enum.join(errs, ", "))}")
+          test_message_error(conn, Enum.join(errs, ", "))
         {:error, reason} ->
-          redirect(conn, "/test-message?error=#{URI.encode_www_form(inspect(reason))}")
+          test_message_error(conn, inspect(reason))
       end
     else
-      {:error, msg} -> redirect(conn, "/test-message?error=#{URI.encode_www_form(msg)}")
+      {:error, msg} -> test_message_error(conn, msg)
     end
   end
 
@@ -1342,6 +1348,23 @@ defmodule TpWeb.Router do
     cid = (settings.cid || "TST") |> to_string() |> String.upcase()
     seq = (settings.tseq || "0001") |> to_string() |> String.replace(~r/\D/, "") |> String.pad_leading(4, "0") |> String.slice(0, 4)
     cid <> seq
+  end
+
+  defp wants_json?(conn) do
+    conn
+    |> Plug.Conn.get_req_header("accept")
+    |> Enum.any?(&String.contains?(&1, "application/json"))
+  end
+
+  defp test_message_error(conn, message) do
+    if wants_json?(conn) do
+      conn
+      |> put_resp_content_type("application/json")
+      |> put_resp_header("cache-control", "no-store")
+      |> send_resp(200, Jason.encode!(%{ok: false, error: message}))
+    else
+      redirect(conn, "/test-message?error=#{URI.encode_www_form(message)}")
+    end
   end
 
   defp test_times(str) do

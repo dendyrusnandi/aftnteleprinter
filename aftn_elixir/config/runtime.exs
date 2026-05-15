@@ -2,7 +2,7 @@ import Config
 
 config :tp, Tp.Repo,
   username: System.get_env("MYSQL_USER") || "root",
-  password: System.get_env("MYSQL_PASSWORD") || "",
+  password: System.get_env("MYSQL_PASSWORD") || "Elsaelsa1#",
   hostname: System.get_env("MYSQL_HOST") || "localhost",
   database: System.get_env("MYSQL_DATABASE") || "tp",
   port: String.to_integer(System.get_env("MYSQL_PORT") || "3306"),

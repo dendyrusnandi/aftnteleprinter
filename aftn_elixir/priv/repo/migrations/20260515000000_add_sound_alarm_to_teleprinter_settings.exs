@@ -1,10 +1,9 @@
-defmodule Tp.Repo.Migrations.AddOutgoingQueueFields do
+defmodule Tp.Repo.Migrations.AddSoundAlarmToTeleprinterSettings do
   use Ecto.Migration
 
   def up do
-    add_column_unless_exists(:air_messages, :transmit_attempts, "`transmit_attempts` integer DEFAULT 0 NOT NULL")
-    add_column_unless_exists(:air_messages, :last_error, "`last_error` text")
-    add_column_unless_exists(:air_messages, :next_attempt_at, "`next_attempt_at` datetime(6)")
+    add_column_unless_exists(:teleprinter_settings, :sound_enabled, "`sound_enabled` boolean DEFAULT true NOT NULL")
+    add_column_unless_exists(:teleprinter_settings, :alarm_repeat_count, "`alarm_repeat_count` integer DEFAULT 1 NOT NULL")
   end
 
   def down do

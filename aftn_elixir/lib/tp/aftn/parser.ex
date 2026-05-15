@@ -7,6 +7,7 @@ defmodule Tp.Aftn.Parser do
     parsed = parse_message(text)
 
     structured_aftn?(text) or
+      channel_check?(text) or
       (parsed.message_type in @message_types and
          (not is_nil(parsed.originator) or parsed.destinations != [])) or
       (not is_nil(parsed.priority) and not is_nil(parsed.originator) and parsed.destinations != [])
@@ -28,7 +29,12 @@ defmodule Tp.Aftn.Parser do
     body = message_body(normalized)
     header = message_header(normalized)
     header_fields = parse_header(header)
-    parse_text = if body == "", do: clean_controls(normalized), else: body
+    parse_text =
+      cond do
+        channel_check?(normalized) -> "CH"
+        body == "" -> clean_controls(normalized)
+        true -> body
+      end
     tokens = Regex.scan(~r/[A-Z0-9\/.-]+/, clean_controls(normalized)) |> List.flatten()
     structured = parse_structured_body(parse_text)
     type = structured[:message_type] || Enum.find(@message_types, &Enum.member?(tokens, &1)) || detect_type_from_body(parse_text)
@@ -178,6 +184,14 @@ defmodule Tp.Aftn.Parser do
       [_, type] -> type in @message_types
       _ -> false
     end
+  end
+
+  defp channel_check?(text) do
+    cleaned = text |> clean_controls() |> String.trim()
+
+    message_body(text) == "CH" or
+      cleaned == "CH" or
+      Regex.match?(~r/^[A-Z]{3,4}\d{3,4}\s+\d{6}\s+CH$/s, String.replace(cleaned, ~r/\s+/, " "))
   end
 
   defp parse_structured_body(text) do

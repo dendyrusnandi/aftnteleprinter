@@ -1,5 +1,7 @@
 defmodule TpWeb.Views do
   def dashboard(messages, events, filters \\ [], notice \\ nil, settings \\ nil, received_messages \\ [], pagination \\ %{}) do
+    settings = settings || Tp.Settings.default_setting()
+
     """
     <!doctype html>
     <html lang="id">
@@ -29,12 +31,13 @@ defmodule TpWeb.Views do
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}
         .message-cell{max-width:560px}.message-preview{display:inline;white-space:pre-wrap;word-break:break-word}.read-more{display:inline;border:0;background:transparent;color:#195b86;padding:0 0 0 6px;font-size:12px;font-weight:700;cursor:pointer}.read-more:hover{text-decoration:underline}.muted{color:#6d7b88}.events{padding:12px}.event{border-bottom:1px solid #edf0f3;padding:8px 0}
         .status-footer{position:fixed;left:12px;right:12px;bottom:10px;z-index:850;background:white;border:1px solid #d8dee6;border-radius:6px;box-shadow:0 10px 28px rgba(20,50,74,.18);overflow:hidden}.status-panel{padding:7px 9px}.status-summary{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:auto}.status-card{display:flex;align-items:center;gap:6px;border:1px solid #e1e6ed;background:#fbfcfd;border-radius:5px;padding:5px 8px;min-width:max-content}.status-label{font-size:12px;color:#6d7b88;font-weight:700;text-transform:uppercase}.status-value{font-size:12px;font-weight:700;color:#17202a}.status-card.ok .status-value{color:#1c6b4f}.status-card.warn .status-value{color:#b42318}.status-card.info .status-value{color:#195b86}.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 7px;background:#f0f3f6;font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#b42318;display:inline-block}.status-pill.up .status-dot{background:#1c6b4f}.status-pill.down .status-dot{background:#b42318}.status-actions{margin-left:auto;display:flex;align-items:center}.status-actions a{height:34px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;background:#14324a;color:white;border:0;border-radius:4px;padding:0 12px;font-size:13px;font-weight:700;line-height:1;white-space:nowrap;min-width:76px}.status-actions a:hover{text-decoration:none;background:#195b86}
-        .udp-monitor{margin-top:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:#fbfcfd;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.udp-monitor-body{padding:9px}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:110px;overflow:auto;white-space:pre-wrap;font-size:12px;line-height:1.15}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px}
+        .udp-monitor{margin-top:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:#fbfcfd;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.udp-monitor-body{padding:9px}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-source{display:inline-flex;align-items:center;gap:4px}.udp-source i{color:#195b86;font-size:13px;line-height:1}.udp-raw{margin:0;padding:7px 8px;max-height:110px;overflow:auto;white-space:pre-wrap;font-size:12px;line-height:1.15}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px}
         @media(max-width:900px){main{grid-template-columns:1fr}.grid2,.grid4{grid-template-columns:1fr}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.filters .field,.filters .filter-cid,.filters .filter-seq,.filters .filter-text,.filters .filter-date,.filters .filter-filed,.filters .filter-select{flex:auto}.filters button,.filters .clear-filter{width:100%}}@media(max-width:560px){.filters{grid-template-columns:1fr}}
       </style>
     </head>
     <body>
       <header><h1>AFTN Teleprinter</h1><nav class="top-nav">#{compose_dropdown()}#{test_message_link()}#{maintenance_dropdown()}#{views_dropdown()}#{status_dropdown()}</nav>#{header_time()}</header>
+      <div id="sound-settings" hidden data-sound-enabled="#{html(settings.sound_enabled)}" data-alarm-repeat="#{html(settings.alarm_repeat_count || 1)}"></div>
       <main>
         <section>
           <h2>AFTN Message</h2>
@@ -201,7 +204,7 @@ defmodule TpWeb.Views do
         .field{margin-bottom:8px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.toolbar a{background:white;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;font-size:13px}.toolbar a.active{background:#14324a;color:white;border-color:#14324a}
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         .hint{font-size:12px;color:#6d7b88;margin:4px 0 10px}.actions{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;align-items:center;margin:-12px -12px 12px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10)}.subhead{background:#f0f3f6;border:1px solid #e4e8ee;border-radius:4px;padding:8px;margin:4px 0 10px;font-size:13px;color:#435466}
-        .compose-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start}.compose-main{min-width:0}.compose-side{position:sticky;top:12px;min-width:0}.compose-side .udp-monitor{margin:0;background:white;border:1px solid #d8dee6;border-radius:8px;overflow:hidden;box-shadow:0 12px 28px rgba(20,50,74,.08)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee;background:#fbfcfd}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.icon-button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.udp-monitor-body{padding:9px;max-height:calc(100vh - 178px);overflow:auto}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-raw{margin:0;padding:7px 8px;max-height:150px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.2}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px;background:#fbfcfd}
+        .compose-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start}.compose-main{min-width:0}.compose-side{position:sticky;top:12px;min-width:0}.compose-side .udp-monitor{margin:0;background:white;border:1px solid #d8dee6;border-radius:8px;overflow:hidden;box-shadow:0 12px 28px rgba(20,50,74,.08)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee;background:#fbfcfd}.section-head h2{border:0}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.icon-button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.udp-monitor-body{padding:9px;max-height:calc(100vh - 178px);overflow:auto}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-source{display:inline-flex;align-items:center;gap:4px}.udp-source i{color:#195b86;font-size:13px;line-height:1}.udp-raw{margin:0;padding:7px 8px;max-height:150px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.2}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px;background:#fbfcfd}
         .compose-head{border-bottom:1px solid #e4e8ee;padding:10px 12px;background:#fbfcfd}.compose-head h2{border:0;padding:0 0 2px}.form-note{font-size:11px;color:#195b86;font-style:italic}.required label{color:#005ce6}.form-band{background:#fbfcfd;border:1px solid #e4e8ee;border-radius:6px;padding:10px;margin-bottom:10px}.send-row{display:grid;grid-template-columns:120px 1fr;gap:8px}.address-line{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start}.address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.address-grid input{text-transform:uppercase;text-align:left;padding:6px}.header-meta{display:grid;grid-template-columns:120px 150px 1fr;gap:8px}.free-text-large textarea{min-height:230px}.filled-row{border-top:1px solid #e4e8ee;margin-top:10px;padding-top:10px;max-width:220px}.compose-submit{display:flex;gap:8px;align-items:center;margin-top:10px}.compose-submit button[type=button]{background:#f0f3f6;color:#17202a;border:1px solid #cbd3dc}.amo-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.amo-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.amo-title i{font-size:18px;color:#9bd0ff}.amo-form{padding:0}.amo-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.amo-tool{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;height:36px;padding:0 14px;box-sizing:border-box;min-width:0;font-size:13px;font-weight:700;line-height:1;cursor:pointer}.amo-tool i{font-size:15px;line-height:1}.amo-tool:hover{background:#edf4fa;text-decoration:none}.amo-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.amo-tool.primary:hover{background:#17583f}.amo-tool.save{color:#14324a}.amo-tool.discard{color:#8a1f11}.amo-tool.close{color:#435466}.amo-body{padding:12px}.amo-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.amo-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.amo-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.amo-filled{width:260px}.amo-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.amo-filled input{height:36px}
         .aftn-window{background:white;border:1px solid #d8dee6;border-radius:8px;box-shadow:0 12px 28px rgba(20,50,74,.08);overflow:visible}.aftn-title{display:flex;align-items:center;gap:9px;background:#14324a;color:white;font-size:15px;font-weight:800;padding:12px 14px}.aftn-title i{font-size:18px;color:#9bd0ff}.aftn-form{padding:0}.aftn-toolbar{position:sticky;top:8px;z-index:600;display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f9fb;border-bottom:1px solid #e4e8ee;box-shadow:0 8px 18px rgba(20,50,74,.10);flex-wrap:wrap}.aftn-tool{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:white;color:#17202a;border:1px solid #cbd3dc;border-radius:6px;height:36px;padding:0 14px;box-sizing:border-box;font-size:13px;font-weight:700;line-height:1;cursor:pointer}.aftn-tool i{font-size:15px;line-height:1}.aftn-tool:hover{background:#edf4fa;text-decoration:none}.aftn-tool.primary{background:#1c6b4f;color:white;border-color:#1c6b4f}.aftn-tool.primary:hover{background:#17583f}.aftn-tool.save{color:#14324a}.aftn-tool.discard{color:#8a1f11}.aftn-tool.close{color:#435466}.aftn-body{padding:12px}.aftn-required-note{font-size:12px;color:#195b86;font-style:italic;margin-bottom:10px}.aftn-topline{display:grid;grid-template-columns:180px;gap:12px;align-items:end;margin-bottom:10px}.tx-id-display{min-height:34px;box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;background:#f0f3f6;color:#14324a;padding:7px 9px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;font-weight:900;display:flex;align-items:center}.aftn-card{border:1px solid #e4e8ee;border-radius:7px;background:#fbfcfd;padding:10px;margin-bottom:12px}.aftn-card-title{font-size:12px;font-weight:800;text-transform:uppercase;color:#435466;margin-bottom:8px}.aftn-address-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}.aftn-address-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aftn-address-grid input{text-transform:uppercase;text-align:left;padding:6px}.aftn-meta{display:grid;grid-template-columns:150px 160px 1fr 90px;gap:8px;align-items:end;margin-top:10px}.aftn-bell{display:flex;align-items:center;gap:8px;height:36px}.aftn-bell input{width:auto}.time-control{display:flex;gap:6px}.time-control input{flex:1}.time-button{display:inline-flex;align-items:center;justify-content:center;width:38px;background:white;color:#14324a;border:1px solid #cbd3dc;border-radius:4px;padding:0;cursor:pointer}.time-button:hover{background:#edf4fa}.aftn-editor-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.aftn-editor-head label{margin:0;color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-editor-head span{color:#6d7b88;font-size:12px}.aftn-textarea{min-height:320px;background:#fbfcfd;border-color:#cbd3dc;border-radius:6px;resize:vertical;font-size:14px;line-height:1.5}.aftn-footer{display:flex;align-items:end;justify-content:flex-start;gap:12px;border-top:1px solid #e4e8ee;margin-top:12px;padding-top:12px;flex-wrap:wrap}.aftn-filled{width:260px}.aftn-filled label{color:#435466;font-size:12px;font-weight:800;text-transform:uppercase}.aftn-filled input{height:36px}
         .alr-scroll{overflow:auto;border-top:1px solid #e4e8ee}.alr-page{padding:12px;border-bottom:1px solid #e4e8ee}.alr-page-title{font-size:13px;font-weight:900;color:#14324a;margin:0 0 10px;text-transform:uppercase}.alr-grid{display:flex;flex-direction:column;gap:10px}.alr-row{display:grid;gap:10px;align-items:end}.alr-row-head{grid-template-columns:1.25fr 1.1fr 1.2fr 1fr 1.8fr}.alr-row-5{grid-template-columns:1.15fr .9fr .85fr 1fr 1fr}.alr-row-5b{grid-template-columns:.8fr 1.1fr .9fr 1.7fr 1.5fr}.alr-row-2{grid-template-columns:1fr 1fr}.alr-row-3{grid-template-columns:repeat(3,1fr)}.alr-row-4{grid-template-columns:repeat(4,1fr)}.alr-row-18{grid-template-columns:1.4fr 1fr 1.4fr}.alr-row-sup{grid-template-columns:1fr 1fr 2fr}.alr-wide{grid-column:span 2}.alr-full{grid-column:1/-1}.alr-checks{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:36px}.alr-checks label,.alr-inline-check{display:inline-flex;align-items:center;gap:5px;margin:0;color:#17202a;font-size:13px;font-weight:700}.alr-checks input,.alr-inline-check input{width:auto}.alr-text{min-height:54px;resize:vertical}.alr-picker{margin-top:6px;padding:6px;font-size:12px}.alr-control{display:flex;align-items:stretch;width:100%}.alr-control input,.alr-control select,.alr-control textarea{flex:1;min-width:0}.alr-control.compact input{width:50%;flex:1 1 50%}.equipment-control .equipment-open{width:40px;flex:0 0 40px;background:white;color:#14324a;border:1px solid #cbd3dc;border-left:0;border-radius:0 4px 4px 0;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.equipment-control .equipment-open:hover{background:#edf4fa}.equipment-control input{border-top-right-radius:0;border-bottom-right-radius:0}.alr-mark{display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:0 8px;border:1px solid #cbd3dc;background:#f0f3f6;color:#14324a;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800}.alr-mark:first-child{border-radius:4px 0 0 4px;border-right:0}.alr-mark:last-child{border-radius:0 4px 4px 0;border-left:0}.alr-control .alr-mark:first-child+input,.alr-control .alr-mark:first-child+select,.alr-control .alr-mark:first-child+textarea{border-top-left-radius:0;border-bottom-left-radius:0}.alr-control input:not(:last-child),.alr-control select:not(:last-child),.alr-control textarea:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}
@@ -359,7 +362,7 @@ defmodule TpWeb.Views do
     """
   end
 
-  def test_message_page(notice \\ nil, settings \\ nil, recent \\ []) do
+  def test_message_page(notice \\ nil, settings \\ nil, recent \\ [], received_messages \\ []) do
     settings = settings || Tp.Settings.default_setting()
     origin   = ( settings.originator || "WAJJYFYC") |> to_string() |> String.upcase()
 
@@ -376,7 +379,7 @@ defmodule TpWeb.Views do
         a{color:#195b86;text-decoration:none} a:hover{text-decoration:underline}
         header{height:56px;background:#14324a;color:white;display:flex;align-items:center;gap:16px;padding:0 18px}
         header a{color:white}.tst-back{display:inline-flex;align-items:center;gap:6px;font-weight:700}.tst-back:hover{text-decoration:none;color:#d8e8f3}.tst-back i{font-size:18px;line-height:1}.tst-title{display:inline-flex;align-items:center;gap:8px}.tst-title i{color:#9bd0ff;font-size:18px;line-height:1}
-        #{header_time_css()} main{max-width:820px;margin:0 auto;padding:16px}
+        #{header_time_css()} main{max-width:1240px;margin:0 auto;padding:16px}.test-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:14px;align-items:start}.test-main{min-width:0}.test-side{position:sticky;top:12px;min-width:0}
         section{background:white;border:1px solid #d8dee6;border-radius:6px;margin-bottom:14px;overflow:visible}
         h1{font-size:18px;margin:0} h2{font-size:14px;font-weight:800;margin:0;padding:10px 14px;border-bottom:1px solid #e4e8ee;background:#f7f9fb;border-radius:6px 6px 0 0}
         .tst-body{padding:12px}
@@ -398,8 +401,10 @@ defmodule TpWeb.Views do
         .btn-send{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;height:36px;background:#1c6b4f;color:white;border:1px solid #1c6b4f;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;cursor:pointer;white-space:nowrap;align-self:flex-start;box-sizing:border-box}.btn-send:hover{background:#17583f;border-color:#17583f}
         .outbox-pre{margin:0;padding:12px;max-height:200px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.4;background:#fbfcfd}
         .outbox-empty{padding:12px;color:#6d7b88;font-size:13px}
+        .test-side .udp-monitor{margin:0;background:white;border:1px solid #d8dee6;border-radius:8px;overflow:hidden;box-shadow:0 12px 28px rgba(20,50,74,.08)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e4e8ee;background:#fbfcfd}.section-head h2{border:0;background:transparent}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:10px;border:1px solid #cbd3dc;border-radius:4px;background:white;color:#14324a;padding:0;cursor:pointer}.icon-button:hover{background:#edf4fa}.icon-button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.udp-monitor-body{padding:9px;max-height:calc(100vh - 152px);overflow:auto}.udp-item{border:1px solid #e1e6ed;background:#fbfcfd;border-radius:6px;margin-bottom:7px;overflow:hidden}.udp-meta{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;background:#f0f3f6;color:#435466;font-size:12px;font-weight:700}.udp-source{display:inline-flex;align-items:center;gap:4px}.udp-source i{color:#195b86;font-size:13px;line-height:1}.udp-raw{margin:0;padding:7px 8px;max-height:150px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.2}.udp-empty{padding:12px;border:1px dashed #cbd3dc;border-radius:6px;color:#6d7b88;font-size:13px;background:#fbfcfd}
         .notice{margin:0 0 12px;padding:10px 12px;border-radius:4px;font-size:13px}.notice.error{background:#fff1f0;border:1px solid #ffccc7;color:#8a1f11}.notice.info{background:#edf7ed;border:1px solid #b7dfb9;color:#1d5f27}
         input[type=text]{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:6px 8px;background:white;font-size:13px}
+        @media(max-width:1100px){.test-layout{grid-template-columns:1fr}.test-side{position:static}.udp-monitor-body{max-height:360px}}
         #{status_footer_css()}
       </style>
     </head>
@@ -411,60 +416,70 @@ defmodule TpWeb.Views do
       </header>
       <main>
         #{notice_banner(notice)}
+        <div class="test-layout">
+          <div class="test-main">
 
-        <section>
-          <h2>Test Message</h2>
-          <div class="tst-body">
-            <div class="tst-row">
-              <span class="tst-label">State :</span>
-              <label class="radio-label"><input type="radio" id="state-start" name="state" value="start"> Start</label>
-              <label class="radio-label"><input type="radio" id="state-stop"  name="state" value="stop"> Stop</label>
-              <input class="tst-times" type="text" id="tst-times" value="1" maxlength="3" inputmode="numeric">
-              <span class="tst-hint">times &nbsp;( 0 = continuous )</span>
-            </div>
-            <div class="tst-row tst-row-top">
-              <span class="tst-label">Test format :</span>
-              <div class="format-col">
-                <label class="radio-label"><input type="radio" name="format" value="qjh" checked> QJH RYRY&hellip;</label>
-                <label class="radio-label"><input type="radio" name="format" value="fox"> QUICK BROWN FOX&hellip;</label>
-                <label class="radio-label"><input type="radio" name="format" value="de"> DE RYRY&hellip;</label>
+            <section>
+              <h2>Test Message</h2>
+              <div class="tst-body">
+                <div class="tst-row">
+                  <span class="tst-label">State :</span>
+                  <label class="radio-label"><input type="radio" id="state-start" name="state" value="start"> Start</label>
+                  <label class="radio-label"><input type="radio" id="state-stop"  name="state" value="stop"> Stop</label>
+                  <input class="tst-times" type="text" id="tst-times" value="1" maxlength="3" inputmode="numeric">
+                  <span class="tst-hint">times &nbsp;( 0 = continuous )</span>
+                </div>
+                <div class="tst-row tst-row-top">
+                  <span class="tst-label">Test format :</span>
+                  <div class="format-col">
+                    <label class="radio-label"><input type="radio" name="format" value="qjh" checked> QJH RYRY&hellip;</label>
+                    <label class="radio-label"><input type="radio" name="format" value="fox"> QUICK BROWN FOX&hellip;</label>
+                    <label class="radio-label"><input type="radio" name="format" value="de"> DE RYRY&hellip;</label>
+                  </div>
+                </div>
+                <div class="tst-row">
+                  <span class="tst-label">Origin :</span>
+                  <input class="tst-addr" type="text" id="tst-originator" value="#{html(origin)}" maxlength="8" autocomplete="off">
+                </div>
+                <div class="tst-row tst-btns">
+                  <span class="tst-label"></span>
+                  <button class="btn-ok" type="button" id="btn-test-ok"><i class="bi bi-check2-circle"></i><span>OK</span></button>
+
+                </div>
+                <div class="tst-status" id="tst-status"></div>
               </div>
-            </div>
-            <div class="tst-row">
-              <span class="tst-label">Origin :</span>
-              <input class="tst-addr" type="text" id="tst-originator" value="#{html(origin)}" maxlength="8" autocomplete="off">
-            </div>
-            <div class="tst-row tst-btns">
-              <span class="tst-label"></span>
-              <button class="btn-ok" type="button" id="btn-test-ok"><i class="bi bi-check2-circle"></i><span>OK</span></button>
-             
-            </div>
-            <div class="tst-status" id="tst-status"></div>
+            </section>
+
+            <section>
+              <h2>SVC TRAF</h2>
+              <form class="tst-body" method="post" action="/test-message/svc" id="svc-form">
+                <div class="tst-row">
+                  <span class="tst-label">Address :</span>
+                  <input class="tst-addr" type="text" name="address" id="svc-address" value="#{html(origin)}" maxlength="8" autocomplete="off">
+                </div>
+                <input type="hidden" name="originator" id="svc-originator" value="#{html(origin)}">
+                <div class="svc-row">
+                  <textarea class="tst-svc" name="svc_message" rows="4" placeholder="SVC TRAF message..."></textarea>
+                </div>
+                 <br>
+                  <button class="btn-send" type="submit"><i class="bi bi-send"></i><span>Send</span></button>
+                   <a class="btn-cancel" href="/"><i class="bi bi-x-circle"></i><span>Cancel</span></a>
+              </form>
+            </section>
+
+            <section>
+              <h2>Outbox</h2>
+              #{test_outbox(recent)}
+            </section>
           </div>
-        </section>
-
-        <section>
-          <h2>SVC TRAF</h2>
-          <form class="tst-body" method="post" action="/test-message/svc" id="svc-form">
-            <div class="tst-row">
-              <span class="tst-label">Address :</span>
-              <input class="tst-addr" type="text" name="address" id="svc-address" value="#{html(origin)}" maxlength="8" autocomplete="off">
-            </div>
-            <input type="hidden" name="originator" id="svc-originator" value="#{html(origin)}">
-            <div class="svc-row">
-              <textarea class="tst-svc" name="svc_message" rows="4" placeholder="SVC TRAF message..."></textarea>
-            </div>
-             <br>
-              <button class="btn-send" type="submit"><i class="bi bi-send"></i><span>Send</span></button>
-               <a class="btn-cancel" href="/"><i class="bi bi-x-circle"></i><span>Cancel</span></a>
-          </form>
-        </section>
-
+          <aside class="test-side">#{udp_receive_monitor(received_messages, [])}</aside>
+        </div>
       </main>
       #{status_panel([], nil)}
       #{header_clock_script()}
       #{status_footer_script()}
       #{auto_uppercase_script()}
+      #{compose_udp_monitor_script()}
       <script>
         ( function ( ) {
           var timer    = null;
@@ -475,6 +490,8 @@ defmodule TpWeb.Views do
           var stopRadio  = document.getElementById('state-stop');
           var statusEl   = document.getElementById('tst-status');
           var svcOrigEl  = document.getElementById('svc-originator');
+          var svcForm    = document.getElementById('svc-form');
+          var outboxKey  = 'aftn-test-message-outbox';
 
           function setStatus(msg, cls) {
             if ( !statusEl) return;
@@ -508,6 +525,57 @@ defmodule TpWeb.Views do
             return null;
           }
 
+          function visibleAftn(value) {
+            return String(value == null ? '' : value)
+              .replace(/\u0001/g, '[SOH]')
+              .replace(/\u0002/g, '[STX]')
+              .replace(/\u0003/g, '[ETX]')
+              .replace(/\u000b/g, '[VT]')
+              .replace(/\r\n/g, '\n')
+              .replace(/\r/g, '\n')
+              .trim();
+          }
+
+          function formatOutboxTime(value) {
+            return String(value || new Date().toISOString()).replace('T', ' ').replace('Z', '').slice(0, 19);
+          }
+
+          function readOutbox() {
+            try {
+              var raw = window.localStorage ? window.localStorage.getItem(outboxKey) : '';
+              return raw ? JSON.parse(raw) : [];
+            } catch ( _error) {
+              return [];
+            }
+          }
+
+          function writeOutbox(items) {
+            try {
+              if ( window.localStorage) window.localStorage.setItem(outboxKey, JSON.stringify(items.slice(0, 20)));
+            } catch ( _error) {}
+          }
+
+          function renderOutbox(items) {
+            var outbox = document.getElementById('test-outbox-pre');
+            if ( !outbox) return;
+            if ( !items.length) {
+              outbox.textContent = outbox.getAttribute('data-empty') || '';
+              return;
+            }
+            outbox.textContent = items.map(function ( item) {
+              return '[' + formatOutboxTime(item.sent_at) + ']\n' + visibleAftn(item.raw || '');
+            }).join('\n' + '-'.repeat(40) + '\n');
+          }
+
+          function addOutbox(raw, sentAt) {
+            if ( !raw) return;
+            var items = readOutbox();
+            items.unshift({raw: raw, sent_at: sentAt || new Date().toISOString()});
+            items = items.slice(0, 20);
+            writeOutbox(items);
+            renderOutbox(items);
+          }
+
           function sendOne(data, cb) {
             fetch('/test-message/send-one', {
               method: 'POST',
@@ -518,13 +586,43 @@ defmodule TpWeb.Views do
                     '&format='     + encodeURIComponent(data.format)
             })
             .then(function ( r) { return r.json(); })
-            .then(function ( j) { cb(j.ok ? null : ( j.error || 'unknown error')); })
+            .then(function ( j) { cb(j.ok ? null : ( j.error || 'unknown error'), j); })
             .catch(function ( ) { cb('Network error'); });
           }
+
+          renderOutbox(readOutbox());
 
           if ( stopRadio) {
             stopRadio.addEventListener('change', function ( ) {
               if ( stopRadio.checked) { clearTimer(); setStatus('Stopped. Sent: ' + sent + ' message(s).', 'ok'); }
+            });
+          }
+
+          if ( svcForm) {
+            svcForm.addEventListener('submit', function ( event) {
+              event.preventDefault();
+              syncSvcOrigin();
+              var data = readData();
+              var err = validate(data);
+              var message = svcForm.querySelector('[name="svc_message"]');
+              if ( err) { setStatus(err, 'err'); return; }
+              if ( !message || !message.value.trim()) { setStatus('SVC message is required', 'err'); return; }
+              setStatus('Sending SVC...', '');
+
+              fetch('/test-message/svc', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json'},
+                credentials: 'same-origin',
+                body: new URLSearchParams(new FormData(svcForm)).toString()
+              })
+                .then(function ( r) { return r.json(); })
+                .then(function ( j) {
+                  if ( !j.ok) { setStatus('Error: ' + ( j.error || 'unknown error'), 'err'); return; }
+                  addOutbox(j.raw, j.sent_at);
+                  message.value = '';
+                  setStatus('SVC sent.', 'ok');
+                })
+                .catch(function ( ) { setStatus('Network error', 'err'); });
             });
           }
 
@@ -555,14 +653,15 @@ defmodule TpWeb.Views do
               setStatus(target > 0 ? 'Sending 1/' + target + '...' : 'Sending ( continuous)...', '');
 
               function tick() {
-                sendOne(data, function ( e) {
+                sendOne(data, function ( e, payload) {
                   if ( e) { clearTimer(); setStatus('Error: ' + e, 'err'); return; }
+                  if ( payload && payload.raw) addOutbox(payload.raw, payload.sent_at);
                   sent++;
                   if ( target > 0) {
                     setStatus('Sending ' + sent + '/' + target + '...', '');
                     if ( sent >= target) { clearTimer(); setStatus('Done. Sent ' + sent + ' message(s).', 'ok'); }
                   } else {
-                    setStatus('Sending ( continuous) — sent: ' + sent, '');
+                    setStatus('Sending ( continuous) - sent: ' + sent, '');
                   }
                 });
               }
@@ -579,18 +678,10 @@ defmodule TpWeb.Views do
   end
 
   defp test_outbox([]) do
-    ~s(<div class="outbox-empty">No recent messages.</div>)
+    ~s(<pre id="test-outbox-pre" class="outbox-pre" data-empty="No local test/SVC messages yet.">No local test/SVC messages yet.</pre>)
   end
 
-  defp test_outbox(messages) do
-    text = messages
-    |> Enum.map_join("\n#{String.duplicate("-", 40)}\n", fn m ->
-      raw = m.raw_text || ""
-      ts  = format_time(m.inserted_at)
-      "[#{ts}]\n#{String.trim(visible_aftn(raw))}"
-    end)
-    ~s(<pre class="outbox-pre">#{html(text)}</pre>)
-  end
+  defp test_outbox(_messages), do: test_outbox([])
 
   def icao_abbreviations_page(items, pagination, q, mean, notice) do
     total       = Map.get(pagination, :total, 0)
@@ -1858,6 +1949,7 @@ defmodule TpWeb.Views do
         h1{font-size:18px;margin:0} h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #e4e8ee}
         form{padding:14px} label{display:block;font-size:12px;color:#435466;font-weight:700;margin-bottom:4px}
         input{box-sizing:border-box;border:1px solid #cbd3dc;border-radius:4px;padding:8px;background:white}
+        input.is-disabled{background:#eef2f6;color:#7f8c99;cursor:not-allowed}
         .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field{margin-bottom:10px}.field input[type=text],.field input[type=number]{width:100%}
         .radio-row{display:flex;align-items:center;gap:12px;min-height:36px}.radio-row label{display:flex;align-items:center;gap:5px;margin:0;font-weight:600;color:#17202a}
         button{background:#1c6b4f;color:white;border:0;border-radius:4px;padding:9px 14px;font-weight:700}.actions{display:flex;gap:8px;align-items:center;margin-top:8px}.actions button,.actions a{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;height:36px;box-sizing:border-box;border-radius:6px;padding:0 14px;font-size:13px;font-weight:700;line-height:1;text-decoration:none}.actions button{background:#1c6b4f;color:white;border:1px solid #1c6b4f}.actions button:hover{background:#17583f;border-color:#17583f}.actions a{background:white;color:#435466;border:1px solid #cbd3dc}.actions a:hover{background:#edf4fa;text-decoration:none}.actions i{font-size:15px;line-height:1}
@@ -1915,7 +2007,7 @@ defmodule TpWeb.Views do
                     #{radio(setting_or_changeset, :svc_msg_generation, false, "OFF")}
                   </div>
                 </div>
-                #{setting_input(setting_or_changeset, :prev_st, "Prev.st")}
+                #{setting_input(setting_or_changeset, :prev_st, "Prev.st", "text", "svc-prev-st")}
                 <div class="field">
                   <label>Channel check</label>
                   <div class="radio-row">
@@ -1930,6 +2022,16 @@ defmodule TpWeb.Views do
                     #{radio(setting_or_changeset, :automatic_repeat, false, "Disabled")}
                   </div>
                 </div>
+              </div>
+              <div class="grid4">
+                <div class="field">
+                  <label>Sound Alert</label>
+                  <div class="radio-row">
+                    #{radio(setting_or_changeset, :sound_enabled, true, "ON")}
+                    #{radio(setting_or_changeset, :sound_enabled, false, "OFF")}
+                  </div>
+                </div>
+                #{setting_input(setting_or_changeset, :alarm_repeat_count, "Alarm Times (0 = Continuous)", "number")}
               </div>
               <div class="grid2">
                 #{setting_input(setting_or_changeset, :originator, "Originator")}
@@ -1946,6 +2048,27 @@ defmodule TpWeb.Views do
       #{status_footer_script()}
       #{header_clock_script()}
       #{auto_uppercase_script()}
+      <script>
+        (function(){
+          function syncSvcPrev(){
+            var on = document.querySelector('input[name="svc_msg_generation"][value="true"]');
+            var prev = document.getElementById('svc-prev-st');
+            if (!on || !prev) return;
+            var enabled = on.checked;
+            prev.readOnly = !enabled;
+            prev.required = enabled;
+            prev.minLength = enabled ? 8 : 0;
+            prev.maxLength = 8;
+            prev.classList.toggle('is-disabled', !enabled);
+            prev.title = enabled ? 'Prev.st wajib 8 huruf' : 'Prev.st aktif jika Svc msg generation ON';
+          }
+
+          document.addEventListener('change', function(event){
+            if (event.target && event.target.name === 'svc_msg_generation') syncSvcPrev();
+          });
+          syncSvcPrev();
+        })();
+      </script>
     </body>
     </html>
     """
@@ -1986,7 +2109,7 @@ defmodule TpWeb.Views do
     <details class="top-menu">
       <summary>#{views_icon()}<span>Views</span></summary>
       <div class="top-submenu">
-        
+
         <a href="/icao-abbreviations"><i class="bi bi-book" style="margin-right:5px"></i>ICAO Abbreviations and Codes</a>
         <a href="/warning-messages"><i class="bi bi-exclamation-triangle" style="margin-right:5px"></i>Warning Messages</a>
       </div>
@@ -2130,11 +2253,13 @@ defmodule TpWeb.Views do
 
   defp settings_errors(_setting), do: ""
 
-  defp setting_input(setting, field, label, type \\ "text") do
+  defp setting_input(setting, field, label, type \\ "text", id \\ nil) do
+    id_attr = if id, do: ~s( id="#{html(id)}"), else: ""
+
     """
     <div class="field">
       <label>#{html(label)}</label>
-      <input type="#{html(type)}" name="#{html(field)}" value="#{html(setting_value(setting, field))}">
+      <input type="#{html(type)}" name="#{html(field)}" value="#{html(setting_value(setting, field))}"#{id_attr}>
     </div>
     """
   end
@@ -2346,12 +2471,12 @@ defmodule TpWeb.Views do
         }
 
         function monitorRow(item) {
-          var bell = hasBellSignal(item) ? '<span title="Bell/Sound">🔔</span>' : '';
+          var messageIn = '<i class="bi bi-envelope-arrow-down-fill" title="Message in" aria-hidden="true"></i>';
           return '<div class="udp-item">' +
             '<div class="udp-meta">' +
               '<span>' + escapeHtml(formatMonitorTime(item.time)) + '</span>' +
               '<span>' + escapeHtml(item.kind || 'UDP') + '</span>' +
-              '<span>' + bell + escapeHtml(monitorSource(item)) + '</span>' +
+              '<span class="udp-source">' + messageIn + escapeHtml(monitorSource(item)) + '</span>' +
             '</div>' +
             '<pre class="udp-raw">' + escapeHtml(visibleMonitorUdp(item.raw || '')) + '</pre>' +
           '</div>';
@@ -2370,7 +2495,37 @@ defmodule TpWeb.Views do
           return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\u0007') !== -1 || raw.indexOf('\u000b') !== -1;
         }
 
-        function playBellAlarm() {
+        function soundSettings() {
+          var node = byId('sound-settings');
+          var enabled = !!node && node.getAttribute('data-sound-enabled') !== 'false';
+          var repeat = node ? parseInt(node.getAttribute('data-alarm-repeat') || '1', 10) : 1;
+          if ( isNaN(repeat) || repeat < 0) repeat = 1;
+          return {enabled: enabled, repeat: repeat};
+        }
+
+        function ensureAlarmStopButton() {
+          var existing = byId('alarm-stop-button');
+          if ( existing) return existing;
+          var button = document.createElement('button');
+          button.id = 'alarm-stop-button';
+          button.type = 'button';
+          button.textContent = 'Stop Alarm';
+          button.style.cssText = 'display:none;position:fixed;right:20px;bottom:82px;z-index:1200;background:#b42318;color:white;border:0;border-radius:6px;padding:9px 14px;font-weight:800;box-shadow:0 10px 26px rgba(0,0,0,.22);cursor:pointer';
+          button.onclick = stopBellAlarm;
+          document.body.appendChild(button);
+          return button;
+        }
+
+        function stopBellAlarm() {
+          if ( window.__aftnBellAlarmTimer) {
+            window.clearInterval(window.__aftnBellAlarmTimer);
+            window.__aftnBellAlarmTimer = null;
+          }
+          var button = byId('alarm-stop-button');
+          if ( button) button.style.display = 'none';
+        }
+
+        function playBellTone() {
           try {
             var AudioContext = window.AudioContext || window.webkitAudioContext;
             if ( !AudioContext) {
@@ -2398,9 +2553,32 @@ defmodule TpWeb.Views do
           } catch ( _error) {}
         }
 
+        function playBellAlarm() {
+          var settings = soundSettings();
+          if ( !settings.enabled) return;
+          stopBellAlarm();
+          playBellTone();
+          if ( settings.repeat === 1) return;
+          var played = 1;
+          var stopButton = ensureAlarmStopButton();
+          stopButton.style.display = 'inline-flex';
+          window.__aftnBellAlarmTimer = window.setInterval(function () {
+            if ( settings.repeat > 0 && played >= settings.repeat) {
+              stopBellAlarm();
+              return;
+            }
+            played += 1;
+            playBellTone();
+          }, 1200);
+        }
+
+        function itemHasBellSignal(item) {
+          return !!(item && item.bell) || hasBellSignal(item) || hasBellSignal({raw: item && item.raw_text});
+        }
+
         function playBellAlarmForRows(rows) {
           for ( var i = 0; i < rows.length; i++) {
-            if ( hasBellSignal(rows[i])) {
+            if ( itemHasBellSignal(rows[i])) {
               playBellAlarm();
               return;
             }
@@ -4100,7 +4278,7 @@ defmodule TpWeb.Views do
             <div class="status-label">Destination</div>
             <div id="status-destination-value" class="status-value">#{html(settings.destination_ip_address)}:#{html(settings.port)}</div>
           </div>
-         
+
           <div class="status-actions"><a href="/settings"> <i class="bi bi-gear" style="margin-right:5px"></i> Setting</a></div>
         </div>
       </div>
@@ -4144,7 +4322,7 @@ defmodule TpWeb.Views do
       <div class="udp-meta">
         <span>#{html(format_time(item.time))}</span>
         <span>#{html(item.kind)}</span>
-        <span>#{html(udp_source(item))}</span>
+        <span class="udp-source"><i class="bi bi-envelope-arrow-down-fill" title="Message in" aria-hidden="true"></i>#{html(udp_source(item))}</span>
       </div>
       <pre class="udp-raw">#{html(visible_monitor_udp(item.raw))}</pre>
     </div>
@@ -4501,7 +4679,7 @@ defmodule TpWeb.Views do
       </select></div>
        <div class="field filter-date"><label class="search-label">Date From</label><input type="date" name="date_from" value="#{html(date_from)}"></div>
       <div class="field filter-date"><label class="search-label">Date To</label><input type="date" name="date_to" value="#{html(date_to)}"></div>
-    
+
       <button type="submit"><i class="bi bi-funnel-fill"></i><span>Filter</span></button>
       <a class="clear-filter" href="/?page_size=#{html(page_size)}"><i class="bi bi-eraser"></i><span>Clear</span></a>
     </form>
@@ -5222,7 +5400,37 @@ defmodule TpWeb.Views do
           return raw.indexOf('[BEL]') !== -1 || raw.indexOf('\u0007') !== -1 || raw.indexOf('\u000b') !== -1;
         }
 
-        function playBellAlarm() {
+        function soundSettings() {
+          var node = byId('sound-settings');
+          var enabled = !!node && node.getAttribute('data-sound-enabled') !== 'false';
+          var repeat = node ? parseInt(node.getAttribute('data-alarm-repeat') || '1', 10) : 1;
+          if ( isNaN(repeat) || repeat < 0) repeat = 1;
+          return {enabled: enabled, repeat: repeat};
+        }
+
+        function ensureAlarmStopButton() {
+          var existing = byId('alarm-stop-button');
+          if ( existing) return existing;
+          var button = document.createElement('button');
+          button.id = 'alarm-stop-button';
+          button.type = 'button';
+          button.textContent = 'Stop Alarm';
+          button.style.cssText = 'display:none;position:fixed;right:20px;bottom:82px;z-index:1200;background:#b42318;color:white;border:0;border-radius:6px;padding:9px 14px;font-weight:800;box-shadow:0 10px 26px rgba(0,0,0,.22);cursor:pointer';
+          button.onclick = stopBellAlarm;
+          document.body.appendChild(button);
+          return button;
+        }
+
+        function stopBellAlarm() {
+          if ( window.__aftnBellAlarmTimer) {
+            window.clearInterval(window.__aftnBellAlarmTimer);
+            window.__aftnBellAlarmTimer = null;
+          }
+          var button = byId('alarm-stop-button');
+          if ( button) button.style.display = 'none';
+        }
+
+        function playBellTone() {
           try {
             var AudioContext = window.AudioContext || window.webkitAudioContext;
             if ( !AudioContext) {
@@ -5250,9 +5458,32 @@ defmodule TpWeb.Views do
           } catch ( _error) {}
         }
 
+        function playBellAlarm() {
+          var settings = soundSettings();
+          if ( !settings.enabled) return;
+          stopBellAlarm();
+          playBellTone();
+          if ( settings.repeat === 1) return;
+          var played = 1;
+          var stopButton = ensureAlarmStopButton();
+          stopButton.style.display = 'inline-flex';
+          window.__aftnBellAlarmTimer = window.setInterval(function () {
+            if ( settings.repeat > 0 && played >= settings.repeat) {
+              stopBellAlarm();
+              return;
+            }
+            played += 1;
+            playBellTone();
+          }, 1200);
+        }
+
+        function itemHasBellSignal(item) {
+          return !!(item && item.bell) || hasBellSignal(item) || hasBellSignal({raw: item && item.raw_text});
+        }
+
         function playBellAlarmForRows(rows) {
           for ( var i = 0; i < rows.length; i++) {
-            if ( hasBellSignal(rows[i])) {
+            if ( itemHasBellSignal(rows[i])) {
               playBellAlarm();
               return;
             }
@@ -5275,12 +5506,12 @@ defmodule TpWeb.Views do
         }
 
         function monitorRow(item) {
-          var bell = hasBellSignal(item) ? '<span title="Bell/Sound">🔔</span>' : '';
+          var messageIn = '<i class="bi bi-envelope-arrow-down-fill" title="Message in" aria-hidden="true"></i>';
           return '<div class="udp-item">' +
             '<div class="udp-meta">' +
               '<span>' + escapeHtml(formatMonitorTime(item.time)) + '</span>' +
               '<span>' + escapeHtml(item.kind || 'UDP') + '</span>' +
-              '<span>' + bell + escapeHtml(monitorSource(item)) + '</span>' +
+              '<span class="udp-source">' + messageIn + escapeHtml(monitorSource(item)) + '</span>' +
             '</div>' +
             '<pre class="udp-raw">' + escapeHtml(visibleMonitorUdp(item.raw || '')) + '</pre>' +
           '</div>';
@@ -5420,8 +5651,8 @@ defmodule TpWeb.Views do
                 var id = parseInt(rows[i].id, 10);
                 if ( !isNaN(id) && !body.querySelector('[data-message-id="' + id + '"]')) fresh.push(rows[i]);
               }
-
               if ( !fresh.length) return;
+              playBellAlarmForRows(fresh);
               var empty = body.querySelector('.empty-row');
               if ( empty) empty.parentNode.removeChild(empty);
 
